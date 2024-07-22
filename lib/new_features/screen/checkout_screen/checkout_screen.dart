@@ -1,11 +1,17 @@
+import 'dart:async';
+
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import 'package:appointment_app/common/widgets/products/product_cards/widget/rating_indicator.dart';
+import 'package:appointment_app/new_features/controller/future_user.dart';
 import 'package:appointment_app/new_features/models/data/branch_data.dart';
+import 'package:appointment_app/new_features/models/user_booking_model.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:appointment_app/utils/constants/image_strings.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +24,7 @@ import '../../models/branch_model.dart';
 import '../../models/calendar_model.dart';
 import '../../models/service_product.dart';
 import '../../models/staff_model.dart';
+import '../../models/user_model.dart';
 
 class CheckoutScreen extends StatefulWidget {
   CheckoutScreen({
@@ -47,9 +54,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   String? title,
       image,
       duration,
+      //name,
       price,
       time,
-      name,
       email,
       userImage,
       number,
@@ -64,7 +71,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   /// Get data in local database
   getDataFromSharedPref() async {
     /// user data
-    name = await SharedPreferenceHelper().getUserName();
+    //name = await SharedPreferenceHelper().getUserName();
     id = await SharedPreferenceHelper().getUserID();
     number = await SharedPreferenceHelper().getUserNumber();
     email = await SharedPreferenceHelper().getUserEmail();
@@ -416,101 +423,161 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => CupertinoAlertDialog(
-                        title: Text(
-                          'Confirm Booking',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        content: Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Text(
-                            'Heads up! Your chosen technician will be considered but it is not guaranteed.',
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            style: TextButton.styleFrom(overlayColor: TColors.primary),
-                            child: Text(
-                              'Cancel',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              /// -- Map String Dynamic helps you to combine key value pairs and map it into database collections
-                              /// -- Get user inputs
-                              Map<String, dynamic> userBookingMap = {
-                                "Username": name,
-                                "Account ID": id,
-                                "Email": email,
-                                "Telephone": number,
-                                "User Image": userImage,
-                                "Service": title,
-                                "Image": image,
-                                "Duration": duration,
-                                "Price": price,
-                                "Date": pickedDate.text,
-                                "Time": time,
-                                "Staff Image": widget.staff.image,
-                                "Staff Name": widget.staff.staffName,
-                                "Staff Rating": widget.staff.rating,
-                                "Branch Image": branch[0].image,
-                                "Branch Title": branch[0].title,
-                                "Branch Location": branch[0].location,
-                                "Branch Contact": branch[0].contact,
-                                "Booking ID": widget.bookingId,
-                              };
 
-                              /// Upload data to Booking Collections with document name of Booking ID
-                              await DatabaseMethods()
-                                  .addUserBooking(
-                                      userBookingMap, widget.bookingId)
-                                  .then((value) {
-                                /// SnackBar
-                                TLoaders.successSnackBar(
-                                    title: 'Done!',
-                                    message:
-                                        'Your reservation was successful!');
-                              });
+                /// -- Apply Future Builder to access user information in Firebase Database
+                FutureBuilder(
+                    future: DatabaseMethods().readUser(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final user = snapshot.data;
 
-                              await Future.delayed(const Duration(seconds: 1));
+                        return user == null
+                            ? Container()
+                            : ElevatedButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (ctx) => CupertinoAlertDialog(
+                                      title: Text(
+                                        'Confirm Booking',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                      ),
+                                      content: Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Text(
+                                          'Heads up! Your chosen technician will be considered but it is not guaranteed.',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge,
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          style: TextButton.styleFrom(
+                                              overlayColor: TColors.primary),
+                                          child: Text(
+                                            'Cancel',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            /// -- Map String Dynamic helps you to combine key value pairs and map it into database collections
+                                            /// -- Get user inputs
+                                            // Map<String, dynamic>
+                                            //     userBookingMap = {
+                                            //   "Username": user.name,
+                                            //   // Data from Firebase
+                                            //   "Account ID": id,
+                                            //   "email": user.email,
+                                            //   // Data from Firebase
+                                            //   "Telephone": user.telephone,
+                                            //   // Data from Firebase
+                                            //   // "User Image": userImage,
+                                            //   "Service": title,
+                                            //   "Image": image,
+                                            //   "Duration": duration,
+                                            //   "Price": price,
+                                            //   "Date": pickedDate.text,
+                                            //   "Time": time,
+                                            //   "Staff Image": widget.staff.image,
+                                            //   "Staff Name":
+                                            //       widget.staff.staffName,
+                                            //   "Staff Rating":
+                                            //       widget.staff.rating,
+                                            //   "Branch Image": branch[0].image,
+                                            //   "Branch Title": branch[0].title,
+                                            //   "Branch Location":
+                                            //       branch[0].location,
+                                            //   "Branch Contact":
+                                            //       branch[0].contact,
+                                            //   "Booking ID": widget.bookingId,
+                                            // };
 
-                              Get.to(() => const NewNavigationMenu());
-                            },
-                            style: TextButton.styleFrom(overlayColor: TColors.primary),
-                            child: Text(
-                              'Book',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .apply(fontSizeDelta: -1, color: TColors.primary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        'Submit',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .apply(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
+                                            final userBooking =
+                                                UserBookingModel(
+                                              name: user.name,
+                                              accountId: id,
+                                              email: user.email,
+                                              telephone: user.telephone,
+                                              service: title,
+                                              image: image,
+                                              duration: duration,
+                                              price: price,
+                                              date: pickedDate.text,
+                                              time: time,
+                                              staffImage: widget.staff.image,
+                                              staffName: widget.staff.staffName,
+                                              staffRating: widget.staff.rating,
+                                              branchImage: branch[0].image,
+                                              branchTitle: branch[0].title,
+                                              branchLocation:
+                                                  branch[0].location,
+                                              branchContact: branch[0].contact,
+                                              bookingId: widget.bookingId,
+                                            );
+                                            final json = userBooking.toJson();
+
+                                            /// Upload data to Booking Collections with document name of Booking ID
+                                            await DatabaseMethods()
+                                                .addUserBooking(
+                                                    json, widget.bookingId)
+                                                .then((value) {
+                                              /// SnackBar
+                                              TLoaders.successSnackBar(
+                                                  title: 'Done!',
+                                                  message:
+                                                      'Your reservation was successful!');
+                                            });
+
+                                            await Future.delayed(
+                                                const Duration(seconds: 1));
+
+                                            Get.to(() =>
+                                                const NewNavigationMenu());
+                                          },
+                                          style: TextButton.styleFrom(
+                                              overlayColor: TColors.primary),
+                                          child: Text(
+                                            'Book',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge!
+                                                .apply(
+                                                    fontSizeDelta: -1,
+                                                    color: TColors.primary),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: Center(
+                                    child: Text(
+                                      'Submit',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge!
+                                          .apply(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              );
+                      }
+
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }),
               ],
             ),
           ),

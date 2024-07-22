@@ -20,6 +20,11 @@ class SelectStaffScreen extends StatelessWidget {
 
   /// -- Method to navigate to Checkout Screen, passing data from Select Staff Screen
   void onSelectStaff(BuildContext context, ServiceProduct service, StaffModel staff) {
+
+    /// Create function for to reschedule booking
+
+
+    /// Navigate to checkout screen
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => CheckoutScreen(

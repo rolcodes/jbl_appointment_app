@@ -61,7 +61,7 @@ class _SignupViewState extends State<SignupView> {
         };
 
         /// Add User Data in Firebase, using the id as Document ID name in Firebase
-        await DatabaseMethods().addUserDetails(userInfoMap, id);
+        await DatabaseMethods().addUserDetails(userInfoMap);
 
         /// -- Show Verify Screen
         Get.to(() => VerifyEmailScreen(email: mail));

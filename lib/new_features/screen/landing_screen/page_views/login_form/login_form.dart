@@ -1,7 +1,5 @@
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/non_screen_widget/gradient_button.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/page_views/regex/regex.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +41,7 @@ class _LoginFormState extends State<LoginForm> {
       /// Save Data Locally, Alter the email from previous user
       await SharedPreferenceHelper().saveUserEmail(emailController.text);
 
+
       /// Show snackbar
       TLoaders.successSnackBar(
           title: 'Congratulations!', message: 'Sign in was successful!');
@@ -57,6 +56,8 @@ class _LoginFormState extends State<LoginForm> {
         TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
       } else if (e.code == 'invalid-email') {
         TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      } else if (e.code == 'email-already-in-use') {
+        TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
       }
     }
   }
@@ -66,29 +67,29 @@ class _LoginFormState extends State<LoginForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 56),
+        const SizedBox(height: 56),
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: IconButton(
             onPressed: () {
               widget.pageController.previousPage(
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: TColors.primary,
             ),
           ),
         ),
-        SizedBox(height: 170),
+        const SizedBox(height: 170),
         Center(
           child: Image.asset(
             'assets/logos/jbl-logo-removebg-preview.png',
             width: 300,
           ),
         ),
-        SizedBox(height: 50),
+        const SizedBox(height: 50),
         Center(
           child: Form(
             key: formkey,
@@ -122,6 +123,7 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       );
                     }
+                    return null;
                   },
                   textCapitalization: TextCapitalization.none,
                 ),
@@ -157,7 +159,7 @@ class _LoginFormState extends State<LoginForm> {
                 TextButton(
                   onPressed: () {
                     widget.pageController.nextPage(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut);
                   },
                   child: Text(
@@ -166,7 +168,7 @@ class _LoginFormState extends State<LoginForm> {
                       color: Colors.white,
                       shadows: [
                         Shadow(
-                          offset: Offset(1, 1),
+                          offset: const Offset(1, 1),
                           blurRadius: 20,
                           color: Colors.grey.withOpacity(1),
                         ),

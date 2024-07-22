@@ -288,7 +288,7 @@ class _AdminReservationsState extends State<AdminReservations> {
                                                       // Perform the delete action here
                                                       /// Delete Function from Firebase
                                                       await DatabaseMethods()
-                                                          .DeleteBooking(ds.id);
+                                                          .deleteBooking(ds.id);
 
                                                       /// Snackbar
                                                       TLoaders.doneSnackBar(
@@ -340,7 +340,7 @@ class _AdminReservationsState extends State<AdminReservations> {
                                                       // Perform the delete action here
                                                       /// Delete Function from Firebase
                                                       await DatabaseMethods()
-                                                          .DeleteBooking(ds.id);
+                                                          .deleteBooking(ds.id);
 
                                                       /// Snackbar
                                                       TLoaders.doneSnackBar(
@@ -378,26 +378,7 @@ class _AdminReservationsState extends State<AdminReservations> {
                   })
 
               /// If no data show blank container
-              : Container(
-                  // width: MediaQuery.of(context).size.width,
-                  // height: MediaQuery.of(context).size.height,
-                  // margin: const EdgeInsets.only(top: 120),
-                  // child: Center(
-                  //   child: Column(
-                  //     children: [
-                  //       Image.asset(
-                  //           'assets/images/animations/No data-amico.png',
-                  //           height: 220),
-                  //       Text('No Bookings Available',
-                  //           style:
-                  //               Theme.of(context).textTheme.headlineMedium),
-                  //       const SizedBox(height: 10),
-                  //       const Text(
-                  //           'Sorry no upcoming bookings as of the moment'),
-                  //     ],
-                  //   ),
-                  // ),
-                  );
+              : Container();
         });
   }
 

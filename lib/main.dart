@@ -1,7 +1,5 @@
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/new_home_screen.dart';
-import 'package:appointment_app/splash_screen.dart';
 import 'package:appointment_app/utils/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +7,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 import 'new_features/models/calendar_model.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +25,7 @@ class MyApp extends StatelessWidget {
 
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: const LandingScreen(),
+        home: const NewNavigationMenu(),
       ),
     );
   }

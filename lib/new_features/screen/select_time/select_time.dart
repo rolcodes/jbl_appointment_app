@@ -18,7 +18,7 @@ class SelectTime extends StatelessWidget {
   });
 
   final List<TimeClass> hours;
-  TextEditingController pickedDate = TextEditingController();
+  // TextEditingController pickedDate = TextEditingController();
 
   /// -- Method to navigate to select staff screen
   void onSelectTime(BuildContext context) {
@@ -35,9 +35,9 @@ class SelectTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// -- List to selected data, and update to text controller
-    pickedDate.text = DateFormat('EEEE') // , MMM d, yyyy
-        .format(Provider.of<CalendarModel>(context, listen: true)
-            .firstDate); //.add_yMd()
+    // pickedDate.text = DateFormat('EEEE') // , MMM d, yyyy
+    //     .format(Provider.of<CalendarModel>(context, listen: true)
+    //         .firstDate); //.add_yMd()
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -46,7 +46,7 @@ class SelectTime extends StatelessWidget {
         showIcon: true,
         isDrawer: false,
         isAction: false,
-        title: Text('Select Date',
+        title: Text('Select Time',
             style: Theme.of(context).textTheme.headlineSmall),
         iconColor: TColors.primary,
         isCenterTitle: true,

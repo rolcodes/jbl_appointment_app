@@ -13,6 +13,14 @@ class TLoaders {
       shouldIconPulse: true,
       colorText: TColors.accent,
       backgroundColor: TColors.secondary,
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 5,
+          offset: const Offset(0, 4),
+          spreadRadius: 2,
+        ),
+      ],
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(10),
@@ -81,7 +89,10 @@ class TLoaders {
   }
 
   static errorSnackBar({required title, message = ''}) {
-    Get.snackbar(title, message, isDismissible: true,
+    Get.snackbar(
+      title,
+      message,
+      isDismissible: true,
       shouldIconPulse: true,
       colorText: TColors.white,
       backgroundColor: Colors.red.shade600,

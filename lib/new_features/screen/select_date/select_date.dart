@@ -23,7 +23,6 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
   /// Variable Declaration
   DateTime? selectedDate;
 
-
   TextEditingController pickedDate = TextEditingController();
 
   /// Calendar Controller

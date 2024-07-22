@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../models/category_model.dart';
 
-
 class ServiceCategoryCardListsItem extends StatelessWidget {
   const ServiceCategoryCardListsItem({
     super.key,
-    required this.service, required this.onSelectedCategory,
+    required this.service,
+    required this.onSelectedCategory,
   });
 
   final Category service;
@@ -17,17 +17,17 @@ class ServiceCategoryCardListsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
+      color: TColors.lightGrey,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         onTap: onSelectedCategory,
-        splashColor: Colors.black,
+        splashColor: TColors.primary.withOpacity(0.1),
         borderRadius: BorderRadius.circular(10),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: TColors.lightGrey),
-          height: 400,
-          width: 200,
+              color: Colors.transparent),
+          width: 250,
           child: Column(
             children: [
               ClipRRect(
@@ -37,8 +37,8 @@ class ServiceCategoryCardListsItem extends StatelessWidget {
                 ),
                 child: Image.network(
                   service.image,
-                  width: 200,
-                  height: 170,
+                  width: 250,
+                  height: 150,
                   fit: BoxFit.cover,
                 ),
               ),

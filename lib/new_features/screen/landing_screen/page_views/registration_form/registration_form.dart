@@ -1,7 +1,9 @@
+import 'package:appointment_app/new_features/models/user_model.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/non_screen_widget/gradient_button.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/page_views/regex/regex.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/page_views/registration_form/widget/privacy_policy.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
         /// Each user needs to have random IDs
         String id = randomAlphaNumeric(10).toUpperCase();
 
+        /// Get current user
+        String uid = FirebaseAuth.instance.currentUser!.uid;
+
         /// Save Data Locally
         await SharedPreferenceHelper().saveUserName(nameController.text);
         await SharedPreferenceHelper().saveUserNumber(numberController.text);
@@ -55,17 +60,26 @@ class _RegistrationFormState extends State<RegistrationForm> {
         await SharedPreferenceHelper().saveUserId(id);
 
         /// Save Data in Firebase using Map String Dynamic
-        Map<String, dynamic> userInfoMap = {
-          "Name": nameController.text,
-          "Email": emailController.text,
-          "Telephone.": numberController.text,
-          "Id": id,
-          "Image": "https://jblnew.keywcomm.com/wp-content/uploads/2024/07/default_profile.png"
-        };
+        // Map<String, dynamic> userInfoMap = {
+        //   "name": nameController.text,
+        //   "email": emailController.text,
+        //   "telephone.": numberController.text,
+        //   "id": uid,
+        //   "image":
+        //       "https://jblnew.keywcomm.com/wp-content/uploads/2024/07/default_profile.png"
+        // };
+
+        final user = UserModel(
+          name: nameController.text,
+          email: emailController.text,
+          telephone: numberController.text,
+          id: uid,
+        );
+        final json = user.toJson();
 
         /// Add User Data in Firebase, using the id as Document ID name in Firebase
-        await DatabaseMethods().addUserDetails(userInfoMap, id);
-
+        // await DatabaseMethods().addUserDetails(userInfoMap, id);
+        await DatabaseMethods().addUserDetails(json);
 
 
         TLoaders.successSnackBar(
@@ -84,6 +98,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
         if (e.code == 'weak-password') {
           // TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
         } else if (e.code == 'email-already-in-use') {
+          TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        } else if (e.code == 'invalid-email') {
           TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
         }
       }

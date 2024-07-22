@@ -30,6 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? isCenterTitle;
   final bool isAction;
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(

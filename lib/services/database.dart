@@ -1,15 +1,21 @@
+import 'package:appointment_app/new_features/models/user_booking_model.dart';
+import 'package:appointment_app/new_features/models/user_model.dart';
 import 'package:appointment_app/services/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseMethods {
+  /// -- Collection Reference
+  final userCollection = FirebaseFirestore.instance.collection('user');
+
   /// -- CREATE: create user
   /// -- Firebase function to add user
-  Future addUserDetails(Map<String, dynamic> userInfoMap, String id) async {
+  Future addUserDetails(Map<String, dynamic> json) async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     return await FirebaseFirestore.instance
         .collection("user")
-        .doc(id)
-        .set(userInfoMap);
+        .doc(uid)
+        .set(json);
   }
 
   /// -- CREATE: create bookings in database
@@ -68,9 +74,38 @@ class DatabaseMethods {
   Future<Stream<QuerySnapshot>> getUserAppointments(String email) async {
     return FirebaseFirestore.instance
         .collection("Booking")
-        // .orderBy("Date", descending: false)
-        .where('Email', isEqualTo: email)
+        //.orderBy("Date", descending: false)
+        .where('email', isEqualTo: email)
         .snapshots();
+  }
+
+  /// -- READ: read user data
+  /// -- Getter function for user
+  Future<UserModel?> readUser() async {
+    /// Create a variable and get current user
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    /// Get single document by ID
+    final docUser = FirebaseFirestore.instance.collection('user').doc(uid);
+    final snapshot = await docUser.get();
+
+    if (snapshot.exists) {
+      return UserModel.fromJson(snapshot.data()!);
+    }
+    return null;
+  }
+
+  /// -- READ: read single appointment/booking
+  /// -- Getter function for user appointments
+  Future<UserBookingModel?> readSingleUserAppointment(String bookingId) async {
+
+    final docBooking = FirebaseFirestore.instance.collection('Booking').doc(bookingId);
+    final snapshot = await docBooking.get();
+
+    if (snapshot.exists) {
+      return UserBookingModel.fromJson(snapshot.data()!);
+    }
+    return null;
   }
 
   /// -- READ: read bookings then display to Upcoming Bookings Tab
@@ -116,8 +151,20 @@ class DatabaseMethods {
     return FirebaseFirestore.instance.collectionGroup('mybookings').snapshots();
   }
 
+  /// -- UPDATE: update user appointments
+  Future<void> updateUserAppointments(
+      String id, String newDate, String newTime) async {
+    return FirebaseFirestore.instance
+        .collection('Booking')
+        .doc(id)
+        .update({
+      'Date': newDate,
+      'Time': newTime,
+    });
+  }
+
   /// -- DELETE: delete function for Upcoming Bookings Collection
-  Future DeleteBooking(String id) async {
+  Future deleteBooking(String id) async {
     return await FirebaseFirestore.instance
         .collection("Booking")
         .doc(id)
