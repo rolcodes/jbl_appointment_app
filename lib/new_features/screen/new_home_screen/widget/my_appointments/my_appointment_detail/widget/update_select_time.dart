@@ -1,36 +1,44 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import 'package:appointment_app/new_features/models/data/dummy_data.dart';
-import 'package:appointment_app/new_features/screen/select_staff/select_staff.dart';
+import 'package:appointment_app/new_features/models/data/time_data.dart';
+import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
 
 import 'package:appointment_app/new_features/screen/select_time/widget/time_item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../models/calendar_model.dart';
-import '../../models/time_model.dart';
+import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../models/time_model.dart';
 
-class SelectTime extends StatelessWidget {
-  const SelectTime({
+
+class UpdateSelectTime extends StatefulWidget {
+  const UpdateSelectTime({
     super.key,
-    required this.hours,
+    required this.hours, required this.ds,
   });
 
   final List<TimeClass> hours;
-  // TextEditingController pickedDate = TextEditingController();
+  final DocumentSnapshot<Object?> ds;
+
+
+  @override
+  State<UpdateSelectTime> createState() => _UpdateSelectTimeState();
+}
+
+class _UpdateSelectTimeState extends State<UpdateSelectTime> {
 
   /// -- Method to navigate to select staff screen
   void onSelectTime(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => const SelectStaffScreen(
+        builder: (ctx) => UpdateSelectStaff(
           services: dummyServices,
-          staff: dummyStaff,
+          staff: dummyStaff, ds: widget.ds,
         ),
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +72,9 @@ class SelectTime extends StatelessWidget {
                   mainAxisSpacing: 10,
                   crossAxisCount: 3,
                 ),
-                itemCount: hours.length,
+                itemCount: widget.hours.length,
                 itemBuilder: (ctx, index) => TimeItem(
-                  selectTime: hours[index],
+                  selectTime: widget.hours[index],
                 ),
               ),
             ),

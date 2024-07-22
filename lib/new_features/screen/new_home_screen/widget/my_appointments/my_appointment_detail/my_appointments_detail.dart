@@ -1,14 +1,15 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import 'package:appointment_app/new_features/models/data/feedback_data.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/widget/custom_choicechip.dart';
+import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/custom_choicechip.dart';
+import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_date.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../select_date/select_date.dart';
+import '../../../../select_date/select_date.dart';
 
 class AppointmentsDetail extends StatefulWidget {
   const AppointmentsDetail({super.key, required this.ds});
@@ -305,7 +306,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
               child: InkWell(
                 onTap: () {
 
-                  Get.to(() => const SelectDateScreen());
+                  Get.to(() => UpdateSelectDateScreen(ds: widget.ds));
 
                 },
                 child: Container(

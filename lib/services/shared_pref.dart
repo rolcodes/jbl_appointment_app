@@ -142,6 +142,13 @@ class SharedPreferenceHelper {
     return prefs.getString(serviceTimeKey);
   }
 
+  /// -- Remove Function
+
+  Future<String?> removeServiceTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(serviceTimeKey);
+  }
+
   // /// -- Method to convert the image to base64string
   // static String base64String(Uint8List data) {
   //   return base64String(data);

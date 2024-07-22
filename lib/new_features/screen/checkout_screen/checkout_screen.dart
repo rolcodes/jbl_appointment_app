@@ -56,7 +56,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       duration,
       //name,
       price,
-      time,
+      time, removeTime,
       email,
       userImage,
       number,
@@ -83,6 +83,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     duration = await SharedPreferenceHelper().getServiceDuration();
     price = await SharedPreferenceHelper().getServicePrice();
     time = await SharedPreferenceHelper().getServiceTime();
+    removeTime = await SharedPreferenceHelper().removeServiceTime();
   }
 
   getOnTheLoad() async {

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
 import 'my_appointment_item.dart';
-import 'my_appointments_detail.dart';
+import 'my_appointment_detail/my_appointments_detail.dart';
 
 class MyAppointmentsScreen extends StatefulWidget {
   const MyAppointmentsScreen({super.key});
