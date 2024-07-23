@@ -2,9 +2,13 @@ import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appba
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
+import '../../../../../utils/popups/loaders.dart';
+import '../../../../new_navigation_menu.dart';
 import 'my_appointment_item.dart';
 import 'my_appointment_detail/my_appointments_detail.dart';
 
@@ -19,12 +23,28 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   Stream? bookingStream;
   String? email;
 
+  final now_date = DateFormat('MMM d').format(DateTime.now());
+
   /// Function to navigate to Appointment Detail Screen
-  void _selectAppointment(BuildContext context, DocumentSnapshot<Object?> ds) {
+  Future<void> _selectAppointment(
+      BuildContext context, DocumentSnapshot<Object?> ds) async {
+    /// Navigate to specific appointment
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => AppointmentsDetail(
               ds: ds,
             )));
+
+    /// Automatically delete appointment if date was exceeded
+    if (ds['date'] == now_date) {
+      await Future.delayed(const Duration(days: 1));
+
+      /// DELETE function: Delete Document ID of Booking in database
+      await DatabaseMethods().deleteBooking(ds.id);
+      TLoaders.successSnackBar(title: 'Expired', message: 'Sorry. Booking was already expired.');
+      await Future.delayed(const Duration(seconds: 1));
+
+      Get.offAll(() => const NewNavigationMenu());
+    }
   }
 
   /// get updated email from sharedpreference
@@ -42,6 +62,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   @override
   void initState() {
     getOnTheLoad();
+
     super.initState();
   }
 
@@ -60,7 +81,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     return MyAppointmentItem(
                       ds: ds,
-                      onSelectedAppointment: () {
+                      onSelectedAppointment: () async {
                         _selectAppointment(context, snapshot.data.docs[index]);
                       },
                     );

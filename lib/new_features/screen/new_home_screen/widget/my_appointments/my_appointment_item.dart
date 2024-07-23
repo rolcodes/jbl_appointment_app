@@ -71,13 +71,7 @@ class MyAppointmentItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      // Text(
-                      //     'Location:  ${ds["Branch Location"]}',
-                      //     maxLines: 2,
-                      //     overflow: TextOverflow.ellipsis,
-                      //     style: Theme.of(context)
-                      //         .textTheme
-                      //         .labelLarge!),
+
                       SizedBox(
                         width: 200,
                         child: Text(
