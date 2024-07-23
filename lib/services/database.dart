@@ -9,7 +9,6 @@ class DatabaseMethods {
   final userCollection = FirebaseFirestore.instance.collection('user');
 
   /// -- CREATE: create user
-  /// -- Firebase function to add user
   Future addUserDetails(Map<String, dynamic> json) async {
     String uid = FirebaseAuth.instance.currentUser!.uid;
     return await FirebaseFirestore.instance
@@ -19,14 +18,13 @@ class DatabaseMethods {
   }
 
   /// -- CREATE: create bookings in database
-  /// -- Firebase function for Upcoming Bookings Collection
-  Future addUserBooking(
-      Map<String, dynamic> json, String bookingId) async {
+  Future addUserBooking(Map<String, dynamic> json, String bookingId) async {
     return await FirebaseFirestore.instance
         .collection("Booking")
         .doc(bookingId)
         .set(json); //userInfoMap
   }
+
   //
   // /// -- CREATE: create bookings in another collection in database for All Bookings Screen
   // /// -- Firebase function for All Bookings Collection
@@ -70,7 +68,6 @@ class DatabaseMethods {
   }
 
   /// -- READ: read user appointment then display to My Appointment Screen
-  /// -- Getter function for user appointments
   Future<Stream<QuerySnapshot>> getUserAppointments(String email) async {
     return FirebaseFirestore.instance
         .collection("Booking")
@@ -80,7 +77,6 @@ class DatabaseMethods {
   }
 
   /// -- READ: read user data
-  /// -- Getter function for user
   Future<UserModel?> readUser() async {
     /// Create a variable and get current user
     String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -140,8 +136,11 @@ class DatabaseMethods {
 
   /// -- UPDATE: update user appointments
   Future<void> updateUserAppointments(
-      String id, String newDate, String newTime, String newStaff) async {
-    return FirebaseFirestore.instance.collection('Booking').doc(id).update({
+      String bookingId, String newDate, String newTime, String newStaff) async {
+    return FirebaseFirestore.instance
+        .collection('Booking')
+        .doc(bookingId)
+        .update({
       'date': newDate,
       'time': newTime,
       'staffName': newStaff,

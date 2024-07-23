@@ -185,7 +185,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                                     .bodyMedium!
                                                     .apply(
                                                         color: Colors.pinkAccent
-                                                            .shade700)),
+                                                            .shade700), maxLines: 1,),
                                             SizedBox(
                                               width: 200,
                                               child: Text(

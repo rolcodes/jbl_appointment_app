@@ -31,7 +31,7 @@ class _UpdateSelectTimeState extends State<UpdateSelectTime> {
   void onSelectTime(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => UpdateSelectStaff(
+        builder: (ctx) => UpdateSelectTechnician(
           services: dummyServices,
           staff: dummyStaff, ds: widget.ds,
         ),

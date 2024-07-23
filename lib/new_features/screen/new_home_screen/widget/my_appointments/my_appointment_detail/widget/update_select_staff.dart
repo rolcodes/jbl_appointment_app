@@ -1,7 +1,11 @@
 import 'package:appointment_app/new_features/models/data/staff_data.dart';
+import 'package:appointment_app/new_features/new_navigation_menu.dart';
+import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/my_appointments_detail.dart';
+import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
 import 'package:appointment_app/new_features/screen/select_staff/widget/staff_item.dart';
 import 'package:appointment_app/services/database.dart';
 import 'package:appointment_app/services/shared_pref.dart';
+import 'package:appointment_app/utils/popups/loaders.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +18,8 @@ import '../../../../../../models/calendar_model.dart';
 import '../../../../../../models/service_product.dart';
 import '../../../../../../models/staff_model.dart';
 
-class UpdateSelectStaff extends StatefulWidget {
-  const UpdateSelectStaff({
+class UpdateSelectTechnician extends StatefulWidget {
+  const UpdateSelectTechnician({
     super.key,
     required this.services,
     required this.staff,
@@ -27,10 +31,10 @@ class UpdateSelectStaff extends StatefulWidget {
   final DocumentSnapshot<Object?> ds;
 
   @override
-  State<UpdateSelectStaff> createState() => _UpdateSelectStaffState();
+  State<UpdateSelectTechnician> createState() => _UpdateSelectTechnicianState();
 }
 
-class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
+class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
   String? time;
 
   TextEditingController pickedDate = TextEditingController();
@@ -138,10 +142,16 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        /// -- UPDATE
-                        Navigator.pop(context);
-                        // await DatabaseMethods().updateUserAppointments(
-                        //     id, pickedDate.text, time!, staff.staffName);
+                        /// -- UPDATE: update user appointment
+                        await DatabaseMethods().updateUserAppointments(widget.ds['bookingId'],
+                             pickedDate.text, time!, staff.staffName);
+                        print('Appointment was successfully updated!');
+
+                        TLoaders.successBookingSnackBar(title: 'Rescheduling successful', message: 'Booking was rescheduled successfully!');
+
+                        await Future.delayed(const Duration(seconds: 2));
+                        Get.offAll(() => const NewNavigationMenu());
+
                       },
                       child: Text(
                         'Yes',
@@ -176,7 +186,7 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
         isAction: false,
         iconColor: TColors.primary,
         title: Text(
-          'Select Staff',
+          'Select Technician',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),

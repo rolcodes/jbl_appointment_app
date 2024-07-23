@@ -56,7 +56,7 @@ class MyAppointmentItem extends StatelessWidget {
                               .bodyMedium!
                               .apply(
                               color: Colors.pinkAccent
-                                  .shade700,fontSizeDelta: -1)),
+                                  .shade700,fontSizeDelta: -1), maxLines: 1,),
                       SizedBox(
                         width: 190,
                         child: Text(
