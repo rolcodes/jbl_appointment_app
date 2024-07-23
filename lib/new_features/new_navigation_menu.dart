@@ -1,7 +1,9 @@
+import 'package:appointment_app/features/personalization/screens/profile/profile.dart';
 import 'package:appointment_app/features/shop/screens/catalog/catalog.dart';
 import 'package:appointment_app/features/shop/screens/home/home.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/custom_drawer.dart';
+import 'package:appointment_app/new_features/screen/profile_screen/profile.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:appointment_app/features/shop/screens/settings/settings.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -20,8 +22,8 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
   List screenList = [
     const NewHomeScreen(),
     const CatalogScreen(),
+    const ProfileScreen(),
     const SettingScreen(),
-    const Placeholder(color: Colors.red),
   ];
 
   @override

@@ -31,13 +31,14 @@ class ServiceCategoriesSeeAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         isCenterTitle: true,
         iconColor: TColors.primary,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
         title: Text(
           'Service Categories',
           style: Theme.of(context).textTheme.headlineSmall,

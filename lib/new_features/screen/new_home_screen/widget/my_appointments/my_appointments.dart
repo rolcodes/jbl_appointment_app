@@ -103,7 +103,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
+        isEdit: false,
         title: Text(
           'My Appointments',
           style: Theme.of(context).textTheme.headlineSmall,

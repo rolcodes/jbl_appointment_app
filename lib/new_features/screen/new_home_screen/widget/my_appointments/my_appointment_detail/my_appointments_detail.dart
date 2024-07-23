@@ -44,11 +44,12 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
         isCenterTitle: true,
         title: Text(
           'Appointment',

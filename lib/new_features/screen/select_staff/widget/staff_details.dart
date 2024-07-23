@@ -18,11 +18,12 @@ class StaffDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
         isCenterTitle: true,
         iconColor: TColors.primary,
         title: Text(

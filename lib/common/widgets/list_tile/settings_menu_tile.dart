@@ -24,6 +24,7 @@ class TSettingMenuTile extends StatelessWidget {
       subtitle: Text(subTitle, style: Theme.of(context).textTheme.labelMedium),
       trailing: trailing,
       onTap: onTap,
+
     );
   }
 }

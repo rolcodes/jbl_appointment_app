@@ -15,14 +15,14 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/popups/loaders.dart';
 import '../../../authentication/screens/login/login_view.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileOldScreen extends StatefulWidget {
+  const ProfileOldScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileOldScreen> createState() => _ProfileOldScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileOldScreenState extends State<ProfileOldScreen> {
   // SOLUTION #1
   // File? _image;
   // final picker = ImagePicker();

@@ -81,12 +81,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
     }
 
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
         isCenterTitle: true,
-        isAction: false,
+        isNotification: false,
         iconColor: TColors.primary,
         title: Text(
           widget.title,

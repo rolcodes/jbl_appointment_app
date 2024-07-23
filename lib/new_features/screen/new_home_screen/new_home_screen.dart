@@ -277,12 +277,13 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
                       /// -- App Bar
                       Positioned(
-                        child: CustomAppBar(
+                        child: CustomAppBar(        isEdit: false,
+
                           iconColor: Colors.white,
                           showBackgroundColor: true,
                           showIcon: true,
                           isDrawer: true,
-                          isAction: true,
+                          isNotification: true,
                         ),
                       ),
                     ],

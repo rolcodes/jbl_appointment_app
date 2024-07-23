@@ -40,11 +40,12 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
         title: Text('Select Date',
             style: Theme.of(context).textTheme.headlineSmall),
         iconColor: TColors.primary,

@@ -107,11 +107,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
         iconColor: TColors.primary,
         title:
             Text('Checkout', style: Theme.of(context).textTheme.headlineSmall),

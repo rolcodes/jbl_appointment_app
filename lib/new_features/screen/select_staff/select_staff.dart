@@ -41,12 +41,13 @@ class SelectStaffScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
         isCenterTitle: true,
-        isAction: false,
+        isNotification: false,
         iconColor: TColors.primary,
         title: Text(
           'Select Staff',

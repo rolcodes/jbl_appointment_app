@@ -128,7 +128,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               color: TColors.light, shape: BoxShape.circle),
                           child: IconButton(
                               onPressed: () =>
-                                  Get.to(() => const ProfileScreen()),
+                                  Get.to(() => const ProfileOldScreen()),
                               icon: const Icon(
                                 Iconsax.user_edit4,
                                 color: TColors.primary,
@@ -154,7 +154,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     icon: Iconsax.bookmark_24,
                     title: 'Bookings',
                     subTitle: 'Check your recent bookings',
-                    onTap: () => Get.to(() => Reservations()),
+                    onTap: () => Get.to(() => const Reservations()),
                   ),
                   TSettingMenuTile(
                       icon: Iconsax.heart_add,

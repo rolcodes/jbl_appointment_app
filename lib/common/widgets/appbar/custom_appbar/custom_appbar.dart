@@ -16,7 +16,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.showIcon,
     required this.isDrawer,
     this.isCenterTitle,
-    required this.isAction,
+    required this.isNotification,
+    required this.isEdit,
   });
 
   final Widget? title;
@@ -26,7 +27,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showIcon;
   final bool isDrawer;
   final bool? isCenterTitle;
-  final bool isAction;
+  final bool isNotification;
+  final bool isEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           automaticallyImplyLeading: false,
           centerTitle: isCenterTitle,
           forceMaterialTransparency: true,
+
           leading: isDrawer
               ? Builder(
                   builder: (BuildContext context) {
@@ -82,7 +85,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
           actions: [
-            isAction!
+            isNotification
                 ? Container(
                     width: 40,
                     height: 40,
@@ -100,7 +103,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                   )
-                : Container(),
+                : isEdit!
+                    ? InkWell(
+                        onTap: () {},
+              borderRadius: BorderRadius.circular(100),
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: showBackgroundColor
+                                ? TColors.primary.withOpacity(0.75)
+                                : Colors.transparent,
+                          ),
+                          child: const Icon(Icons.edit_outlined),
+                        ),
+                      )
+                    : Container(),
           ]),
     );
   }

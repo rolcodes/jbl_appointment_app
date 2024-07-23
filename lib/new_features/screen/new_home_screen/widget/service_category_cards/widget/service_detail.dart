@@ -171,12 +171,13 @@ class ServiceDetailScreen extends StatelessWidget {
           ),
 
           /// -- App Bar
-          const CustomAppBar(
+          const CustomAppBar(        isEdit: false,
+
             iconColor: Colors.white,
             showBackgroundColor: true,
             showIcon: true,
             isDrawer: false,
-            isAction: true,
+            isNotification: true,
           ),
         ],
       ),

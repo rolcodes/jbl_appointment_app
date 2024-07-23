@@ -41,11 +41,12 @@ class SelectTime extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar(        isEdit: false,
+
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
-        isAction: false,
+        isNotification: false,
         title: Text('Select Time',
             style: Theme.of(context).textTheme.headlineSmall),
         iconColor: TColors.primary,
