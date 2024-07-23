@@ -1,5 +1,6 @@
 import 'package:appointment_app/new_features/models/data/staff_data.dart';
 import 'package:appointment_app/new_features/screen/select_staff/widget/staff_item.dart';
+import 'package:appointment_app/services/database.dart';
 import 'package:appointment_app/services/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,13 @@ class UpdateSelectStaff extends StatefulWidget {
   const UpdateSelectStaff({
     super.key,
     required this.services,
-    required this.staff, required this.ds,
+    required this.staff,
+    required this.ds,
   });
 
   final List<ServiceProduct> services;
   final List<StaffModel> staff;
   final DocumentSnapshot<Object?> ds;
-
 
   @override
   State<UpdateSelectStaff> createState() => _UpdateSelectStaffState();
@@ -35,15 +36,12 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
   TextEditingController pickedDate = TextEditingController();
 
   getDataFromSharedPref() async {
-
     time = await SharedPreferenceHelper().getServiceTime();
   }
 
   getOnTheLoad() async {
     await getDataFromSharedPref();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -70,14 +68,25 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
-                  child: SizedBox(
-                    width: 220,
-                    child: Text(
-                      'Are you sure you want to reschedule this appointment?',
-                      textAlign: TextAlign.center,
+                Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        'Reschedule Booking',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 10),
+                    const Center(
+                      child: SizedBox(
+                        width: 220,
+                        child: Text(
+                          'Are you sure you want to reschedule this appointment?',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
 
                 /// Get data from Firebase
@@ -90,7 +99,8 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
                             .bodyLarge!
                             .apply(fontWeightDelta: 1)),
                     const SizedBox(height: 6),
-                    Text('Date: ${widget.ds['date']}, 2024, ${widget.ds['time']}',
+                    Text(
+                        'Date: ${widget.ds['date']}, 2024, ${widget.ds['time']}',
                         style: Theme.of(context).textTheme.bodyMedium),
                     Text('Technician: ${widget.ds['staffName']}',
                         style: Theme.of(context).textTheme.bodyMedium),
@@ -107,9 +117,10 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
                             .bodyLarge!
                             .apply(fontWeightDelta: 1)),
                     const SizedBox(height: 6),
-
-                    Text('Date: ${pickedDate.text}, $time',
-                        style: Theme.of(context).textTheme.bodyMedium, ),
+                    Text(
+                      'Date: ${pickedDate.text}, $time',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     Text('Technician: ${staff.staffName}',
                         style: Theme.of(context).textTheme.bodyMedium),
                   ],
@@ -126,7 +137,12 @@ class _UpdateSelectStaffState extends State<UpdateSelectStaff> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () async {
+                        /// -- UPDATE
+                        Navigator.pop(context);
+                        // await DatabaseMethods().updateUserAppointments(
+                        //     id, pickedDate.text, time!, staff.staffName);
+                      },
                       child: Text(
                         'Yes',
                         style: Theme.of(context).textTheme.bodyLarge,

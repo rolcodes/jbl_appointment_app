@@ -19,7 +19,7 @@ class _AdminAllBookingsState extends State<AdminAllBookings> {
   Stream? BookingStream;
 
   getOnTheLoad() async {
-    BookingStream = await DatabaseMethods().getAllBookings();
+    // BookingStream = await DatabaseMethods().getAllBookings();
     setState(() {});
   }
 

@@ -554,22 +554,22 @@ class _BookingPageState extends State<BookingPage> {
               "Account ID": id,
             };
 
-            /// Upload data to Booking Collections with document name of Booking ID
-            await DatabaseMethods()
-                .addUserBooking(userBookingmap, widget.bookingId)
-                .then((value) {
-              /// SnackBar
-              TLoaders.successBookingSnackBar(
-                  title: 'Done!', message: 'Your reservation was successful!');
-            });
+            // /// Upload data to Booking Collections with document name of Booking ID
+            // await DatabaseMethods()
+            //     .addUserBooking(userBookingmap, widget.bookingId)
+            //     .then((value) {
+            //   /// SnackBar
+            //   TLoaders.successBookingSnackBar(
+            //       title: 'Done!', message: 'Your reservation was successful!');
+            // });
 
             /// Function for sub collection of user bookings
             await DatabaseMethods().addUserAccBooking(userBookingmap, id!, widget.bookingId);
             await SharedPreferenceHelper().saveUserBookingId(widget.bookingId);
 
             /// Another Collection for All Bookings
-            await DatabaseMethods()
-                .addUserAllBooking(userBookingmap, widget.bookingId);
+            // await DatabaseMethods()
+            //     .addUserAllBooking(userBookingmap, widget.bookingId);
 
             await Future.delayed(const Duration(seconds: 1));
 

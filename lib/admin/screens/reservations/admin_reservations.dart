@@ -24,7 +24,7 @@ class _AdminReservationsState extends State<AdminReservations> {
 
   /// This function allows us to get booking details in firebase
   getOnTheLoad() async {
-    BookingStream = await DatabaseMethods().getBookings();
+    // BookingStream = await DatabaseMethods().getBookings();
     setState(() {});
   }
 
@@ -280,10 +280,10 @@ class _AdminReservationsState extends State<AdminReservations> {
                                                         // function for sorting
                                                       };
 
-                                                      await DatabaseMethods()
-                                                          .addCompleteBookings(
-                                                              userBookingCompleteMap,
-                                                              ds["Booking ID"]);
+                                                      // await DatabaseMethods()
+                                                      //     .addCompleteBookings(
+                                                      //         userBookingCompleteMap,
+                                                      //         ds["Booking ID"]);
 
                                                       // Perform the delete action here
                                                       /// Delete Function from Firebase
@@ -332,10 +332,10 @@ class _AdminReservationsState extends State<AdminReservations> {
                                                         // function for sorting
                                                       };
 
-                                                      await DatabaseMethods()
-                                                          .addCancelledBookings(
-                                                              userCancelledBookingMap,
-                                                              ds["Booking ID"]);
+                                                      // await DatabaseMethods()
+                                                      //     .addCancelledBookings(
+                                                      //         userCancelledBookingMap,
+                                                      //         ds["Booking ID"]);
 
                                                       // Perform the delete action here
                                                       /// Delete Function from Firebase

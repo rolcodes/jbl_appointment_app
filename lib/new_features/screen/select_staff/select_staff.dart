@@ -63,7 +63,11 @@ class SelectStaffScreen extends StatelessWidget {
             /// checkout details
             service: services[index],
             onSelectedService: (service) {
-              onSelectStaff(context, service, staff[index]);
+              onSelectStaff(
+                context,
+                service,
+                staff[index],
+              );
             },
           );
         },

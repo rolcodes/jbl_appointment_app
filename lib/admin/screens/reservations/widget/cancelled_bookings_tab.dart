@@ -16,7 +16,7 @@ class _CancelledBookingsTabState extends State<CancelledBookingsTab> {
 
   /// This function allows us to get Completed Booking Details in firebase
   getOnTheLoad() async {
-    CancelledBookingStream = await DatabaseMethods().getCancelledBookings();
+    // CancelledBookingStream = await DatabaseMethods().getCancelledBookings();
     setState(() {});
   }
 

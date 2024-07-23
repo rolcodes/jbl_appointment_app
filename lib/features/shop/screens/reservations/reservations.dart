@@ -31,8 +31,8 @@ class _ReservationsState extends State<Reservations> {
 
   /// This function allows us to get booking details in firebase
   getOnTheLoad() async {
-    BookingStream =
-        await DatabaseMethods().getUserAccBooking(id!, userAccbooking!);
+    // BookingStream =
+    //     await DatabaseMethods().getUserAccBooking(id!, userAccbooking!);
     setState(() {});
   }
 
