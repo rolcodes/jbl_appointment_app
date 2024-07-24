@@ -41,7 +41,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           automaticallyImplyLeading: false,
           centerTitle: isCenterTitle,
           forceMaterialTransparency: true,
-
           leading: isDrawer
               ? Builder(
                   builder: (BuildContext context) {
@@ -103,13 +102,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                   )
-                : isEdit!
+                : isEdit
                     ? InkWell(
                         onTap: () {},
-              borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(100),
                         child: Container(
-                          width: 50,
-                          height: 50,
                           decoration: BoxDecoration(
                             color: showBackgroundColor
                                 ? TColors.primary.withOpacity(0.75)
