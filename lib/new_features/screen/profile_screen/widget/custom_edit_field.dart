@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomEditField extends StatelessWidget {
   const CustomEditField({
-    super.key, required this.title, required this.subtitle, required this.onTap,
+    super.key, required this.title, required this.subtitle, required this.onTap, required this.isCopy,
   });
 
   final String title;
   final String subtitle;
   final VoidCallback onTap;
+  final bool isCopy;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class CustomEditField extends StatelessWidget {
                   subtitle,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                const Icon(Icons.edit_outlined, size: 20),
+                isCopy! ? const Icon(Icons.copy_rounded, size: 20) : const Icon(Icons.edit_outlined, size: 20),
               ],
             ),
           ),

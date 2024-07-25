@@ -46,124 +46,134 @@ class ServiceDetailScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 300,
                     fit: BoxFit.cover,
-                  ),
+                  ),SizedBox(height: 4),
 
                   /// -- Title
-                  Padding(
-                    padding: const EdgeInsets.all(25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          service.title,
-                          style: Theme.of(context).textTheme.headlineMedium,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.5),
                         ),
-                        const SizedBox(height: 25),
-
-                        /// -- Description
-                        Text(service.description),
-                        const SizedBox(height: 25),
-
-                        /// -- Price
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 2),
-                          decoration: BoxDecoration(
-                              color: TColors.primary,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'assets/images/users/female-svgrepo-com.png',
-                                width: 20,
-                              ),
-                              Image.asset(
-                                'assets/images/users/male-svgrepo-com.png',
-                                width: 14,
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                "${service.price}.00",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .apply(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 25),
-
-                        /// -- Duration
-                        Text(service.duration,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        const SizedBox(height: 25),
-
-                        /// -- Rating
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: TColors.primary,
-                              ),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Average Rating',
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-                                const SizedBox(height: 10),
-                                RatingBarIndicator(
-                                  rating: 4.6,
-                                  itemSize: 20,
-                                  unratedColor: TColors.white,
-                                  itemBuilder: (_, __) => const Icon(
-                                      Iconsax.star1,
-                                      color: TColors.primary),
-                                ),
-                              ],
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              service.title,
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 25),
+                            const SizedBox(height: 25),
 
-                        /// -- Service Inclusions:
-                        Center(
+                            /// -- Description
+                            Text(service.description),
+                            const SizedBox(height: 25),
+
+                            /// -- Price
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 2),
+                              decoration: BoxDecoration(
+                                  color: TColors.primary,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/users/female-svgrepo-com.png',
+                                    width: 20,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/users/male-svgrepo-com.png',
+                                    width: 14,
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    "${service.price}.00",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .apply(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 25),
+
+                            /// -- Duration
+                            Text(service.duration,
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+
+                      /// -- Rating
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 25),
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: TColors.primary,
+                            ),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Center(
                           child: Column(
                             children: [
                               Text(
-                                'Service Inclusions:',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .apply(color: TColors.primary),
+                                'Average Rating',
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
                               const SizedBox(height: 10),
-                              Text(
-                                'No Information Available',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                              const SizedBox(height: 30),
-                              Text(
-                                'How Often Should It be Done?',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .apply(color: TColors.primary),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                'Repeat service every 2-3 weeks',
-                                style: Theme.of(context).textTheme.titleSmall,
+                              RatingBarIndicator(
+                                rating: 4.6,
+                                itemSize: 20,
+                                unratedColor: TColors.white,
+                                itemBuilder: (_, __) => const Icon(
+                                    Iconsax.star1,
+                                    color: TColors.primary),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 25),
+
+                      /// -- Service Inclusions:
+                      Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              'Service Inclusions:',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .apply(color: TColors.primary),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'No Information Available',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                            const SizedBox(height: 30),
+                            Text(
+                              'How Often Should It be Done?',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .apply(color: TColors.primary),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Repeat service every 2-3 weeks',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

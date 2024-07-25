@@ -1,6 +1,4 @@
-import 'package:appointment_app/new_features/models/user_booking_model.dart';
 import 'package:appointment_app/new_features/models/user_model.dart';
-import 'package:appointment_app/services/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -89,6 +87,16 @@ class DatabaseMethods {
       return UserModel.fromJson(snapshot.data()!);
     }
     return null;
+  }
+
+  /// -- READ: get user profile information using stream builder
+  Future<Stream<DocumentSnapshot<Map<String, dynamic>>>>
+      getUserProfileInfo() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    return FirebaseFirestore.instance
+        .collection('user')
+        .doc(uid)
+        .snapshots();
   }
 
   // /// -- READ: read bookings then display to Upcoming Bookings Tab

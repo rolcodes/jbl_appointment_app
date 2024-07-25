@@ -1,6 +1,7 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import 'package:appointment_app/features/shop/screens/notifications/notifications.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
+import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
 import 'package:appointment_app/new_features/screen/profile_screen/widget/edit_profile.dart';
 import 'package:appointment_app/services/database.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/widgets/list_tile/settings_menu_tile.dart';
 import '../../../utils/popups/loaders.dart';
@@ -50,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                             color: TColors.light,
                       borderRadius: BorderRadius.circular(20),
                             child: InkWell(
-                              onTap: () => Get.to(() => const EditProfileScreen()),
+                              onTap: () => Get.to(() => EditProfileScreen()),
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
@@ -180,7 +182,11 @@ class ProfileScreen extends StatelessWidget {
                                                 await Future.delayed(
                                                     const Duration(seconds: 1));
                                                 Get.offAll(() =>
-                                                    const NewNavigationMenu());
+                                                    const LandingScreen());
+
+                                                /// Delete user data in local storage after logging out
+                                                // SharedPreferences preferences = await SharedPreferences.getInstance();
+                                                // await preferences.clear();
                                               },
                                             ),
                                           ],

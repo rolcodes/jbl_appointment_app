@@ -81,8 +81,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
     }
 
     return Scaffold(
-      appBar: CustomAppBar(        isEdit: false,
-
+      appBar: CustomAppBar(
+        isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
@@ -95,12 +95,11 @@ class _ServiceScreenState extends State<ServiceScreen> {
             color: TColors.primary,
             shadows: [
               BoxShadow(
-                color: Colors.grey.withOpacity(.50),
-                spreadRadius: 5,
-                offset: const Offset(0, 1),
-                blurRadius: 5,
-                blurStyle: BlurStyle.normal
-              ),
+                  color: Colors.grey.withOpacity(.50),
+                  spreadRadius: 5,
+                  offset: const Offset(0, 1),
+                  blurRadius: 5,
+                  blurStyle: BlurStyle.normal),
             ],
           ),
         ),

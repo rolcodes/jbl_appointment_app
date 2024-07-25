@@ -1,4 +1,5 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/widget/notification_badge.dart';
+import 'package:appointment_app/new_features/screen/profile_screen/widget/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
@@ -103,17 +104,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   )
                 : isEdit
-                    ? InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(100),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: showBackgroundColor
-                                ? TColors.primary.withOpacity(0.75)
-                                : Colors.transparent,
-                          ),
-                          child: const Icon(Icons.edit_outlined),
+                    ? IconButton(
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              WidgetStatePropertyAll(Colors.transparent),
                         ),
+                        padding: EdgeInsets.zero,
+                        alignment: Alignment(1, 0),
+                        onPressed: () => Get.to(() => EditProfileScreen()),
+                        icon: Icon(Icons.edit_outlined),
                       )
                     : Container(),
           ]),
