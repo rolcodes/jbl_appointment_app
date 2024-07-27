@@ -564,7 +564,7 @@ class _BookingPageState extends State<BookingPage> {
             // });
 
             /// Function for sub collection of user bookings
-            await DatabaseMethods().addUserAccBooking(userBookingmap, id!, widget.bookingId);
+            // await DatabaseMethods().addUserAccBooking(userBookingmap, id!, widget.bookingId);
             await SharedPreferenceHelper().saveUserBookingId(widget.bookingId);
 
             /// Another Collection for All Bookings

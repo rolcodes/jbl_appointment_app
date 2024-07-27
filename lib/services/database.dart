@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class DatabaseMethods {
   /// -- Collection Reference
   final userCollection = FirebaseFirestore.instance.collection('user');
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
 
   /// -- CREATE: create user
   Future addUserDetails(Map<String, dynamic> json) async {
@@ -18,7 +20,16 @@ class DatabaseMethods {
   /// -- CREATE: create bookings in database
   Future addUserBooking(Map<String, dynamic> json, String bookingId) async {
     return await FirebaseFirestore.instance
-        .collection("Booking")
+        .collection("appointments")
+        .doc(bookingId)
+        .set(json); //userInfoMap
+  }
+
+  /// -- CREATE: create Appointment History in database
+  Future addCancelledAppointment(Map<String, dynamic> json,
+      String bookingId) async {
+    return await FirebaseFirestore.instance
+        .collection("cancelled appointment history")
         .doc(bookingId)
         .set(json); //userInfoMap
   }
@@ -54,29 +65,31 @@ class DatabaseMethods {
   //       .set(userInfoMap);
   // }
 
-  /// -- CREATE: create upcoming bookings/appointments to user
-  Future addUserAccBooking(
-      Map<String, dynamic> userInfoMap, String userId, String bookingId) async {
-    return await FirebaseFirestore.instance
-        .collection('user')
-        .doc(userId)
-        .collection('myBookings')
-        .doc(bookingId)
-        .set(userInfoMap);
-  }
+  // /// -- CREATE: create upcoming bookings/appointments to user
+  // Future addUserAccBooking(
+  //     Map<String, dynamic> userInfoMap, String userId, String bookingId) async {
+  //   return await FirebaseFirestore.instance
+  //       .collection('user')
+  //       .doc(userId)
+  //       .collection('myBookings')
+  //       .doc(bookingId)
+  //       .set(userInfoMap);
+  // }
 
   /// -- READ: read user appointment then display to My Appointment Screen
-  Future<Stream<QuerySnapshot>> getUserAppointments(String email) async {
+  Future<Stream<QuerySnapshot>> getUserAppointments() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
     return FirebaseFirestore.instance
-        .collection("Booking")
-        //.orderBy("Date", descending: false)
-        .where('email', isEqualTo: email)
+        .collection("appointments")
+    //.orderBy("Date", descending: false)
+        .where('accountId', isEqualTo: uid)
         .snapshots();
   }
 
   /// -- READ: read user data
   Future<UserModel?> readUser() async {
-    /// Create a variable and get current user
+    /// Create a variable and get current user id
     String uid = FirebaseAuth.instance.currentUser!.uid;
 
     /// Get single document by ID
@@ -90,12 +103,18 @@ class DatabaseMethods {
   }
 
   /// -- READ: get user profile information using stream builder
-  Future<Stream<DocumentSnapshot<Map<String, dynamic>>>>
-      getUserProfileInfo() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+  // Future<Stream<DocumentSnapshot<Map<String, dynamic>>>>
+  //     getUserProfileInfo() async {
+  //   return FirebaseFirestore.instance
+  //       .collection('user')
+  //       .doc(uid)
+  //       .snapshots();
+  // }
+
+  Future<Stream<QuerySnapshot>> getCancelledAppointments() async {
     return FirebaseFirestore.instance
-        .collection('user')
-        .doc(uid)
+        .collection("cancelled appointment history")
+        .where('accountId', isEqualTo: uid)
         .snapshots();
   }
 
@@ -143,10 +162,10 @@ class DatabaseMethods {
   // }
 
   /// -- UPDATE: update user appointments
-  Future<void> updateUserAppointments(
-      String bookingId, String newDate, String newTime, String newStaff) async {
+  Future<void> updateUserAppointments(String bookingId, String newDate,
+      String newTime, String newStaff) async {
     return FirebaseFirestore.instance
-        .collection('Booking')
+        .collection('appointments')
         .doc(bookingId)
         .update({
       'date': newDate,
@@ -155,10 +174,18 @@ class DatabaseMethods {
     });
   }
 
+  /// -- Update appointment, add Cancel Reason
+  Future<void> updateUserCancelledAppointments(String bookingId, String selectedFeedback) async {
+    return FirebaseFirestore.instance.collection(
+        'cancelled appointment history').doc(bookingId).update({
+      'cancelReason': selectedFeedback,
+    });
+  }
+
   /// -- DELETE: delete function for Upcoming Bookings Collection
   Future deleteBooking(String id) async {
     return await FirebaseFirestore.instance
-        .collection("Booking")
+        .collection("appointments")
         .doc(id)
         .delete();
   }

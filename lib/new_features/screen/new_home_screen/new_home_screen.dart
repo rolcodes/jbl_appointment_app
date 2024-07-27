@@ -1,5 +1,6 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import 'package:appointment_app/new_features/controller/future_user.dart';
+import 'package:appointment_app/new_features/screen/new_home_screen/widget/chat/custom_chat_button.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/custom_drawer.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/new_promo_silder.dart';
@@ -45,18 +46,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   }
 
   late bool _isLoading;
-  String? email;
-
-  /// Get data in local database
-  getDataFromSharedPref() async {
-    /// user data
-    email = await SharedPreferenceHelper().getUserEmail();
-    setState(() {});
-  }
 
   getOnTheLoad() async {
-    await getDataFromSharedPref();
-    bookingStream = await DatabaseMethods().getUserAppointments(email!);
+    bookingStream = await DatabaseMethods().getUserAppointments();
     setState(() {});
   }
 
@@ -560,16 +552,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       /// -- Drawer
       drawer: const CustomDrawer(),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: TColors.primary,
-        shape: const CircleBorder(
-          side: BorderSide(
-            color: Colors.transparent,
-          ),
-        ),
-        child: const Icon(Icons.message, color: Colors.white),
-      ),
+      floatingActionButton: const CustomChatButton(),
     );
   }
 }
+
+

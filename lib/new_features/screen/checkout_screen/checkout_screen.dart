@@ -42,7 +42,7 @@ class CheckoutScreen extends StatefulWidget {
   final String bookingId = randomAlphaNumeric(6).toUpperCase();
 
   /// Each user needs to have random user IDs
-  final String id = randomAlphaNumeric(6).toUpperCase();
+  // final String id = randomAlphaNumeric(6).toUpperCase();
 
   @override
   State<CheckoutScreen> createState() =>
@@ -59,8 +59,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       time, removeTime,
       email,
       userImage,
-      number,
-      id;
+      number;
+
+  /// Create a variable and get current user id
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
   TextEditingController pickedDate = TextEditingController();
 
   /// Created a required constructor for this variable
@@ -72,7 +75,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   getDataFromSharedPref() async {
     /// user data
     //name = await SharedPreferenceHelper().getUserName();
-    id = await SharedPreferenceHelper().getUserID();
+    // id = await SharedPreferenceHelper().getUserID();
     number = await SharedPreferenceHelper().getUserNumber();
     email = await SharedPreferenceHelper().getUserEmail();
     userImage = await SharedPreferenceHelper().getUserImage();
@@ -506,7 +509,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                             final userBooking =
                                                 UserBookingModel(
                                               name: user.name,
-                                              accountId: id,
+                                              accountId: uid,
                                               email: user.email,
                                               telephone: user.telephone,
                                               service: title,

@@ -18,7 +18,7 @@ class TLoaders {
           color: Colors.black.withOpacity(0.3),
           blurRadius: 5,
           offset: const Offset(0, 4),
-          spreadRadius: 2,
+          spreadRadius: 1,
         ),
       ],
       snackPosition: SnackPosition.BOTTOM,

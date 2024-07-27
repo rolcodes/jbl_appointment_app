@@ -3,6 +3,7 @@ import 'package:appointment_app/features/shop/screens/notifications/notification
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
+import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/appointment_history.dart';
 import 'package:appointment_app/new_features/screen/profile_screen/widget/edit_profile.dart';
 import 'package:appointment_app/services/database.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
@@ -14,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/widgets/list_tile/settings_menu_tile.dart';
 import '../../../utils/popups/loaders.dart';
+import '../new_home_screen/widget/chat/custom_chat_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -93,7 +95,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           );
                   } else {
-                    return const Center(child: CircularProgressIndicator(),);
+                    return const Center(child: CircularProgressIndicator(color: TColors.primary),);
                   }
                 },
               ),
@@ -124,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                             Icons.arrow_forward_ios_rounded,
                             size: 20,
                           ),
-                          onTap: () {},
+                          onTap: () => Get.to(() => const AppointmentHistoryScreen()),
                         ),
                         TSettingMenuTile(
                           icon: Iconsax.notification,
@@ -207,6 +209,8 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: const CustomChatButton(),
+
     );
   }
 }

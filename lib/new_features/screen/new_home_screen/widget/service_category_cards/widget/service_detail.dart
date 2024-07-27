@@ -46,14 +46,16 @@ class ServiceDetailScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 300,
                     fit: BoxFit.cover,
-                  ),SizedBox(height: 4),
+                  ),
+                  SizedBox(height: 8),
 
                   /// -- Title
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.5),
                         ),
@@ -181,8 +183,8 @@ class ServiceDetailScreen extends StatelessWidget {
           ),
 
           /// -- App Bar
-          const CustomAppBar(        isEdit: false,
-
+          const CustomAppBar(
+            isEdit: false,
             iconColor: Colors.white,
             showBackgroundColor: true,
             showIcon: true,

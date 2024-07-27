@@ -21,7 +21,6 @@ class MyAppointmentsScreen extends StatefulWidget {
 
 class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   Stream? bookingStream;
-  String? email;
 
   final now_date = DateFormat('MMM d').format(DateTime.now());
 
@@ -40,22 +39,16 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
 
       /// DELETE function: Delete Document ID of Booking in database
       await DatabaseMethods().deleteBooking(ds.id);
-      TLoaders.successSnackBar(title: 'Expired', message: 'Sorry. Booking was already expired.');
+      TLoaders.successSnackBar(
+          title: 'Expired', message: 'Sorry. Booking was already expired.');
       await Future.delayed(const Duration(seconds: 1));
 
       Get.offAll(() => const NewNavigationMenu());
     }
   }
 
-  /// get updated email from sharedpreference
-  getDataFromSharedPref() async {
-    email = await SharedPreferenceHelper().getUserEmail();
-    setState(() {});
-  }
-
   getOnTheLoad() async {
-    await getDataFromSharedPref();
-    bookingStream = await DatabaseMethods().getUserAppointments(email!);
+    bookingStream = await DatabaseMethods().getUserAppointments();
     setState(() {});
   }
 
@@ -70,6 +63,34 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
     return StreamBuilder(
         stream: bookingStream,
         builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null || snapshot.data.docs.length == 0) {
+            /// If no data in snapshots display no appointments
+            return SizedBox(
+              height: 600,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/on_boarding_images/No data-amico.png',
+                    height: 250,
+                    width: 250,
+                    fit: BoxFit.contain,
+                  ),
+                  Center(
+                    child: Text('No Appointment Yet', style: Theme.of(context).textTheme.headlineSmall,),
+                  ),
+                  const SizedBox(height: 8),
+                  Center(
+                    child: Text(
+                        'Book An Appointment Now! Enjoy Our Exclusive Deals!', style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.darkGrey),
+                    textAlign: TextAlign.center,),
+                  ),
+                ],
+              ),
+            );
+          }
+
           return snapshot.hasData
               ? ListView.separated(
                   itemCount: snapshot.data.docs.length,
@@ -88,7 +109,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
-                      height: 12,
+                      height: 24,
                     );
                   },
                 )
@@ -113,8 +134,9 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
       ),
       backgroundColor: TColors.secondary,
       body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 24),
-          child: userAppointments()),
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        child: userAppointments(),
+      ),
     );
   }
 }

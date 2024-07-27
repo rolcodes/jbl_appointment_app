@@ -1,45 +1,18 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/new_features/models/data/feedback_data.dart';
-import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/custom_choicechip.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_date.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../select_date/select_date.dart';
-
-class AppointmentsDetail extends StatefulWidget {
-  const AppointmentsDetail({super.key, required this.ds});
+class CancelledAppointmentDetail extends StatefulWidget {
+  const CancelledAppointmentDetail({super.key, required this.ds});
 
   final DocumentSnapshot<Object?> ds;
 
   @override
-  State<AppointmentsDetail> createState() => _AppointmentsDetailState();
+  State<CancelledAppointmentDetail> createState() => _CancelledAppointmentDetail();
 }
 
-class _AppointmentsDetailState extends State<AppointmentsDetail> {
-  /// not working in simulator, we have to use real device
-  void _launchURL(Uri uri, bool inApp) async {
-    try {
-      if (inApp) {
-        await launchUrl(
-          uri,
-          mode: LaunchMode.externalApplication,
-        );
-      } else {
-        await launchUrl(
-          uri,
-          mode: LaunchMode.externalApplication,
-        );
-      }
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +25,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
         isNotification: false,
         isCenterTitle: true,
         title: Text(
-          'Appointment',
+          'Cancelled Appointment',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -163,8 +136,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                           style: Theme.of(context).textTheme.bodyMedium),
                       Text('${widget.ds['time']}, ${widget.ds["date"]}',
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                color: Colors.pinkAccent.shade700,
-                              )),
+                            color: Colors.pinkAccent.shade700,
+                          )),
                     ],
                   ),
 
@@ -243,87 +216,6 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                     ),
                   ),
                 ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        width: double.infinity,
-        height: 70,
-        decoration: BoxDecoration(
-          gradient:
-              LinearGradient(colors: [Colors.orange.shade800, TColors.primary]),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => StatefulBuilder(
-                      builder: (context, setState) => Dialog(
-                        child: SizedBox(
-                          height: 400,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: TColors.light,
-                                borderRadius: BorderRadius.circular(10)),
-                            padding: const EdgeInsets.all(24),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const SizedBox(
-                                  width: 220,
-                                  child: Text(
-                                    'Your feedback matters! \nTell us why you cancelled your appointment.',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                CustomChoiceChip(
-                                  dsID: widget.ds.id, ds: widget.ds,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(
-                      left: 75, right: 75, top: 25, bottom: 25),
-                  child: Text(
-                    'Cancel',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .apply(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  Get.to(() => UpdateSelectDateScreen(ds: widget.ds));
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(
-                      left: 60, right: 60, top: 25, bottom: 25),
-                  child: Text(
-                    'Reschedule',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .apply(color: Colors.white),
-                  ),
-                ),
               ),
             ),
           ],
