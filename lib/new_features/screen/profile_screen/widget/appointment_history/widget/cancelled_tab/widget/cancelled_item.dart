@@ -15,7 +15,7 @@ class CancelledItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 22),
+      padding: const EdgeInsets.only(top: 18),
       child: InkWell(
         onTap: onSelectedCancelledAppointment,
         child: Container(

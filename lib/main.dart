@@ -1,4 +1,7 @@
+import 'package:appointment_app/admin/admin_navigation_menu.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
+import 'package:appointment_app/new_features/screen/admin_panel/admin_navigation_menu.dart';
+import 'package:appointment_app/new_features/screen/admin_panel/admin_panel_home.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
 import 'package:appointment_app/utils/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
 
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: const NewNavigationMenu(),
+        home: const NewAdminNavigationMenu(),
       ),
     );
   }

@@ -26,9 +26,6 @@ class _AdminLoginState extends State<AdminLogin> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController userpasswordController = TextEditingController();
 
-
-
-
   /// Helps to check validation in each text fields
   final _formkey = GlobalKey<FormState>();
 
@@ -42,23 +39,7 @@ class _AdminLoginState extends State<AdminLogin> {
             Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(color: TColors.secondary
-                  // gradient: LinearGradient(
-                  //     begin: Alignment.topCenter,
-                  //     end: Alignment.bottomCenter,
-                  //     colors: [
-                  //       TColors.secondary,
-                  //       TColors.accent,
-                  //       TColors.accent,
-                  //       TColors.accent,
-                  //     ],
-                  //     stops: [
-                  //       0.3,
-                  //       2,
-                  //       2,
-                  //       2,
-                  //     ]),
-                  ),
+              decoration: const BoxDecoration(color: TColors.secondary),
             ),
 
             /// BorderRadius for top left and top right
@@ -237,36 +218,39 @@ class _AdminLoginState extends State<AdminLogin> {
   /// -- Login Function for Administrator
   loginAdmin() {
     /// Call the collection name Admin from Firestore
-    FirebaseFirestore.instance.collection("Admin").get().then((snapshot) {
-      /// Snapshot will be helpful to get all the documents that is available on the Admin Collection
-      /// If each inputs in text field match the ID and password from collection then redirect to admin panel
-      snapshot.docs.forEach((result) async {
-        /// Check if ID is correct. If not correct show snackbar
-        if (result.data()['id'] != usernameController.text.trim()) {
-          TLoaders.errorSnackBar(
-              title: 'Username is not correct!',
-              message: 'Password is either empty or not correct.');
-        }
+    FirebaseFirestore.instance.collection("admin").get().then(
+      (snapshot) {
+        /// Snapshot will be helpful to get all the documents that is available on the Admin Collection
+        /// If inputs in text field match the ID and password from collection then redirect to admin panel
+        snapshot.docs.forEach(
+          (result) async {
+            /// Check if ID is correct. If not correct show error snackbar
+            if (result.data()['id'] != usernameController.text.trim()) {
+              TLoaders.errorSnackBar(
+                  title: 'Username is not correct!',
+                  message: 'Username is either empty or not correct.');
+            }
 
-        /// Check if Password is correct. If not correct show snackbar
-        else if (result.data()['password'] !=
-            userpasswordController.text.trim()) {
-          TLoaders.errorSnackBar(
+            /// Check if Password is correct
+            else if (result.data()['password'] !=
+                userpasswordController.text.trim()) {
+              TLoaders.errorSnackBar(
+                  title: 'Password is not correct!',
+                  message: 'Password is either empty or not correct.');
+            }
 
-              title: 'Password is not correct!',
-              message: 'Password is either empty or not correct.');
-        }
+            /// Check if both ID and Password is correct then go to Booking Admin Panel
+            else {
+              TLoaders.doneSnackBar(
+                  title: 'Congratulations!', message: 'Login was successful!');
 
-        /// Check if both ID and Password is correct then go to Booking Admin Panel
-        else {
-          TLoaders.doneSnackBar(
-              title: 'Congratulations!', message: 'Login was successful!');
+              await Future.delayed(const Duration(seconds: 1));
 
-          await Future.delayed(const Duration(seconds: 1));
-
-          Get.offAll(const AdminNavigationMenu());
-        }
-      });
-    });
+              Get.offAll(const AdminNavigationMenu());
+            }
+          },
+        );
+      },
+    );
   }
 }

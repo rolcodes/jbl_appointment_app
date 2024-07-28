@@ -34,9 +34,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           onChanged: (value) {
             newValue = value;
-            setState(() {
-
-            });
+            setState(() {});
           },
         ),
         actions: [
@@ -56,8 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                 TLoaders.successSnackBar(
                     title: 'Saved successfully',
-                    message:
-                    'Changes was saved successfuly.');
+                    message: 'Changes was saved successfuly.');
 
                 await Future.delayed(const Duration(seconds: 1));
 
@@ -99,7 +96,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             /// Variable for data
             final user = snapshot.data;
             return user == null
-                ? Container()
+                ? SizedBox(
+                    height: 600,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/on_boarding_images/No data-amico.png',
+                          height: 250,
+                          width: 250,
+                          fit: BoxFit.contain,
+                        ),
+                        Center(
+                          child: Text(
+                            'No data',
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Center(
+                          child: Text(
+                            'Sorry. No data available.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .apply(color: TColors.darkGrey),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : Stack(
                     children: [
                       SizedBox(

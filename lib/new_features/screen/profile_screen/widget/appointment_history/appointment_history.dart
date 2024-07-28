@@ -30,7 +30,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
             Container(
               height: 40,
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+              margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
               decoration: BoxDecoration(
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(25)),
