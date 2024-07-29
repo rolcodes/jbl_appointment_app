@@ -95,7 +95,7 @@ class _AdminRequestTabState extends State<AdminRequestTab> {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
-                      height: 24,
+                      height: 8,
                     );
                   },
                 )

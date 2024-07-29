@@ -19,7 +19,7 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
       child: Scaffold(
         backgroundColor: TColors.secondary,
         appBar: CustomAppBar(
-          backgroundColor: TColors.white,
+          backgroundColor: TColors.light,
           showBackgroundColor: false,
           showIcon: false,
           isDrawer: false,
@@ -35,10 +35,9 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                color: Colors.white
-              ),
+              decoration: const BoxDecoration(color: TColors.light),
               padding: EdgeInsets.only(bottom: 10),
+              margin: EdgeInsets.only(bottom: 8),
               child: Container(
                 height: 40,
                 width: MediaQuery.of(context).size.width,
@@ -47,10 +46,10 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
+                  labelPadding: EdgeInsets.zero,
                   dividerHeight: 0,
                   padding: EdgeInsets.zero,
-                  indicatorPadding:
-                      const EdgeInsets.symmetric(horizontal: -20),
+                  indicatorPadding: const EdgeInsets.symmetric(horizontal: -20),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: TColors.primary.withOpacity(0.5),
@@ -58,52 +57,26 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
                   unselectedLabelColor: TColors.black,
                   splashBorderRadius: BorderRadius.circular(25),
                   labelColor: Colors.white,
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .labelSmall!
+                      .apply(fontSizeDelta: -3),
                   isScrollable: false,
-                  tabs: [
+                  tabs: const [
                     Tab(
-                      child: Text(
-                        'Requests',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall!
-                            .apply(fontSizeDelta: -2),
-                      ),
+                      child: Text('Requests'),
                     ),
                     Tab(
-                      child: Text(
-                        'Approved',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall!
-                            .apply(fontSizeDelta: -2),
-                      ),
+                      child: Text('Approved'),
                     ),
                     Tab(
-                      child: Text(
-                        'Completed',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall!
-                            .apply(fontSizeDelta: -4, fontWeightDelta: 1),
-                      ),
+                      child: Text('Completed'),
                     ),
                     Tab(
-                      child: Text(
-                        'Expired',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall!
-                            .apply(fontSizeDelta: -2),
-                      ),
+                      child: Text('Expired'),
                     ),
                     Tab(
-                      child: Text(
-                        'Cancelled',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall!
-                            .apply(fontSizeDelta: -3),
-                      ),
+                      child: Text('Cancelled'),
                     ),
                   ],
                 ),
@@ -113,9 +86,8 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
               child: TabBarView(
                 children: [
                   /// -- 1st tab
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: const Center(
                       child: AdminRequestTab(),
                     ),
@@ -143,7 +115,6 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
                     padding: const EdgeInsets.only(left: 24, right: 24),
                     child: const Center(
                       child: Text('4th Tab'),
-
                     ),
                   ),
                   Container(

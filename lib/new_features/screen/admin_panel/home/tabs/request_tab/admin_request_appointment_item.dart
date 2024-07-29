@@ -13,7 +13,7 @@ class AdminRequestAppointmentItem extends StatelessWidget {
     return InkWell(
       onTap: onSelectedAllRequestAppointment,
       child: Container(
-        height: 245,
+        height: 192,
         padding: EdgeInsets.all(20),
         decoration: const BoxDecoration(
           color: TColors.light,
@@ -148,40 +148,6 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 14),
-            Container(
-              width: double.infinity,
-              padding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.pink.shade100.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Cancelled by customer.',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall!
-                            .apply(color: Colors.red),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'Reason: ${ds['name']}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall!
-                        .apply(color: Colors.red),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),
