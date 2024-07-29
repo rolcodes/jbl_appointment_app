@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserBookingModel {
   final String name;
   final String? accountId;
@@ -17,6 +19,7 @@ class UserBookingModel {
   final String branchLocation;
   final String branchContact;
   final String bookingId;
+  final String timestamp;
 
   UserBookingModel({
     required this.name,
@@ -37,6 +40,7 @@ class UserBookingModel {
     required this.branchLocation,
     required this.branchContact,
     required this.bookingId,
+    required this.timestamp,
   });
 
   Map<String, dynamic> toJson() => {
@@ -58,6 +62,7 @@ class UserBookingModel {
         'branchLocation': branchLocation,
         'branchContact': branchContact,
         'bookingId': bookingId,
+        'timestamp': timestamp,
       };
 
   static UserBookingModel fromJson(Map<String, dynamic> json) =>
@@ -80,5 +85,6 @@ class UserBookingModel {
         branchContact: json['branchContact'],
         bookingId: json['bookingId'],
         branchImage: json['branchImage'],
+        timestamp: json['timestamp'],
       );
 }

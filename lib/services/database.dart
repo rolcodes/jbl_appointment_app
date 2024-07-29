@@ -118,15 +118,22 @@ class DatabaseMethods {
   }
 
   /// -- READ: get all requests appointments where status is 'Waiting for approval'
-  Future<Stream<QuerySnapshot>> getRequestAppointments() async {
+  Future<Stream<QuerySnapshot>> getAdminRequestAppointments() async {
     return FirebaseFirestore.instance
         .collection('appointments')
+        //.orderBy("timestamp", descending: true)
         .where('status', isEqualTo: 'Waiting for approval')
-        // .orderBy("Date", descending: false)
+        //.orderBy("Date", descending: false)
         .snapshots();
   }
 
   /// -- ReAD: get all approved appointments where status is 'Approved'
+  Future<Stream<QuerySnapshot>> getAdminApprovedAppointments() async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .where('status', isEqualTo: 'Approved')
+        .snapshots();
+  }
 
   // /// -- READ: read bookings then display to Upcoming Bookings Tab
   // /// -- Getter function for Upcoming Booking Collection

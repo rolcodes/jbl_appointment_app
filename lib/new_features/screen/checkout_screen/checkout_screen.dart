@@ -8,6 +8,7 @@ import 'package:appointment_app/new_features/models/user_booking_model.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:appointment_app/utils/constants/image_strings.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +57,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       duration,
       //name,
       price,
-      time, removeTime,
+      time,
+      removeTime,
       email,
       userImage,
       number;
+
+  // String timestamp = DateFormat('M - d - yyyy').format(DateTime.now());
+
+  // final DateTime timestamp = DateTime.now();
+
+  final String _currentDate = DateFormat("MM-dd-yyyy").format(DateTime.now());
 
   /// Create a variable and get current user id
   String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -110,8 +118,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(        isEdit: false,
-
+      appBar: CustomAppBar(
+        isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
@@ -527,6 +535,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   branch[0].location,
                                               branchContact: branch[0].contact,
                                               bookingId: widget.bookingId,
+                                              timestamp: _currentDate,
                                             );
                                             final json = userBooking.toJson();
 
@@ -543,7 +552,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                             });
 
                                             /// -- Add update status in document field using update function
-                                            await DatabaseMethods().updateAppointmentStatus(widget.bookingId);
+                                            await DatabaseMethods()
+                                                .updateAppointmentStatus(
+                                                    widget.bookingId);
 
                                             await Future.delayed(
                                                 const Duration(seconds: 1));

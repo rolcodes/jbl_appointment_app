@@ -4,6 +4,7 @@ import 'package:appointment_app/utils/popups/loaders.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../../services/database.dart';
 import '../../../../../../../utils/constants/colors.dart';
@@ -15,13 +16,17 @@ class CustomChoiceChip extends StatefulWidget {
   final String dsID;
   final DocumentSnapshot<Object?> ds;
 
-
   @override
   State<CustomChoiceChip> createState() => _CustomChoiceChipState();
 }
 
 class _CustomChoiceChipState extends State<CustomChoiceChip> {
   String? _selectedFeedback;
+
+  // String timestamp = DateFormat('M - d - yyyy').format(DateTime.now());
+
+  final String _currentDate = DateFormat("MM-dd-yyyy").format(DateTime.now());
+
 
   /// List of choices
   final List<String> _feedback = [
@@ -48,26 +53,21 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
           alignment: WrapAlignment.center,
           children: _feedback
               .map(
-                (feedback) =>
-                ChoiceChip(
+                (feedback) => ChoiceChip(
                   showCheckmark: true,
                   elevation: 2,
                   side: const BorderSide(color: Colors.grey),
                   label: _selectedFeedback == feedback
                       ? Text(
-                    feedback,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .labelLarge!
-                        .apply(color: Colors.white),
-                  )
+                          feedback,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .apply(color: Colors.white),
+                        )
                       : Text(feedback),
                   selected: _selectedFeedback == feedback,
-                  labelStyle: Theme
-                      .of(context)
-                      .textTheme
-                      .labelLarge,
+                  labelStyle: Theme.of(context).textTheme.labelLarge,
                   backgroundColor: TColors.white,
                   onSelected: (selected) {
                     if (selected) {
@@ -76,7 +76,7 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
                   },
                   selectedColor: TColors.primary,
                 ),
-          )
+              )
               .toList(),
         ),
         const SizedBox(height: 14),
@@ -88,10 +88,7 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
               style: TextButton.styleFrom(overlayColor: TColors.primary),
               child: Text(
                 'Cancel',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
             TextButton(
@@ -121,20 +118,23 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
                       branchTitle: widget.ds['branchTitle'],
                       branchLocation: widget.ds['branchLocation'],
                       branchContact: widget.ds['branchContact'],
-                      bookingId: widget.ds['bookingId']);
+                      bookingId: widget.ds['bookingId'],
+                      timestamp: _currentDate);
                   final json = userCancelledBooking.toJson();
 
                   /// -- Add Cancelled Appointments in a new collection "cancelled appointments history"
-                  await DatabaseMethods().addCancelledAppointment(
-                      json, widget.ds['bookingId']);
+                  await DatabaseMethods()
+                      .addCancelledAppointment(json, widget.ds['bookingId']);
 
                   /// -- Add Cancel Reason in document field using update function
-                  await DatabaseMethods().updateUserCancelledAppointments(widget.ds['bookingId'], _selectedFeedback!);
+                  await DatabaseMethods().updateUserCancelledAppointments(
+                      widget.ds['bookingId'], _selectedFeedback!);
 
                   /// DELETE function: Delete Document ID of Booking in database
                   await DatabaseMethods().deleteBooking(widget.dsID);
                   print('Appointment was deleted from database');
-                  TLoaders.successSnackBar(title: 'Cancelled',
+                  TLoaders.successSnackBar(
+                      title: 'Cancelled',
                       message: 'Booking successfully cancelled.');
                   await Future.delayed(const Duration(seconds: 1));
 
@@ -144,10 +144,7 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
               style: TextButton.styleFrom(overlayColor: TColors.primary),
               child: Text(
                 'Submit',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ],

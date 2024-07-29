@@ -28,7 +28,7 @@ class _AdminRequestTabState extends State<AdminRequestTab> {
   }
 
   getOnTheLoad() async {
-    requestStream = await DatabaseMethods().getRequestAppointments();
+    requestStream = await DatabaseMethods().getAdminRequestAppointments();
     setState(() {
 
     });

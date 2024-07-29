@@ -1,3 +1,4 @@
+import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/approved_tab/dart/admin_approved_tab.dart';
 import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/request_tab/admin_request_tab.dart';
 import 'package:flutter/material.dart';
 
@@ -96,9 +97,8 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
                   /// -- 2nd tab
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
                     child: const Center(
-                      child: Text('2nd Tab'),
+                      child: AdminApprovedTab(),
                     ),
                   ),
 
