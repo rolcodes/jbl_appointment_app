@@ -13,7 +13,6 @@ class AdminRequestAppointmentItem extends StatelessWidget {
     return InkWell(
       onTap: onSelectedAllRequestAppointment,
       child: Container(
-        height: 192,
         padding: EdgeInsets.all(20),
         decoration: const BoxDecoration(
           color: TColors.light,
@@ -62,19 +61,50 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                       height: 110,
                     )),
                 Container(
-                  padding: EdgeInsets.only(left: 12),
-                  width: 240,
-                  height: 110,
+                  padding: const EdgeInsets.only(left: 14),
+                  width: 280,
+                  height: 130,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        ds['branchTitle'],
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .apply(color: Colors.black),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            ds['name'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .apply(color: Colors.black),
+                          ),
+                          Text(
+                            ds['telephone'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .apply(color: TColors.black),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Email:',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .apply(color: TColors.darkGrey),
+                          ),
+                          Text(
+                            ds['email'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .apply(color: TColors.darkGrey),
+                          ),
+                        ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
