@@ -57,121 +57,123 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 56),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: IconButton(
-            onPressed: () {
-              widget.pageController.previousPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: TColors.primary,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 56),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: IconButton(
+              onPressed: () {
+                widget.pageController.previousPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: TColors.primary,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 170),
-        Center(
-          child: Image.asset(
-            'assets/logos/jbl-logo-removebg-preview.png',
-            width: 300,
+          const SizedBox(height: 170),
+          Center(
+            child: Image.asset(
+              'assets/logos/jbl-logo-removebg-preview.png',
+              width: 300,
+            ),
           ),
-        ),
-        const SizedBox(height: 50),
-        Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Text(
-                'Forgot your password?',
-                style: Theme.of(context).textTheme.headlineMedium!.apply(
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(1, 1),
-                      blurRadius: 10,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 5),
-              Center(
-                child: SizedBox(
-                  width: 350,
-                  child: Text(
-                    "Dont' worry sometimes people can forget too, enter your email and we will send you a password reset link.",
-                    style: Theme.of(context).textTheme.bodyLarge!.apply(
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-
-                          offset: Offset(1, 1),
-                          blurRadius: 15,
-                          color: Colors.black.withOpacity(0.5),
-
-                        ),
-                      ],
-                    ),
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
+          const SizedBox(height: 50),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Text(
+                  'Forgot your password?',
+                  style: Theme.of(context).textTheme.headlineMedium!.apply(
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              CustomTextFormField(
-                textController: emailController,
-                hint: 'Email',
-                obscureText: false,
-                textCapitalization: TextCapitalization.none,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => CupertinoAlertDialog(
-                        content: Text('Please enter your credential.',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .apply(color: Colors.black)),
-                        actions: [
-                          TextButton(
-                            child: Text("OK",
-                                style:
-                                Theme.of(context).textTheme.bodyMedium),
-                            onPressed: () {
-                              Get.back();
-                            },
+                const SizedBox(height: 5),
+                Center(
+                  child: SizedBox(
+                    width: 350,
+                    child: Text(
+                      "Dont' worry sometimes people can forget too, enter your email and we will send you a password reset link.",
+                      style: Theme.of(context).textTheme.bodyLarge!.apply(
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+      
+                            offset: Offset(1, 1),
+                            blurRadius: 15,
+                            color: Colors.black.withOpacity(0.5),
+      
                           ),
                         ],
                       ),
-                    );
-                  }
-                },
-              ),
-              GradientButton(
-                text: 'Continue',
-                color: [Colors.orange.shade800, TColors.primary],
-                width: 260,
-                height: 40,
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      email = emailController.text;
-                    });
-                    resetPassword();
-                  }
-                },
-              ),
-            ],
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                CustomTextFormField(
+                  textController: emailController,
+                  hint: 'Email',
+                  obscureText: false,
+                  textCapitalization: TextCapitalization.none,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => CupertinoAlertDialog(
+                          content: Text('Please enter your credential.',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .apply(color: Colors.black)),
+                          actions: [
+                            TextButton(
+                              child: Text("OK",
+                                  style:
+                                  Theme.of(context).textTheme.bodyMedium),
+                              onPressed: () {
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                ),
+                GradientButton(
+                  text: 'Continue',
+                  color: [Colors.orange.shade800, TColors.primary],
+                  width: 260,
+                  height: 40,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        email = emailController.text;
+                      });
+                      resetPassword();
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

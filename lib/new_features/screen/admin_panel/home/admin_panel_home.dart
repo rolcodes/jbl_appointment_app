@@ -1,7 +1,8 @@
+import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/request_tab/admin_request_tab.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import '../../../utils/constants/colors.dart';
+import '../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../utils/constants/colors.dart';
 
 class AdminPanelHomeScreen extends StatefulWidget {
   const AdminPanelHomeScreen({super.key});
@@ -34,16 +35,16 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 52,
               decoration: const BoxDecoration(
                 color: Colors.white
               ),
+              padding: EdgeInsets.only(bottom: 10),
               child: Container(
                 height: 40,
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
                   dividerHeight: 0,
@@ -116,7 +117,7 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: const Center(
-                      child: Text('1st Tab'),
+                      child: AdminRequestTab(),
                     ),
                   ),
 

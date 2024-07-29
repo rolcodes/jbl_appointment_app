@@ -1,4 +1,5 @@
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
+import 'package:appointment_app/new_features/screen/admin_panel/admin_panel_login.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/non_screen_widget/gradient_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -64,123 +65,148 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 56),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: IconButton(
-            onPressed: () {
-              widget.pageController.previousPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: TColors.primary,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 56),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, top: 5),
+            child: IconButton(
+              onPressed: () {
+                widget.pageController.previousPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: TColors.primary,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 170),
-        Center(
-          child: Image.asset(
-            'assets/logos/jbl-logo-removebg-preview.png',
-            width: 300,
+          const SizedBox(height: 170),
+          Center(
+            child: Image.asset(
+              'assets/logos/jbl-logo-removebg-preview.png',
+              width: 300,
+            ),
           ),
-        ),
-        const SizedBox(height: 50),
-        Center(
-          child: Form(
-            key: formkey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomTextFormField(
-                  textController: emailController,
-                  hint: 'Email',
-                  obscureText: false,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      showDialog(
-                        context: context,
-                        builder: (ctx) => CupertinoAlertDialog(
-                          content: Text('Please enter your credentials.',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge!
-                                  .apply(color: Colors.black)),
-                          actions: [
-                            TextButton(
-                              child: Text("OK",
-                                  style:
-                                      Theme.of(context).textTheme.bodyMedium),
-                              onPressed: () {
-                                Get.back();
-                              },
+          const SizedBox(height: 50),
+          Center(
+            child: Form(
+              key: formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomTextFormField(
+                    textController: emailController,
+                    hint: 'Email',
+                    obscureText: false,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => CupertinoAlertDialog(
+                            content: Text('Please enter your credentials.',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .apply(color: Colors.black)),
+                            actions: [
+                              TextButton(
+                                child: Text("OK",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      return null;
+                    },
+                    textCapitalization: TextCapitalization.none,
+                  ),
+                  CustomTextFormField(
+                    textController: passwordController,
+                    hint: 'Password',
+                    obscureText: false,
+                    textCapitalization: TextCapitalization.none,
+                  ),
+      
+                  /// -- Button for Login Function
+                  GradientButton(
+                    text: 'LOGIN',
+                    color: [Colors.orange.shade800, TColors.primary],
+                    width: 260,
+                    height: 40,
+                    onPressed: () {
+                      if (formkey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar.
+                        setState(() {
+                          mail = emailController.text;
+                          password = passwordController.text;
+                        });
+                        print('set state');
+                      }
+                      userLogin();
+                      print('user login');
+                    },
+                  ),
+                  const SizedBox(height: 10),
+      
+                  /// -- Navigate to next Page View = Forgot Password
+                  TextButton(
+                    onPressed: () {
+                      widget.pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut);
+                    },
+                    child: Text(
+                      'Forgot username or password?',
+                      style: Theme.of(context).textTheme.bodyLarge!.apply(
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(1, 1),
+                            blurRadius: 20,
+                            color: Colors.grey.withOpacity(1),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 220),
+                  Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: TextButton(
+                      onPressed: () {
+                        Get.to(() => const AdminPanelLogin());
+                      },
+                      child: Text(
+                        'Login as Administrator',
+                        style: Theme.of(context).textTheme.bodyLarge!.apply(
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              offset: const Offset(0, 2),
+                              blurRadius: 25,
+                              color: Colors.black.withOpacity(0.5),
+      
                             ),
                           ],
                         ),
-                      );
-                    }
-                    return null;
-                  },
-                  textCapitalization: TextCapitalization.none,
-                ),
-                CustomTextFormField(
-                  textController: passwordController,
-                  hint: 'Password',
-                  obscureText: false,
-                  textCapitalization: TextCapitalization.none,
-                ),
-
-                /// -- Button for Login Function
-                GradientButton(
-                  text: 'LOGIN',
-                  color: [Colors.orange.shade800, TColors.primary],
-                  width: 260,
-                  height: 40,
-                  onPressed: () {
-                    if (formkey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar.
-                      setState(() {
-                        mail = emailController.text;
-                        password = passwordController.text;
-                      });
-                      print('set state');
-                    }
-                    userLogin();
-                    print('user login');
-                  },
-                ),
-                const SizedBox(height: 10),
-
-                /// -- Navigate to next Page View = Forgot Password
-                TextButton(
-                  onPressed: () {
-                    widget.pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut);
-                  },
-                  child: Text(
-                    'Forgot username or password?',
-                    style: Theme.of(context).textTheme.bodyLarge!.apply(
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(1, 1),
-                          blurRadius: 20,
-                          color: Colors.grey.withOpacity(1),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

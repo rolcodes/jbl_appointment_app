@@ -1,5 +1,5 @@
 import 'package:appointment_app/features/shop/screens/catalog/catalog.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/admin_panel_home.dart';
+import 'package:appointment_app/new_features/screen/admin_panel/home/admin_panel_home.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/custom_drawer.dart';
 import 'package:appointment_app/new_features/screen/profile_screen/profile.dart';

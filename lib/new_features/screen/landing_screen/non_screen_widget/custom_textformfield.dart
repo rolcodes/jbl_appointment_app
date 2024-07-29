@@ -26,7 +26,7 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 260,
       height: 70,
       child: TextFormField(
@@ -63,29 +63,3 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 }
-
-/// -- Show Dialog Box
-// showDialog(
-//   context: context,
-//   builder: (ctx) =>
-//       CupertinoAlertDialog(
-//         content: Text(
-//             'Please fill out the following fields to proceed.',
-//             style: Theme.of(context)
-//                 .textTheme
-//                 .labelLarge!
-//                 .apply(
-//                 color: Colors.black)),
-//         actions: [
-//           TextButton(
-//             child: Text("OK",
-//                 style: Theme.of(context)
-//                     .textTheme
-//                     .bodyMedium),
-//             onPressed: () {
-//               Get.back();
-//             },
-//           ),
-//         ],
-//       ),
-// );

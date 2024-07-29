@@ -1,6 +1,6 @@
+import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-enum design { white, black }
 
 class GradientButton extends StatelessWidget {
   const GradientButton({
@@ -30,8 +30,9 @@ class GradientButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(6),
       child: InkWell(
         onTap: onPressed,
-
-        child: Container(
+        splashColor: TColors.primary,
+        borderRadius: BorderRadius.circular(6),
+        child: Ink(
           height: height,
           width: width,
           decoration: BoxDecoration(
@@ -60,7 +61,7 @@ class GradientButton extends StatelessWidget {
                             width: 20,
                             height: 20,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
                             text,
                             style: style,

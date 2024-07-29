@@ -117,7 +117,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         children: [
           const SizedBox(height: 56),
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 5, top:5),
             child: IconButton(
               onPressed: () {
                 widget.pageController.nextPage(
