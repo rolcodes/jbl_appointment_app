@@ -73,6 +73,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             /// If no data display nothing
             return Container();
           }
+
           /// If there is data display appointments
           return snapshot.hasData
               ? Column(
@@ -171,13 +172,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                                'Service Start Time: ${ds["time"]}, ${ds["date"]}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyMedium!
-                                                    .apply(
-                                                        color: Colors.pinkAccent
-                                                            .shade700), maxLines: 1,),
+                                              'Service Start Time: ${ds["time"]}, ${ds["date"]}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium!
+                                                  .apply(
+                                                      color: Colors
+                                                          .pinkAccent.shade700),
+                                              maxLines: 1,
+                                            ),
                                             SizedBox(
                                               width: 200,
                                               child: Text(
@@ -269,8 +272,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
                       /// -- App Bar
                       Positioned(
-                        child: CustomAppBar(        isEdit: false,
-
+                        child: CustomAppBar(
+                          isEdit: false,
                           iconColor: Colors.white,
                           showBackgroundColor: true,
                           showIcon: true,
@@ -556,5 +559,3 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     );
   }
 }
-
-

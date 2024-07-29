@@ -542,6 +542,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                       'Your reservation was successful!');
                                             });
 
+                                            /// -- Add update status in document field using update function
+                                            await DatabaseMethods().updateAppointmentStatus(widget.bookingId);
+
                                             await Future.delayed(
                                                 const Duration(seconds: 1));
 

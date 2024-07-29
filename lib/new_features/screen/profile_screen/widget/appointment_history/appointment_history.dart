@@ -14,6 +14,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: TColors.secondary,
         appBar: CustomAppBar(
+          backgroundColor: TColors.light,
           showBackgroundColor: false,
           showIcon: true,
           isDrawer: false,
@@ -28,34 +29,42 @@ class AppointmentHistoryScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              height: 40,
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
               decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(25)),
-              child: TabBar(
-                dividerHeight: 0,
-                indicatorPadding: const EdgeInsets.symmetric(horizontal: -20, vertical: 0),
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: TColors.primary.withOpacity(0.5),
+                color: TColors.light
+              ),
+              padding: EdgeInsets.only(bottom: 10),
+              child: Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(25)),
+                child: TabBar(
+                  dividerHeight: 0,
+                  indicatorPadding: const EdgeInsets.only(left: -22,right: -21),
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: TColors.primary.withOpacity(0.5),
+                  ),
+                  unselectedLabelColor: TColors.black,
+                  splashBorderRadius: BorderRadius.circular(25),
+                  labelColor: Colors.white,
+                  isScrollable: false,
+                  labelStyle: Theme.of(context).textTheme.bodyLarge,
+                  unselectedLabelStyle: Theme.of(context).textTheme.labelLarge!.apply(fontSizeDelta: 1),
+                  tabs: const [
+                    Tab(
+                      child: Text(' Cancelled '),
+                    ),
+                    Tab(
+                      child: Text('Completed'),
+                    ),
+                    Tab(
+                      child: Text('    Expired    '),
+                    ),
+                  ],
                 ),
-                unselectedLabelColor: TColors.black,
-                splashBorderRadius: BorderRadius.circular(25),
-                labelColor: Colors.white,
-                isScrollable: false,
-                tabs: const [
-                  Tab(
-                    child: Text(' Cancelled '),
-                  ),
-                  Tab(
-                    child: Text('Completed'),
-                  ),
-                  Tab(
-                    child: Text('    Expired    '),
-                  ),
-                ],
               ),
             ),
             Expanded(

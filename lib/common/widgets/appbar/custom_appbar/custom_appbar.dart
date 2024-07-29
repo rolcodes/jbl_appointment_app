@@ -18,12 +18,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.isDrawer,
     this.isCenterTitle,
     required this.isNotification,
-    required this.isEdit,
+    required this.isEdit, this.backgroundColor,
   });
 
   final Widget? title;
   final List<Widget>? actions;
   final Color? iconColor;
+  final Color? backgroundColor;
   final bool showBackgroundColor;
   final bool showIcon;
   final bool isDrawer;
@@ -33,60 +34,61 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 20, left: 10),
-      child: AppBar(
-          iconTheme: IconThemeData(color: iconColor),
-          title: title,
-          titleSpacing: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: isCenterTitle,
-          forceMaterialTransparency: true,
-          leading: isDrawer
-              ? Builder(
-                  builder: (BuildContext context) {
-                    return IconButton(
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                      icon: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: showBackgroundColor
-                              ? TColors.primary.withOpacity(0.75)
-                              : Colors.transparent,
-                        ),
-                        child: Icon(
-                          Icons.menu,
-                          color: showIcon ? iconColor : Colors.transparent,
-                        ),
+    return AppBar(
+      backgroundColor: backgroundColor,
+        iconTheme: IconThemeData(color: iconColor),
+        title: title,
+        titleSpacing: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: isCenterTitle,
+        forceMaterialTransparency: false,
+        leading: isDrawer
+            ? Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    icon: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: showBackgroundColor
+                            ? TColors.primary.withOpacity(0.75)
+                            : Colors.transparent,
                       ),
-                    );
-                  },
-                )
-              : IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: showBackgroundColor
-                          ? TColors.primary.withOpacity(0.75)
-                          : Colors.transparent,
+                      child: Icon(
+                        Icons.menu,
+                        color: showIcon ? iconColor : Colors.transparent,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: showIcon ? iconColor : Colors.transparent,
-                      size: 20,
-                    ),
+                  );
+                },
+              )
+            : IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: showBackgroundColor
+                        ? TColors.primary.withOpacity(0.75)
+                        : Colors.transparent,
+                  ),
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: showIcon ? iconColor : Colors.transparent,
+                    size: 20,
                   ),
                 ),
-          actions: [
-            isNotification
-                ? Container(
+              ),
+        actions: [
+          isNotification
+              ? Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Container(
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
@@ -97,26 +99,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     child: Center(
                       child: NotificationBadge(
-                        iconColor: showBackgroundColor
-                            ? TColors.white
-                            : TColors.primary,
+                        iconColor:
+                            showBackgroundColor ? TColors.white : TColors.primary,
                       ),
                     ),
-                  )
-                : isEdit
-                    ? IconButton(
+                  ),
+              )
+              : isEdit
+                  ? Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: IconButton(
                         style: const ButtonStyle(
                           backgroundColor:
                               WidgetStatePropertyAll(Colors.transparent),
                         ),
-                        padding: EdgeInsets.zero,
-                        alignment: Alignment(1, 0),
                         onPressed: () => Get.to(() => EditProfileScreen()),
                         icon: Icon(Icons.edit_outlined),
-                      )
-                    : Container(),
-          ]),
-    );
+                      ),
+                  )
+                  : Container(),
+        ]);
   }
 
   @override

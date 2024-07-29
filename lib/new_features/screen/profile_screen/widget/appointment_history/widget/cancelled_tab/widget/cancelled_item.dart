@@ -6,7 +6,8 @@ import '../../../../../../../../utils/constants/colors.dart';
 class CancelledItem extends StatelessWidget {
   const CancelledItem({
     super.key,
-    required this.ds, required this.onSelectedCancelledAppointment,
+    required this.ds,
+    required this.onSelectedCancelledAppointment,
   });
 
   final DocumentSnapshot<Object?> ds;
@@ -20,6 +21,7 @@ class CancelledItem extends StatelessWidget {
         onTap: onSelectedCancelledAppointment,
         child: Container(
           clipBehavior: Clip.none,
+          height: 245,
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -40,13 +42,13 @@ class CancelledItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: 270,
+                    width: 240,
                     child: Text(
                       ds["service"],
                       style: Theme.of(context)
                           .textTheme
-                          .titleLarge!
-                          .apply(fontSizeDelta: 1),
+                          .bodySmall!
+                          .apply(fontSizeDelta: 1, color: Colors.black),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -56,14 +58,14 @@ class CancelledItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .apply(color: Colors.red),
+                        .apply(fontSizeDelta: -2,color: Colors.red),
                   )
                 ],
               ),
               SizedBox(
                   child: Divider(
-                    color: Colors.grey.shade300,
-                  )),
+                color: Colors.grey.shade300,
+              )),
               const SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,59 +76,90 @@ class CancelledItem extends StatelessWidget {
                       child: Image.network(
                         ds["image"],
                         fit: BoxFit.cover,
-                        width: 80,
-                        height: 80,
+                        width: 110,
+                        height: 110,
                       )),
-                  SizedBox(
-                    width: 260,
-                    height: 80,
+                  Container(
+                    padding: EdgeInsets.only(left: 12),
+                    width: 240,
+                    height: 110,
                     child: Column(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: 200,
-                          child: Text(
-                            ds['branchTitle'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .apply(color: Colors.black),
-                          ),
+                        Text(
+                          ds['branchTitle'],
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .apply(color: Colors.black),
                         ),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Schedule:',
                               style: Theme.of(context)
                                   .textTheme
-                                  .labelLarge,
+                                  .labelLarge!
+                                  .apply(color: TColors.darkGrey),
                             ),
                             Text(
                               "${ds['date']}, ${ds['time']}",
                               style: Theme.of(context)
                                   .textTheme
-                                  .labelLarge,
+                                  .labelLarge!
+                                  .apply(color: TColors.darkGrey),
                             ),
                           ],
                         ),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Technician:",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge),
-                            Text(ds['staffName'],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge),
+                            Text(
+                              "Technician:",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .apply(color: TColors.darkGrey),
+                            ),
+                            Text(
+                              ds['staffName'],
+                              style:
+                                  Theme.of(context).textTheme.labelLarge!.apply(
+                                        color: TColors.darkGrey,
+                                      ),
+                            ),
                           ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Booking ID: ",
+                              style:
+                                  Theme.of(context).textTheme.labelLarge!.apply(
+                                        color: TColors.darkGrey,
+                                      ),
+                            ),
+                            Text(
+                              ds['bookingId'],
+                              style:
+                                  Theme.of(context).textTheme.labelLarge!.apply(
+                                        color: TColors.darkGrey,
+                                      ),
+                            )
+                          ],
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          child: Text(
+                            'Price:  ${ds["price"]}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .apply(fontSizeDelta: 0),
+                          ),
                         ),
                       ],
                     ),
@@ -136,28 +169,20 @@ class CancelledItem extends StatelessWidget {
               const SizedBox(height: 14),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.pink.shade100.withOpacity(0.2),
+                  color: Colors.pink.shade100.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Cancelled by customer.',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall!
-                              .apply(color: Colors.red),
-                        ),
-                        Text(
-                          "ID:  ${ds['bookingId']}",
                           style: Theme.of(context)
                               .textTheme
                               .labelSmall!

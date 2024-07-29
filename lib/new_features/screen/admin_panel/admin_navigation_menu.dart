@@ -19,6 +19,7 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
   List screenList = [
     const AdminPanelHomeScreen(),
     const Placeholder(color: Colors.red),
+    const Placeholder(color: Colors.blue),
   ];
 
   @override
@@ -66,6 +67,17 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
                 color: TColors.darkGrey,
               ),
               label: 'Booking',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(
+                Icons.calendar_month_rounded,
+                color: TColors.primary,
+              ),
+              icon: Icon(
+                Icons.settings,
+                color: TColors.darkGrey,
+              ),
+              label: 'Settings',
             ),
           ],
         ),

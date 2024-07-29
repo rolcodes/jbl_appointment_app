@@ -182,6 +182,14 @@ class DatabaseMethods {
     });
   }
 
+  /// -- Update appointment, add status
+  Future<void> updateAppointmentStatus(String bookingId) async {
+    return FirebaseFirestore.instance.collection(
+        'appointments').doc(bookingId).update({
+      'status': 'Waiting for approval',
+    });
+  }
+
   /// -- DELETE: delete function for Upcoming Bookings Collection
   Future deleteBooking(String id) async {
     return await FirebaseFirestore.instance

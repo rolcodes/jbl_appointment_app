@@ -121,6 +121,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        backgroundColor: TColors.light,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
@@ -133,9 +134,11 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         isCenterTitle: true,
       ),
       backgroundColor: TColors.secondary,
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-        child: userAppointments(),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(24),
+          child: userAppointments(),
+        ),
       ),
     );
   }
