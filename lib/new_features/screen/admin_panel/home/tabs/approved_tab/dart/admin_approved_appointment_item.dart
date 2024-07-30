@@ -76,7 +76,9 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                             onPressed: () async {
                               Get.back();
                               TLoaders.successSnackBar(
-                                  title: 'Done', message: 'Appointment was moved to requests tab');
+                                  title: 'Done',
+                                  message:
+                                      'Appointment was moved to requests tab');
                               await DatabaseMethods()
                                   .updateAppointmentStatus(ds['bookingId']);
                             },
@@ -131,7 +133,7 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                              color: Colors.grey.withOpacity(0.5), width: 0.5),
+                              color: Colors.grey.shade300, width: 0.5),
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
@@ -265,6 +267,7 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          /// -- Cancel Appointment
                           TextButton(
                             style: TextButton.styleFrom(
                               overlayColor: Colors.grey.withOpacity(0.5),
@@ -274,10 +277,22 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 side: BorderSide(
-                                    color: Colors.grey.withOpacity(0.3)),
+                                  color: Colors.grey.shade300,
+                                ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              /// -- show snackbar
+                              TLoaders.cancelledApprovedSnackBar(
+                                title: 'Cancelled',
+                                bookingId: ds['bookingId'],
+                                context: context,
+                              );
+
+                              /// -- update status [Approved]
+                              await DatabaseMethods()
+                                  .updateAdminCancelledStatus(ds['bookingId']);
+                            },
                             child: Text(
                               'Cancel',
                               style: Theme.of(context)
@@ -286,6 +301,8 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                   .apply(fontWeightDelta: 1),
                             ),
                           ),
+
+                          /// -- Expired Appointment
                           TextButton(
                             style: TextButton.styleFrom(
                               overlayColor: Colors.grey.withOpacity(0.5),
@@ -295,7 +312,8 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 side: BorderSide(
-                                    color: Colors.grey.withOpacity(0.3)),
+                                  color: Colors.grey.shade300,
+                                ),
                               ),
                             ),
                             onPressed: () {},
@@ -307,6 +325,8 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                   .apply(fontWeightDelta: 1),
                             ),
                           ),
+
+                          /// -- Completed Appointment
                           TextButton(
                             style: TextButton.styleFrom(
                               overlayColor: Colors.grey.withOpacity(0.5),

@@ -127,11 +127,19 @@ class DatabaseMethods {
         .snapshots();
   }
 
-  /// -- ReAD: get all approved appointments where status is 'Approved'
+  /// -- READ: get all approved appointments where status is 'Approved'
   Future<Stream<QuerySnapshot>> getAdminApprovedAppointments() async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .where('status', isEqualTo: 'Approved')
+        .snapshots();
+  }
+
+  /// -- READ: get all cancelled appointments where status is 'Cancelled'
+  Future<Stream<QuerySnapshot>> getAdminCancelledAppointments() async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .where('status', isEqualTo: 'Cancelled')
         .snapshots();
   }
 
@@ -212,13 +220,23 @@ class DatabaseMethods {
     });
   }
 
-  /// -- Update status of appoinment to Approved
+  /// -- Update status of appointment to Approved
   Future<void> updateAdminApprovedStatus(String bookingId) async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .doc(bookingId)
         .update({
       'status': 'Approved',
+    });
+  }
+
+  /// -- Update status of appointment to Approved
+  Future<void> updateAdminCancelledStatus(String bookingId) async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(bookingId)
+        .update({
+      'status': 'Cancelled',
     });
   }
 
