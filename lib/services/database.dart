@@ -143,11 +143,19 @@ class DatabaseMethods {
         .snapshots();
   }
 
-  /// -- READ: get all cancelled appointments where status is 'Cancelled'
+  /// -- READ: get all completed appointments where status is 'Completed'
   Future<Stream<QuerySnapshot>> getAdminCompletedAppointments() async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .where('status', isEqualTo: 'Completed')
+        .snapshots();
+  }
+
+  /// -- READ: get all expired appointments where status is 'Expired'
+  Future<Stream<QuerySnapshot>> getAdminExpiredAppointments() async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .where('status', isEqualTo: 'Expired')
         .snapshots();
   }
 

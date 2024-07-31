@@ -60,7 +60,7 @@ class _AdminApprovedTabState extends State<AdminApprovedTab> {
               ),
               Center(
                 child: Text(
-                  'No Requests Yet',
+                  'No Approved Appointment Yet',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),

@@ -118,7 +118,8 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Text(
                                     'Are you sure you want to put back this appointment to requests tab?',
-                                    style: Theme.of(context).textTheme.labelLarge,
+                                    style:
+                                    Theme.of(context).textTheme.labelLarge,
                                   ),
                                 ),
                                 actions: [
@@ -130,26 +131,32 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                         overlayColor: TColors.primary),
                                     child: Text(
                                       'Cancel',
-                                      style: Theme.of(context).textTheme.bodyLarge,
+                                      style:
+                                      Theme.of(context).textTheme.bodyLarge,
                                     ),
                                   ),
                                   TextButton(
                                     onPressed: () async {
                                       Get.back();
-                                      TLoaders.successSnackBar(
-                                          title: 'Done',
-                                          message:
-                                          'Appointment was moved to requests tab');
+                                      TLoaders.undoCancelledToRequestsSnackBar(
+                                        title: 'Done',
+                                        message:
+                                        'Appointment was moved to requests tab',
+                                        bookingId: ds['bookingId'],
+                                        context: context,
+                                      );
                                       await DatabaseMethods()
-                                          .updateAppointmentStatus(ds['bookingId']);
+                                          .updateAppointmentStatus(
+                                          ds['bookingId']);
                                     },
                                     style: TextButton.styleFrom(
                                         overlayColor: TColors.primary),
                                     child: Text(
                                       'Confirm',
-                                      style:
-                                      Theme.of(context).textTheme.bodyLarge!.apply(
-                                        color: CupertinoColors.activeBlue,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .apply(
                                         fontWeightDelta: 1,
                                       ),
                                     ),

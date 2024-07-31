@@ -8,10 +8,11 @@ import 'package:get/get.dart';
 import '../../../../../../../utils/constants/colors.dart';
 
 class AdminCompletedAppointmentItem extends StatelessWidget {
-  const AdminCompletedAppointmentItem(
-      {super.key,
-        required this.ds, required this.onSelectedAllCompletedAppointment,
-        });
+  const AdminCompletedAppointmentItem({
+    super.key,
+    required this.ds,
+    required this.onSelectedAllCompletedAppointment,
+  });
 
   final DocumentSnapshot<Object?> ds;
   final void Function() onSelectedAllCompletedAppointment;
@@ -47,17 +48,17 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                 Text(
                   ds['status'],
                   style: Theme.of(context).textTheme.bodySmall!.apply(
-                    fontSizeDelta: -2,
-                    color: Colors.green.shade700,
-                  ),
+                        fontSizeDelta: -2,
+                        color: Colors.green.shade700,
+                      ),
                 )
               ],
             ),
             const SizedBox(height: 2),
             SizedBox(
                 child: Divider(
-                  color: Colors.grey.shade300,
-                )),
+              color: Colors.grey.shade300,
+            )),
             const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,7 +119,8 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Text(
                                     'Are you sure you want to put back this appointment to requests tab?',
-                                    style: Theme.of(context).textTheme.labelLarge,
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
                                   ),
                                 ),
                                 actions: [
@@ -130,35 +132,45 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                                         overlayColor: TColors.primary),
                                     child: Text(
                                       'Cancel',
-                                      style: Theme.of(context).textTheme.bodyLarge,
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
                                   ),
                                   TextButton(
                                     onPressed: () async {
                                       Get.back();
-                                      TLoaders.successSnackBar(
-                                          title: 'Done',
-                                          message:
-                                          'Appointment was moved to requests tab');
+                                      TLoaders.undoCompletedToRequestsSnackBar(
+                                        title: 'Done',
+                                        message:
+                                            'Appointment was moved to requests tab',
+                                        bookingId: ds['bookingId'],
+                                        context: context,
+                                      );
                                       await DatabaseMethods()
-                                          .updateAppointmentStatus(ds['bookingId']);
+                                          .updateAppointmentStatus(
+                                              ds['bookingId']);
                                     },
                                     style: TextButton.styleFrom(
                                         overlayColor: TColors.primary),
                                     child: Text(
                                       'Confirm',
-                                      style:
-                                      Theme.of(context).textTheme.bodyLarge!.apply(
-                                        color: CupertinoColors.activeBlue,
-                                        fontWeightDelta: 1,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .apply(
+                                            fontWeightDelta: 1,
+                                          ),
                                     ),
                                   ),
                                 ],
                               ),
                             );
                           },
-                          icon: Icon(Icons.more_horiz, size: 20, color: Colors.black,),
+                          icon: Icon(
+                            Icons.more_horiz,
+                            size: 20,
+                            color: Colors.black,
+                          ),
                         ),
                       )
                     ],
@@ -242,9 +254,9 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                           Text(
                             ds['staffName'],
                             style:
-                            Theme.of(context).textTheme.labelLarge!.apply(
-                              color: TColors.darkGrey,
-                            ),
+                                Theme.of(context).textTheme.labelLarge!.apply(
+                                      color: TColors.darkGrey,
+                                    ),
                           ),
                         ],
                       ),
@@ -254,16 +266,16 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                           Text(
                             "Booking ID: ",
                             style:
-                            Theme.of(context).textTheme.labelLarge!.apply(
-                              color: TColors.darkGrey,
-                            ),
+                                Theme.of(context).textTheme.labelLarge!.apply(
+                                      color: TColors.darkGrey,
+                                    ),
                           ),
                           Text(
                             ds['bookingId'],
                             style:
-                            Theme.of(context).textTheme.labelLarge!.apply(
-                              color: TColors.darkGrey,
-                            ),
+                                Theme.of(context).textTheme.labelLarge!.apply(
+                                      color: TColors.darkGrey,
+                                    ),
                           ),
                         ],
                       ),
