@@ -7,19 +7,19 @@ import 'package:get/get.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
 
-class AdminCancelledAppointmentItem extends StatelessWidget {
-  const AdminCancelledAppointmentItem(
+class AdminCompletedAppointmentItem extends StatelessWidget {
+  const AdminCompletedAppointmentItem(
       {super.key,
-      required this.ds,
-      required this.onSelectedAllCancelledAppointment});
+        required this.ds, required this.onSelectedAllCompletedAppointment,
+        });
 
   final DocumentSnapshot<Object?> ds;
-  final void Function() onSelectedAllCancelledAppointment;
+  final void Function() onSelectedAllCompletedAppointment;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onSelectedAllCancelledAppointment,
+      onTap: onSelectedAllCompletedAppointment,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
@@ -43,21 +43,21 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                   ),
                 ),
 
-                /// -- Approved Status
+                /// -- Completed Status
                 Text(
                   ds['status'],
                   style: Theme.of(context).textTheme.bodySmall!.apply(
-                        fontSizeDelta: -2,
-                        color: CupertinoColors.systemRed,
-                      ),
+                    fontSizeDelta: -2,
+                    color: Colors.green.shade700,
+                  ),
                 )
               ],
             ),
             const SizedBox(height: 2),
             SizedBox(
                 child: Divider(
-              color: Colors.grey.shade300,
-            )),
+                  color: Colors.grey.shade300,
+                )),
             const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -242,9 +242,9 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                           Text(
                             ds['staffName'],
                             style:
-                                Theme.of(context).textTheme.labelLarge!.apply(
-                                      color: TColors.darkGrey,
-                                    ),
+                            Theme.of(context).textTheme.labelLarge!.apply(
+                              color: TColors.darkGrey,
+                            ),
                           ),
                         ],
                       ),
@@ -254,16 +254,16 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                           Text(
                             "Booking ID: ",
                             style:
-                                Theme.of(context).textTheme.labelLarge!.apply(
-                                      color: TColors.darkGrey,
-                                    ),
+                            Theme.of(context).textTheme.labelLarge!.apply(
+                              color: TColors.darkGrey,
+                            ),
                           ),
                           Text(
                             ds['bookingId'],
                             style:
-                                Theme.of(context).textTheme.labelLarge!.apply(
-                                      color: TColors.darkGrey,
-                                    ),
+                            Theme.of(context).textTheme.labelLarge!.apply(
+                              color: TColors.darkGrey,
+                            ),
                           ),
                         ],
                       ),

@@ -143,6 +143,14 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  /// -- READ: get all cancelled appointments where status is 'Cancelled'
+  Future<Stream<QuerySnapshot>> getAdminCompletedAppointments() async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .where('status', isEqualTo: 'Completed')
+        .snapshots();
+  }
+
   // /// -- READ: read bookings then display to Upcoming Bookings Tab
   // /// -- Getter function for Upcoming Booking Collection
   // Future<Stream<QuerySnapshot>> getBookings() async {
@@ -237,6 +245,15 @@ class DatabaseMethods {
         .doc(bookingId)
         .update({
       'status': 'Cancelled',
+    });
+  }
+
+  Future<void> updateAdminCompletedStatus(String bookingId) async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(bookingId)
+        .update({
+      'status': 'Completed',
     });
   }
 

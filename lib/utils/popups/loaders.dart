@@ -184,6 +184,76 @@ class TLoaders {
     );
   }
 
+  /// -- Approved Status
+  static completedSnackBar({
+    required title,
+    message = '',
+    duration = 3,
+    required String bookingId,
+    required BuildContext context,
+  }) {
+    Get.snackbar(
+      title,
+      message,
+      titleText: Text(
+        'Completed',
+        style: Theme
+            .of(context)
+            .textTheme
+            .bodySmall!
+            .apply(
+          color: Colors.black,
+          fontWeightDelta: 1,
+        ),
+      ),
+      messageText: Text(
+        'The appointment was successfully completed!',
+        style: Theme
+            .of(context)
+            .textTheme
+            .labelSmall,
+      ),
+      isDismissible: true,
+      shouldIconPulse: false,
+      colorText: TColors.black,
+      backgroundColor: Colors.green.shade100,
+      borderColor: Colors.green.shade700,
+      borderWidth: 0.5,
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 4,
+          offset: const Offset(0, 2),
+          spreadRadius: 1,
+        ),
+      ],
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: duration),
+      margin: const EdgeInsets.all(10),
+      icon: const Icon(Icons.check, color: TColors.black),
+      mainButton: TextButton(
+        style: TextButton.styleFrom(
+          overlayColor: Colors.grey.withOpacity(0.5),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          padding: EdgeInsets.zero,
+          minimumSize: const Size(100, 40),
+        ),
+        onPressed: () async {
+          /// -- update status back to [Approved]
+          await DatabaseMethods().updateAdminApprovedStatus(bookingId);
+        },
+        child: Text(
+          'Undo',
+          style: Theme
+              .of(context)
+              .textTheme
+              .bodySmall!
+              .apply(color: Colors.green.shade700, fontWeightDelta: 1),
+        ),
+      ),
+    );
+  }
+
   /// -- Cancelled Status with undo then moved to request
   static cancelledRequestSnackBar({
     required title,

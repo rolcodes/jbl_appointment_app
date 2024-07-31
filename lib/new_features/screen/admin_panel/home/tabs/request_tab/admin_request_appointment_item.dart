@@ -1,6 +1,8 @@
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../services/database.dart';
 import '../../../../../../utils/popups/loaders.dart';
@@ -251,16 +253,70 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(2),
                               ),
                             ),
-                            onPressed: () async {
-                              /// -- show snackbar
-                              TLoaders.approvedSnackBar(
-                                  title: 'Approved',
-                                  bookingId: ds['bookingId'],
-                                  context: context);
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => CupertinoAlertDialog(
+                                  title: Text(
+                                    'Approve appointment',
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  content: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text(
+                                      'Are you sure you want to approve this appointment?',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      style: TextButton.styleFrom(
+                                          overlayColor: TColors.primary),
+                                      child: Text(
+                                        'Cancel',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        Get.back();
 
-                              /// -- update status [Approved]
-                              await DatabaseMethods()
-                                  .updateAdminApprovedStatus(ds['bookingId']);
+                                        /// -- show snackbar
+                                        TLoaders.approvedSnackBar(
+                                            title: 'Approved',
+                                            bookingId: ds['bookingId'],
+                                            context: context);
+
+                                        /// -- update status [Approved]
+                                        await DatabaseMethods()
+                                            .updateAdminApprovedStatus(
+                                                ds['bookingId']);
+
+                                      },
+                                      style: TextButton.styleFrom(
+                                          overlayColor: TColors.primary),
+                                      child: Text(
+                                        'Approved',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .apply(
+                                              color: CupertinoColors.activeBlue,
+                                              fontWeightDelta: 1,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
                             child: Text(
                               'Approved',

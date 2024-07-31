@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/constants/colors.dart';
 
 class AdminApprovedAppointmentItem extends StatelessWidget {
   const AdminApprovedAppointmentItem(
@@ -338,9 +338,72 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(2),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => CupertinoAlertDialog(
+                                  title: Text(
+                                    'Complete appointment',
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  content: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text(
+                                      'Are you sure you the appointment was complete?',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      style: TextButton.styleFrom(
+                                          overlayColor: TColors.primary),
+                                      child: Text(
+                                        'Cancel',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: ()  async {
+                                        Get.back();
+
+                                        /// -- show snackbar
+                                        TLoaders.completedSnackBar(
+                                            title: 'Approved',
+                                            bookingId: ds['bookingId'],
+                                            context: context);
+
+                                        /// -- update status [Completed]
+                                        await DatabaseMethods()
+                                            .updateAdminCompletedStatus(
+                                            ds['bookingId']);
+                                      },
+                                      style: TextButton.styleFrom(
+                                          overlayColor: TColors.primary),
+                                      child: Text(
+                                        'Complete',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .apply(
+                                              color: Colors.green.shade700,
+                                              fontWeightDelta: 1,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             child: Text(
-                              'Completed',
+                              'Complete',
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge!
