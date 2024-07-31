@@ -316,7 +316,18 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              /// -- show snackbar
+                              TLoaders.expiredSnackBar(
+                                title: 'Cancelled',
+                                bookingId: ds['bookingId'],
+                                context: context,
+                              );
+
+                              /// -- update status [Approved]
+                              await DatabaseMethods()
+                                  .updateAdminCancelledStatus(ds['bookingId']);
+                            },
                             child: Text(
                               'Expired',
                               style: Theme.of(context)

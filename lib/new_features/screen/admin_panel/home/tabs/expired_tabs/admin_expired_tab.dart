@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import 'admin_expired_appointment_detail.dart';
+import 'admin_expired_appointment_item.dart';
 
 class AdminExpiredTab extends StatefulWidget {
   const AdminExpiredTab({super.key});
@@ -17,7 +19,7 @@ class _AdminExpiredTabState extends State<AdminExpiredTab> {
   Stream? expiredStream;
 
   /// -- Function to navigate to Admin Requests Appointments Detail Screen
-  Future<void> _selectedAllCancelledAppointment(
+  Future<void> _selectedAllExpiredAppointment(
       BuildContext context, DocumentSnapshot<Object?> ds) async {
     /// -- Navigate to specific Request Appointment
     Navigator.of(context).push(
@@ -85,8 +87,8 @@ class _AdminExpiredTabState extends State<AdminExpiredTab> {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     return AdminExpiredAppointmentItem(
                       ds: ds,
-                      onSelectedAllCancelledAppointment: () async {
-                        _selectedAllCancelledAppointment(
+                      onSelectedAllExpiredAppointment: () async {
+                        _selectedAllExpiredAppointment(
                             context, snapshot.data.docs[index]);
                       },
                     );

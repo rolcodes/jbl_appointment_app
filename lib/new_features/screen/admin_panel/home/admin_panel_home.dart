@@ -1,6 +1,7 @@
 import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/approved_tab/admin_approved_tab.dart';
 import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/cancelled_tab/admin_cancelled_tab.dart';
 import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/completed_tabs/admin_completed_tab.dart';
+import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/expired_tabs/admin_expired_tab.dart';
 import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/request_tab/admin_request_tab.dart';
 import 'package:flutter/material.dart';
 
@@ -113,9 +114,8 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
                     child: const Center(
-                      child: Text('4th Tab'),
+                      child: AdminExpiredTab(),
                     ),
                   ),
                   Container(

@@ -265,6 +265,15 @@ class DatabaseMethods {
     });
   }
 
+  Future<void> updateAdminExpiredStatus(String bookingId) async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(bookingId)
+        .update({
+      'status': 'Expired',
+    });
+  }
+
   /// -- DELETE: delete function for Upcoming Bookings Collection
   Future deleteBooking(String id) async {
     return await FirebaseFirestore.instance
