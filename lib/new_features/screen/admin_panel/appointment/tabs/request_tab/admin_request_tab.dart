@@ -1,4 +1,4 @@
-import 'package:appointment_app/new_features/screen/admin_panel/home/tabs/request_tab/admin_request_appointment_item.dart';
+import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/request_tab/admin_request_appointment_item.dart';
 import 'package:appointment_app/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -52,12 +52,6 @@ class _AdminRequestTabState extends State<AdminRequestTab> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/on_boarding_images/No data-amico.png',
-                    height: 250,
-                    width: 250,
-                    fit: BoxFit.contain,
-                  ),
                   Center(
                     child: Text(
                       'No Requests Yet',

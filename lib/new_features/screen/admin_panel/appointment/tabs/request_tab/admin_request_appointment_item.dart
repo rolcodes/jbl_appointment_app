@@ -46,7 +46,7 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                   ds['status'],
                   style: Theme.of(context).textTheme.bodySmall!.apply(
                         fontSizeDelta: -2,
-                        color: Colors.black,
+                        color: Colors.grey.shade500,
                       ),
                 )
               ],
@@ -299,7 +299,6 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                                         await DatabaseMethods()
                                             .updateAdminApprovedStatus(
                                                 ds['bookingId']);
-
                                       },
                                       style: TextButton.styleFrom(
                                           overlayColor: TColors.primary),
