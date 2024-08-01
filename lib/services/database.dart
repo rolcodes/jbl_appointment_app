@@ -24,14 +24,14 @@ class DatabaseMethods {
         .set(json); //userInfoMap
   }
 
-  /// -- CREATE: create Appointment History in database
-  Future addCancelledAppointment(
-      Map<String, dynamic> json, String bookingId) async {
-    return await FirebaseFirestore.instance
-        .collection("cancelled appointment history")
-        .doc(bookingId)
-        .set(json); //userInfoMap
-  }
+  // /// -- CREATE: create Appointment History in database
+  // Future addCancelledAppointment(
+  //     Map<String, dynamic> json, String bookingId) async {
+  //   return await FirebaseFirestore.instance
+  //       .collection("cancelled appointment history")
+  //       .doc(bookingId)
+  //       .set(json); //userInfoMap
+  // }
 
   //
   // /// -- CREATE: create bookings in another collection in database for All Bookings Screen

@@ -141,7 +141,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           DocumentSnapshot ds = snapshot.data.docs[index];
-                          return Material(
+                          return ds['status'] == 'Cancelled' || ds['status'] == 'Completed' ? SizedBox() :  Material(
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(10),

@@ -289,7 +289,7 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                 context: context,
                               );
 
-                              /// -- update status [Approved]
+                              /// -- update status [Cancelled]
                               await DatabaseMethods()
                                   .updateAdminCancelledStatus(ds['bookingId']);
 
@@ -328,9 +328,9 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                 context: context,
                               );
 
-                              /// -- update status [Approved]
+                              /// -- update status [Expired]
                               await DatabaseMethods()
-                                  .updateAdminCancelledStatus(ds['bookingId']);
+                                  .updateAdminExpiredStatus(ds['bookingId']);
                             },
                             child: Text(
                               'Expired',

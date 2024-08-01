@@ -536,6 +536,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               branchContact: branch[0].contact,
                                               bookingId: widget.bookingId,
                                               timestamp: _currentDate,
+                                              cancelReason: '',
                                             );
                                             final json = userBooking.toJson();
 

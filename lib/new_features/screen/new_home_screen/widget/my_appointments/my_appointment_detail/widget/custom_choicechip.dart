@@ -27,7 +27,6 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
 
   final String _currentDate = DateFormat("MM-dd-yyyy").format(DateTime.now());
 
-
   /// List of choices
   final List<String> _feedback = [
     'I change my plans',
@@ -99,32 +98,34 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
                   TLoaders.errorSnackBar(
                       title: 'Error', message: 'Select feedback to proceed!');
                 } else {
-                  /// Get data from firebase thru specific user by passing data each screens
-                  final userCancelledBooking = UserBookingModel(
-                      name: widget.ds['name'],
-                      accountId: widget.ds['accountId'],
-                      email: widget.ds['email'],
-                      telephone: widget.ds['telephone'],
-                      service: widget.ds['service'],
-                      image: widget.ds['image'],
-                      duration: widget.ds['duration'],
-                      price: widget.ds['price'],
-                      date: widget.ds['date'],
-                      time: widget.ds['time'],
-                      staffImage: widget.ds['staffImage'],
-                      staffName: widget.ds['staffName'],
-                      staffRating: widget.ds['staffRating'],
-                      branchImage: widget.ds['branchImage'],
-                      branchTitle: widget.ds['branchTitle'],
-                      branchLocation: widget.ds['branchLocation'],
-                      branchContact: widget.ds['branchContact'],
-                      bookingId: widget.ds['bookingId'],
-                      timestamp: _currentDate);
-                  final json = userCancelledBooking.toJson();
+                  // /// Get data from firebase thru specific user by passing data each screens
+                  // final userCancelledBooking = UserBookingModel(
+                  //   name: widget.ds['name'],
+                  //   accountId: widget.ds['accountId'],
+                  //   email: widget.ds['email'],
+                  //   telephone: widget.ds['telephone'],
+                  //   service: widget.ds['service'],
+                  //   image: widget.ds['image'],
+                  //   duration: widget.ds['duration'],
+                  //   price: widget.ds['price'],
+                  //   date: widget.ds['date'],
+                  //   time: widget.ds['time'],
+                  //   staffImage: widget.ds['staffImage'],
+                  //   staffName: widget.ds['staffName'],
+                  //   staffRating: widget.ds['staffRating'],
+                  //   branchImage: widget.ds['branchImage'],
+                  //   branchTitle: widget.ds['branchTitle'],
+                  //   branchLocation: widget.ds['branchLocation'],
+                  //   branchContact: widget.ds['branchContact'],
+                  //   bookingId: widget.ds['bookingId'],
+                  //   timestamp: _currentDate,
+                  //   cancelReason: '',
+                  // );
+                  // final json = userCancelledBooking.toJson();
 
-                  /// -- Add Cancelled Appointments in a new collection "cancelled appointments history"
-                  await DatabaseMethods()
-                      .addCancelledAppointment(json, widget.ds['bookingId']);
+                  // /// -- Add Cancelled Appointments in a new collection "cancelled appointments history"
+                  // await DatabaseMethods()
+                  //     .addCancelledAppointment(json, widget.ds['bookingId']);
 
                   /// -- Add Cancel Reason in document field using update function
                   await DatabaseMethods().updateUserCancelledAppointments(

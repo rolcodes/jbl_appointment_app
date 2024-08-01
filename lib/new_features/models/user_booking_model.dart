@@ -20,6 +20,7 @@ class UserBookingModel {
   final String branchContact;
   final String bookingId;
   final String timestamp;
+  final String cancelReason;
 
   UserBookingModel({
     required this.name,
@@ -41,6 +42,7 @@ class UserBookingModel {
     required this.branchContact,
     required this.bookingId,
     required this.timestamp,
+    required this.cancelReason,
   });
 
   Map<String, dynamic> toJson() => {
@@ -63,6 +65,7 @@ class UserBookingModel {
         'branchContact': branchContact,
         'bookingId': bookingId,
         'timestamp': timestamp,
+        'cancelReason': cancelReason,
       };
 
   static UserBookingModel fromJson(Map<String, dynamic> json) =>
@@ -86,5 +89,6 @@ class UserBookingModel {
         bookingId: json['bookingId'],
         branchImage: json['branchImage'],
         timestamp: json['timestamp'],
+        cancelReason: json['cancelReason'],
       );
 }

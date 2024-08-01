@@ -16,7 +16,7 @@ class MyAppointmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Create condition to remove Cancelled Appointments in My Appointments Screen
-    return ds['status'] == 'Cancelled' ? const SizedBox() : Material(
+    return ds['status'] == 'Cancelled' || ds['status'] == 'Completed' ? const SizedBox() : Material(
       elevation: 3,
       color: TColors.light,
       borderRadius: BorderRadius.circular(20),
@@ -41,7 +41,7 @@ class MyAppointmentItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .apply(heightDelta: -0.2, color: TColors.primary),
+                        .apply(heightDelta: -0.2),
                     overflow: TextOverflow.ellipsis,
                   ),
 
