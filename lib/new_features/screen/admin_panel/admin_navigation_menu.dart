@@ -1,9 +1,9 @@
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/custom_drawer.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'appointment/admin_panel_appointments.dart';
 import 'home/admin_home.dart';
+import 'home/widget/admin_custom_drawer.dart';
 
 class NewAdminNavigationMenu extends StatefulWidget {
   const NewAdminNavigationMenu({super.key});
@@ -18,7 +18,6 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
   List screenList = [
     const AdminPanelHome(),
     const AdminPanelHomeScreen(),
-    const Placeholder(color: Colors.blue),
   ];
 
   @override
@@ -43,7 +42,6 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
           indicatorShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-
           destinations: const [
             NavigationDestination(
               selectedIcon: Icon(
@@ -67,24 +65,13 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
               ),
               label: 'Appointments',
             ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.calendar_month_rounded,
-                color: TColors.primary,
-              ),
-              icon: Icon(
-                Icons.settings,
-                color: TColors.darkGrey,
-              ),
-              label: 'Settings',
-            ),
+
           ],
         ),
       ),
 
       /// -- Drawer
-      drawer: const CustomDrawer(),
-
+      drawer: const AdminCustomDrawer(),
     );
   }
 }

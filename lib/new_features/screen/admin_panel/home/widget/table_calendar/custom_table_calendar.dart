@@ -25,20 +25,20 @@ class CustomTableCalendar extends StatelessWidget {
       lastDay: _lastDay,
       weekendDays: [6],
       headerStyle: HeaderStyle(
-          decoration: BoxDecoration(
-            color: TColors.primary.withOpacity(0.1),
-          ),
-          headerMargin: const EdgeInsets.only(bottom: 20),
-          headerPadding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          titleTextStyle: const TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: TColors.primary),
-          formatButtonVisible: false,
-          leftChevronVisible: false,
-          rightChevronVisible: false),
+        decoration: BoxDecoration(
+          color: TColors.primary.withOpacity(0.1),
+        ),
+        headerMargin: const EdgeInsets.only(bottom: 20),
+        headerPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        titleTextStyle: const TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: TColors.primary),
+        formatButtonVisible: false,
+        leftChevronVisible: false,
+        rightChevronVisible: false,
+      ),
       calendarStyle: CalendarStyle(
         todayDecoration: BoxDecoration(
             color: TColors.primary.withOpacity(0.2),

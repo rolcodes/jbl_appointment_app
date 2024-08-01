@@ -4,9 +4,8 @@ import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs
 import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/expired_tabs/admin_expired_tab.dart';
 import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/request_tab/admin_request_tab.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../utils/constants/colors.dart';
+import '../widget/appbar/admin_custom_app_bar.dart';
 
 class AdminPanelHomeScreen extends StatefulWidget {
   const AdminPanelHomeScreen({super.key});
@@ -22,12 +21,12 @@ class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
       length: 5,
       child: Scaffold(
         backgroundColor: TColors.secondary,
-        appBar: CustomAppBar(
+        appBar: AdminCustomAppBar(
           backgroundColor: TColors.light,
           showBackgroundColor: false,
-          showIcon: false,
-          isDrawer: false,
-          isNotification: false,
+          showIcon: true,
+          isDrawer: true,
+          isNotification: true,
           isEdit: false,
           title: Text(
             'All Appointments',
