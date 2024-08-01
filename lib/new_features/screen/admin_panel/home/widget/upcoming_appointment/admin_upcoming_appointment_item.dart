@@ -109,7 +109,7 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
                             .start,
                         children: [
                           SizedBox(
-                            width: 200,
+                            width: 190,
                             child: Column(
                               crossAxisAlignment:
                               CrossAxisAlignment

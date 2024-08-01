@@ -119,7 +119,7 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                   child: Text(
                                     'Are you sure you want to put back this appointment to requests tab?',
                                     style:
-                                    Theme.of(context).textTheme.labelLarge,
+                                        Theme.of(context).textTheme.labelLarge,
                                   ),
                                 ),
                                 actions: [
@@ -132,7 +132,7 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                     child: Text(
                                       'Cancel',
                                       style:
-                                      Theme.of(context).textTheme.bodyLarge,
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
                                   ),
                                   TextButton(
@@ -141,15 +141,18 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                       TLoaders.undoCancelledToRequestsSnackBar(
                                         title: 'Done',
                                         message:
-                                        'Appointment was moved to requests tab',
+                                            'Appointment was moved to requests tab',
                                         bookingId: ds['bookingId'],
                                         context: context,
                                       );
                                       await DatabaseMethods()
                                           .updateAppointmentStatus(
-                                          ds['bookingId']);
+                                              ds['bookingId']);
+
                                       /// -- update cancel reason to null
-                                      await DatabaseMethods().updateAdminReasonNull(ds['bookingId']);
+                                      await DatabaseMethods()
+                                          .updateAdminReasonNull(
+                                              ds['bookingId']);
                                     },
                                     style: TextButton.styleFrom(
                                         overlayColor: TColors.primary),
@@ -159,15 +162,19 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                           .textTheme
                                           .bodyLarge!
                                           .apply(
-                                        fontWeightDelta: 1,
-                                      ),
+                                            fontWeightDelta: 1,
+                                          ),
                                     ),
                                   ),
                                 ],
                               ),
                             );
                           },
-                          icon: Icon(Icons.more_horiz, size: 20, color: Colors.black,),
+                          icon: Icon(
+                            Icons.more_horiz,
+                            size: 20,
+                            color: Colors.black,
+                          ),
                         ),
                       )
                     ],
@@ -291,6 +298,29 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.pink.shade100.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Text(
+                    "Note: ${ds['cancelReason']}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall!
+                        .apply(color: Colors.red),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
