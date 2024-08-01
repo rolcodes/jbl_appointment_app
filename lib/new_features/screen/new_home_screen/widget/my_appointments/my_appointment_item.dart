@@ -1,5 +1,6 @@
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyAppointmentItem extends StatelessWidget {
@@ -14,7 +15,8 @@ class MyAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    /// Create condition to remove Cancelled Appointments in My Appointments Screen
+    return ds['status'] == 'Cancelled' ? const SizedBox() : Material(
       elevation: 3,
       color: TColors.light,
       borderRadius: BorderRadius.circular(20),
@@ -49,12 +51,18 @@ class MyAppointmentItem extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .apply(fontSizeDelta: -3, color: Colors.blue))
+                              .apply(fontSizeDelta: -3, color: Colors.grey))
+                      : ds['status'] == 'Cancelled'
+                      ? Text(ds['status'],
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .apply(fontSizeDelta: -3, color: CupertinoColors.systemRed))
                       : Text(ds['status'],
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .apply(fontSizeDelta: -3, color: Colors.green)),
+                              .apply(fontSizeDelta: -3, color: Colors.blue)),
                 ],
               ),
               Container(

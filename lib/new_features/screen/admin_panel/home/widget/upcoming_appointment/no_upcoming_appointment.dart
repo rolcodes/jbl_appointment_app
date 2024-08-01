@@ -12,7 +12,7 @@ class NoUpcomingAppointment extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin:
-      EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      EdgeInsets.only(left: 20, right: 20, bottom: 40, top: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(

@@ -54,7 +54,7 @@ class CancelledItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Cancelled',
+                    ds['status'],
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!

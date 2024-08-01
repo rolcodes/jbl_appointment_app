@@ -231,6 +231,8 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                               /// -- update status [Approved]
                               await DatabaseMethods()
                                   .updateAdminCancelledStatus(ds['bookingId']);
+                              /// -- add cancel reason [Cancelled by Admin]
+                              await DatabaseMethods().updateAdminReason(ds['bookingId']);
                             },
                             child: Text(
                               'Cancel',

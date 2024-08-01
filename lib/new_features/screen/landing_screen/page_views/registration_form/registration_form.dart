@@ -90,7 +90,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         Future.delayed(const Duration(seconds: 3));
 
         /// -- Show Verify Screen
-        Get.to(() => const NewNavigationMenu());
+        Get.offAll(() => const NewNavigationMenu());
 
         /// ignore: use_build_context_synchronously
         // Get.offAll(const NavigationMenu());

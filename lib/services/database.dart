@@ -112,7 +112,7 @@ class DatabaseMethods {
 
   Future<Stream<QuerySnapshot>> getCancelledAppointments() async {
     return FirebaseFirestore.instance
-        .collection("cancelled appointment history")
+        .collection("appointments")
         .where('accountId', isEqualTo: uid)
         .snapshots();
   }
@@ -246,7 +246,7 @@ class DatabaseMethods {
     });
   }
 
-  /// -- Update status of appointment to Approved
+  /// -- Update status of appointment to Cancelled
   Future<void> updateAdminCancelledStatus(String bookingId) async {
     return FirebaseFirestore.instance
         .collection('appointments')
@@ -256,6 +256,7 @@ class DatabaseMethods {
     });
   }
 
+  /// -- Update status of appointment to Completed
   Future<void> updateAdminCompletedStatus(String bookingId) async {
     return FirebaseFirestore.instance
         .collection('appointments')
@@ -265,12 +266,33 @@ class DatabaseMethods {
     });
   }
 
+  /// -- Update status of appointment to Expired
   Future<void> updateAdminExpiredStatus(String bookingId) async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .doc(bookingId)
         .update({
       'status': 'Expired',
+    });
+  }
+
+  /// -- Update/Add cancel reason of Admin
+  Future<void> updateAdminReason(String bookingId) async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(bookingId)
+        .update({
+      'cancelReason': 'Cancelled by Admin',
+    });
+  }
+
+  /// -- Update cancel reason to null
+  Future<void> updateAdminReasonNull(String bookingId) async {
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(bookingId)
+        .update({
+      'cancelReason': '',
     });
   }
 

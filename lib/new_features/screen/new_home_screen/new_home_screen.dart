@@ -408,146 +408,146 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                     isAppBar: false,
                   ),
 
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child:
-
-                        /// -- Product Categories
-                        Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('PRODUCT CATEGORIES',
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall),
-
-                            /// -- See All Product Categories
-                            TextButton(
-                              onPressed: () =>
-                                  Get.to(() => const ServiceCategoriesSeeAll()),
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                alignment: Alignment.centerRight,
-                              ),
-                              child: Text('See All',
-                                  style: Theme.of(context).textTheme.bodySmall),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-
-                        /// -- Services Categories Cards
-                        SizedBox(
-                          height: 240,
-                          child: ListView.separated(
-                            clipBehavior: Clip.none,
-                            // remove hard edges and fix cropped shadows
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: availableCategories.length,
-                            itemBuilder: (ctx, index) {
-                              return ServiceCategoryCardListsItem(
-                                service: availableCategories[index],
-                                onSelectedCategory: () {
-                                  _selectCategory(
-                                      context, availableCategories[index]);
-                                },
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(width: 20);
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-
-                        /// -- Shop
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('SHOP',
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall),
-
-                            /// -- See All Categories
-                            TextButton(
-                              onPressed: () =>
-                                  Get.to(() => const ServiceCategoriesSeeAll()),
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                alignment: Alignment.centerRight,
-                              ),
-                              child: Text('See All',
-                                  style: Theme.of(context).textTheme.bodySmall),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 10),
-                      ],
-                    ),
-                  ),
-
-                  /// -- Promos
-                  const NewPromoSlider(
-                    banners: [
-                      TImages.newBanner1,
-                      TImages.newBanner2,
-                      TImages.newBanner3,
-                      TImages.newBanner4,
-                    ],
-                    isAppBar: false,
-                  ),
-
-                  /// -- About the Branches
-                  Container(
-                    padding: const EdgeInsets.all(24),
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('ABOUT THE BRANCHES',
-                            style: Theme.of(context).textTheme.headlineSmall),
-                        const SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Material(
-                              elevation: 5,
-                              borderRadius: BorderRadius.circular(100),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/content/jbl.webp',
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 30),
-                            Material(
-                              elevation: 5,
-                              borderRadius: BorderRadius.circular(100),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/content/jss.jpeg',
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 24),
+                  //   decoration: const BoxDecoration(color: Colors.white),
+                  //   child:
+                  //
+                  //       /// -- Product Categories
+                  //       Column(
+                  //     children: [
+                  //       const SizedBox(height: 10),
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           Text('PRODUCT CATEGORIES',
+                  //               style:
+                  //                   Theme.of(context).textTheme.headlineSmall),
+                  //
+                  //           /// -- See All Product Categories
+                  //           TextButton(
+                  //             onPressed: () =>
+                  //                 Get.to(() => const ServiceCategoriesSeeAll()),
+                  //             style: TextButton.styleFrom(
+                  //               padding: EdgeInsets.zero,
+                  //               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //               alignment: Alignment.centerRight,
+                  //             ),
+                  //             child: Text('See All',
+                  //                 style: Theme.of(context).textTheme.bodySmall),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       const SizedBox(height: 5),
+                  //
+                  //       /// -- Services Categories Cards
+                  //       SizedBox(
+                  //         height: 240,
+                  //         child: ListView.separated(
+                  //           clipBehavior: Clip.none,
+                  //           // remove hard edges and fix cropped shadows
+                  //           shrinkWrap: true,
+                  //           scrollDirection: Axis.horizontal,
+                  //           itemCount: availableCategories.length,
+                  //           itemBuilder: (ctx, index) {
+                  //             return ServiceCategoryCardListsItem(
+                  //               service: availableCategories[index],
+                  //               onSelectedCategory: () {
+                  //                 _selectCategory(
+                  //                     context, availableCategories[index]);
+                  //               },
+                  //             );
+                  //           },
+                  //           separatorBuilder:
+                  //               (BuildContext context, int index) {
+                  //             return const SizedBox(width: 20);
+                  //           },
+                  //         ),
+                  //       ),
+                  //       const SizedBox(height: 10),
+                  //
+                  //       /// -- Shop
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           Text('SHOP',
+                  //               style:
+                  //                   Theme.of(context).textTheme.headlineSmall),
+                  //
+                  //           /// -- See All Categories
+                  //           TextButton(
+                  //             onPressed: () =>
+                  //                 Get.to(() => const ServiceCategoriesSeeAll()),
+                  //             style: TextButton.styleFrom(
+                  //               padding: EdgeInsets.zero,
+                  //               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //               alignment: Alignment.centerRight,
+                  //             ),
+                  //             child: Text('See All',
+                  //                 style: Theme.of(context).textTheme.bodySmall),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //
+                  //       const SizedBox(height: 10),
+                  //     ],
+                  //   ),
+                  // ),
+                  //
+                  // /// -- Promos
+                  // const NewPromoSlider(
+                  //   banners: [
+                  //     TImages.newBanner1,
+                  //     TImages.newBanner2,
+                  //     TImages.newBanner3,
+                  //     TImages.newBanner4,
+                  //   ],
+                  //   isAppBar: false,
+                  // ),
+                  //
+                  // /// -- About the Branches
+                  // Container(
+                  //   padding: const EdgeInsets.all(24),
+                  //   decoration: const BoxDecoration(color: Colors.white),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text('ABOUT THE BRANCHES',
+                  //           style: Theme.of(context).textTheme.headlineSmall),
+                  //       const SizedBox(height: 16),
+                  //       Row(
+                  //         children: [
+                  //           Material(
+                  //             elevation: 5,
+                  //             borderRadius: BorderRadius.circular(100),
+                  //             child: ClipOval(
+                  //               child: Image.asset(
+                  //                 'assets/images/content/jbl.webp',
+                  //                 width: 100,
+                  //                 height: 100,
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           const SizedBox(width: 30),
+                  //           Material(
+                  //             elevation: 5,
+                  //             borderRadius: BorderRadius.circular(100),
+                  //             child: ClipOval(
+                  //               child: Image.asset(
+                  //                 'assets/images/content/jss.jpeg',
+                  //                 width: 100,
+                  //                 height: 100,
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       const SizedBox(height: 20),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),

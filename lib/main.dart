@@ -19,6 +19,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
 
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: const NewAdminNavigationMenu(),
+        home: LandingScreen(),
       ),
     );
   }

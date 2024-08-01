@@ -148,6 +148,8 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                                       await DatabaseMethods()
                                           .updateAppointmentStatus(
                                           ds['bookingId']);
+                                      /// -- update cancel reason to null
+                                      await DatabaseMethods().updateAdminReasonNull(ds['bookingId']);
                                     },
                                     style: TextButton.styleFrom(
                                         overlayColor: TColors.primary),
