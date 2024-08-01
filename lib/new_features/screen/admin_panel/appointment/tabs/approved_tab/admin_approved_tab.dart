@@ -86,7 +86,7 @@ class _AdminApprovedTabState extends State<AdminApprovedTab> {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     return AdminApprovedAppointmentItem(
                       ds: ds,
-                      onSelectedAllApprovedtAppointment: () async {
+                      onSelectedAllApprovedAppointment: () async {
                         _selectedAllApprovedAppointment(
                             context, snapshot.data.docs[index]);
                       },

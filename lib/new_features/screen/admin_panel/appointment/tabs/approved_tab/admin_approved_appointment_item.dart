@@ -11,15 +11,15 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
   const AdminApprovedAppointmentItem(
       {super.key,
       required this.ds,
-      required this.onSelectedAllApprovedtAppointment});
+      required this.onSelectedAllApprovedAppointment});
 
   final DocumentSnapshot<Object?> ds;
-  final void Function() onSelectedAllApprovedtAppointment;
+  final void Function() onSelectedAllApprovedAppointment;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onSelectedAllApprovedtAppointment,
+      onTap: onSelectedAllApprovedAppointment,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
