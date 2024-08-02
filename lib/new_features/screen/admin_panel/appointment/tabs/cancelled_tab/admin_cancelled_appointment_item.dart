@@ -301,25 +301,43 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
             SizedBox(height: 10),
             Container(
               width: double.infinity,
-              padding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               decoration: BoxDecoration(
                 color: Colors.pink.shade100.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Text(
-                    "Note: ${ds['cancelReason']}",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall!
-                        .apply(color: Colors.red),
-                  ),
-                ],
-              ),
+              child: ds['cancelReason'] != 'Cancelled by Admin'
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Cancelled by customer.',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .apply(color: Colors.red),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Reason: ${ds['cancelReason']}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall!
+                              .apply(color: Colors.red),
+                        ),
+                      ],
+                    )
+                  : Text(
+                      "Note: ${ds['cancelReason']}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall!
+                          .apply(color: Colors.red),
+                    ),
             )
           ],
         ),

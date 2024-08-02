@@ -92,9 +92,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
           }
 
           return snapshot.hasData
-              ? ListView.separated(
+              ? ListView.builder(
                   itemCount: snapshot.data.docs.length,
-                  physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
@@ -107,11 +106,11 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                       },
                     );
                   },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 24,
-                    );
-                  },
+                  // separatorBuilder: (BuildContext context, int index) {
+                  //   return const SizedBox(
+                  //     height: 5,
+                  //   );
+                  // },
                 )
               : Container();
         });
@@ -134,11 +133,15 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         isCenterTitle: true,
       ),
       backgroundColor: TColors.secondary,
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(24),
-          child: userAppointments(),
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              child: userAppointments(),
+            ),
+          ),
+        ],
       ),
     );
   }

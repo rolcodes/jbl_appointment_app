@@ -58,7 +58,6 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
     _lastDay = DateTime.now().add(const Duration(days: 1000));
     getOnTheLoad();
 
-
     super.initState();
   }
 
@@ -155,7 +154,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                     },
                   ),
 
-                  Padding(
+                  Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
@@ -208,7 +207,6 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
               ),
             ),
       floatingActionButton: const AdminCustomChatButton(),
-
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_tab.dart';
+import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/completed_tab/completed_tab.dart';
+import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/expired_tab/expired_tab.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
@@ -29,20 +31,19 @@ class AppointmentHistoryScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: TColors.light
-              ),
+              decoration: BoxDecoration(color: TColors.light),
               padding: EdgeInsets.only(bottom: 10),
               child: Container(
                 height: 40,
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
                   dividerHeight: 0,
-                  indicatorPadding: const EdgeInsets.only(left: -22,right: -21),
+                  indicatorPadding:
+                      const EdgeInsets.only(left: -22, right: -21),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: TColors.primary.withOpacity(0.5),
@@ -52,7 +53,10 @@ class AppointmentHistoryScreen extends StatelessWidget {
                   labelColor: Colors.white,
                   isScrollable: false,
                   labelStyle: Theme.of(context).textTheme.bodyLarge,
-                  unselectedLabelStyle: Theme.of(context).textTheme.labelLarge!.apply(fontSizeDelta: 1),
+                  unselectedLabelStyle: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .apply(fontSizeDelta: 1),
                   tabs: const [
                     Tab(
                       child: Text(' Cancelled '),
@@ -80,18 +84,18 @@ class AppointmentHistoryScreen extends StatelessWidget {
                   /// -- 2nd tab
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: const Center(
-                      child: Text('2nd Tab'),
+                      child: CompletedTab(),
                     ),
                   ),
 
                   /// -- 3rd tab
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: const Center(
-                      child: Text('3rd Tab'),
+                      child: ExpiredTab(),
                     ),
                   ),
                 ],

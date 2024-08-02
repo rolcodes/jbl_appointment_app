@@ -1,19 +1,20 @@
 import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_detail.dart';
 import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_item.dart';
+import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/completed_tab/completed_item.dart';
 import 'package:appointment_app/services/database.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class CancelledTab extends StatefulWidget {
-  const CancelledTab({super.key});
+class CompletedTab extends StatefulWidget {
+  const CompletedTab({super.key});
 
   @override
-  State<CancelledTab> createState() => _CancelledTabState();
+  State<CompletedTab> createState() => _CompletedTabState();
 }
 
-class _CancelledTabState extends State<CancelledTab> {
-  Stream? cancelledAppointmentStream;
+class _CompletedTabState extends State<CompletedTab> {
+  Stream? completedAppointmentStream;
 
   /// -- Function to navigate to Cancelled Detail Screen
   Future<void> _selectCancelledAppointment(
@@ -21,13 +22,13 @@ class _CancelledTabState extends State<CancelledTab> {
     /// Navigate to specific cancelled appointment
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => CancelledAppointmentDetail(
-              ds: ds,
-            )));
+          ds: ds,
+        )));
   }
 
   getOnTheLoad() async {
-    cancelledAppointmentStream =
-        await DatabaseMethods().getUserAppointments();
+    completedAppointmentStream =
+    await DatabaseMethods().getUserAppointments();
     setState(() {});
   }
 
@@ -40,7 +41,7 @@ class _CancelledTabState extends State<CancelledTab> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: cancelledAppointmentStream,
+        stream: completedAppointmentStream,
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.data == null || snapshot.data.docs.length == 0) {
             /// If no data in snapshots display no appointments
@@ -80,20 +81,20 @@ class _CancelledTabState extends State<CancelledTab> {
           /// if we have data, get all cancelled user appointments
           return snapshot.hasData
               ? ListView.builder(
-                  itemCount: snapshot.data.docs.length,
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.docs[index];
+              itemCount: snapshot.data.docs.length,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: false,
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) {
+                DocumentSnapshot ds = snapshot.data.docs[index];
 
-                    return CancelledItem(
-                      ds: ds,
-                      onSelectedCancelledAppointment: () async {
-                        _selectCancelledAppointment(context, snapshot.data.docs[index]);
-                      },
-                    );
-                  })
+                return CompletedItem(
+                  ds: ds,
+                  onSelectedCancelledAppointment: () async {
+                    _selectCancelledAppointment(context, snapshot.data.docs[index]);
+                  },
+                );
+              })
               : Container();
         });
   }

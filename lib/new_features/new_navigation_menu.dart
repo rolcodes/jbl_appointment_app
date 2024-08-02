@@ -17,8 +17,6 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
   int currentPageIndex = 0;
   List screenList = [
     const NewHomeScreen(),
-    const CatalogScreen(),
-    Placeholder(color: Colors.red),
     const ProfileScreen(),
   ];
 
@@ -56,28 +54,6 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
                 color: TColors.darkGrey,
               ),
               label: 'Home',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.calendar_month_rounded,
-                color: TColors.primary,
-              ),
-              icon: Icon(
-                Icons.calendar_month_rounded,
-                color: TColors.darkGrey,
-              ),
-              label: 'Booking',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.search_rounded,
-                color: TColors.primary,
-              ),
-              icon: Icon(
-                Icons.search_rounded,
-                color: TColors.darkGrey,
-              ),
-              label: 'Search',
             ),
             NavigationDestination(
               selectedIcon: Icon(

@@ -75,16 +75,16 @@ class DatabaseMethods {
   //       .set(userInfoMap);
   // }
 
-  /// -- READ: read user appointment then display to My Appointment Screen
-  Future<Stream<QuerySnapshot>> getUserAppointments() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
-
-    return FirebaseFirestore.instance
-        .collection("appointments")
-        //.orderBy("Date", descending: false)
-        .where('accountId', isEqualTo: uid)
-        .snapshots();
-  }
+  // /// -- READ: read user appointment then display to My Appointment Screen
+  // Future<Stream<QuerySnapshot>> getUserAppointments() async {
+  //   String uid = FirebaseAuth.instance.currentUser!.uid;
+  //
+  //   return FirebaseFirestore.instance
+  //       .collection("appointments")
+  //       //.orderBy("Date", descending: false)
+  //       .where('accountId', isEqualTo: uid)
+  //       .snapshots();
+  // }
 
   /// -- READ: read user data
   Future<UserModel?> readUser() async {
@@ -101,21 +101,15 @@ class DatabaseMethods {
     return null;
   }
 
-  /// -- READ: get user profile information using stream builder
-  // Future<Stream<DocumentSnapshot<Map<String, dynamic>>>>
-  //     getUserProfileInfo() async {
-  //   return FirebaseFirestore.instance
-  //       .collection('user')
-  //       .doc(uid)
-  //       .snapshots();
-  // }
 
-  Future<Stream<QuerySnapshot>> getCancelledAppointments() async {
+  /// -- READ: User Cancelled Appointments
+  Future<Stream<QuerySnapshot>> getUserAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
         .where('accountId', isEqualTo: uid)
         .snapshots();
   }
+
 
   /// -- READ: get all requests appointments where status is 'Waiting for approval'
   Future<Stream<QuerySnapshot>> getAdminRequestAppointments() async {
@@ -219,7 +213,7 @@ class DatabaseMethods {
   Future<void> updateUserCancelledAppointments(
       String bookingId, String selectedFeedback) async {
     return FirebaseFirestore.instance
-        .collection('cancelled appointment history')
+        .collection('appointments')
         .doc(bookingId)
         .update({
       'cancelReason': selectedFeedback,

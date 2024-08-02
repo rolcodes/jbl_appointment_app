@@ -76,166 +76,190 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
           /// If there is data display appointments
           return snapshot.hasData
-              ? Column(
+              ? Container(
+                child: Column(
                   children: [
-                    /// -- My Appointments
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'MY APPOINTMENTS',
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (ctx) => CupertinoAlertDialog(
-                                    title: const Text('Note:'),
-                                    content: const Text(
-                                        'Please come to the branch at least 15 minutes before your appointment. Do note that if you miss your appointment schedule, your slot may be given to the next client. Thank you!'),
-                                    actions: [
-                                      TextButton(
-                                        child: const Text("Got it!",
-                                            style: TextStyle(
-                                                color: CupertinoColors
-                                                    .activeBlue)),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.note_alt_rounded,
-                                  color: TColors.primary),
-                            ),
-                          ],
-                        ),
+                    ListView.builder(
+                      // add null check in data (!) to check if snapshot is 0 then display nothing
+                      // itemCount: snapshot.data.docs.length,
+                      itemCount: 1,
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        DocumentSnapshot ds = snapshot.data.docs[index];
 
-                        /// -- See All Appointments
-                        TextButton(
-                          onPressed: () =>
-                              Get.to(() => const MyAppointmentsScreen()),
-                          style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              alignment: Alignment.centerRight),
-                          child: Text('See All',
-                              style: Theme.of(context).textTheme.bodySmall),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 110,
-                      child: ListView.builder(
-                        // add null check in data (!) to check if snapshot is 0 then display nothing
-                        itemCount: snapshot.data!.docs.length,
-                        // itemCount: 1,
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          DocumentSnapshot ds = snapshot.data.docs[index];
-                          return ds['status'] == 'Cancelled' || ds['status'] == 'Completed' ? SizedBox() :  Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(10),
-                              onTap: () =>
-                                  Get.to(() => const MyAppointmentsScreen()),
-                              child: Container(
-                                padding: EdgeInsets.zero,
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                        ds['image'],
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 12),
-                                      child: SizedBox(
-                                        width: 260,
-                                        height: 110,
-                                        child: Column(
+                        /// -- Condition to remove cancelled, expired and completed status
+                        return ds['status'] == 'Cancelled' ||
+                                ds['status'] == 'Completed' ||
+                                ds['status'] == 'Expired'
+                            ? const SizedBox()
+                            : Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(10),
+                                  onTap: () =>
+                                      Get.to(() => const MyAppointmentsScreen()),
+                                  child: Container(
+                                    padding: EdgeInsets.zero,
+                                    child: Column(
+                                      children: [
+                                        /// -- My Appointments
+                                        Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              'Service Start Time: ${ds["time"]}, ${ds["date"]}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium!
-                                                  .apply(
-                                                      color: Colors
-                                                          .pinkAccent.shade700),
-                                              maxLines: 1,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'MY APPOINTMENTS',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge,
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (ctx) =>
+                                                          CupertinoAlertDialog(
+                                                        title:
+                                                            const Text('Note:'),
+                                                        content: const Text(
+                                                            'Please come to the branch at least 15 minutes before your appointment. Do note that if you miss your appointment schedule, your slot may be given to the next client. Thank you!'),
+                                                        actions: [
+                                                          TextButton(
+                                                            child: const Text(
+                                                                "Got it!",
+                                                                style: TextStyle(
+                                                                    color: CupertinoColors
+                                                                        .activeBlue)),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.note_alt_rounded,
+                                                      color: TColors.primary),
+                                                ),
+                                              ],
                                             ),
-                                            SizedBox(
-                                              width: 200,
-                                              child: Text(
-                                                ds["branchTitle"],
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .apply(
-                                                        heightDelta: -0.2,
-                                                        color: TColors.primary),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            // Text(
-                                            //     'Location:  ${ds["Branch Location"]}',
-                                            //     maxLines: 2,
-                                            //     overflow: TextOverflow.ellipsis,
-                                            //     style: Theme.of(context)
-                                            //         .textTheme
-                                            //         .labelLarge!),
-                                            SizedBox(
-                                              width: 300,
-                                              child: Text(
-                                                ds["service"],
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            Text(
-                                              'Technician:  ${ds["staffName"]}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge!
-                                                  .apply(
-                                                      color: TColors.darkGrey),
+
+                                            /// -- See All Appointments
+                                            TextButton(
+                                              onPressed: () => Get.to(() =>
+                                                  const MyAppointmentsScreen()),
+                                              style: TextButton.styleFrom(
+                                                  padding: EdgeInsets.zero,
+                                                  tapTargetSize:
+                                                      MaterialTapTargetSize
+                                                          .shrinkWrap,
+                                                  alignment:
+                                                      Alignment.centerRight),
+                                              child: Text('See All',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall),
                                             ),
                                           ],
                                         ),
-                                      ),
+                                        Row(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Image.network(
+                                                ds['image'],
+                                                width: 110,
+                                                height: 110,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(left: 12),
+                                              child: SizedBox(
+                                                width: 260,
+                                                height: 110,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Service Start Time: ${ds["time"]}, ${ds["date"]}',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium!
+                                                          .apply(
+                                                              color: Colors
+                                                                  .pinkAccent
+                                                                  .shade700),
+                                                      maxLines: 1,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 200,
+                                                      child: Text(
+                                                        ds["branchTitle"],
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge!
+                                                            .apply(
+                                                                heightDelta: -0.2,
+                                                                color: TColors
+                                                                    .primary),
+                                                        maxLines: 2,
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 300,
+                                                      child: Text(
+                                                        ds["service"],
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge,
+                                                        maxLines: 1,
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      'Technician:  ${ds["staffName"]}',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge!
+                                                          .apply(
+                                                              color: TColors
+                                                                  .darkGrey),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                              );
+                      },
                     ),
                   ],
-                )
-              : const Text('Error');
+                ),
+              )
+              : Container();
         });
   }
 

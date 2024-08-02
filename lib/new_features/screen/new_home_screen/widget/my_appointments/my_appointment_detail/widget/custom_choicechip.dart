@@ -123,17 +123,18 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
                   // );
                   // final json = userCancelledBooking.toJson();
 
-                  // /// -- Add Cancelled Appointments in a new collection "cancelled appointments history"
-                  // await DatabaseMethods()
-                  //     .addCancelledAppointment(json, widget.ds['bookingId']);
+                  /// -- Add Cancelled Appointments in a new collection "cancelled appointments history"
+                  await DatabaseMethods()
+                      .updateAdminCancelledStatus(widget.ds['bookingId']);
 
                   /// -- Add Cancel Reason in document field using update function
                   await DatabaseMethods().updateUserCancelledAppointments(
                       widget.ds['bookingId'], _selectedFeedback!);
 
-                  /// DELETE function: Delete Document ID of Booking in database
-                  await DatabaseMethods().deleteBooking(widget.dsID);
-                  print('Appointment was deleted from database');
+
+                  // /// DELETE function: Delete Document ID of Booking in database
+                  // await DatabaseMethods().deleteBooking(widget.dsID);
+                  // print('Appointment was deleted from database');
                   TLoaders.successSnackBar(
                       title: 'Cancelled',
                       message: 'Booking successfully cancelled.');

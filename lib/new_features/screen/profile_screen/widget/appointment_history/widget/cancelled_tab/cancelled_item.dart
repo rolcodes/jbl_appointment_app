@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/constants/colors.dart';
 
 class CancelledItem extends StatelessWidget {
   const CancelledItem({
@@ -18,10 +18,10 @@ class CancelledItem extends StatelessWidget {
     /// -- Create condition to display only cancelled appointments in Cancelled Tabs
     return ds['status'] == 'Waiting for approval' ||
             ds['status'] == 'Completed' ||
-            ds['status'] == 'Approved'
+            ds['status'] == 'Approved' || ds['status'] == 'Expired'
         ? const SizedBox()
         : Padding(
-            padding: const EdgeInsets.only(top: 18),
+            padding: const EdgeInsets.only(top: 20),
             child: InkWell(
               onTap: onSelectedCancelledAppointment,
               child: Container(
