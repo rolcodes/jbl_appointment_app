@@ -27,7 +27,7 @@ class _CancelledTabState extends State<CancelledTab> {
 
   getOnTheLoad() async {
     cancelledAppointmentStream =
-        await DatabaseMethods().getSpecificUCancelledAppointments();
+        await DatabaseMethods().getSpecificCancelledAppointments();
     setState(() {});
   }
 

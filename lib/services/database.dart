@@ -121,7 +121,7 @@ class DatabaseMethods {
   }
 
   /// -- READ: Specific Cancelled User Appointments
-  Future<Stream<QuerySnapshot>> getSpecificUCancelledAppointments() async {
+  Future<Stream<QuerySnapshot>> getSpecificCancelledAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
         .where('accountId', isEqualTo: uid)

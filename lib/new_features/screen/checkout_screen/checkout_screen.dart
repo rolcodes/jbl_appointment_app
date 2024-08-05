@@ -1,14 +1,11 @@
 import 'dart:async';
 
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/common/widgets/products/product_cards/widget/rating_indicator.dart';
-import 'package:appointment_app/new_features/controller/future_user.dart';
 import 'package:appointment_app/new_features/models/data/branch_data.dart';
 import 'package:appointment_app/new_features/models/user_booking_model.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
+import 'package:appointment_app/new_features/screen/select_staff/widget/custom_rating_bar_indicator.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
-import 'package:appointment_app/utils/constants/image_strings.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

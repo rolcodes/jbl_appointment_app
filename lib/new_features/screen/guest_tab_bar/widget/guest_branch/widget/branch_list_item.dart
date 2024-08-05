@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../common/widgets/products/product_cards/widget/rating_indicator.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../models/branch_model.dart';
+import '../../../../select_staff/widget/custom_rating_bar_indicator.dart';
 
 class BranchListItem extends StatelessWidget {
   const BranchListItem(

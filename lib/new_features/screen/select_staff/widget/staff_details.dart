@@ -1,13 +1,12 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/common/widgets/products/product_cards/widget/rating_indicator.dart';
-import 'package:appointment_app/common/widgets/products/product_cards/widget/rating_progress_indicator.dart';
-import 'package:appointment_app/new_features/models/data/staff_data.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/non_screen_widget/gradient_button.dart';
+import 'package:appointment_app/new_features/screen/select_staff/widget/custom_overall_product_rating.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../models/staff_model.dart';
+import 'custom_rating_bar_indicator.dart';
 
 class StaffDetails extends StatelessWidget {
   const  StaffDetails({super.key, required this.staff});

@@ -1,4 +1,3 @@
-import 'package:appointment_app/common/widgets/products/product_cards/widget/rating_indicator.dart';
 import 'package:appointment_app/new_features/models/service_product.dart';
 import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';

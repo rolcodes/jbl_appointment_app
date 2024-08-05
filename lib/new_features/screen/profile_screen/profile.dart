@@ -1,5 +1,4 @@
 import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/features/shop/screens/notifications/notifications.dart';
 import 'package:appointment_app/new_features/new_navigation_menu.dart';
 import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
 import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
@@ -136,7 +135,7 @@ class ProfileScreen extends StatelessWidget {
                             Icons.arrow_forward_ios_rounded,
                             size: 20,
                           ),
-                          onTap: () => Get.to(() => const NotificationScreen()),
+                          onTap: () {},
                         ),
                         TSettingMenuTile(
                           icon: Iconsax.heart_add,

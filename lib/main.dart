@@ -1,9 +1,4 @@
-import 'package:appointment_app/admin/admin_navigation_menu.dart';
-import 'package:appointment_app/navigation_menu.dart';
-import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/admin_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/new_home_screen.dart';
+import 'package:appointment_app/splash_screen.dart';
 import 'package:appointment_app/utils/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +23,8 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: NewNavigationMenu(),
+        /// SplashScreen() to begin from the start
+        home: const SplashScreen(),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:appointment_app/features/shop/screens/notifications/notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,19 +24,12 @@ class NotificationBadge extends StatelessWidget {
       ),
       showBadge: true,
       ignorePointer: false,
-      onTap: () => Get.to(() => const NotificationScreen()),
+      onTap: () {},
       badgeContent: const Icon(
         Icons.circle,
         color: CupertinoColors.activeGreen,
         size: 8,
       ),
-      // Text(
-      //   '3',
-      //   style: Theme.of(context)
-      //       .textTheme
-      //       .labelSmall!
-      //       .apply(color: TColors.primary),
-      // ),
       badgeAnimation: const badges.BadgeAnimation.scale(
         animationDuration: Duration(seconds: 1),
         colorChangeAnimationDuration: Duration(seconds: 1),
@@ -47,7 +39,7 @@ class NotificationBadge extends StatelessWidget {
       ),
       badgeStyle: const badges.BadgeStyle(badgeColor: Colors.transparent),
       child: GestureDetector(
-        onTap: () => Get.to(() => const NotificationScreen()),
+        onTap: () {},
         child: Align(
           alignment: Alignment.center,
           child: Icon(
