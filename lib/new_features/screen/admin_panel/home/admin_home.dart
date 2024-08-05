@@ -129,27 +129,27 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
 
                       return snapshot.hasData
                           ? Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 8),
-                                child: ListView.builder(
-                                  itemCount: 1,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    DocumentSnapshot ds =
-                                        snapshot.data.docs[index];
-                                    return AdminUpcomingAppointmentItem(
-                                      ds: ds,
-                                      onSelectedAUpcomingAppointment: () {
-                                        _selectedUpcomingAppointment(
-                                            context, snapshot.data.docs[index]);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                            )
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 8),
+                          child: ListView.builder(
+                            itemCount: 1,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder:
+                                (BuildContext context, int index) {
+                              DocumentSnapshot ds =
+                              snapshot.data.docs[index];
+                              return AdminUpcomingAppointmentItem(
+                                ds: ds,
+                                onSelectedAUpcomingAppointment: () {
+                                  _selectedUpcomingAppointment(
+                                      context, snapshot.data.docs[index]);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      )
                           : Container();
                     },
                   ),

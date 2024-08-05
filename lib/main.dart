@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: const NewAdminNavigationMenu(),
+        home: NewNavigationMenu(),
       ),
     );
   }

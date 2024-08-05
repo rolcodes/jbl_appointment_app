@@ -48,7 +48,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   }
 
   getOnTheLoad() async {
-    bookingStream = await DatabaseMethods().getUserAppointments();
+    bookingStream = await DatabaseMethods().getSpecificUserAppointments();
     setState(() {});
   }
 
@@ -66,7 +66,6 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
           if (snapshot.data == null || snapshot.data.docs.length == 0) {
             /// If no data in snapshots display no appointments
             return SizedBox(
-              height: 600,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

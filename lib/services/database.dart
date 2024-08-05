@@ -102,11 +102,30 @@ class DatabaseMethods {
   }
 
 
-  /// -- READ: User Cancelled Appointments
+  /// -- READ: User Appointments
   Future<Stream<QuerySnapshot>> getUserAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
         .where('accountId', isEqualTo: uid)
+        .snapshots();
+  }
+
+  /// -- READ: Specific User Appointments
+  Future<Stream<QuerySnapshot>> getSpecificUserAppointments() async {
+    return FirebaseFirestore.instance
+        .collection("appointments")
+        .where('accountId', isEqualTo: uid)
+         /// use multiple objects to find multiple status of appointments
+        .where('status', whereIn: ['Waiting for approval', 'Approved'])
+        .snapshots();
+  }
+
+  /// -- READ: Specific Cancelled User Appointments
+  Future<Stream<QuerySnapshot>> getSpecificUCancelledAppointments() async {
+    return FirebaseFirestore.instance
+        .collection("appointments")
+        .where('accountId', isEqualTo: uid)
+        .where('status', isEqualTo: 'Cancelled')
         .snapshots();
   }
 
