@@ -1,9 +1,9 @@
-import 'package:appointment_app/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../services/database.dart';
 import 'admin_approved_appointment_detail.dart';
 import 'admin_approved_appointment_item.dart';
 

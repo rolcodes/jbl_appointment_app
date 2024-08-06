@@ -1,6 +1,6 @@
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants/colors.dart';
 import 'appointment/admin_panel_appointments.dart';
 import 'home/admin_home.dart';
 import 'home/widget/admin_custom_drawer.dart';

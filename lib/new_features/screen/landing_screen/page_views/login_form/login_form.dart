@@ -1,6 +1,4 @@
-import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/admin_panel_login.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/non_screen_widget/gradient_button.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +7,10 @@ import 'package:get/get.dart';
 import '../../../../../services/shared_pref.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/popups/loaders.dart';
+import '../../../../new_navigation_menu.dart';
+import '../../../admin_panel/admin_panel_login.dart';
 import '../../non_screen_widget/custom_textformfield.dart';
+import '../../non_screen_widget/gradient_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({

@@ -1,8 +1,9 @@
-import 'package:appointment_app/new_features/models/time_model.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../services/shared_pref.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../models/time_model.dart';
 
 class TimeItem extends StatefulWidget {
   const TimeItem({super.key, required this.selectTime});

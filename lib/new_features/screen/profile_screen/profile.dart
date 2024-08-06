@@ -1,20 +1,19 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/appointment_history.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/widget/edit_profile.dart';
-import 'package:appointment_app/services/database.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/appointment_history.dart';
+import 'package:jbl/new_features/screen/profile_screen/widget/edit_profile.dart';
 
+import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../common/widgets/list_tile/settings_menu_tile.dart';
+import '../../../services/database.dart';
+import '../../../utils/constants/colors.dart';
 import '../../../utils/popups/loaders.dart';
+import '../landing_screen/landing_screen.dart';
 import '../new_home_screen/widget/chat/custom_chat_button.dart';
+import '../new_home_screen/widget/my_appointments/my_appointments.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

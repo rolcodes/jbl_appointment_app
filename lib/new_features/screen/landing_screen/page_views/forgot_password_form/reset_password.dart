@@ -56,20 +56,20 @@ class ResetPassword extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (ctx) => CupertinoAlertDialog(
-                              title: const Text('Password Reset Email'),
-                              content: const Text(
-                                  'A secure reset link was sent. Check your mail now.'),
-                              actions: [
-                                TextButton(
-                                  child: const Text("Open Gmail now",
-                                      style: TextStyle(
-                                          color: CupertinoColors.activeBlue)),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            ));
+                          title: const Text('Password Reset Email'),
+                          content: const Text(
+                              'A secure reset link was sent. Check your mail now.'),
+                          actions: [
+                            TextButton(
+                              child: const Text("Open Gmail now",
+                                  style: TextStyle(
+                                      color: CupertinoColors.activeBlue)),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ));
                   },
                   child: const Text(
                     'Resend Email',

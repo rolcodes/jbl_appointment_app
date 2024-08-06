@@ -1,9 +1,11 @@
-import 'package:appointment_app/new_features/models/service_product.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../../models/service_product.dart';
 
 class GuestServiceDetailScreen extends StatelessWidget {
   const GuestServiceDetailScreen({

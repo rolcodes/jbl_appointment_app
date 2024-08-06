@@ -1,4 +1,3 @@
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TSettingMenuTile extends StatelessWidget {

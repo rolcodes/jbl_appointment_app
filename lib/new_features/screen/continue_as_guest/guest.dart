@@ -1,9 +1,10 @@
-import 'package:appointment_app/new_features/models/data/branch_data.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_branch/guest_branch_tab.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_service_category/guest_service_category.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
+import '../../models/data/branch_data.dart';
+import '../guest_tab_bar/widget/guest_branch/guest_branch_tab.dart';
+import '../guest_tab_bar/widget/guest_service_category/guest_service_category.dart';
 
 class GuestScreen extends StatefulWidget {
   const GuestScreen({super.key});

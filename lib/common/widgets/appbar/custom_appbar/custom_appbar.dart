@@ -1,9 +1,10 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/widget/notification_badge.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/widget/edit_profile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbl/common/widgets/appbar/custom_appbar/widget/notification_badge.dart';
 import 'package:path/path.dart';
 
+import '../../../../new_features/screen/profile_screen/widget/edit_profile.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/device/device_utility.dart';
 

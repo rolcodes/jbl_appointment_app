@@ -1,21 +1,22 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/new_features/controller/future_user.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/chat/custom_chat_button.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/custom_drawer.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/new_promo_silder.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/service_categories_see_all.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/service_category_cards/service_category_cards.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/service_category_cards/widget/services.dart';
-import 'package:appointment_app/services/database.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/chat/custom_chat_button.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/custom_drawer.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointments.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/new_promo_silder.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/service_categories_see_all.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/service_category_cards.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/widget/services.dart';
 
+import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../services/database.dart';
 import '../../../services/shared_pref.dart';
+import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/image_strings.dart';
+import '../../controller/future_user.dart';
 import '../../models/category_model.dart';
 import '../../models/data/dummy_data.dart';
 import '../admin_panel/home/widget/upcoming_appointment/admin_upcoming_appointment_item.dart';

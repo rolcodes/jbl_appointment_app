@@ -1,11 +1,12 @@
-import 'package:appointment_app/services/database.dart';
-import 'package:appointment_app/utils/popups/loaders.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../services/database.dart';
+import '../../../../../../utils/popups/loaders.dart';
 
 class AdminCompletedAppointmentItem extends StatelessWidget {
   const AdminCompletedAppointmentItem({

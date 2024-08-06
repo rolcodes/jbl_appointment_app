@@ -1,9 +1,11 @@
-import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_detail.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_item.dart';
-import 'package:appointment_app/services/database.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../services/database.dart';
+import '../../../../../../../utils/constants/colors.dart';
+import 'cancelled_detail.dart';
+import 'cancelled_item.dart';
 
 class CancelledTab extends StatefulWidget {
   const CancelledTab({super.key});

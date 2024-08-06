@@ -1,9 +1,10 @@
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/approved_tab/admin_approved_tab.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/cancelled_tab/admin_cancelled_tab.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/completed_tabs/admin_completed_tab.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/expired_tabs/admin_expired_tab.dart';
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/request_tab/admin_request_tab.dart';
+
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/approved_tab/admin_approved_tab.dart';
+import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/cancelled_tab/admin_cancelled_tab.dart';
+import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/completed_tabs/admin_completed_tab.dart';
+import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/expired_tabs/admin_expired_tab.dart';
+import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/request_tab/admin_request_tab.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../widget/admin_chat/admin_custom_chat_button.dart';
 import '../widget/appbar/admin_custom_app_bar.dart';

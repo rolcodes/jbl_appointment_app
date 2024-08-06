@@ -1,10 +1,11 @@
-import 'package:appointment_app/new_features/models/service_product.dart';
-import 'package:appointment_app/new_features/screen/select_staff/widget/custom_rating_bar_indicator.dart';
-import 'package:appointment_app/new_features/screen/select_staff/widget/staff_details.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/select_staff/widget/staff_details.dart';
+
+import '../../../../utils/constants/colors.dart';
+import '../../../models/service_product.dart';
 import '../../../models/staff_model.dart';
+import 'custom_rating_bar_indicator.dart';
 
 class StaffItem extends StatelessWidget {
   const StaffItem({

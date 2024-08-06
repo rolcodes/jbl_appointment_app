@@ -1,4 +1,3 @@
-import 'package:appointment_app/new_features/screen/landing_screen/page_views/registration_form/widget/privacy_policy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/popups/loaders.dart';
 import '../../../landing_screen/landing_screen.dart';
+import '../../../landing_screen/page_views/registration_form/widget/privacy_policy.dart';
 
 class AdminCustomDrawer extends StatelessWidget {
   const AdminCustomDrawer({super.key});

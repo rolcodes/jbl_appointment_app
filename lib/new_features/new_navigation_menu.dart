@@ -1,8 +1,10 @@
-import 'package:appointment_app/new_features/screen/new_home_screen/new_home_screen.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/custom_drawer.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/profile.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/custom_drawer.dart';
+import 'package:jbl/new_features/screen/profile_screen/profile.dart';
+
+import '../utils/constants/colors.dart';
 
 class NewNavigationMenu extends StatefulWidget {
   const NewNavigationMenu({super.key});

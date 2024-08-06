@@ -1,13 +1,13 @@
 import 'dart:ui';
 
-import 'package:appointment_app/new_features/models/branch_model.dart';
-import 'package:appointment_app/new_features/models/data/branch_data.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/landing_screen.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../utils/constants/colors.dart';
+import '../../../../../models/branch_model.dart';
+import '../../../../../models/data/branch_data.dart';
+import '../../../../landing_screen/landing_screen.dart';
 import '../../../../select_staff/widget/custom_rating_bar_indicator.dart';
 
 class GuestBranchDetailsScreen extends StatelessWidget {

@@ -1,10 +1,11 @@
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/widget/service_detail/guest_service_detail.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/widget/service_item.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/widget/service_detail/guest_service_detail.dart';
+import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/widget/service_item.dart';
 
+import '../../../../../../../utils/constants/colors.dart';
 import '../../../../../../models/service_product.dart';
 import '../../../../../landing_screen/landing_screen.dart';
 

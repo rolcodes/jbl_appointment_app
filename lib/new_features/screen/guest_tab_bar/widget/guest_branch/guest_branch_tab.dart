@@ -1,8 +1,8 @@
-import 'package:appointment_app/new_features/models/data/branch_data.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_branch/widget/branch_list_item.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_branch/widget/guest_branch_details.dart';
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_branch/widget/branch_list_item.dart';
+import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_branch/widget/guest_branch_details.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../models/branch_model.dart';

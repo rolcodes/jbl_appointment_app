@@ -1,9 +1,10 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/widget/service_item.dart';
-import 'package:appointment_app/new_features/screen/new_home_screen/widget/service_category_cards/widget/service_detail.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/widget/service_detail.dart';
+import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../../utils/constants/colors.dart';
 import '../../../../../models/service_product.dart';
+import '../../../../guest_tab_bar/widget/guest_service_category/widget/services/widget/service_item.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({super.key, required this.title, required this.services});

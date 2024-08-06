@@ -1,5 +1,6 @@
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/constants/colors.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, this.onTap, required this.buttonText});

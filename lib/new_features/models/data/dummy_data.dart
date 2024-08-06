@@ -1,6 +1,7 @@
-import 'package:appointment_app/new_features/models/category_model.dart';
-import 'package:appointment_app/new_features/models/service_product.dart';
 
+
+import '../category_model.dart';
+import '../service_product.dart';
 import '../staff_model.dart';
 
 List<Category> availableCategories = [

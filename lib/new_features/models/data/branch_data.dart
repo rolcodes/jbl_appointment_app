@@ -1,4 +1,5 @@
-import 'package:appointment_app/new_features/models/branch_model.dart';
+
+import '../branch_model.dart';
 
 const dummyBranch = [
   BranchClass(

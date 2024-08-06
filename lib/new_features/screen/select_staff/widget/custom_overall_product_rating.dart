@@ -1,7 +1,9 @@
-import 'package:appointment_app/new_features/screen/select_staff/widget/custom_rating_bar_indicator.dart';
-import 'package:appointment_app/new_features/screen/select_staff/widget/custom_rating_progress_indicator.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../../../utils/constants/colors.dart';
+import 'custom_rating_bar_indicator.dart';
+import 'custom_rating_progress_indicator.dart';
 
 
 class TOverallProductRating extends StatelessWidget {

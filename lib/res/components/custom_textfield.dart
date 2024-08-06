@@ -1,5 +1,6 @@
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/constants/colors.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({

@@ -1,12 +1,13 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
+import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/popups/loaders.dart';
 import '../../../../new_navigation_menu.dart';
 import 'my_appointment_item.dart';

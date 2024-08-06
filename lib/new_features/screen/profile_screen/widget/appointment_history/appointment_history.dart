@@ -1,7 +1,7 @@
-import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_tab.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/completed_tab/completed_tab.dart';
-import 'package:appointment_app/new_features/screen/profile_screen/widget/appointment_history/widget/expired_tab/expired_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_tab.dart';
+import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/completed_tab/completed_tab.dart';
+import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/expired_tab/expired_tab.dart';
 
 import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../utils/constants/colors.dart';

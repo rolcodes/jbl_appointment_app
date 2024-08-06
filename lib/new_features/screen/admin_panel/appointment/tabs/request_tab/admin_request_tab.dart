@@ -1,10 +1,11 @@
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/request_tab/admin_request_appointment_item.dart';
-import 'package:appointment_app/services/database.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../services/database.dart';
 import '../../../../../../utils/constants/colors.dart';
 import 'admin_request_appointment_detail.dart';
+import 'admin_request_appointment_item.dart';
 
 class AdminRequestTab extends StatefulWidget {
   const AdminRequestTab({super.key});

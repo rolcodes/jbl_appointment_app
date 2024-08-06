@@ -1,15 +1,12 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/new_features/models/data/dummy_data.dart';
-import 'package:appointment_app/new_features/screen/select_staff/select_staff.dart';
-
-import 'package:appointment_app/new_features/screen/select_time/widget/time_item.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+import 'package:jbl/new_features/screen/select_time/widget/time_item.dart';
 
+import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../utils/constants/colors.dart';
 import '../../models/calendar_model.dart';
+import '../../models/data/dummy_data.dart';
 import '../../models/time_model.dart';
+import '../select_staff/select_staff.dart';
 
 class SelectTime extends StatelessWidget {
   const SelectTime({
@@ -18,6 +15,7 @@ class SelectTime extends StatelessWidget {
   });
 
   final List<TimeClass> hours;
+
   // TextEditingController pickedDate = TextEditingController();
 
   /// -- Method to navigate to select staff screen
@@ -41,8 +39,8 @@ class SelectTime extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(        isEdit: false,
-
+      appBar: CustomAppBar(
+        isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,

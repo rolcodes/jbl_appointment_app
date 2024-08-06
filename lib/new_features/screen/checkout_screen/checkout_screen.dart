@@ -1,28 +1,26 @@
 import 'dart:async';
 
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/new_features/models/data/branch_data.dart';
-import 'package:appointment_app/new_features/models/user_booking_model.dart';
-import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/select_staff/widget/custom_rating_bar_indicator.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 
+import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../services/database.dart';
 import '../../../services/shared_pref.dart';
+import '../../../utils/constants/colors.dart';
 import '../../../utils/popups/loaders.dart';
 import '../../models/branch_model.dart';
 import '../../models/calendar_model.dart';
+import '../../models/data/branch_data.dart';
 import '../../models/service_product.dart';
 import '../../models/staff_model.dart';
-import '../../models/user_model.dart';
+import '../../models/user_booking_model.dart';
+import '../../new_navigation_menu.dart';
+import '../select_staff/widget/custom_rating_bar_indicator.dart';
 
 class CheckoutScreen extends StatefulWidget {
   CheckoutScreen({

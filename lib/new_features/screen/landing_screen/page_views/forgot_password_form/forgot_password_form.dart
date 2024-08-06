@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbl/new_features/screen/landing_screen/page_views/forgot_password_form/reset_password.dart';
 
-import '../../../../../features/authentication/screens/password_configurations/reset_password.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/popups/loaders.dart';
 import '../../non_screen_widget/custom_textformfield.dart';

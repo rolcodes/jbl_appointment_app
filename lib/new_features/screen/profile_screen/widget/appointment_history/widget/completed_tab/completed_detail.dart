@@ -1,7 +1,9 @@
-import 'package:appointment_app/common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../../../utils/constants/colors.dart';
 
 class CompletedAppointmentDetail extends StatefulWidget {
   const CompletedAppointmentDetail({super.key, required this.ds});

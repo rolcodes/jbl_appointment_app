@@ -1,8 +1,8 @@
-import 'package:appointment_app/new_features/models/data/dummy_data.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/service_grid_item.dart';
-import 'package:appointment_app/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/guest_service.dart';
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/service_grid_item.dart';
+import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_service_category/widget/services/guest_service.dart';
 import '../../../../models/category_model.dart';
+import '../../../../models/data/dummy_data.dart';
 
 class GuestServiceCategory extends StatelessWidget {
   const GuestServiceCategory({super.key});

@@ -1,11 +1,12 @@
-import 'package:appointment_app/new_features/screen/admin_panel/appointment/tabs/completed_tabs/admin_completed_appointment_item.dart';
-import 'package:appointment_app/services/database.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../services/database.dart';
 import '../cancelled_tab/admin_cancelled_appointment_item.dart';
 import 'admin_completed_appointment_detail.dart';
+import 'admin_completed_appointment_item.dart';
 
 
 class AdminCompletedTab extends StatefulWidget {

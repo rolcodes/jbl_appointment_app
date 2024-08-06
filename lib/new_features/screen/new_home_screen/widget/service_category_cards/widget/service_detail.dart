@@ -1,6 +1,4 @@
-import 'package:appointment_app/new_features/models/service_product.dart';
-import 'package:appointment_app/new_features/screen/select_date/select_date.dart';
-import 'package:appointment_app/utils/constants/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,9 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../../services/shared_pref.dart';
+import '../../../../../../utils/constants/colors.dart';
+import '../../../../../models/service_product.dart';
+import '../../../../select_date/select_date.dart';
 
 class ServiceDetailScreen extends StatelessWidget {
   const ServiceDetailScreen({

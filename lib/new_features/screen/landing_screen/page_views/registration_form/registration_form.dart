@@ -1,21 +1,22 @@
-import 'package:appointment_app/new_features/models/user_model.dart';
-import 'package:appointment_app/new_features/new_navigation_menu.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/non_screen_widget/gradient_button.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/page_views/regex/regex.dart';
-import 'package:appointment_app/new_features/screen/landing_screen/page_views/registration_form/widget/privacy_policy.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:jbl/new_features/screen/landing_screen/page_views/regex/regex.dart';
+import 'package:jbl/new_features/screen/landing_screen/page_views/registration_form/widget/privacy_policy.dart';
 import 'package:random_string/random_string.dart';
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/popups/loaders.dart';
+import '../../../../models/user_model.dart';
+import '../../../../new_navigation_menu.dart';
 import '../../landing_screen.dart';
 import '../../non_screen_widget/custom_textformfield.dart';
+import '../../non_screen_widget/gradient_button.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key, required this.pageController});

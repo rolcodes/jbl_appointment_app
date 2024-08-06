@@ -1,6 +1,4 @@
-import 'package:appointment_app/new_features/models/feedback_model.dart';
-import 'package:appointment_app/new_features/models/user_booking_model.dart';
-import 'package:appointment_app/utils/popups/loaders.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../../services/database.dart';
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/popups/loaders.dart';
 import '../../../../../../new_navigation_menu.dart';
 
 class CustomChoiceChip extends StatefulWidget {

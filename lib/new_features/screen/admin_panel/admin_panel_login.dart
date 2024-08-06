@@ -1,13 +1,12 @@
-import 'package:appointment_app/new_features/screen/admin_panel/admin_navigation_menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/popups/loaders.dart';
 import '../landing_screen/non_screen_widget/custom_textformfield.dart';
 import '../landing_screen/non_screen_widget/gradient_button.dart';
+import 'admin_navigation_menu.dart';
 
 class AdminPanelLogin extends StatefulWidget {
   const AdminPanelLogin({super.key});

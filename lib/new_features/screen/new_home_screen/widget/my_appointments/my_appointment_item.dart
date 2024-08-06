@@ -1,7 +1,8 @@
-import 'package:appointment_app/utils/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../utils/constants/colors.dart';
 
 class MyAppointmentItem extends StatelessWidget {
   const MyAppointmentItem({
