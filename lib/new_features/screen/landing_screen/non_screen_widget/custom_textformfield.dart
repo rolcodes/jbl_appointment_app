@@ -30,6 +30,9 @@ class CustomTextFormField extends StatelessWidget {
       width: 260,
       height: 70,
       child: TextFormField(
+        onTapOutside: (PointerDownEvent event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         obscureText: obscureText,
         controller: textController,
         validator: validator,

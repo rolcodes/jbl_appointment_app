@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:jbl/new_features/new_navigation_menu.dart';
+import 'package:jbl/new_features/screen/landing_screen/landing_screen.dart';
+import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:jbl/splash_screen.dart';
 import 'package:jbl/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -9,14 +14,21 @@ import 'new_features/models/calendar_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
 
-    options: const FirebaseOptions(
-        apiKey: "current_key",
-        appId: "mobilesdk_app_id",
-        messagingSenderId: "project_number",
-        projectId: "project_id"),
-  );
+  /// -- Make sure Firebase.initializeApp
+  if (Platform.isAndroid) {
+    await Firebase.initializeApp(
+
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyBr4fsZcZjua-0fpTAwjKPfCAEeIyz42xk",
+          appId: "1:8262591029:android:6c7ced8349341bfc32877c",
+          messagingSenderId: "8262591029",
+          projectId: "appointmentapp-7e48c"),
+    );
+  } else if (Platform.isIOS) {
+    await Firebase.initializeApp();
+  }
+
   runApp(const MyApp());
 }
 
@@ -32,7 +44,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         /// SplashScreen() to begin from the start
-        home: const SplashScreen(),
+        home: const LandingScreen(),
       ),
     );
   }

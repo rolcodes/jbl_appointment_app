@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -64,55 +63,67 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
     return StreamBuilder(
         stream: bookingStream,
         builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null || snapshot.data.docs.length == 0) {
-            /// If no data in snapshots display no appointments
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/on_boarding_images/No data-amico.png',
-                    height: 250,
-                    width: 250,
-                    fit: BoxFit.contain,
-                  ),
-                  Center(
-                    child: Text('No Appointment Yet', style: Theme.of(context).textTheme.headlineSmall,),
-                  ),
-                  const SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                        'Book An Appointment Now! Enjoy Our Exclusive Deals!', style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.darkGrey),
-                    textAlign: TextAlign.center,),
-                  ),
-                ],
-              ),
-            );
+          try {
+            return snapshot.hasData
+                ? ListView.separated(
+                    itemCount: snapshot.data.docs.length,
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      DocumentSnapshot ds = snapshot.data.docs[index];
+                      return MyAppointmentItem(
+                        ds: ds,
+                        onSelectedAppointment: () async {
+                          _selectAppointment(
+                              context, snapshot.data.docs[index]);
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        height: 24,
+                      );
+                    },
+                  )
+                : Container();
+          } catch (_) {
+            if (snapshot.data == null || snapshot.data.docs.length == 0) {
+              /// If no data in snapshots display no appointments
+              return SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/on_boarding_images/No data-amico.png',
+                      height: 250,
+                      width: 250,
+                      fit: BoxFit.contain,
+                    ),
+                    Center(
+                      child: Text(
+                        'No Appointment Yet',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: Text(
+                        'Book An Appointment Now! Enjoy Our Exclusive Deals!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .apply(color: TColors.darkGrey),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
           }
-
-          return snapshot.hasData
-              ? ListView.builder(
-                  itemCount: snapshot.data.docs.length,
-                  scrollDirection: Axis.vertical,
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    DocumentSnapshot ds = snapshot.data.docs[index];
-                    return MyAppointmentItem(
-                      ds: ds,
-                      onSelectedAppointment: () async {
-                        _selectAppointment(context, snapshot.data.docs[index]);
-                      },
-                    );
-                  },
-                  // separatorBuilder: (BuildContext context, int index) {
-                  //   return const SizedBox(
-                  //     height: 5,
-                  //   );
-                  // },
-                )
-              : Container();
+          return Container();
         });
   }
 
@@ -133,15 +144,16 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         isCenterTitle: true,
       ),
       backgroundColor: TColors.secondary,
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               child: userAppointments(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

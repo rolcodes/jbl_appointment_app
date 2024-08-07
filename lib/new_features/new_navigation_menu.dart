@@ -26,7 +26,7 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
     return Scaffold(
       body: screenList.elementAt(currentPageIndex),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 10),
         child: NavigationBar(
           height: 50,
           overlayColor: WidgetStatePropertyAll(Colors.amberAccent.shade100),

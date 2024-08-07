@@ -85,9 +85,9 @@ class _AdminPanelLoginState extends State<AdminPanelLogin> {
                     margin: EdgeInsets.all(50),
                     padding: EdgeInsets.all(50),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade100.withOpacity(0.5),width: 2),
+                      border: Border.all(color: TColors.primary.withOpacity(0.3),width: 2),
                         borderRadius: BorderRadius.circular(20),
-                        color: TColors.secondary.withOpacity(0.4),
+                        color: TColors.secondary.withOpacity(0.7),
                         boxShadow: [
                           BoxShadow(
                             color: TColors.secondary.withOpacity(0.5),

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +80,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
           return snapshot.hasData
               ? Container(
                   height: 170,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(color: TColors.white),
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 6),
                   child: Column(
@@ -128,10 +128,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             onPressed: () =>
                                 Get.to(() => const MyAppointmentsScreen()),
                             style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                minimumSize: Size(50, 30),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                               ),
+                              padding: EdgeInsets.zero,
+                              minimumSize: Size(50, 30),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
                             child: Text('See All',
                                 style: Theme.of(context).textTheme.bodySmall),
                           ),
@@ -146,14 +146,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             DocumentSnapshot ds = snapshot.data.docs[index];
-                        
+
                             /// -- Condition to remove cancelled, expired and completed status
                             return
-                                // ds['status'] == 'Cancelled' ||
-                                //       ds['status'] == 'Completed' ||
-                                //       ds['status'] == 'Expired'
-                                //   ? const SizedBox()
-                                //   :
                                 Material(
                               color: Colors.transparent,
                               child: InkWell(
@@ -165,7 +160,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     Row(
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Image.network(
                                             ds['image'],
                                             width: 110,
@@ -175,13 +171,14 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(left: 12),
+                                              const EdgeInsets.only(left: 10),
                                           child: SizedBox(
-                                            width: 260,
+                                            width: MediaQuery.of(context).size.width / 1.71,
                                             height: 110,
                                             child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
@@ -191,9 +188,11 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                                       .textTheme
                                                       .bodyMedium!
                                                       .apply(
-                                                          color: Colors.pinkAccent
+                                                          color: Colors
+                                                              .pinkAccent
                                                               .shade700),
                                                   maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                                 SizedBox(
                                                   width: 200,
@@ -204,8 +203,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                                         .bodyLarge!
                                                         .apply(
                                                             heightDelta: -0.2,
-                                                            color:
-                                                                TColors.primary),
+                                                            color: TColors
+                                                                .primary),
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -264,8 +263,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
               ),
             )
           : SingleChildScrollView(
-              child: Container(
-                width: MediaQuery.of(context).size.width ,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
                     const Stack(
@@ -330,6 +329,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       children: [
                         /// -- Appointment Item
                         userAppointments(),
+
                         /// -- Service Categories
                         Container(
                           height: 315,
@@ -341,22 +341,28 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             children: [
                               SizedBox(height: 15),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('SERVICE CATEGORIES',
-                                      style: Theme.of(context).textTheme.headlineSmall),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall),
 
                                   /// -- See All Categories
                                   TextButton(
-                                    onPressed: () =>
-                                        Get.to(() => const ServiceCategoriesSeeAll()),
+                                    onPressed: () => Get.to(
+                                        () => const ServiceCategoriesSeeAll()),
                                     style: TextButton.styleFrom(
                                       minimumSize: Size(50, 30),
                                       padding: EdgeInsets.zero,
-                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
                                     ),
                                     child: Text('See All',
-                                        style: Theme.of(context).textTheme.bodySmall),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall),
                                   ),
                                 ],
                               ),
@@ -375,12 +381,13 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     return ServiceCategoryCardListsItem(
                                       service: availableCategories[index],
                                       onSelectedCategory: () {
-                                        _selectCategory(
-                                            context, availableCategories[index]);
+                                        _selectCategory(context,
+                                            availableCategories[index]);
                                       },
                                     );
                                   },
-                                  separatorBuilder: (BuildContext context, int index) {
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
                                     return const SizedBox(width: 24);
                                   },
                                 ),
@@ -389,35 +396,36 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
                               /// -- Promos
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('PROMOS',
-                                      style: Theme.of(context).textTheme.headlineSmall),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall),
 
                                   /// -- See All Categories
                                   TextButton(
-                                    onPressed: () =>
-                                        Get.to(() => const ServiceCategoriesSeeAll()),
+                                    onPressed: () => Get.to(
+                                        () => const ServiceCategoriesSeeAll()),
                                     style: TextButton.styleFrom(
                                       padding: EdgeInsets.zero,
                                       minimumSize: Size(50, 30),
-                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
                                     ),
                                     child: Text('See All',
-                                        style: Theme.of(context).textTheme.bodySmall),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall),
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
-
-
                       ],
                     ),
-
-
 
                     /// -- Promos
                     const NewPromoSlider(
@@ -429,8 +437,6 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       ],
                       isAppBar: false,
                     ),
-
-
 
                     // Container(
                     //   padding: const EdgeInsets.symmetric(horizontal: 24),
