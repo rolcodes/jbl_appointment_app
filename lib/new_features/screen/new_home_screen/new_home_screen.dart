@@ -9,6 +9,7 @@ import 'package:jbl/new_features/screen/new_home_screen/widget/new_promo_silder.
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_categories_see_all.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/service_category_cards.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/widget/services.dart';
+import 'package:jbl/utils/device/device_utility.dart';
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../services/database.dart';
@@ -68,6 +69,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   }
 
   Widget userAppointments() {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return StreamBuilder(
         stream: bookingStream,
         builder: (context, AsyncSnapshot snapshot) {
@@ -93,7 +96,12 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             children: [
                               Text(
                                 'MY APPOINTMENTS',
-                                style: Theme.of(context).textTheme.titleLarge,
+                                style: isMobileSmall
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .apply(fontSizeDelta: -1)
+                                    : Theme.of(context).textTheme.titleLarge,
                               ),
                               IconButton(
                                 onPressed: () {
@@ -148,96 +156,144 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             DocumentSnapshot ds = snapshot.data.docs[index];
 
                             /// -- Condition to remove cancelled, expired and completed status
-                            return
-                                Material(
+                            return Material(
                               color: Colors.transparent,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(10),
                                 onTap: () =>
                                     Get.to(() => const MyAppointmentsScreen()),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.network(
-                                            ds['image'],
-                                            width: 110,
-                                            height: 110,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context).size.width / 1.71,
-                                            height: 110,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Service Start Time: ${ds["time"]}, ${ds["date"]}',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .apply(
-                                                          color: Colors
-                                                              .pinkAccent
-                                                              .shade700),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                                SizedBox(
-                                                  width: 200,
-                                                  child: Text(
-                                                    ds["branchTitle"],
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge!
-                                                        .apply(
-                                                            heightDelta: -0.2,
-                                                            color: TColors
-                                                                .primary),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 300,
-                                                  child: Text(
-                                                    ds["service"],
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge,
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Technician:  ${ds["staffName"]}',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelLarge!
-                                                      .apply(
-                                                          color:
-                                                              TColors.darkGrey),
-                                                ),
-                                              ],
+                                child: SizedBox(
+                                  width: TDeviceUtils.getScreenWidth(context),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.network(
+                                              ds['image'],
+                                              width: isMobileSmall ? 100 : 110,
+                                              height: isMobileSmall ? 100 : 110,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: SizedBox(
+                                              width: TDeviceUtils
+                                                          .getScreenWidth(
+                                                              context) >=
+                                                      430
+                                                  ? TDeviceUtils.getScreenWidth(
+                                                          context) *
+                                                      0.60
+                                                  : TDeviceUtils.getScreenWidth(
+                                                          context) *
+                                                      0.57,
+                                              height: isMobileSmall ? 100 : 110,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  FittedBox(
+                                                    child: Text(
+                                                      'Service Start Time: ${ds["time"]}, ${ds["date"]}',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium!
+                                                          .apply(
+                                                              color: Colors
+                                                                  .pinkAccent
+                                                                  .shade700),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: isMobileSmall
+                                                        ? 180
+                                                        : 200,
+                                                    child: Text(
+                                                      ds["branchTitle"],
+                                                      style: isMobileSmall
+                                                          ? Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .apply(
+                                                                  heightDelta:
+                                                                      -0.2,
+                                                                  fontSizeDelta:
+                                                                      -1,
+                                                                  color: TColors
+                                                                      .primary)
+                                                          : Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .apply(
+                                                                  heightDelta:
+                                                                      -0.2,
+                                                                  color: TColors
+                                                                      .primary),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 300,
+                                                    child: Text(
+                                                      ds["service"],
+                                                      style: isMobileSmall
+                                                          ? Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .apply(
+                                                                  fontSizeDelta:
+                                                                      -1)
+                                                          : Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'Technician:  ${ds["staffName"]}',
+                                                    style: isMobileSmall
+                                                        ? Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .apply(
+                                                                color: TColors
+                                                                    .darkGrey)
+                                                        : Theme.of(context)
+                                                            .textTheme
+                                                            .labelLarge!
+                                                            .apply(
+                                                                color: TColors
+                                                                    .darkGrey),
+                                                  ),
+                                                  // Text(
+                                                  //   "${TDeviceUtils.getScreenWidth(context)}",
+                                                  //   style: Theme.of(context)
+                                                  //       .textTheme
+                                                  //       .labelSmall,
+                                                  // )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
@@ -254,6 +310,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   /// -- Main Widget
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return Scaffold(
       backgroundColor: TColors.secondary, // Colors.grey.shade300
       body: _isLoading
@@ -311,13 +369,20 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             const FutureUser(),
                             Text(
                               'BOOK AN APPOINTMENT NOW!',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .apply(
-                                      color: TColors.primary,
-                                      fontSizeDelta: 2,
-                                      letterSpacingDelta: 2),
+                              style: isMobileSmall
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .apply(
+                                          color: TColors.primary,
+                                          letterSpacingDelta: 2)
+                                  : Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .apply(
+                                          color: TColors.primary,
+                                          fontSizeDelta: 2,
+                                          letterSpacingDelta: 2),
                             )
                           ],
                         ),
@@ -332,22 +397,29 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
                         /// -- Service Categories
                         Container(
-                          height: 315,
+                          height: isMobileSmall ? 300 : 315,
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
                           padding: EdgeInsets.symmetric(horizontal: 24),
                           child: Column(
                             children: [
-                              SizedBox(height: 15),
+                              SizedBox(height: isMobileSmall ? 0 : 15),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('SERVICE CATEGORIES',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall),
+                                  Text(
+                                    'SERVICE CATEGORIES',
+                                    style: isMobileSmall
+                                        ? Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .apply(fontSizeDelta: -1)
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                  ),
 
                                   /// -- See All Categories
                                   TextButton(

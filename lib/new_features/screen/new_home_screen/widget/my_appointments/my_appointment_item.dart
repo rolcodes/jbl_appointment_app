@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jbl/utils/device/device_utility.dart';
 
 import '../../../../../utils/constants/colors.dart';
 
@@ -16,7 +16,8 @@ class MyAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Create condition to remove Cancelled Appointments in My Appointments Screen
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return Material(
         elevation: 3,
         color: TColors.light,
@@ -34,34 +35,44 @@ class MyAppointmentItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Jevelme Beauty Lounge',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .apply(heightDelta: -0.2),
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                SizedBox(
+                  width: TDeviceUtils.getScreenWidth(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      isMobileSmall ? Text(
+                        'Jevelme Beauty Lounge',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .apply(fontSizeDelta: -2),
+                        overflow: TextOverflow.ellipsis,
+                      ) : Text(
+                        'Jevelme Beauty Lounge',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .apply(fontSizeDelta: -1),
+                        overflow: TextOverflow.ellipsis,
+                      ),
 
-                    /// -- Appointment Status Update
-                    ds['status'] == 'Waiting for approval'
-                        ? Text(ds['status'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .apply(
-                                    fontSizeDelta: -3, color: Colors.grey))
-                            : Text(ds['status'],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .apply(
-                                        fontSizeDelta: -3,
-                                        color: Colors.blue)),
-                  ],
+                      /// -- Appointment Status Update
+                      ds['status'] == 'Waiting for approval'
+                          ? Text(ds['status'],
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .apply(
+                                      fontSizeDelta: -3, color: Colors.grey))
+                              : Text(ds['status'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .apply(
+                                          fontSizeDelta: -3,
+                                          color: Colors.blue)),
+                    ],
+                  ),
                 ),
                 Container(
                   width: double.infinity,
@@ -85,15 +96,15 @@ class MyAppointmentItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
                         ds['image'],
-                        width: 110,
-                        height: 110,
+                        width: isMobileSmall ? 100 : 110,
+                        height: isMobileSmall ? 100 : 110,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 12),
                       child: SizedBox(
-                        width: 220,
+                        width: isMobileSmall ? 192 : 220,
                         height: 110,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

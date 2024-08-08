@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/database.dart';
 import '../../services/shared_pref.dart';
+import '../../utils/device/device_utility.dart';
 import '../models/user_model.dart';
 
 class FutureUser extends StatelessWidget {
@@ -9,6 +10,7 @@ class FutureUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
 
     return FutureBuilder<UserModel?>(
       future: DatabaseMethods().readUser(),
@@ -21,9 +23,11 @@ class FutureUser extends StatelessWidget {
           return user == null
               ? Container()
               : Text("Hi, ${user.name}",
-              style: Theme.of(context)
+              style: isMobileSmall ?  Theme.of(context)
                   .textTheme
-                  .titleLarge);
+                  .titleLarge!.apply(fontSizeDelta: -1) : Theme.of(context)
+                  .textTheme
+                  .titleLarge );
         } else {
           return Container();
         }

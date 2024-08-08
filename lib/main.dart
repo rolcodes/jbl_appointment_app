@@ -40,11 +40,12 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => CalendarModel(),
       child: GetMaterialApp(
+
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
 
         /// SplashScreen() to begin from the start
-        home: const LandingScreen(),
+        home: const NewNavigationMenu(),
       ),
     );
   }

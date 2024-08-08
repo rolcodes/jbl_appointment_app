@@ -1,10 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/appointment_history.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/edit_profile.dart';
+import 'package:jbl/utils/device/device_utility.dart';
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../common/widgets/list_tile/settings_menu_tile.dart';
@@ -20,6 +20,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) < 430;
+
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
@@ -50,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                         ? Container()
                         : Material(
                             color: TColors.light,
-                      borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                             child: InkWell(
                               onTap: () => Get.to(() => EditProfileScreen()),
                               borderRadius: BorderRadius.circular(20),
@@ -93,7 +95,9 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           );
                   } else {
-                    return const Center(child: CircularProgressIndicator(color: TColors.primary),);
+                    return const Center(
+                      child: CircularProgressIndicator(color: TColors.primary),
+                    );
                   }
                 },
               ),
@@ -115,6 +119,8 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           onTap: () =>
                               Get.to(() => const MyAppointmentsScreen()),
+                          titleSmall: isMobileSmall ? true : false,
+                          subTitleSmall: isMobileSmall ? true : false,
                         ),
                         TSettingMenuTile(
                           icon: Iconsax.archive_book,
@@ -124,7 +130,10 @@ class ProfileScreen extends StatelessWidget {
                             Icons.arrow_forward_ios_rounded,
                             size: 20,
                           ),
-                          onTap: () => Get.to(() => const AppointmentHistoryScreen()),
+                          onTap: () =>
+                              Get.to(() => const AppointmentHistoryScreen()),
+                          titleSmall: isMobileSmall ? true : false,
+                          subTitleSmall: isMobileSmall ? true : false,
                         ),
                         TSettingMenuTile(
                           icon: Iconsax.notification,
@@ -135,6 +144,8 @@ class ProfileScreen extends StatelessWidget {
                             size: 20,
                           ),
                           onTap: () {},
+                          titleSmall: isMobileSmall ? true : false,
+                          subTitleSmall: isMobileSmall ? true : false,
                         ),
                         TSettingMenuTile(
                           icon: Iconsax.heart_add,
@@ -145,6 +156,8 @@ class ProfileScreen extends StatelessWidget {
                             size: 20,
                           ),
                           onTap: () {},
+                          titleSmall: isMobileSmall ? true : false,
+                          subTitleSmall: isMobileSmall ? true : false,
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -208,7 +221,6 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: const CustomChatButton(),
-
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../models/category_model.dart';
 
 class ServiceGridItem extends StatelessWidget {
@@ -15,6 +16,8 @@ class ServiceGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     /// -- Widget for Categories => guest_service_category.dart
     return Material(
       elevation: 2,
@@ -43,10 +46,18 @@ class ServiceGridItem extends StatelessWidget {
               ),
               Expanded(
                 child: Center(
-                  child: Text(
-                    service.title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                    textAlign: TextAlign.center,
+                  child: SizedBox(
+                    width: isMobileSmall ? 140 : 160,
+                    child: Text(
+                      service.title,
+                      style: isMobileSmall
+                          ? Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .apply(fontSizeDelta: -2)
+                          : Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               )

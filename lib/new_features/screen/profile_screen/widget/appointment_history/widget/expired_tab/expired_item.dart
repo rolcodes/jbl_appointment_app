@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/device/device_utility.dart';
 
 class ExpiredItem extends StatelessWidget {
   const ExpiredItem({
@@ -15,6 +16,8 @@ class ExpiredItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     /// -- Create condition to display only cancelled appointments in Cancelled Tabs
     return ds['status'] == 'Waiting for approval' ||
         ds['status'] == 'Cancelled' ||
@@ -80,23 +83,25 @@ class ExpiredItem extends StatelessWidget {
                       child: Image.network(
                         ds["image"],
                         fit: BoxFit.cover,
-                        width: 110,
-                        height: 110,
+                        width: isMobileSmall ? 100 : 110,
+                        height: isMobileSmall ? 100 : 110,
                       )),
                   Container(
                     padding: EdgeInsets.only(left: 12),
-                    width: 240,
-                    height: 110,
+                    width: isMobileSmall ? 210 : 240,
+                    height: isMobileSmall ? 100 : 110,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          ds['branchTitle'],
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .apply(color: Colors.black),
+                        FittedBox(
+                          child: Text(
+                            ds['branchTitle'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .apply(color: Colors.black),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment:

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../services/database.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_utility.dart';
 import '../../../../utils/popups/loaders.dart';
 import '../../../new_navigation_menu.dart';
 import 'custom_edit_field.dart';
@@ -22,6 +23,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   /// Edit field
   Future<void> editField(String field) async {
+
     String? newValue;
     return await showDialog(
       context: context,
@@ -94,6 +96,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
           /// Show content
           else if (snapshot.hasData) {
+            final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
             /// Variable for data
             final user = snapshot.data;
             return user == null
@@ -129,111 +133,113 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                   )
-                : Stack(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      Positioned(
-                        top: 10,
-                        left: 138,
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/images/users/default_profile.png',
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.contain,
-                          ),
+                : SingleChildScrollView(
+                  child: Stack(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
                         ),
-                      ),
-                      Positioned(
-                        top: 104,
-                        left: 240,
-                        child: IconButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStatePropertyAll(Colors.grey.shade400),
-                            side: const WidgetStatePropertyAll(
-                              BorderSide(color: TColors.secondary, width: 3),
+                        Positioned(
+                          top: 10,
+                          left: isMobileSmall ? 120 : 138,
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/images/users/default_profile.png',
+                              height: 150,
+                              width: 150,
+                              fit: BoxFit.contain,
                             ),
                           ),
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.image_outlined,
-                            color: Colors.white,
+                        ),
+                        Positioned(
+                          top: 104,
+                          left: isMobileSmall ? 220 : 240,
+                          child: IconButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStatePropertyAll(Colors.grey.shade400),
+                              side: const WidgetStatePropertyAll(
+                                BorderSide(color: TColors.secondary, width: 3),
+                              ),
+                            ),
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.image_outlined,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 180,
-                        child: Container(
-                          height: 640,
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 40),
-                          decoration: BoxDecoration(
-                            color: TColors.white.withOpacity(0.5),
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(60),
-                                topLeft: Radius.circular(60)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomEditField(
-                                title: 'Full Name',
-                                subtitle: user.name,
-                                isCopy: false,
-                                onTap: () {
-                                  editField('name');
-                                  print('full name clicked');
-                                },
-                              ),
-                              CustomEditField(
-                                title: 'Email',
-                                subtitle: user.email,
-                                isCopy: false,
-                                onTap: () {
-                                  editField('email');
-                                },
-                              ),
-                              CustomEditField(
-                                title: 'Phone No.',
-                                subtitle: user.telephone,
-                                isCopy: false,
-                                onTap: () {
-                                  editField('telephone');
-                                },
-                              ),
-                              CustomEditField(
-                                title: 'Account ID',
-                                subtitle: user.id,
-                                isCopy: true,
-                                onTap: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      duration: Duration(seconds: 2),
-                                      content:
-                                          Text('Text copied to clipboard.'),
-                                    ),
-                                  );
-                                },
-                              ),
-                              CustomEditField(
-                                title: 'Password',
-                                subtitle: '*********',
-                                isCopy: false,
-                                onTap: () {
-                                  editField;
-                                },
-                              ),
-                            ],
+                        Positioned(
+                          top: 180,
+                          child: Container(
+                            height: 640,
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 40),
+                            decoration: BoxDecoration(
+                              color: TColors.white.withOpacity(0.5),
+                              borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(60),
+                                  topLeft: Radius.circular(60)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomEditField(
+                                  title: 'Full Name',
+                                  subtitle: user.name,
+                                  isCopy: false,
+                                  onTap: () {
+                                    editField('name');
+                                    print('full name clicked');
+                                  },
+                                ),
+                                CustomEditField(
+                                  title: 'Email',
+                                  subtitle: user.email,
+                                  isCopy: false,
+                                  onTap: () {
+                                    editField('email');
+                                  },
+                                ),
+                                CustomEditField(
+                                  title: 'Phone No.',
+                                  subtitle: user.telephone,
+                                  isCopy: false,
+                                  onTap: () {
+                                    editField('telephone');
+                                  },
+                                ),
+                                CustomEditField(
+                                  title: 'Account ID',
+                                  subtitle: user.id,
+                                  isCopy: true,
+                                  onTap: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        duration: Duration(seconds: 2),
+                                        content:
+                                            Text('Text copied to clipboard.'),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                CustomEditField(
+                                  title: 'Password',
+                                  subtitle: '*********',
+                                  isCopy: false,
+                                  onTap: () {
+                                    editField;
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
+                      ],
+                    ),
+                );
           } else {
             /// Show loading indicator
             const Center(

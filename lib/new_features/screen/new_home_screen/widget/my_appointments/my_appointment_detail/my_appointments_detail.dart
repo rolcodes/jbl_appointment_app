@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/device/device_utility.dart';
 import '../../../../select_date/select_date.dart';
 
 class AppointmentsDetail extends StatefulWidget {
@@ -41,6 +41,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return Scaffold(
         appBar: CustomAppBar(
           isEdit: false,
@@ -72,22 +74,27 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                         ClipOval(
                           child: Image.network(
                             widget.ds['branchImage'],
-                            height: 100,
-                            width: 100,
+                            height: isMobileSmall ? 90 : 100,
+                            width: isMobileSmall ? 90 : 100,
                             fit: BoxFit.cover,
                           ),
                         ),
                       ],
                     ),
                     SizedBox(
-                      width: 260,
+                      width: isMobileSmall ? 240 : 260,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             widget.ds['branchTitle'],
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: isMobileSmall
+                                ? Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .apply(fontSizeDelta: -1)
+                                : Theme.of(context).textTheme.headlineSmall,
                             maxLines: 2,
                           ),
                           Text(
@@ -208,19 +215,19 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         widget.ds['image'],
-                        width: 120,
-                        height: 120,
+                        width: isMobileSmall ?  110 : 120,
+                        height: isMobileSmall ?  110 : 120,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.only(left: 20),
-                      height: 120,
+                      height: isMobileSmall ?  110 : 120,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 220,
+                            width: isMobileSmall ? 200 : 220,
                             child: Text(
                               widget.ds['service'],
                               style: Theme.of(context)
@@ -228,6 +235,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                                   .headlineSmall!
                                   .apply(fontSizeDelta: -1),
                               maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Text(widget.ds['duration'],
@@ -249,6 +257,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
             ],
           ),
         ),
+
         /// -- Create condition if appointment status is "Approved" or "Cancelled" then display nothing
         bottomNavigationBar: widget.ds['status'] == 'Approved' ||
                 widget.ds['status'] == 'Cancelled'
@@ -303,8 +312,11 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                           );
                         },
                         child: Container(
-                          padding: const EdgeInsets.only(
-                              left: 75, right: 75, top: 25, bottom: 25),
+                          padding: EdgeInsets.only(
+                              left: 75,
+                              right: isMobileSmall ? 60 : 75,
+                              top: 25,
+                              bottom: 25),
                           child: Text(
                             'Cancel',
                             style: Theme.of(context)
@@ -322,8 +334,11 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                           Get.to(() => UpdateSelectDateScreen(ds: widget.ds));
                         },
                         child: Container(
-                          padding: const EdgeInsets.only(
-                              left: 60, right: 60, top: 25, bottom: 25),
+                          padding: EdgeInsets.only(
+                              left: isMobileSmall ? 40 : 60,
+                              right: 60,
+                              top: 25,
+                              bottom: 25),
                           child: Text(
                             'Reschedule',
                             style: Theme.of(context)

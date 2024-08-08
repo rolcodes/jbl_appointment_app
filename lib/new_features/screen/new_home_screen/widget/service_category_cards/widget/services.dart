@@ -114,32 +114,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
             )
           : content,
       backgroundColor: TColors.secondary,
-
-      /// -- Book an Appointment
-      // bottomNavigationBar: GestureDetector(
-      //   onTap: () => Get.to(() => const SelectDateScreen()),
-      //   child: Container(
-      //     height: 70,
-      //     decoration: BoxDecoration(
-      //         gradient: LinearGradient(
-      //             colors: [Colors.orange.shade800, TColors.primary])),
-      //     child: Center(
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           Text(
-      //             'Book an Appointment',
-      //             style: Theme.of(context)
-      //                 .textTheme
-      //                 .titleSmall!
-      //                 .apply(color: Colors.white),
-      //           ),
-      //           SizedBox(height: 10),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../services/shared_pref.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_utility.dart';
 import '../../../models/time_model.dart';
 
 class TimeItem extends StatefulWidget {
@@ -20,6 +21,8 @@ class _TimeItemState extends State<TimeItem> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return TextButton(
       style: TextButton.styleFrom(
           backgroundColor: Colors.grey.shade300,
@@ -33,7 +36,10 @@ class _TimeItemState extends State<TimeItem> {
       child: Center(
         child: Text(
           widget.selectTime.time,
-          style: Theme.of(context)
+          style: isMobileSmall ? Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .apply(color: Colors.black, fontSizeDelta: -2) : Theme.of(context)
               .textTheme
               .titleSmall!
               .apply(color: Colors.black),

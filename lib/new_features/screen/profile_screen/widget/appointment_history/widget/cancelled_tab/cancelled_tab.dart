@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -81,23 +80,22 @@ class _CancelledTabState extends State<CancelledTab> {
 
           /// if we have data, get all cancelled user appointments
           return snapshot.hasData
-              ? Container(
-            padding: EdgeInsets.only(top: 20),
-                child: ListView.separated(
-                    itemCount: snapshot.data.docs.length,
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      DocumentSnapshot ds = snapshot.data.docs[index];
+              ? ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: false,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
 
-                      return CancelledItem(
-                        ds: ds,
-                        onSelectedCancelledAppointment: () async {
-                          _selectCancelledAppointment(context, snapshot.data.docs[index]);
-                        },
-                      );
-                    }, separatorBuilder: (BuildContext context, int index) { return const SizedBox(height: 20,); },),
+                  return CancelledItem(
+                    ds: ds,
+                    onSelectedCancelledAppointment: () async {
+                      _selectCancelledAppointment(
+                          context, snapshot.data.docs[index]);
+                    },
+                  );
+                },
               )
               : Container();
         });

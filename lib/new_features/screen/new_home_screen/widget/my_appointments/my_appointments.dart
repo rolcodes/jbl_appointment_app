@@ -7,6 +7,7 @@ import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
 import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/popups/loaders.dart';
 import '../../../../new_navigation_menu.dart';
 import 'my_appointment_item.dart';
@@ -60,6 +61,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   }
 
   Widget userAppointments() {
+
     return StreamBuilder(
         stream: bookingStream,
         builder: (context, AsyncSnapshot snapshot) {

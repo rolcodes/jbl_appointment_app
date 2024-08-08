@@ -7,6 +7,7 @@ import '../../../../../common/widgets/images/t_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../features/shop/controllers/home_controller.dart';
+import '../../../../utils/device/device_utility.dart';
 
 class NewPromoSlider extends StatelessWidget {
   const NewPromoSlider({
@@ -20,6 +21,7 @@ class NewPromoSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
 
     return Column(
       children: [
@@ -32,7 +34,7 @@ class NewPromoSlider extends StatelessWidget {
             CarouselSlider(
               options: CarouselOptions(
                   clipBehavior: Clip.antiAlias,
-                  height: 235,
+                  height: isMobileSmall ? 222 : 235,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
                   autoPlayCurve: Curves.fastOutSlowIn,
@@ -53,7 +55,7 @@ class NewPromoSlider extends StatelessWidget {
 
             /// -- Indicators
             Positioned(
-              top: 220,
+              top: isMobileSmall ? 188 : 220,
               child: Obx(
                     () => Container(
                       width: MediaQuery.of(context).size.width,
