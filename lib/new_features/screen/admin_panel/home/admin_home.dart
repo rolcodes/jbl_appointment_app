@@ -86,96 +86,95 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                 valueColor: AlwaysStoppedAnimation<Color>(TColors.primary),
               ),
             )
-          : SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  /// -- Calendar
-                  Container(
-                    margin: EdgeInsets.only(top: 4),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    decoration: BoxDecoration(
-                        color: TColors.light,
-                        borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.4),
-                            offset: const Offset(0, 2),
-                            blurRadius: 20,
-                            spreadRadius: 1,
-                          )
-                        ]),
-
-                    /// -- Calendar widget
-                    child: CustomTableCalendar(
-                        focusedDay: _focusedDay,
-                        firstDay: _firstDay,
-                        lastDay: _lastDay),
-                  ),
-                  const SizedBox(height: 10),
-
-                  /// -- Upcoming appointment
-                  StreamBuilder(
-                    stream: upcomingAppointmentStream,
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (snapshot.data == null ||
-                          snapshot.data.docs.length == 0) {
-                        /// If no data in snapshots display nothing
-                        return const NoUpcomingAppointment();
-                      }
-
-                      return snapshot.hasData
-                          ? Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 8),
-                          child: ListView.builder(
-                            itemCount: 1,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              DocumentSnapshot ds =
-                              snapshot.data.docs[index];
-                              return AdminUpcomingAppointmentItem(
-                                ds: ds,
-                                onSelectedAUpcomingAppointment: () {
-                                  _selectedUpcomingAppointment(
-                                      context, snapshot.data.docs[index]);
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      )
-                          : Container();
-                    },
-                  ),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        Icon(Icons.message_outlined,
-                            size: 18, color: Colors.grey.shade700),
-                        SizedBox(width: 6),
-                        Text(
-                          'Notifications',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .apply(color: Colors.grey.shade700),
-                        ),
-                      ],
+          : SingleChildScrollView(
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 1.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    /// -- Calendar
+                    Container(
+                      margin: EdgeInsets.only(top: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      decoration: BoxDecoration(
+                          color: TColors.light,
+                          borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(30),
+                              bottomLeft: Radius.circular(30)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.4),
+                              offset: const Offset(0, 2),
+                              blurRadius: 20,
+                              spreadRadius: 1,
+                            )
+                          ]),
+            
+                      /// -- Calendar widget
+                      child: CustomTableCalendar(
+                          focusedDay: _focusedDay,
+                          firstDay: _firstDay,
+                          lastDay: _lastDay),
                     ),
-                  ),
+                    const SizedBox(height: 10),
+            
+                    /// -- Upcoming appointment
+                    StreamBuilder(
+                      stream: upcomingAppointmentStream,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.data == null ||
+                            snapshot.data.docs.length == 0) {
+                          /// If no data in snapshots display nothing
+                          return const NoUpcomingAppointment();
+                        }
+            
+                        return snapshot.hasData
+                            ? Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 8),
+                            child: ListView.builder(
+                              itemCount: 1,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                DocumentSnapshot ds =
+                                snapshot.data.docs[index];
+                                return AdminUpcomingAppointmentItem(
+                                  ds: ds,
+                                  onSelectedAUpcomingAppointment: () {
+                                    _selectedUpcomingAppointment(
+                                        context, snapshot.data.docs[index]);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                            : Container();
+                      },
+                    ),
 
-                  /// -- Notifications
-                  Expanded(
-                    child: Container(
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          Icon(Icons.message_outlined,
+                              size: 18, color: Colors.grey.shade700),
+                          SizedBox(width: 6),
+                          Text(
+                            'Notifications',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .apply(color: Colors.grey.shade700),
+                          ),
+                        ],
+                      ),
+                    ),
+                    /// -- Notifications
+                    Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: TColors.light,
@@ -202,11 +201,11 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                               style: Theme.of(context).textTheme.labelMedium),
                         ],
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
+          ),
       floatingActionButton: const AdminCustomChatButton(),
     );
   }
