@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/admin_panel/home/widget/admin_custom_drawer.dart';
@@ -9,6 +8,7 @@ import 'package:jbl/new_features/screen/admin_panel/home/widget/upcoming_appoint
 
 import '../../../../services/database.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_utility.dart';
 import '../../new_home_screen/widget/chat/custom_chat_button.dart';
 import '../widget/admin_chat/admin_custom_chat_button.dart';
 import '../widget/appbar/admin_custom_app_bar.dart';
@@ -64,6 +64,8 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: AdminCustomAppBar(
@@ -87,16 +89,19 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
               ),
             )
           : SingleChildScrollView(
-            child: SizedBox(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 1.2,
+                height: isMobileSmall
+                    ? MediaQuery.of(context).size.height / 1.2
+                    : MediaQuery.of(context).size.height / 1.32,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     /// -- Calendar
                     Container(
                       margin: EdgeInsets.only(top: 4),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       decoration: BoxDecoration(
                           color: TColors.light,
                           borderRadius: const BorderRadius.only(
@@ -110,7 +115,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                               spreadRadius: 1,
                             )
                           ]),
-            
+
                       /// -- Calendar widget
                       child: CustomTableCalendar(
                           focusedDay: _focusedDay,
@@ -118,7 +123,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                           lastDay: _lastDay),
                     ),
                     const SizedBox(height: 10),
-            
+
                     /// -- Upcoming appointment
                     StreamBuilder(
                       stream: upcomingAppointmentStream,
@@ -128,30 +133,31 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                           /// If no data in snapshots display nothing
                           return const NoUpcomingAppointment();
                         }
-            
+
                         return snapshot.hasData
                             ? Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 8),
-                            child: ListView.builder(
-                              itemCount: 1,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder:
-                                  (BuildContext context, int index) {
-                                DocumentSnapshot ds =
-                                snapshot.data.docs[index];
-                                return AdminUpcomingAppointmentItem(
-                                  ds: ds,
-                                  onSelectedAUpcomingAppointment: () {
-                                    _selectedUpcomingAppointment(
-                                        context, snapshot.data.docs[index]);
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        )
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  child: ListView.builder(
+                                    itemCount: 1,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      DocumentSnapshot ds =
+                                          snapshot.data.docs[index];
+                                      return AdminUpcomingAppointmentItem(
+                                        ds: ds,
+                                        onSelectedAUpcomingAppointment: () {
+                                          _selectedUpcomingAppointment(context,
+                                              snapshot.data.docs[index]);
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              )
                             : Container();
                       },
                     ),
@@ -173,6 +179,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                         ],
                       ),
                     ),
+
                     /// -- Notifications
                     Container(
                       width: double.infinity,
@@ -184,7 +191,6 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                       margin: EdgeInsets.all(20),
                       padding: EdgeInsets.all(20),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
@@ -196,6 +202,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                               )
                             ],
                           ),
+                          SizedBox(height: 8),
                           Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                               style: Theme.of(context).textTheme.labelMedium),
@@ -205,7 +212,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                   ],
                 ),
               ),
-          ),
+            ),
       floatingActionButton: const AdminCustomChatButton(),
     );
   }
