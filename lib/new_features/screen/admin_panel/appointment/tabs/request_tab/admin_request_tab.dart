@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -30,9 +29,7 @@ class _AdminRequestTabState extends State<AdminRequestTab> {
 
   getOnTheLoad() async {
     requestStream = await DatabaseMethods().getAdminRequestAppointments();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -46,7 +43,9 @@ class _AdminRequestTabState extends State<AdminRequestTab> {
     return StreamBuilder(
         stream: requestStream,
         builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null || snapshot.data.docs.length == 0) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.data == null || snapshot.data.docs.length == 0) {
             /// If no data in snapshots display no appointments
             return SizedBox(
               width: MediaQuery.of(context).size.width,

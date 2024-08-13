@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
 import '../../../../../../services/database.dart';
+import '../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/popups/loaders.dart';
 
@@ -21,7 +22,8 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
 
     return InkWell(
       onTap: onSelectedAllCompletedAppointment,
@@ -182,7 +184,11 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 14),
-                  width: isMobileSmall ? 252 : 280,
+                  width: isMobileSmall
+                      ? 252
+                      : isMobileMedium
+                      ? 260
+                      : 280,
                   height: 160,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../services/database.dart';
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/popups/loaders.dart';
 
@@ -20,7 +20,8 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
 
     return InkWell(
       onTap: onSelectedAllApprovedAppointment,
@@ -174,7 +175,11 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 14),
-                  width: isMobileSmall ? 252 : 280,
+                  width: isMobileSmall
+                      ? 252
+                      : isMobileMedium
+                          ? 260
+                          : 280,
                   height: 160,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,19 +195,25 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                 .bodySmall!
                                 .apply(color: Colors.black),
                           ),
-                          isMobileSmall ? Text(
-                            ds['telephone'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .apply(color: TColors.black, fontSizeDelta: -3),
-                          ) : Text(
-                            ds['telephone'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .apply(color: TColors.black, fontSizeDelta: -2),
-                          ),
+                          isMobileSmall
+                              ? Text(
+                                  ds['telephone'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .apply(
+                                          color: TColors.black,
+                                          fontSizeDelta: -3),
+                                )
+                              : Text(
+                                  ds['telephone'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .apply(
+                                          color: TColors.black,
+                                          fontSizeDelta: -2),
+                                ),
                         ],
                       ),
                       Row(
@@ -283,7 +294,11 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                               overlayColor: Colors.grey.withOpacity(0.5),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               padding: EdgeInsets.zero,
-                              minimumSize: isMobileSmall ? const Size(57, 28) : const Size(62, 28),
+                              minimumSize: isMobileSmall
+                                  ? const Size(57, 28)
+                                  : isMobileMedium
+                                      ? const Size(60, 28)
+                                      : const Size(62, 28),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 side: BorderSide(
@@ -322,7 +337,11 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                               overlayColor: Colors.grey.withOpacity(0.5),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               padding: EdgeInsets.zero,
-                              minimumSize: isMobileSmall ? const Size(57, 28) : const Size(62, 28),
+                              minimumSize: isMobileSmall
+                                  ? const Size(57, 28)
+                                  : isMobileMedium
+                                      ? const Size(60, 28)
+                                      : const Size(62, 28),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 side: BorderSide(
@@ -358,7 +377,11 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               backgroundColor: Colors.green,
                               padding: EdgeInsets.zero,
-                              minimumSize: isMobileSmall ? const Size(110, 28) : const Size(129, 28),
+                              minimumSize: isMobileSmall
+                                  ? const Size(110, 28)
+                                  : isMobileMedium
+                                      ? const Size(112, 28)
+                                      : const Size(129, 28),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(2),
                               ),
@@ -396,7 +419,7 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: ()  async {
+                                      onPressed: () async {
                                         Get.back();
 
                                         /// -- show snackbar
@@ -408,7 +431,7 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                                         /// -- update status [Completed]
                                         await DatabaseMethods()
                                             .updateAdminCompletedStatus(
-                                            ds['bookingId']);
+                                                ds['bookingId']);
                                       },
                                       style: TextButton.styleFrom(
                                           overlayColor: TColors.primary),

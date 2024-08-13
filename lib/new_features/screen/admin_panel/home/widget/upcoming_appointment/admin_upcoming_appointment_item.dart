@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jbl/utils/device/device_screen_ratio.dart';
 
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/device/device_utility.dart';
@@ -16,7 +17,9 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
+    final isMobileLarge = CustomScreen.isMobileLarge(context);
 
     return InkWell(
       onTap: onSelectedAUpcomingAppointment,
@@ -83,7 +86,7 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 10),
-                  width: isMobileSmall ? 242 : 280,
+                  width: isMobileSmall ? 242 : isMobileMedium ? 258 : isMobileLarge ? 270 : 280,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +96,7 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: isMobileSmall ? 160 : 190,
+                            width: isMobileSmall ? 160 : isMobileMedium ? 175 : 190,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

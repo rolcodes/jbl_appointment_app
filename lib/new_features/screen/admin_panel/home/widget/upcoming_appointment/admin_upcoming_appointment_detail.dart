@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
@@ -110,6 +111,21 @@ class _AdminUpcomingAppointmentDetailState
                           .titleSmall!
                           .apply(fontWeightDelta: 2)),
                   SizedBox(height: 5),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Status:",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      Text(
+                        widget.ds['status'],
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                          fontSizeDelta: -2,
+                          color: CupertinoColors.activeBlue,
+                        ),
+                      ),
+                    ],
+                  ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

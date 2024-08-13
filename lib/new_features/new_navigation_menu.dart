@@ -25,7 +25,7 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screenList.elementAt(currentPageIndex),
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10),
         child: NavigationBar(
           height: 50,

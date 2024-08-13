@@ -17,18 +17,7 @@ class AdminAppointmentTabs extends StatefulWidget {
 }
 
 class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
-  late bool _isLoading;
 
-  @override
-  void initState() {
-    _isLoading = true;
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +38,7 @@ class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
           ),
           isCenterTitle: true,
         ),
-        body: _isLoading
-            ? const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(TColors.primary),
-                ),
-              )
-            : Column(
+        body: Column(
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width,

@@ -12,10 +12,12 @@ class AdminApprovedAppointmentDetail extends StatefulWidget {
   final DocumentSnapshot<Object?> ds;
 
   @override
-  State<AdminApprovedAppointmentDetail> createState() => _AdminApprovedAppointmentDetailState();
+  State<AdminApprovedAppointmentDetail> createState() =>
+      _AdminApprovedAppointmentDetailState();
 }
 
-class _AdminApprovedAppointmentDetailState extends State<AdminApprovedAppointmentDetail> {
+class _AdminApprovedAppointmentDetailState
+    extends State<AdminApprovedAppointmentDetail> {
   @override
   Widget build(BuildContext context) {
     final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
@@ -68,9 +70,9 @@ class _AdminApprovedAppointmentDetailState extends State<AdminApprovedAppointmen
                           widget.ds['branchTitle'],
                           style: isMobileSmall
                               ? Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .apply(fontSizeDelta: -1)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .apply(fontSizeDelta: -1)
                               : Theme.of(context).textTheme.headlineSmall,
                           maxLines: 2,
                         ),
@@ -84,7 +86,6 @@ class _AdminApprovedAppointmentDetailState extends State<AdminApprovedAppointmen
                           children: [
                             Text(widget.ds['branchContact'],
                                 style: Theme.of(context).textTheme.bodyMedium),
-
                           ],
                         ),
                       ],
@@ -118,9 +119,9 @@ class _AdminApprovedAppointmentDetailState extends State<AdminApprovedAppointmen
                       Text(
                         widget.ds['status'],
                         style: Theme.of(context).textTheme.bodyMedium!.apply(
-                          fontSizeDelta: -2,
-                          color: CupertinoColors.activeBlue,
-                        ),
+                              fontSizeDelta: -2,
+                              color: CupertinoColors.activeBlue,
+                            ),
                       ),
                     ],
                   ),
@@ -143,8 +144,8 @@ class _AdminApprovedAppointmentDetailState extends State<AdminApprovedAppointmen
                           style: Theme.of(context).textTheme.bodyMedium),
                       Text('${widget.ds['time']}, ${widget.ds["date"]}',
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
-                            color: Colors.pinkAccent.shade700,
-                          )),
+                                color: Colors.pinkAccent.shade700,
+                              )),
                     ],
                   ),
 
@@ -229,5 +230,6 @@ class _AdminApprovedAppointmentDetailState extends State<AdminApprovedAppointmen
           ],
         ),
       ),
-    );  }
+    );
+  }
 }

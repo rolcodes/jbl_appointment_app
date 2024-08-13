@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../services/database.dart';
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/popups/loaders.dart';
 
@@ -19,7 +20,8 @@ class AdminRequestAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
 
     return InkWell(
       onTap: onSelectedAllRequestAppointment,
@@ -112,7 +114,11 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 14),
-                  width: isMobileSmall ? 252 : 280,
+                  width: isMobileSmall
+                      ? 252
+                      : isMobileMedium
+                          ? 260
+                          : 280,
                   height: 160,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,19 +134,25 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                                 .bodySmall!
                                 .apply(color: Colors.black),
                           ),
-                          isMobileSmall ? Text(
-                            ds['telephone'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .apply(color: TColors.black, fontSizeDelta: -3),
-                          ) : Text(
-                            ds['telephone'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .apply(color: TColors.black, fontSizeDelta: -2),
-                          ),
+                          isMobileSmall
+                              ? Text(
+                                  ds['telephone'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .apply(
+                                          color: TColors.black,
+                                          fontSizeDelta: -3),
+                                )
+                              : Text(
+                                  ds['telephone'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .apply(
+                                          color: TColors.black,
+                                          fontSizeDelta: -2),
+                                ),
                         ],
                       ),
                       Row(
@@ -221,7 +233,11 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                               overlayColor: Colors.grey.withOpacity(0.5),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               padding: EdgeInsets.zero,
-                              minimumSize: isMobileSmall ? const Size(115, 28) : const Size(129, 28),
+                              minimumSize: isMobileSmall
+                                  ? const Size(115, 28)
+                                  : isMobileMedium
+                                      ? const Size(119, 28)
+                                      : const Size(129, 28),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 side: BorderSide(
@@ -261,7 +277,11 @@ class AdminRequestAppointmentItem extends StatelessWidget {
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               backgroundColor: Colors.blue,
                               padding: EdgeInsets.zero,
-                              minimumSize: isMobileSmall ? const Size(115, 28) : const Size(129, 28),
+                              minimumSize: isMobileSmall
+                                  ? const Size(115, 28)
+                                  : isMobileMedium
+                                  ? const Size(119, 28)
+                                  : const Size(129, 28),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(2),
                               ),
