@@ -71,6 +71,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                     itemCount: snapshot.data.docs.length,
                     scrollDirection: Axis.vertical,
                     padding: EdgeInsets.zero,
+                    physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       DocumentSnapshot ds = snapshot.data.docs[index];
@@ -146,15 +147,17 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         isCenterTitle: true,
       ),
       backgroundColor: TColors.secondary,
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              child: userAppointments(),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: userAppointments(),
+              ),
+            ],
+          ),
         ),
       ),
     );

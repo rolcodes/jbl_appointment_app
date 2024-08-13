@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jbl/utils/device/device_utility.dart';
 
 import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/device/device_screen_ratio.dart';
 
 class MyAppointmentItem extends StatelessWidget {
   const MyAppointmentItem({
@@ -16,7 +17,8 @@ class MyAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
 
     return Material(
         elevation: 3,
@@ -104,7 +106,7 @@ class MyAppointmentItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 12),
                       child: SizedBox(
-                        width: isMobileSmall ? 192 : 220,
+                        width: isMobileSmall ? 192 : isMobileMedium ? 200 : 220,
                         height: 110,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

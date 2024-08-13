@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         /// SplashScreen() to begin from the start
-        home: const NewAdminNavigationMenu(),
+        home: const NewNavigationMenu(),
       ),
     );
   }

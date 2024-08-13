@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../../utils/device/device_utility.dart';
 
 class CompletedItem extends StatelessWidget {
@@ -16,7 +17,8 @@ class CompletedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
 
     /// -- Create condition to display only cancelled appointments in Cancelled Tabs
     return ds['status'] == 'Waiting for approval' ||
@@ -88,7 +90,7 @@ class CompletedItem extends StatelessWidget {
                       )),
                   Container(
                     padding: EdgeInsets.only(left: 12),
-                    width: isMobileSmall ? 210 : 240,
+                    width: isMobileSmall ? 210 : isMobileMedium ? 220 : 240,
                     height: isMobileSmall ? 100 : 110,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

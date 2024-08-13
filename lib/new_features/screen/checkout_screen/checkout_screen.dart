@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:jbl/utils/device/device_utility.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 
@@ -12,6 +13,7 @@ import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../services/database.dart';
 import '../../../services/shared_pref.dart';
 import '../../../utils/constants/colors.dart';
+import '../../../utils/device/device_screen_ratio.dart';
 import '../../../utils/popups/loaders.dart';
 import '../../models/branch_model.dart';
 import '../../models/calendar_model.dart';
@@ -111,6 +113,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         .format(Provider.of<CalendarModel>(context, listen: true)
             .firstDate); //.add_yMd()
 
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
+
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
@@ -125,10 +130,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         isCenterTitle: true,
       ),
       body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 1.11,
+          height: isMobileSmall
+              ? TDeviceUtils.getScreenHeight() / 1.12
+              : TDeviceUtils.getScreenHeight() / 1.11,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: TColors.primary.withOpacity(0.5),
@@ -155,25 +161,52 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ClipOval(
                           child: Image.network(
                             image!,
-                            width: 90,
-                            height: 90,
+                            width: isMobileSmall
+                                ? 75
+                                : isMobileMedium
+                                    ? 80
+                                    : 90,
+                            height: isMobileSmall
+                                ? 75
+                                : isMobileMedium
+                                    ? 80
+                                    : 90,
                             fit: BoxFit.cover,
                           ),
                         ),
                       Container(
                         padding: const EdgeInsets.only(left: 20),
-                        height: 90,
+                        height: isMobileSmall
+                            ? 75
+                            : isMobileMedium
+                                ? 80
+                                : 90,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (title != null)
                               Expanded(
                                 child: SizedBox(
-                                  width: 200,
+                                  width: isMobileSmall
+                                      ? 170
+                                      : isMobileMedium
+                                          ? 190
+                                          : 200,
                                   child: Text(
                                     title!,
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
+                                    style: isMobileSmall
+                                        ? Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .apply(fontSizeDelta: -2)
+                                        : isMobileMedium
+                                            ? Theme.of(context)
+                                                .textTheme
+                                                .titleLarge!
+                                                .apply(fontSizeDelta: -1)
+                                            : Theme.of(context)
+                                                .textTheme
+                                                .titleLarge,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                   ),
@@ -194,7 +227,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                 ),
                 const Divider(height: 10, color: TColors.primary),
-                const SizedBox(height: 20),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 10
+                        : isMobileMedium
+                            ? 15
+                            : 20),
                 Row(
                   children: [
                     Expanded(
@@ -254,9 +292,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 10
+                        : isMobileMedium
+                            ? 15
+                            : 20),
                 const Divider(height: 10, color: TColors.primary),
-                const SizedBox(height: 10),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 5
+                        : isMobileMedium
+                            ? 8
+                            : 10),
                 Text(
                   'Your choosen staff',
                   style: Theme.of(context)
@@ -264,9 +312,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       .titleSmall!
                       .apply(color: TColors.primary, fontSizeDelta: 2),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 5
+                        : isMobileMedium
+                            ? 8
+                            : 10),
                 Container(
-                  padding: const EdgeInsets.only(left: 40),
+                  padding: EdgeInsets.only(
+                      left: isMobileSmall
+                          ? 20
+                          : isMobileMedium
+                              ? 25
+                              : 40),
                   child: Row(
                     children: [
                       ClipOval(
@@ -277,23 +335,33 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Column(
-                        children: [
-                          Text(widget.staff.staffName,
-                              style: Theme.of(context).textTheme.titleMedium),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 40),
-                            child: TRatingBarIndicator(
-                                rating: widget.staff.rating),
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsets.only(left: 40),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(" ${widget.staff.staffName}",
+                                style: Theme.of(context).textTheme.titleMedium),
+                            TRatingBarIndicator(rating: widget.staff.rating),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 10
+                        : isMobileMedium
+                            ? 15
+                            : 20),
                 const Divider(height: 10, color: TColors.primary),
-                const SizedBox(height: 10),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 5
+                        : isMobileMedium
+                            ? 8
+                            : 10),
                 Text(
                   'Branch',
                   style: Theme.of(context)
@@ -301,9 +369,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       .titleSmall!
                       .apply(color: TColors.primary, fontSizeDelta: 2),
                 ),
-                const SizedBox(height: 10),
+                 SizedBox(height: isMobileSmall ? 0 : 10),
                 Container(
-                  padding: const EdgeInsets.only(left: 40),
+                  padding: EdgeInsets.only(
+                      left: isMobileSmall
+                          ? 20
+                          : isMobileMedium
+                              ? 25
+                              : 40),
                   child: Row(
                     children: [
                       Column(
@@ -327,11 +400,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 33),
                               child: SizedBox(
-                                width: 200,
+                                width: isMobileSmall ? 180 : 200,
                                 child: Text(
                                   branch[0].title,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
+                                  style: isMobileSmall
+                                      ? Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .apply(fontSizeDelta: -1)
+                                      : Theme.of(context).textTheme.titleMedium,
                                   maxLines: 2,
                                 ),
                               ),
@@ -342,10 +419,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     color: TColors.primary),
                                 const SizedBox(width: 10),
                                 SizedBox(
-                                    width: 200,
+                                    width: isMobileSmall ? 180 : 200,
                                     child: Text(
                                       branch[0].location,
-                                      style: Theme.of(context)
+                                      style: isMobileSmall ? Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!.apply(fontSizeDelta: -2) : Theme.of(context)
                                           .textTheme
                                           .bodyMedium,
                                       maxLines: 4,
@@ -358,7 +437,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 const Icon(Icons.call, color: TColors.primary),
                                 const SizedBox(width: 10),
                                 SizedBox(
-                                  width: 200,
+                                  width: isMobileSmall ? 180 : 200,
                                   child: Text(
                                     branch[0].contact,
                                     style:
@@ -375,9 +454,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 5
+                        : isMobileMedium
+                            ? 8
+                            : 10),
                 const Divider(height: 10, color: TColors.primary),
-                const SizedBox(height: 20),
+                SizedBox(
+                    height: isMobileSmall
+                        ? 10
+                        : isMobileMedium
+                            ? 15
+                            : 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -416,7 +505,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(
+                          height: isMobileSmall
+                              ? 304
+                              : isMobileMedium
+                                  ? 18
+                                  : 25),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -427,7 +521,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 style: Theme.of(context).textTheme.titleLarge)
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(
+                          height: isMobileSmall
+                              ? 15
+                              : isMobileMedium
+                                  ? 20
+                                  : 30),
                     ],
                   ),
                 ),

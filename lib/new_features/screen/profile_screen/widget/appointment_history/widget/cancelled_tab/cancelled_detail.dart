@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/device/device_screen_ratio.dart';
 
 class CancelledAppointmentDetail extends StatefulWidget {
   const CancelledAppointmentDetail({super.key, required this.ds});
@@ -18,6 +19,9 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = CustomScreen.isMobileSmall(context);
+    final isMobileMedium = CustomScreen.isMobileMedium(context);
+
     return Scaffold(
       appBar: CustomAppBar(
         isEdit: false,
@@ -27,7 +31,7 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
         isNotification: false,
         isCenterTitle: true,
         title: Text(
-          'Cancelled Appointment',
+          'Appointment',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -49,22 +53,30 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                       ClipOval(
                         child: Image.network(
                           widget.ds['branchImage'],
-                          height: 100,
-                          width: 100,
+                          height: isMobileSmall ? 90 : 100,
+                          width: isMobileSmall ? 90 : 100,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 260,
+                  Container(
+                    width: isMobileSmall ? 240 : 260,
+                    padding: isMobileMedium
+                        ? const EdgeInsets.only(left: 8)
+                        : const EdgeInsets.only(left: 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           widget.ds['branchTitle'],
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: isMobileSmall
+                              ? Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .apply(fontSizeDelta: -1)
+                              : Theme.of(context).textTheme.headlineSmall,
                           maxLines: 2,
                         ),
                         Text(
@@ -118,7 +130,7 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                           .textTheme
                           .titleSmall!
                           .apply(fontWeightDelta: 2)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -183,19 +195,19 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       widget.ds['image'],
-                      width: 120,
-                      height: 120,
+                      width: isMobileSmall ? 110 : 120,
+                      height: isMobileSmall ? 110 : 120,
                       fit: BoxFit.cover,
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 20),
-                    height: 120,
+                    height: isMobileSmall ? 110 : 120,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 220,
+                          width: isMobileSmall ? 200 : 220,
                           child: Text(
                             widget.ds['service'],
                             style: Theme.of(context)
@@ -203,6 +215,7 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                                 .headlineSmall!
                                 .apply(fontSizeDelta: -1),
                             maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         Text(widget.ds['duration'],
@@ -223,6 +236,7 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
           ],
         ),
       ),
+
     );
   }
 }
