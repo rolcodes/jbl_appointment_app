@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
 import '../../../../../../services/database.dart';
+import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/popups/loaders.dart';
 
 class AdminCancelledAppointmentItem extends StatelessWidget {
@@ -19,6 +20,8 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return InkWell(
       onTap: onSelectedAllCancelledAppointment,
       child: Container(
@@ -70,8 +73,8 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 110,
-                        width: 110,
+                        height: isMobileSmall ? 100 : 110,
+                        width: isMobileSmall ? 100 : 110,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
@@ -82,8 +85,8 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                           child: Image.network(
                             ds["image"],
                             fit: BoxFit.cover,
-                            width: 110,
-                            height: 110,
+                            width: isMobileSmall ? 100 : 110,
+                            height: isMobileSmall ? 100 : 110,
                           ),
                         ),
                       ),
@@ -183,7 +186,7 @@ class AdminCancelledAppointmentItem extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 14),
-                  width: 280,
+                  width: isMobileSmall ? 252 : 280,
                   height: 160,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

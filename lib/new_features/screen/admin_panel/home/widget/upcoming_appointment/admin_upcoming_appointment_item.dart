@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/device/device_utility.dart';
 
 class AdminUpcomingAppointmentItem extends StatelessWidget {
   const AdminUpcomingAppointmentItem({
     super.key,
-    required this.ds, required this.onSelectedAUpcomingAppointment,
+    required this.ds,
+    required this.onSelectedAUpcomingAppointment,
   });
 
   final DocumentSnapshot<Object?> ds;
@@ -14,10 +16,11 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return InkWell(
       onTap: onSelectedAUpcomingAppointment,
-      splashColor:
-      Colors.grey.shade300.withOpacity(0.2),
+      splashColor: Colors.grey.shade300.withOpacity(0.2),
       borderRadius: BorderRadius.circular(20),
       child: Ink(
         width: double.infinity,
@@ -41,46 +44,35 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
-          crossAxisAlignment:
-          CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Upcoming Appointment',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
-                  .apply(
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                        color: Colors.black
-                            .withOpacity(0.2),
-                        offset: const Offset(0, 1),
-                        blurRadius: 10)
-                  ]),
+                  .apply(color: Colors.white, shadows: [
+                Shadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(0, 1),
+                    blurRadius: 10)
+              ]),
             ),
             const SizedBox(height: 10),
             Row(
-              mainAxisAlignment:
-              MainAxisAlignment.start,
-              crossAxisAlignment:
-              CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black
-                              .withOpacity(0.2),
-                          offset: const Offset(0, 1),
-                          blurRadius: 4,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(10)
-                  ),
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      offset: const Offset(0, 1),
+                      blurRadius: 4,
+                    )
+                  ], borderRadius: BorderRadius.circular(10)),
                   child: ClipRRect(
-                    borderRadius:
-                    BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                       ds["image"],
                       fit: BoxFit.cover,
@@ -90,86 +82,104 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(
-                      left: 10),
-                  width: 280,
+                  padding: const EdgeInsets.only(left: 10),
+                  width: isMobileSmall ? 242 : 280,
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment
-                        .spaceBetween,
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                        crossAxisAlignment:
-                        CrossAxisAlignment
-                            .start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 190,
+                            width: isMobileSmall ? 160 : 190,
                             child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  ds['service'],
-                                  style: Theme.of(
-                                      context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .apply(
-                                      color: Colors
-                                          .white),
-                                ),
-                                Text(
-                                  ds['price'],
-                                  style: Theme.of(
-                                      context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .apply(
-                                      color: Colors
-                                          .white),
-                                ),
+                                isMobileSmall
+                                    ? Text(
+                                        ds['service'],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .apply(
+                                                color: Colors.white,
+                                                fontSizeDelta: -2),
+                                      )
+                                    : Text(
+                                        ds['service'],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .apply(color: Colors.white),
+                                      ),
+                                isMobileSmall
+                                    ? Text(
+                                        ds['price'],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .apply(color: Colors.white,
+                                        fontSizeDelta: -2),
+                                      )
+                                    : Text(
+                                        ds['price'],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .apply(color: Colors.white),
+                                      ),
                               ],
                             ),
                           ),
-                          Text(
+                          isMobileSmall ? Text(
                             "Booking ID: ${ds['bookingId']}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .apply(
-                                color: Colors
-                                    .white),
+                                .apply(color: Colors.white,
+                                fontSizeDelta: -2
+                            ),
+                          ) : Text(
+                            "Booking ID: ${ds['bookingId']}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .apply(color: Colors.white),
                           ),
                         ],
                       ),
                       Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
+                          isMobileSmall ? Text(
                             ds['date'],
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!
-                                .apply(
-                                color: Colors
-                                    .white),
+                                .apply(color: Colors.white,
+                              fontSizeDelta: -2
+                            ),
+                          ) : Text(
+                            ds['date'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .apply(color: Colors.white),
                           ),
-                          Text(
+                          isMobileSmall ? Text(
                             ds['time'],
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!
-                                .apply(
-                                color: Colors
-                                    .white),
+                                .apply(color: Colors.white, fontSizeDelta: -2),
+                          ) : Text(
+                            ds['time'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .apply(color: Colors.white),
                           ),
                         ],
                       )

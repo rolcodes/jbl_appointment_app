@@ -9,14 +9,14 @@ import '../../../../../utils/constants/colors.dart';
 import '../widget/admin_chat/admin_custom_chat_button.dart';
 import '../widget/appbar/admin_custom_app_bar.dart';
 
-class AdminPanelHomeScreen extends StatefulWidget {
-  const AdminPanelHomeScreen({super.key});
+class AdminAppointmentTabs extends StatefulWidget {
+  const AdminAppointmentTabs({super.key});
 
   @override
-  State<AdminPanelHomeScreen> createState() => _AdminPanelHomeScreenState();
+  State<AdminAppointmentTabs> createState() => _AdminAppointmentTabsState();
 }
 
-class _AdminPanelHomeScreenState extends State<AdminPanelHomeScreen> {
+class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
   late bool _isLoading;
 
   @override

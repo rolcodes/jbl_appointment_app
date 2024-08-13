@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
-import 'appointment/admin_panel_appointments.dart';
+import 'appointment/admin_appointment_tabs.dart';
 import 'home/admin_home.dart';
 import 'home/widget/admin_custom_drawer.dart';
 
@@ -17,7 +17,7 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
   int currentPageIndex = 0;
   List screenList = [
     const AdminPanelHome(),
-    const AdminPanelHomeScreen(),
+    const AdminAppointmentTabs(),
   ];
 
   @override

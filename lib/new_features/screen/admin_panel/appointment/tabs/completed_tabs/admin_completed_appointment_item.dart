@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
 import '../../../../../../services/database.dart';
+import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/popups/loaders.dart';
 
 class AdminCompletedAppointmentItem extends StatelessWidget {
@@ -20,6 +21,8 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return InkWell(
       onTap: onSelectedAllCompletedAppointment,
       child: Container(
@@ -71,8 +74,8 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 110,
-                        width: 110,
+                        height: isMobileSmall ? 100 : 110,
+                        width: isMobileSmall ? 100 : 110,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
@@ -83,8 +86,8 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                           child: Image.network(
                             ds["image"],
                             fit: BoxFit.cover,
-                            width: 110,
-                            height: 110,
+                            width: isMobileSmall ? 100 : 110,
+                            height: isMobileSmall ? 100 : 110,
                           ),
                         ),
                       ),
@@ -179,7 +182,7 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 14),
-                  width: 280,
+                  width: isMobileSmall ? 252 : 280,
                   height: 160,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,7 +198,13 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                                 .bodySmall!
                                 .apply(color: Colors.black),
                           ),
-                          Text(
+                          isMobileSmall ? Text(
+                            ds['telephone'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .apply(color: TColors.black, fontSizeDelta: -3),
+                          ) : Text(
                             ds['telephone'],
                             style: Theme.of(context)
                                 .textTheme

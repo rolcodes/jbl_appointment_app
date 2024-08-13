@@ -93,7 +93,7 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
                 width: MediaQuery.of(context).size.width,
                 height: isMobileSmall
                     ? MediaQuery.of(context).size.height / 1.2
-                    : MediaQuery.of(context).size.height / 1.32,
+                    : MediaQuery.of(context).size.height / 1.3,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

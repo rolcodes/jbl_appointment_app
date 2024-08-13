@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/popups/loaders.dart';
 import '../../../landing_screen/landing_screen.dart';
 import '../../../landing_screen/page_views/registration_form/widget/privacy_policy.dart';
@@ -12,6 +13,8 @@ class AdminCustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -77,7 +80,7 @@ class AdminCustomDrawer extends StatelessWidget {
             ),
 
             Expanded(
-              flex:6,
+              flex: isMobileSmall ? 5 : 6,
               child: ListView(
                 padding: const EdgeInsets.all(0),
                 physics: const NeverScrollableScrollPhysics(),
