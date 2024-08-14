@@ -4,10 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jbl/new_features/new_navigation_menu.dart';
-import 'package:jbl/new_features/screen/admin_panel/admin_navigation_menu.dart';
-import 'package:jbl/new_features/screen/landing_screen/landing_screen.dart';
-import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
-import 'package:jbl/splash_screen.dart';
+
 import 'package:jbl/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
 

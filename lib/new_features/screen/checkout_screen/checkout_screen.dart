@@ -129,418 +129,466 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Text('Checkout', style: Theme.of(context).textTheme.headlineSmall),
         isCenterTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: isMobileSmall
-              ? TDeviceUtils.getScreenHeight() / 1.12
-              : TDeviceUtils.getScreenHeight() / 1.11,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: TColors.primary.withOpacity(0.5),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-                color: TColors.light,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                      spreadRadius: 2)
-                ]),
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      if (image != null)
-                        ClipOval(
-                          child: Image.network(
-                            image!,
-                            width: isMobileSmall
-                                ? 75
-                                : isMobileMedium
-                                    ? 80
-                                    : 90,
-                            height: isMobileSmall
-                                ? 75
-                                : isMobileMedium
-                                    ? 80
-                                    : 90,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20),
+      body: FutureBuilder(
+          future: DatabaseMethods().readUser(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final user = snapshot.data;
+
+              return user == null
+                  ? Container()
+                  : SingleChildScrollView(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
                         height: isMobileSmall
-                            ? 75
-                            : isMobileMedium
-                                ? 80
-                                : 90,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (title != null)
-                              Expanded(
-                                child: SizedBox(
-                                  width: isMobileSmall
-                                      ? 170
-                                      : isMobileMedium
-                                          ? 190
-                                          : 200,
-                                  child: Text(
-                                    title!,
-                                    style: isMobileSmall
-                                        ? Theme.of(context)
-                                            .textTheme
-                                            .titleLarge!
-                                            .apply(fontSizeDelta: -2)
-                                        : isMobileMedium
-                                            ? Theme.of(context)
-                                                .textTheme
-                                                .titleLarge!
-                                                .apply(fontSizeDelta: -1)
-                                            : Theme.of(context)
-                                                .textTheme
-                                                .titleLarge,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                              ),
-                            if (duration != null)
-                              Text(duration!,
-                                  style:
-                                      Theme.of(context).textTheme.titleSmall),
-                            if (price != null)
-                              Text(price!,
-                                  style:
-                                      Theme.of(context).textTheme.titleSmall),
-                          ],
+                            ? TDeviceUtils.getScreenHeight() / 1.12
+                            : TDeviceUtils.getScreenHeight() / 1.11,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: TColors.primary.withOpacity(0.5),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(height: 10, color: TColors.primary),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 10
-                        : isMobileMedium
-                            ? 15
-                            : 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          /// -- Date
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: TColors.primary,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              'Date',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .apply(color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            pickedDate.text,
-                            style: Theme.of(context).textTheme.titleLarge,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          /// -- Time
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: TColors.primary,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              'Time',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .apply(color: Colors.white),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          if (time != null)
-                            Text(time!,
-                                style: Theme.of(context).textTheme.titleLarge),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 10
-                        : isMobileMedium
-                            ? 15
-                            : 20),
-                const Divider(height: 10, color: TColors.primary),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 5
-                        : isMobileMedium
-                            ? 8
-                            : 10),
-                Text(
-                  'Your choosen staff',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .apply(color: TColors.primary, fontSizeDelta: 2),
-                ),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 5
-                        : isMobileMedium
-                            ? 8
-                            : 10),
-                Container(
-                  padding: EdgeInsets.only(
-                      left: isMobileSmall
-                          ? 20
-                          : isMobileMedium
-                              ? 25
-                              : 40),
-                  child: Row(
-                    children: [
-                      ClipOval(
-                        child: Image.network(
-                          widget.staff.image,
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 40),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(" ${widget.staff.staffName}",
-                                style: Theme.of(context).textTheme.titleMedium),
-                            TRatingBarIndicator(rating: widget.staff.rating),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 10
-                        : isMobileMedium
-                            ? 15
-                            : 20),
-                const Divider(height: 10, color: TColors.primary),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 5
-                        : isMobileMedium
-                            ? 8
-                            : 10),
-                Text(
-                  'Branch',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .apply(color: TColors.primary, fontSizeDelta: 2),
-                ),
-                 SizedBox(height: isMobileSmall ? 0 : 10),
-                Container(
-                  padding: EdgeInsets.only(
-                      left: isMobileSmall
-                          ? 20
-                          : isMobileMedium
-                              ? 25
-                              : 40),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          ClipOval(
-                            child: Image.network(
-                              branch[0].image,
-                              width: 70,
-                              height: 70,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(height: 55),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 33),
-                              child: SizedBox(
-                                width: isMobileSmall ? 180 : 200,
-                                child: Text(
-                                  branch[0].title,
-                                  style: isMobileSmall
-                                      ? Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .apply(fontSizeDelta: -1)
-                                      : Theme.of(context).textTheme.titleMedium,
-                                  maxLines: 2,
-                                ),
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.location_on,
-                                    color: TColors.primary),
-                                const SizedBox(width: 10),
-                                SizedBox(
-                                    width: isMobileSmall ? 180 : 200,
-                                    child: Text(
-                                      branch[0].location,
-                                      style: isMobileSmall ? Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!.apply(fontSizeDelta: -2) : Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                      maxLines: 4,
-                                      overflow: TextOverflow.ellipsis,
-                                    ))
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.call, color: TColors.primary),
-                                const SizedBox(width: 10),
-                                SizedBox(
-                                  width: isMobileSmall ? 180 : 200,
-                                  child: Text(
-                                    branch[0].contact,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 5
-                        : isMobileMedium
-                            ? 8
-                            : 10),
-                const Divider(height: 10, color: TColors.primary),
-                SizedBox(
-                    height: isMobileSmall
-                        ? 10
-                        : isMobileMedium
-                            ? 15
-                            : 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: TColors.light,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 5),
+                                    spreadRadius: 2)
+                              ]),
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10),
+                          child: Column(
                             children: [
-                              const Icon(Icons.monetization_on_outlined,
-                                  color: TColors.primary),
-                              const SizedBox(width: 5),
-                              Text(
-                                'JBL Deals',
-                                style: Theme.of(context).textTheme.titleMedium,
+                              Container(
+                                padding: const EdgeInsets.all(20),
+                                child: Row(
+                                  children: [
+                                    if (image != null)
+                                      ClipOval(
+                                        child: Image.network(
+                                          image!,
+                                          width: isMobileSmall
+                                              ? 75
+                                              : isMobileMedium
+                                                  ? 80
+                                                  : 90,
+                                          height: isMobileSmall
+                                              ? 75
+                                              : isMobileMedium
+                                                  ? 80
+                                                  : 90,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    Container(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      height: isMobileSmall
+                                          ? 75
+                                          : isMobileMedium
+                                              ? 80
+                                              : 90,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          if (title != null)
+                                            Expanded(
+                                              child: SizedBox(
+                                                width: isMobileSmall
+                                                    ? 170
+                                                    : isMobileMedium
+                                                        ? 190
+                                                        : 200,
+                                                child: Text(
+                                                  title!,
+                                                  style: isMobileSmall
+                                                      ? Theme.of(context)
+                                                          .textTheme
+                                                          .titleLarge!
+                                                          .apply(
+                                                              fontSizeDelta: -2)
+                                                      : isMobileMedium
+                                                          ? Theme.of(context)
+                                                              .textTheme
+                                                              .titleLarge!
+                                                              .apply(
+                                                                  fontSizeDelta:
+                                                                      -1)
+                                                          : Theme.of(context)
+                                                              .textTheme
+                                                              .titleLarge,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                ),
+                                              ),
+                                            ),
+                                          if (duration != null)
+                                            Text(duration!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall),
+                                          if (price != null)
+                                            Text(price!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shadowColor: Colors.transparent,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              minimumSize: const Size(50, 30),
-                            ),
-                            child: Text(
-                              'Apply Deals',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .apply(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                          height: isMobileSmall
-                              ? 304
-                              : isMobileMedium
-                                  ? 18
-                                  : 25),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Total Fee: ',
-                              style: Theme.of(context).textTheme.titleLarge),
-                          if (price != null)
-                            Text(price!,
-                                style: Theme.of(context).textTheme.titleLarge)
-                        ],
-                      ),
-                      SizedBox(
-                          height: isMobileSmall
-                              ? 15
-                              : isMobileMedium
-                                  ? 20
-                                  : 30),
-                    ],
-                  ),
-                ),
+                              const Divider(height: 10, color: TColors.primary),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 10
+                                      : isMobileMedium
+                                          ? 15
+                                          : 20),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        /// -- Date
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: TColors.primary,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Text(
+                                            'Date',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall!
+                                                .apply(color: Colors.white),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          pickedDate.text,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        /// -- Time
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: TColors.primary,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Text(
+                                            'Time',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall!
+                                                .apply(color: Colors.white),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        if (time != null)
+                                          Text(time!,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 10
+                                      : isMobileMedium
+                                          ? 15
+                                          : 20),
+                              const Divider(height: 10, color: TColors.primary),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 5
+                                      : isMobileMedium
+                                          ? 8
+                                          : 10),
+                              Text(
+                                'Your choosen staff',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .apply(
+                                        color: TColors.primary,
+                                        fontSizeDelta: 2),
+                              ),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 5
+                                      : isMobileMedium
+                                          ? 8
+                                          : 10),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: isMobileSmall
+                                        ? 20
+                                        : isMobileMedium
+                                            ? 25
+                                            : 40),
+                                child: Row(
+                                  children: [
+                                    ClipOval(
+                                      child: Image.network(
+                                        widget.staff.image,
+                                        width: 70,
+                                        height: 70,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 40),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(" ${widget.staff.staffName}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium),
+                                          TRatingBarIndicator(
+                                              rating: widget.staff.rating),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 10
+                                      : isMobileMedium
+                                          ? 15
+                                          : 20),
+                              const Divider(height: 10, color: TColors.primary),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 5
+                                      : isMobileMedium
+                                          ? 8
+                                          : 10),
+                              Text(
+                                'Branch',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .apply(
+                                        color: TColors.primary,
+                                        fontSizeDelta: 2),
+                              ),
+                              SizedBox(height: isMobileSmall ? 0 : 10),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: isMobileSmall
+                                        ? 20
+                                        : isMobileMedium
+                                            ? 25
+                                            : 40),
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        ClipOval(
+                                          child: Image.network(
+                                            branch[0].image,
+                                            width: 70,
+                                            height: 70,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 55),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 33),
+                                            child: SizedBox(
+                                              width: isMobileSmall ? 180 : 200,
+                                              child: Text(
+                                                branch[0].title,
+                                                style: isMobileSmall
+                                                    ? Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium!
+                                                        .apply(
+                                                            fontSizeDelta: -1)
+                                                    : Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium,
+                                                maxLines: 2,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Icon(Icons.location_on,
+                                                  color: TColors.primary),
+                                              const SizedBox(width: 10),
+                                              SizedBox(
+                                                  width:
+                                                      isMobileSmall ? 180 : 200,
+                                                  child: Text(
+                                                    branch[0].location,
+                                                    style: isMobileSmall
+                                                        ? Theme.of(context)
+                                                            .textTheme
+                                                            .bodyMedium!
+                                                            .apply(
+                                                                fontSizeDelta:
+                                                                    -2)
+                                                        : Theme.of(context)
+                                                            .textTheme
+                                                            .bodyMedium,
+                                                    maxLines: 4,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ))
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Icon(Icons.call,
+                                                  color: TColors.primary),
+                                              const SizedBox(width: 10),
+                                              SizedBox(
+                                                width:
+                                                    isMobileSmall ? 180 : 200,
+                                                child: Text(
+                                                  branch[0].contact,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                  maxLines: 4,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 5
+                                      : isMobileMedium
+                                          ? 8
+                                          : 10),
+                              const Divider(height: 10, color: TColors.primary),
+                              SizedBox(
+                                  height: isMobileSmall
+                                      ? 10
+                                      : isMobileMedium
+                                          ? 15
+                                          : 20),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                                Icons.monetization_on_outlined,
+                                                color: TColors.primary),
+                                            const SizedBox(width: 5),
+                                            Text(
+                                              'JBL Deals',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium,
+                                            ),
+                                          ],
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            shadowColor: Colors.transparent,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 30),
+                                            tapTargetSize: MaterialTapTargetSize
+                                                .shrinkWrap,
+                                            minimumSize: const Size(50, 30),
+                                          ),
+                                          child: Text(
+                                            'Apply Deals',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge!
+                                                .apply(color: Colors.white),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                        height: isMobileSmall
+                                            ? 304
+                                            : isMobileMedium
+                                                ? 18
+                                                : 25),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Total Fee: ',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge),
+                                        if (price != null)
+                                          Text(price!,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge)
+                                      ],
+                                    ),
+                                    SizedBox(
+                                        height: isMobileSmall
+                                            ? 15
+                                            : isMobileMedium
+                                                ? 20
+                                                : 30),
+                                  ],
+                                ),
+                              ),
 
-                /// -- Apply Future Builder to access user information in Firebase Database
-                FutureBuilder(
-                    future: DatabaseMethods().readUser(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final user = snapshot.data;
-
-                        return user == null
-                            ? Container()
-                            : ElevatedButton(
+                              ElevatedButton(
                                 onPressed: () {
                                   showDialog(
                                     context: context,
@@ -685,18 +733,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     ),
                                   ),
                                 ),
-                              );
-                      }
+                              ),
 
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }),
-              ],
-            ),
-          ),
-        ),
-      ),
+                              // /// -- Apply Future Builder to access user information in Firebase Database
+                              // FutureBuilder(
+                              //     future: DatabaseMethods().readUser(),
+                              //     builder: (context, snapshot) {
+                              //       if (snapshot.hasData) {
+                              //         final user = snapshot.data;
+                              //
+                              //         return user == null
+                              //             ? Container()
+                              //             :
+                              //       }
+                              //
+                              //       return Container();
+                              //     }),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+            }
+            return const Center(child: CircularProgressIndicator(color: TColors.primary,),);
+          }),
     );
   }
 }

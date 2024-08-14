@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../utils/constants/colors.dart';
 import 'package:badges/badges.dart' as badges;
 
 class NotificationBadge extends StatelessWidget {
