@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/custom_drawer.dart';
@@ -26,9 +28,9 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
     return Scaffold(
       body: screenList.elementAt(currentPageIndex),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(top: 10),
+        padding:  EdgeInsets.only(top: Platform.isAndroid ? 0 : 10),
         child: NavigationBar(
-          height: 50,
+          height: Platform.isAndroid ? 60 : 50,
           overlayColor: WidgetStatePropertyAll(Colors.amberAccent.shade100),
           indicatorColor: TColors.primary.withOpacity(0.2),
           animationDuration: const Duration(milliseconds: 1500),

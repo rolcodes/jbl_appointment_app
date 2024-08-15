@@ -141,7 +141,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         height: isMobileSmall
-                            ? TDeviceUtils.getScreenHeight() / 1.12
+                            ? TDeviceUtils.getScreenHeight() / 1.11
                             : TDeviceUtils.getScreenHeight() / 1.09,
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(

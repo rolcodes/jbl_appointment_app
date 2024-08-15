@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -100,7 +102,7 @@ class _UpdateSelectDateScreenState extends State<UpdateSelectDateScreen> {
               }
             },
             child: Container(
-              height: 70,
+              height: Platform.isAndroid ? 50 : 70,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [Colors.orange.shade800, TColors.primary])),
@@ -115,7 +117,7 @@ class _UpdateSelectDateScreenState extends State<UpdateSelectDateScreen> {
                           .titleSmall!
                           .apply(color: Colors.white),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: Platform.isAndroid ? 0 : 10),
                   ],
                 ),
               ),

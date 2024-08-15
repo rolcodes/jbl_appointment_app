@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -90,7 +92,7 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
               }
             },
             child: Container(
-              height: 70,
+              height: Platform.isAndroid ? 50 : 70,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [Colors.orange.shade800, TColors.primary])),
@@ -105,7 +107,7 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
                           .titleSmall!
                           .apply(color: Colors.white),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: Platform.isAndroid ? 0 : 10),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/select_time/widget/time_item.dart';
 
@@ -89,7 +91,7 @@ class SelectTime extends StatelessWidget {
 
         },
         child: Container(
-          height: 70,
+          height: Platform.isAndroid ? 50 : 70,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [Colors.orange.shade800, TColors.primary])),
@@ -104,7 +106,7 @@ class SelectTime extends StatelessWidget {
                       .titleSmall!
                       .apply(color: Colors.white),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: Platform.isAndroid ? 0 : 10),
               ],
             ),
           ),

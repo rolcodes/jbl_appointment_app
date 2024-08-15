@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -198,7 +200,7 @@ class ServiceDetailScreen extends StatelessWidget {
           saveServiceData();
         },
         child: Container(
-          height: 70,
+          height: Platform.isAndroid ? 50 : 70,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [Colors.orange.shade800, TColors.primary])),
@@ -213,7 +215,7 @@ class ServiceDetailScreen extends StatelessWidget {
                       .titleSmall!
                       .apply(color: Colors.white),
                 ),
-                const SizedBox(height: 10),
+                 SizedBox(height: Platform.isAndroid ? 0 : 10),
               ],
             ),
           ),

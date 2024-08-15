@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -266,7 +268,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
           ? const SizedBox()
           : Container(
               width: double.infinity,
-              height: 70,
+              height: Platform.isAndroid ? 50 : 70,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     colors: [Colors.orange.shade800, TColors.primary]),
@@ -316,8 +318,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                         padding: EdgeInsets.only(
                             left: 75,
                             right: isMobileSmall ? 60 : 75,
-                            top: 25,
-                            bottom: 25),
+                            top: Platform.isAndroid ? 0 : 25,
+                            bottom: Platform.isAndroid ? 0 : 25),
                         child: Text(
                           'Cancel',
                           style: Theme.of(context)
@@ -338,8 +340,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                         padding: EdgeInsets.only(
                             left: isMobileSmall ? 40 : 60,
                             right: 60,
-                            top: 25,
-                            bottom: 25),
+                            top: Platform.isAndroid ? 0 : 25,
+                            bottom: Platform.isAndroid ? 0 : 25),
                         child: Text(
                           'Reschedule',
                           style: Theme.of(context)
