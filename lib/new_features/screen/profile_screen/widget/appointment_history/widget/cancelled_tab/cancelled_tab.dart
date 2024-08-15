@@ -65,7 +65,7 @@ class _CancelledTabState extends State<CancelledTab> {
                   const SizedBox(height: 8),
                   Center(
                     child: Text(
-                      'Waiting for user to book an appointment...',
+                      'Book an appointment now and avail our exclusive offers!',
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!

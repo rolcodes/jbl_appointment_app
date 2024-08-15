@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/select_time/widget/time_item.dart';
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../services/shared_pref.dart';
 import '../../../utils/constants/colors.dart';
-import '../../models/calendar_model.dart';
+import '../../../utils/popups/loaders.dart';
 import '../../models/data/dummy_data.dart';
 import '../../models/time_model.dart';
 import '../select_staff/select_staff.dart';
@@ -32,6 +33,8 @@ class SelectTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? time;
+
     /// -- List to selected data, and update to text controller
     // pickedDate.text = DateFormat('EEEE') // , MMM d, yyyy
     //     .format(Provider.of<CalendarModel>(context, listen: true)
@@ -40,6 +43,7 @@ class SelectTime extends StatelessWidget {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
+        isDeleteTime: true,
         isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
@@ -73,8 +77,16 @@ class SelectTime extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: InkWell(
-        onTap: () {
-          onSelectTime(context);
+        onTap: () async {
+
+          time = await SharedPreferenceHelper().getServiceTime();
+
+          if (time == null) {
+            TLoaders.errorSnackBar(title: 'Error', message: 'Make sure to select time to proceed!');
+          } else {
+            onSelectTime(context);
+          }
+
         },
         child: Container(
           height: 70,

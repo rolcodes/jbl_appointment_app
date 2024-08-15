@@ -28,10 +28,7 @@ class _AdminPanelLoginState extends State<AdminPanelLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.light,
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: true,
-      //   iconTheme: IconThemeData(color: TColors.primary),
-      // ),
+
       body: SingleChildScrollView(
         child: Stack(
           children: [

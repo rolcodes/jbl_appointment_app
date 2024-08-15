@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jbl/common/widgets/appbar/custom_appbar/widget/notification_badge.dart';
+import 'package:jbl/services/shared_pref.dart';
 
 import '../../../../new_features/screen/profile_screen/widget/edit_profile.dart';
 import '../../../../utils/constants/colors.dart';
@@ -18,7 +18,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.isDrawer,
     this.isCenterTitle,
     required this.isNotification,
-    required this.isEdit, this.backgroundColor,
+    required this.isEdit,
+    this.backgroundColor,
+    this.isDeleteTime = false,
   });
 
   final Widget? title;
@@ -31,11 +33,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? isCenterTitle;
   final bool isNotification;
   final bool isEdit;
+  final bool isDeleteTime;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor,
         iconTheme: IconThemeData(color: iconColor),
         title: title,
         titleSpacing: 0,
@@ -64,31 +67,54 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   );
                 },
               )
-            : IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: showBackgroundColor
-                        ? TColors.primary.withOpacity(0.75)
-                        : Colors.transparent,
+            : isDeleteTime
+                ? IconButton(
+                    onPressed: () {
+                      Get.back();
+                      SharedPreferenceHelper().removeServiceTime();
+                      print('Time was deleted');
+                    },
+                    icon: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: showBackgroundColor
+                            ? TColors.primary.withOpacity(0.75)
+                            : Colors.transparent,
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: showIcon ? iconColor : Colors.transparent,
+                        size: 20,
+                      ),
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: showBackgroundColor
+                            ? TColors.primary.withOpacity(0.75)
+                            : Colors.transparent,
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: showIcon ? iconColor : Colors.transparent,
+                        size: 20,
+                      ),
+                    ),
                   ),
-                  child: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: showIcon ? iconColor : Colors.transparent,
-                    size: 20,
-                  ),
-                ),
-              ),
         actions: [
           isNotification
               ? Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: Container(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Container(
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
@@ -99,16 +125,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     child: Center(
                       child: NotificationBadge(
-                        iconColor:
-                            showBackgroundColor ? TColors.white : TColors.primary,
+                        iconColor: showBackgroundColor
+                            ? TColors.white
+                            : TColors.primary,
                       ),
                     ),
                   ),
-              )
+                )
               : isEdit
                   ? Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: IconButton(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
                         style: const ButtonStyle(
                           backgroundColor:
                               WidgetStatePropertyAll(Colors.transparent),
@@ -116,7 +143,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         onPressed: () => Get.to(() => EditProfileScreen()),
                         icon: Icon(Icons.edit_outlined),
                       ),
-                  )
+                    )
                   : Container(),
         ]);
   }

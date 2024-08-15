@@ -29,7 +29,7 @@ class _CompletedTabState extends State<CompletedTab> {
 
   getOnTheLoad() async {
     completedAppointmentStream =
-    await DatabaseMethods().getUserAppointments();
+    await DatabaseMethods().getSpecificCompletedAppointments();
     setState(() {});
   }
 
@@ -59,14 +59,14 @@ class _CompletedTabState extends State<CompletedTab> {
                   ),
                   Center(
                     child: Text(
-                      'No Cancelled Appointment',
+                      'No Completed Appointment',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Center(
                     child: Text(
-                      'Waiting for user to book an appointment...',
+                      'Book an appointment now and avail our exclusive offers!',
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!

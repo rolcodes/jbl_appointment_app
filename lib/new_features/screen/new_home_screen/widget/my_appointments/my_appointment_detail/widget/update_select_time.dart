@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
 
 import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../../../services/shared_pref.dart';
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/popups/loaders.dart';
 import '../../../../../../models/data/dummy_data.dart';
 import '../../../../../../models/time_model.dart';
 import '../../../../../select_time/widget/time_item.dart';
@@ -39,6 +41,8 @@ class _UpdateSelectTimeState extends State<UpdateSelectTime> {
 
   @override
   Widget build(BuildContext context) {
+    String? time;
+
     /// -- List to selected data, and update to text controller
     // pickedDate.text = DateFormat('EEEE') // , MMM d, yyyy
     //     .format(Provider.of<CalendarModel>(context, listen: true)
@@ -47,6 +51,7 @@ class _UpdateSelectTimeState extends State<UpdateSelectTime> {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
+        isDeleteTime: true,
         isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
@@ -80,9 +85,14 @@ class _UpdateSelectTimeState extends State<UpdateSelectTime> {
         ],
       ),
       bottomNavigationBar: InkWell(
-        onTap: () {
-          onSelectTime(context);
-        },
+        onTap: () async {
+          time = await SharedPreferenceHelper().getServiceTime();
+
+          if (time == null) {
+            TLoaders.errorSnackBar(title: 'Error', message: 'Make sure to select time to proceed!');
+          } else {
+            onSelectTime(context);
+          }        },
         child: Container(
           height: 70,
           decoration: BoxDecoration(

@@ -130,6 +130,24 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  /// -- READ: Specific Completed User Appointments
+  Future<Stream<QuerySnapshot>> getSpecificCompletedAppointments() async {
+    return FirebaseFirestore.instance
+        .collection("appointments")
+        .where('accountId', isEqualTo: uid)
+        .where('status', isEqualTo: 'Completed')
+        .snapshots();
+  }
+
+  /// -- READ: Specific Completed User Appointments
+  Future<Stream<QuerySnapshot>> getSpecificExpiredAppointments() async {
+    return FirebaseFirestore.instance
+        .collection("appointments")
+        .where('accountId', isEqualTo: uid)
+        .where('status', isEqualTo: 'Expired')
+        .snapshots();
+  }
+
 
   /// -- READ: get all requests appointments where status is 'Waiting for approval'
   Future<Stream<QuerySnapshot>> getAdminRequestAppointments() async {

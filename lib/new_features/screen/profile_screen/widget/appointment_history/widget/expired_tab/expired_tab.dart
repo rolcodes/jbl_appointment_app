@@ -29,7 +29,7 @@ class _ExpiredTabState extends State<ExpiredTab> {
 
   getOnTheLoad() async {
     userAppointmentStream =
-    await DatabaseMethods().getUserAppointments();
+    await DatabaseMethods().getSpecificExpiredAppointments();
     setState(() {});
   }
 
@@ -66,7 +66,7 @@ class _ExpiredTabState extends State<ExpiredTab> {
                   const SizedBox(height: 8),
                   Center(
                     child: Text(
-                      'Waiting for user to book an appointment...',
+                      'Book an appointment now and avail our exclusive offers!',
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
