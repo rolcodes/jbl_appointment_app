@@ -62,7 +62,7 @@ class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
                         dividerHeight: 0,
                         padding: EdgeInsets.zero,
                         indicatorPadding:
-                            const EdgeInsets.symmetric(horizontal: -20),
+                            const EdgeInsets.symmetric(horizontal: -8),
                         indicator: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           color: TColors.primary.withOpacity(0.5),
@@ -73,7 +73,11 @@ class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
                         labelStyle: Theme.of(context)
                             .textTheme
                             .labelSmall!
-                            .apply(fontSizeDelta: -3),
+                            .apply(fontSizeDelta: 1, fontWeightDelta: 1),
+                        unselectedLabelStyle: Theme.of(context)
+                            .textTheme
+                            .labelSmall!
+                            .apply(fontSizeDelta: -1),
                         isScrollable: false,
                         tabs: const [
                           Tab(

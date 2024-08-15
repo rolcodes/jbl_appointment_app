@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -25,9 +27,9 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
     return Scaffold(
       body: screenList.elementAt(currentPageIndex),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(top: 10),
+        padding:  EdgeInsets.only(top: Platform.isAndroid ? 0 : 10),
         child: NavigationBar(
-          height: 50,
+          height: Platform.isAndroid ? 60 : 50,
           overlayColor: WidgetStatePropertyAll(Colors.amberAccent.shade100),
           indicatorColor: TColors.primary.withOpacity(0.2),
           animationDuration: const Duration(milliseconds: 1500),
