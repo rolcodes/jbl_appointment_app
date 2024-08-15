@@ -252,7 +252,7 @@ class _AdminPanelLoginState extends State<AdminPanelLogin> {
             /// Check if both ID and Password is correct then go to Booking Admin Panel
             else {
               TLoaders.successSnackBar(
-                  title: 'Welcome back Admin!', message: 'Check upcoming appointments now.');
+                  title: 'Welcome Back Admin!', message: 'Check upcoming appointments now.');
 
               await Future.delayed(const Duration(seconds: 1));
 
