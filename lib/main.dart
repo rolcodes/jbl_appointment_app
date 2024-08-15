@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jbl/new_features/new_navigation_menu.dart';
+import 'package:jbl/new_features/screen/landing_screen/landing_screen.dart';
 
 import 'package:jbl/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         /// SplashScreen() to begin from the start
-        home: const NewNavigationMenu(),
+        home: const LandingScreen(),
       ),
     );
   }

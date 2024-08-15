@@ -193,7 +193,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     CustomTextFormField(
                       textController: passwordController,
                       hint: 'Password',
-                      obscureText: false,
+                      obscureText: true,
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'Please enter a valid password';

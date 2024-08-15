@@ -165,7 +165,7 @@ class _AdminPanelLoginState extends State<AdminPanelLogin> {
                                 CustomTextFormField(
                                   textController: passwordController,
                                   hint: 'Password',
-                                  obscureText: false,
+                                  obscureText: true,
                                   textCapitalization: TextCapitalization.none,
                                   validator: (value) {
                                     if (value!.isEmpty) {

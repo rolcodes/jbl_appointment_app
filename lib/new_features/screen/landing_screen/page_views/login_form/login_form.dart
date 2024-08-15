@@ -58,8 +58,6 @@ class _LoginFormState extends State<LoginForm> {
         TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
       } else if (e.code == 'invalid-email') {
         TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-      } else if (e.code == 'email-already-in-use') {
-        TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
       }
     }
   }
@@ -146,7 +144,7 @@ class _LoginFormState extends State<LoginForm> {
                         CustomTextFormField(
                           textController: passwordController,
                           hint: 'Password',
-                          obscureText: false,
+                          obscureText: true,
                           textCapitalization: TextCapitalization.none,
                         ),
 
