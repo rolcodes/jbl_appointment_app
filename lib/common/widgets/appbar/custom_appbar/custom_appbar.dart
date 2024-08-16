@@ -56,7 +56,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: showBackgroundColor
-                            ? TColors.primary.withOpacity(0.75)
+                            ? TColors.primary
                             : Colors.transparent,
                       ),
                       child: Icon(
@@ -120,7 +120,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: showBackgroundColor
-                          ? TColors.primary.withOpacity(0.75)
+                          ? TColors.primary
                           : Colors.transparent,
                     ),
                     child: Center(

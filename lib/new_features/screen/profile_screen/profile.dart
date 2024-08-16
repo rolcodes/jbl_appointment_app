@@ -25,6 +25,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
+        backgroundColor: TColors.secondary,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: true,

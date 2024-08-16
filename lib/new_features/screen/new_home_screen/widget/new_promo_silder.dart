@@ -12,11 +12,10 @@ import '../../../../utils/device/device_utility.dart';
 class NewPromoSlider extends StatelessWidget {
   const NewPromoSlider({
     super.key,
-    required this.banners, required this.isAppBar,
+    required this.banners,
   });
 
   final List<String> banners;
-  final bool isAppBar;
 
   @override
   Widget build(BuildContext context) {
@@ -25,57 +24,54 @@ class NewPromoSlider extends StatelessWidget {
 
     return Column(
       children: [
-        isAppBar ? Container(height: 50,color: TColors.white) : Container(),
-
         Stack(
           children: [
-
             /// -- Sliders
             CarouselSlider(
               options: CarouselOptions(
                   clipBehavior: Clip.antiAlias,
                   height: isMobileSmall ? 222 : 235,
                   autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayInterval: const Duration(seconds: 4),
                   autoPlayCurve: Curves.fastOutSlowIn,
                   viewportFraction: 1,
                   onPageChanged: (index, _) =>
                       controller.updatePageIndicator(index)),
               items: banners
                   .map((url) => TRoundedImage(
-                borderRadius: 0,
-                isNetworkImage: false,
-                imageUrl: url,
-                fit: BoxFit.cover,
-                widthImage: 500,
-              ))
+                        borderRadius: 20,
+                        isNetworkImage: false,
+                        imageUrl: url,
+                        fit: BoxFit.cover,
+                        widthImage: 500,
+                      ))
                   .toList(),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
 
             /// -- Indicators
             Positioned(
-              top: isMobileSmall ? 188 : 220,
+              top: isMobileSmall ? 188 : 210,
               child: Obx(
-                    () => Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
+                () => SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                         for (int i = 0; i < banners.length; i++)
                           TCircularContainer(
                             width: 15,
                             height: 4,
                             margin: const EdgeInsets.only(right: 10),
-                            backgroundColor: controller.carouselCurrentIndex.value == i
-                                ? const Color.fromRGBO(219, 157, 0, 100)
-                                : TColors.white,
+                            backgroundColor:
+                                controller.carouselCurrentIndex.value == i
+                                    ? const Color.fromRGBO(219, 157, 0, 100)
+                                    : TColors.white,
                           ),
-                                          ],
-                                        ),
-                      ),
+                      ],
                     ),
+                  ),
+                ),
               ),
             ),
           ],

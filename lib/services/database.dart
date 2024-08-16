@@ -25,67 +25,6 @@ class DatabaseMethods {
         .set(json); //userInfoMap
   }
 
-  // /// -- CREATE: create Appointment History in database
-  // Future addCancelledAppointment(
-  //     Map<String, dynamic> json, String bookingId) async {
-  //   return await FirebaseFirestore.instance
-  //       .collection("cancelled appointment history")
-  //       .doc(bookingId)
-  //       .set(json); //userInfoMap
-  // }
-
-  //
-  // /// -- CREATE: create bookings in another collection in database for All Bookings Screen
-  // /// -- Firebase function for All Bookings Collection
-  // Future addUserAllBooking(
-  //     Map<String, dynamic> userInfoMap, String bookingId) async {
-  //   return await FirebaseFirestore.instance
-  //       .collection("All Booking")
-  //       .doc(bookingId)
-  //       .set(userInfoMap);
-  // }
-  //
-  // /// -- CREATE: create Completed Bookings Collection in database
-  // /// -- Firebase function for Completed Bookings
-  // Future addCompleteBookings(
-  //     Map<String, dynamic> userInfoMap, String bookingId) async {
-  //   return await FirebaseFirestore.instance
-  //       .collection("Completed Booking")
-  //       .doc(bookingId)
-  //       .set(userInfoMap);
-  // }
-  //
-  // /// -- CREATE: create Cancelled Bookings Collection in database
-  // /// -- Firebase function for Cancelled Bookings
-  // Future addCancelledBookings(
-  //     Map<String, dynamic> userInfoMap, String bookingId) async {
-  //   return await FirebaseFirestore.instance
-  //       .collection("Cancelled Booking")
-  //       .doc(bookingId)
-  //       .set(userInfoMap);
-  // }
-
-  // /// -- CREATE: create upcoming bookings/appointments to user
-  // Future addUserAccBooking(
-  //     Map<String, dynamic> userInfoMap, String userId, String bookingId) async {
-  //   return await FirebaseFirestore.instance
-  //       .collection('user')
-  //       .doc(userId)
-  //       .collection('myBookings')
-  //       .doc(bookingId)
-  //       .set(userInfoMap);
-  // }
-
-  // /// -- READ: read user appointment then display to My Appointment Screen
-  // Future<Stream<QuerySnapshot>> getUserAppointments() async {
-  //   String uid = FirebaseAuth.instance.currentUser!.uid;
-  //
-  //   return FirebaseFirestore.instance
-  //       .collection("appointments")
-  //       //.orderBy("Date", descending: false)
-  //       .where('accountId', isEqualTo: uid)
-  //       .snapshots();
-  // }
 
   /// -- READ: read user data
   Future<UserModel?> readUser() async {
@@ -111,12 +50,21 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  Future<QuerySnapshot> ifStatusExists() async {
+
+    return FirebaseFirestore.instance
+        .collection('appointments')
+        .where('accountId', isEqualTo: uid)
+        .where('status', whereIn: ['Waiting for Approval', 'Approved']).get();
+  }
+
   /// -- READ: Specific User Appointments
   Future<Stream<QuerySnapshot>> getSpecificUserAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
         .where('accountId', isEqualTo: uid)
-         /// use multiple objects to find multiple status of appointments
+
+    /// use multiple objects to find multiple status of appointments
         .where('status', whereIn: ['Waiting for approval', 'Approved'])
         .snapshots();
   }
@@ -139,7 +87,7 @@ class DatabaseMethods {
         .snapshots();
   }
 
-  /// -- READ: Specific Completed User Appointments
+  /// -- READ: Specific Expired User Appointments
   Future<Stream<QuerySnapshot>> getSpecificExpiredAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
@@ -153,9 +101,9 @@ class DatabaseMethods {
   Future<Stream<QuerySnapshot>> getAdminRequestAppointments() async {
     return FirebaseFirestore.instance
         .collection('appointments')
-        //.orderBy("timestamp", descending: true)
+    //.orderBy("timestamp", descending: true)
         .where('status', isEqualTo: 'Waiting for approval')
-        //.orderBy("Date", descending: false)
+    //.orderBy("Date", descending: false)
         .snapshots();
   }
 
@@ -191,52 +139,10 @@ class DatabaseMethods {
         .snapshots();
   }
 
-  // /// -- READ: read bookings then display to Upcoming Bookings Tab
-  // /// -- Getter function for Upcoming Booking Collection
-  // Future<Stream<QuerySnapshot>> getBookings() async {
-  //   return FirebaseFirestore.instance
-  //       .collection("Booking")
-  //       .orderBy("Date", descending: false)
-  //       .snapshots();
-  // }
-
-  // /// -- READ: read bookings then display it in All Bookings Screen
-  // /// -- Getter function for All Booking Collection
-  // Future<Stream<QuerySnapshot>> getAllBookings() async {
-  //   return FirebaseFirestore.instance
-  //       .collection("All Booking")
-  //       .orderBy("Timestamp", descending: true)
-  //       .snapshots();
-  // }
-  //
-  // /// -- READ: read completed bookings then display it in Completed Bookings Tab
-  // /// -- Getter function for All Booking Collection
-  // Future<Stream<QuerySnapshot>> getCompletedBookings() async {
-  //   return FirebaseFirestore.instance
-  //       .collection("Completed Booking")
-  //       .orderBy("Timestamp", descending: true)
-  //       .snapshots();
-  // }
-  //
-  // /// -- READ: read completed bookings then display it in Completed Bookings Tab
-  // /// -- Getter function for All Booking Collection
-  // Future<Stream<QuerySnapshot>> getCancelledBookings() async {
-  //   return FirebaseFirestore.instance
-  //       .collection("Cancelled Booking")
-  //       .orderBy("Timestamp", descending: true)
-  //       .snapshots();
-  // }
-
-  // /// -- READ: read user myBookings then display it in User Upcoming Bookings Tab
-  // /// -- Getter function for myBookings Collection
-  // Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getUserAccBooking(
-  //     String userId, String bookingId) async {
-  //   return FirebaseFirestore.instance.collectionGroup('mybookings').snapshots();
-  // }
 
   /// -- UPDATE: update user appointments
-  Future<void> updateUserAppointments(
-      String bookingId, String newDate, String newTime, String newStaff) async {
+  Future<void> updateUserAppointments(String bookingId, String newDate,
+      String newTime, String newStaff) async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .doc(bookingId)
@@ -248,8 +154,8 @@ class DatabaseMethods {
   }
 
   /// -- Update appointment, add Cancel Reason
-  Future<void> updateUserCancelledAppointments(
-      String bookingId, String selectedFeedback) async {
+  Future<void> updateUserCancelledAppointments(String bookingId,
+      String selectedFeedback) async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .doc(bookingId)
@@ -335,4 +241,7 @@ class DatabaseMethods {
         .doc(id)
         .delete();
   }
+
 }
+
+

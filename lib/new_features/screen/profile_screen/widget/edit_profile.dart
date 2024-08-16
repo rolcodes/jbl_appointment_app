@@ -31,6 +31,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: TColors.light,
         title: Text('Edit $field'),
         content: TextField(
+          onTapOutside: (PointerDownEvent event) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           autofocus: true,
           decoration: InputDecoration(
             hintText: "Enter new $field",
