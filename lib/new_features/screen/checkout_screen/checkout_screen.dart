@@ -113,8 +113,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         .format(Provider.of<CalendarModel>(context, listen: true)
             .firstDate); //.add_yMd()
 
-    final isMobileSmall = CustomScreen.isMobileSmall(context);
-    final isMobileMedium = CustomScreen.isMobileMedium(context);
+    final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -650,7 +650,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   'Cancel',
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyLarge,
+                                                      .bodyLarge!.apply(color: TColors.darkerGrey),
                                                 ),
                                               ),
                                               TextButton(
@@ -755,7 +755,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                       .apply(
                                                           fontSizeDelta: -1,
                                                           color:
-                                                              TColors.primary),
+                                                              CupertinoColors.activeBlue),
                                                 ),
                                               ),
                                             ],

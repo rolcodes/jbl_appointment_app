@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jbl/new_features/screen/select_time/widget/time_item.dart';
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
@@ -11,7 +12,7 @@ import '../../models/data/dummy_data.dart';
 import '../../models/time_model.dart';
 import '../select_staff/select_staff.dart';
 
-class SelectTime extends StatelessWidget {
+class SelectTime extends StatefulWidget {
   const SelectTime({
     super.key,
     required this.hours,
@@ -19,8 +20,11 @@ class SelectTime extends StatelessWidget {
 
   final List<TimeClass> hours;
 
-  // TextEditingController pickedDate = TextEditingController();
+  @override
+  State<SelectTime> createState() => _SelectTimeState();
+}
 
+class _SelectTimeState extends State<SelectTime> {
   /// -- Method to navigate to select staff screen
   void onSelectTime(BuildContext context) {
     Navigator.of(context).push(
@@ -33,6 +37,23 @@ class SelectTime extends StatelessWidget {
     );
   }
 
+  // String? serviceTime;
+  //
+  // getDataFromSharedPref() async {
+  //   serviceTime = await SharedPreferenceHelper().getServiceTime();
+  // }
+  //
+  // getOnTheLoad() async {
+  //   await getDataFromSharedPref();
+  //   setState(() {});
+  // }
+  //
+  // @override
+  // void initState() {
+  //   getOnTheLoad();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     String? time;
@@ -44,17 +65,32 @@ class SelectTime extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(
-        isDeleteTime: true,
-        isEdit: false,
-        showBackgroundColor: false,
-        showIcon: true,
-        isDrawer: false,
-        isNotification: false,
+      appBar: AppBar(
         title: Text('Select Time',
             style: Theme.of(context).textTheme.headlineSmall),
-        iconColor: TColors.primary,
-        isCenterTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+            SharedPreferenceHelper().removeServiceTime();
+            print('Time was deleted');
+          },
+          icon: Container(
+            height: 50,
+            width: 50,
+            child: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: TColors.primary,
+              size: 20,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          Text(
+            "",
+            style: Theme.of(context).textTheme.titleLarge,
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -69,9 +105,9 @@ class SelectTime extends StatelessWidget {
                   mainAxisSpacing: 10,
                   crossAxisCount: 3,
                 ),
-                itemCount: hours.length,
+                itemCount: widget.hours.length,
                 itemBuilder: (ctx, index) => TimeItem(
-                  selectTime: hours[index],
+                  selectTime: widget.hours[index],
                 ),
               ),
             ),
@@ -80,15 +116,15 @@ class SelectTime extends StatelessWidget {
       ),
       bottomNavigationBar: InkWell(
         onTap: () async {
-
           time = await SharedPreferenceHelper().getServiceTime();
 
           if (time == null) {
-            TLoaders.errorSnackBar(title: 'Error', message: 'Make sure to select time to proceed!');
+            TLoaders.errorSnackBar(
+                title: 'Error',
+                message: 'Make sure to select time to proceed!');
           } else {
             onSelectTime(context);
           }
-
         },
         child: Container(
           height: Platform.isAndroid ? 50 : 70,

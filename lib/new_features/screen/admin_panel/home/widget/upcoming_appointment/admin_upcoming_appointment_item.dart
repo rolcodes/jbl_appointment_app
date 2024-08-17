@@ -17,9 +17,9 @@ class AdminUpcomingAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = CustomScreen.isMobileSmall(context);
-    final isMobileMedium = CustomScreen.isMobileMedium(context);
-    final isMobileLarge = CustomScreen.isMobileLarge(context);
+    final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
+    final isMobileLarge = CustomScreen.isMobileLargeWidth(context);
 
     return InkWell(
       onTap: onSelectedAUpcomingAppointment,

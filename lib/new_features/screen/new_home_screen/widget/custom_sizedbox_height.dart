@@ -1,18 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:jbl/utils/device/device_utility.dart';
+import 'package:path/path.dart';
 
 import '../../../../services/database.dart';
 
 class CustomSizedboxHeight extends StatefulWidget {
-  const CustomSizedboxHeight({
+  CustomSizedboxHeight({
     super.key,
     required this.width,
     required this.child,
+    this.height,
   });
 
+  late double? height = MediaQuery.of(context as BuildContext).size.height;
   final double width;
   final Widget child;
 
@@ -21,36 +25,19 @@ class CustomSizedboxHeight extends StatefulWidget {
 }
 
 class _CustomSizedboxHeightState extends State<CustomSizedboxHeight> {
-  Stream? BookingStream;
-
-  getOnTheLoad() async {
-    BookingStream = await DatabaseMethods().getSpecificUserAppointments();
-
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    getOnTheLoad();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: DatabaseMethods().ifStatusExists(),
+        future: DatabaseMethods().ifStatusNotExists(),
         builder: (context, AsyncSnapshot snapshot) {
           return snapshot.hasData
               ? SizedBox(
-                  height: TDeviceUtils.getScreenHeight() * 1.2,
                   width: widget.width,
+                  height: TDeviceUtils.getScreenHeight() / 1.07,
                   child: widget.child,
                 )
-              : SizedBox(
-                  height: TDeviceUtils.getScreenHeight(),
-                  width: widget.width,
-                  child: widget.child,
-                );
+              : Container();
         });
   }
 }

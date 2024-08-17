@@ -25,7 +25,6 @@ class DatabaseMethods {
         .set(json); //userInfoMap
   }
 
-
   /// -- READ: read user data
   Future<UserModel?> readUser() async {
     /// Create a variable and get current user id
@@ -41,7 +40,6 @@ class DatabaseMethods {
     return null;
   }
 
-
   /// -- READ: User Appointments
   Future<Stream<QuerySnapshot>> getUserAppointments() async {
     return FirebaseFirestore.instance
@@ -50,12 +48,12 @@ class DatabaseMethods {
         .snapshots();
   }
 
-  Future<QuerySnapshot> ifStatusExists() async {
-
+  Future<Future<QuerySnapshot<Map<String, dynamic>>>> ifStatusNotExists() async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .where('accountId', isEqualTo: uid)
-        .where('status', whereIn: ['Waiting for Approval', 'Approved']).get();
+        .where('status',
+            isNotEqualTo: ['Waiting for Approval', 'Approved']).get();
   }
 
   /// -- READ: Specific User Appointments
@@ -64,9 +62,9 @@ class DatabaseMethods {
         .collection("appointments")
         .where('accountId', isEqualTo: uid)
 
-    /// use multiple objects to find multiple status of appointments
-        .where('status', whereIn: ['Waiting for approval', 'Approved'])
-        .snapshots();
+        /// use multiple objects to find multiple status of appointments
+        .where('status',
+            whereIn: ['Waiting for approval', 'Approved']).snapshots();
   }
 
   /// -- READ: Specific Cancelled User Appointments
@@ -96,14 +94,13 @@ class DatabaseMethods {
         .snapshots();
   }
 
-
   /// -- READ: get all requests appointments where status is 'Waiting for approval'
   Future<Stream<QuerySnapshot>> getAdminRequestAppointments() async {
     return FirebaseFirestore.instance
         .collection('appointments')
-    //.orderBy("timestamp", descending: true)
+        //.orderBy("timestamp", descending: true)
         .where('status', isEqualTo: 'Waiting for approval')
-    //.orderBy("Date", descending: false)
+        //.orderBy("Date", descending: false)
         .snapshots();
   }
 
@@ -139,10 +136,9 @@ class DatabaseMethods {
         .snapshots();
   }
 
-
   /// -- UPDATE: update user appointments
-  Future<void> updateUserAppointments(String bookingId, String newDate,
-      String newTime, String newStaff) async {
+  Future<void> updateUserAppointments(
+      String bookingId, String newDate, String newTime, String newStaff) async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .doc(bookingId)
@@ -154,8 +150,8 @@ class DatabaseMethods {
   }
 
   /// -- Update appointment, add Cancel Reason
-  Future<void> updateUserCancelledAppointments(String bookingId,
-      String selectedFeedback) async {
+  Future<void> updateUserCancelledAppointments(
+      String bookingId, String selectedFeedback) async {
     return FirebaseFirestore.instance
         .collection('appointments')
         .doc(bookingId)
@@ -241,7 +237,4 @@ class DatabaseMethods {
         .doc(id)
         .delete();
   }
-
 }
-
-

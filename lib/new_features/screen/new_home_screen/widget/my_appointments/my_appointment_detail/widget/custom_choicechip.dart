@@ -130,10 +130,6 @@ class _CustomChoiceChipState extends State<CustomChoiceChip> {
                   await DatabaseMethods().updateUserCancelledAppointments(
                       widget.ds['bookingId'], _selectedFeedback!);
 
-
-                  // /// DELETE function: Delete Document ID of Booking in database
-                  // await DatabaseMethods().deleteBooking(widget.dsID);
-                  // print('Appointment was deleted from database');
                   TLoaders.successSnackBar(
                       title: 'Cancelled',
                       message: 'Booking successfully cancelled.');
