@@ -33,6 +33,7 @@ class ServiceDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// My Strategy on making conditions in Media Queries
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
