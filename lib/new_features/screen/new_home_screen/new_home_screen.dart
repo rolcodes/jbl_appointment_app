@@ -8,6 +8,7 @@ import 'package:jbl/new_features/screen/new_home_screen/widget/service_categorie
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/service_category_cards.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/widget/services.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/user_appointment_display.dart';
+import 'package:jbl/utils/device/device_screen_ratio.dart';
 import 'package:jbl/utils/device/device_utility.dart';
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
@@ -68,7 +69,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   /// -- Main Widget
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -82,7 +86,11 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         isDrawer: true,
         isNotification: true,
         isCenterTitle: true,
-        title: Image.asset('assets/logos/jbl-logo.jpg', fit: BoxFit.contain, width: 145,),
+        title: Image.asset(
+          'assets/logos/jbl-logo.jpg',
+          fit: BoxFit.contain,
+          width: 145,
+        ),
       ),
       body: _isLoading
           ? const Center(
@@ -91,15 +99,17 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
               ),
             )
           : SingleChildScrollView(
-              child: CustomSizedboxHeight(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
+                height: TDeviceUtils.getScreenHeight() * 1.2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       flex: 0,
                       child: Container(
-                        padding: const EdgeInsets.only(left: 20,right: 20, top: 10),
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
                         decoration: const BoxDecoration(color: Colors.white),
                         child: const NewPromoSlider(
                           banners: [
@@ -116,7 +126,6 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 4),
-
                     Expanded(
                       flex: 0,
                       child: Container(
@@ -131,7 +140,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             const FutureUser(),
                             Text(
                               'BOOK AN APPOINTMENT NOW!',
-                              style: isMobileSmall
+                              style: isMobileSmallWidth
                                   ? Theme.of(context)
                                       .textTheme
                                       .titleMedium!
@@ -151,32 +160,47 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 4),
-
                     Expanded(
                       flex: 7,
                       child: Column(
                         children: [
                           /// -- Appointment Item
-                          UserAppointmentDisplay(context: context, bookingStream: bookingStream),
+                          UserAppointmentDisplay(
+                              context: context, bookingStream: bookingStream),
 
-                          /// -- Service Categories
                           Container(
-                            height: isMobileSmall ? 300 : 540,
+                            height: isMobileMediumHeight
+                                ? 540
+                                : isMobileLargeHeight
+                                    ? 550
+                                    : isMobileExtraLargeHeight
+                                        ? 580
+                                        : null,
                             decoration: const BoxDecoration(
                               color: Colors.white,
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(height: isMobileSmall ? 15 : 15),
+                                SizedBox(
+                                    height: isMobileMediumHeight
+                                        ? 10
+                                        : isMobileLargeHeight
+                                            ? 12
+                                            : isMobileExtraLargeHeight
+                                                ? 0
+                                                : null),
+
+                                /// -- Service Categories
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'SERVICE CATEGORIES',
-                                      style: isMobileSmall
+                                      // 'SERVICE CATEGORIES',
+                                      "${TDeviceUtils.getScreenHeight()}",
+                                      style: isMobileSmallWidth
                                           ? Theme.of(context)
                                               .textTheme
                                               .titleLarge!
@@ -188,8 +212,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
                                     /// -- See All Categories
                                     TextButton(
-                                      onPressed: () => Get.to(
-                                          () => const ServiceCategoriesSeeAll()),
+                                      onPressed: () => Get.to(() =>
+                                          const ServiceCategoriesSeeAll()),
                                       style: TextButton.styleFrom(
                                         minimumSize: const Size(50, 30),
                                         padding: EdgeInsets.zero,
@@ -203,7 +227,14 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 10),
+                                SizedBox(
+                                    height: isMobileMediumHeight
+                                        ? 10
+                                        : isMobileLargeHeight
+                                            ? 16
+                                            : isMobileExtraLargeHeight
+                                                ? 0
+                                                : null),
 
                                 /// -- Services Categories Cards
                                 SizedBox(
@@ -229,7 +260,14 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     },
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(
+                                    height: isMobileMediumHeight
+                                        ? 10
+                                        : isMobileLargeHeight
+                                            ? 18
+                                            : isMobileExtraLargeHeight
+                                                ? 0
+                                                : null),
 
                                 /// -- Promos
                                 Row(
@@ -243,8 +281,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
                                     /// -- See All Categories
                                     TextButton(
-                                      onPressed: () => Get.to(
-                                          () => const ServiceCategoriesSeeAll()),
+                                      onPressed: () => Get.to(() =>
+                                          const ServiceCategoriesSeeAll()),
                                       style: TextButton.styleFrom(
                                         padding: EdgeInsets.zero,
                                         minimumSize: const Size(50, 30),
@@ -258,7 +296,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(
+                                    height: isMobileMediumHeight
+                                        ? 5
+                                        : isMobileLargeHeight
+                                            ? 12
+                                            : isMobileExtraLargeHeight
+                                                ? 0
+                                                : null),
+
                                 /// -- Promos
                                 const NewPromoSlider(
                                   banners: [
@@ -274,8 +320,6 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                         ],
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -288,4 +332,3 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     );
   }
 }
-

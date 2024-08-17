@@ -7,6 +7,7 @@ import '../../../../../common/widgets/images/t_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../features/shop/controllers/home_controller.dart';
+import '../../../../utils/device/device_screen_ratio.dart';
 import '../../../../utils/device/device_utility.dart';
 
 class NewPromoSlider extends StatelessWidget {
@@ -20,61 +21,71 @@ class NewPromoSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
 
-    return Column(
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+
+    return Stack(
       children: [
-        Stack(
-          children: [
-            /// -- Sliders
-            CarouselSlider(
-              options: CarouselOptions(
-                  clipBehavior: Clip.antiAlias,
-                  height: isMobileSmall ? 222 : 235,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 4),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  viewportFraction: 1,
-                  onPageChanged: (index, _) =>
-                      controller.updatePageIndicator(index)),
-              items: banners
-                  .map((url) => TRoundedImage(
-                        borderRadius: 20,
-                        isNetworkImage: false,
-                        imageUrl: url,
-                        fit: BoxFit.cover,
-                        widthImage: 500,
-                      ))
-                  .toList(),
-            ),
+        CarouselSlider(
+          options: CarouselOptions(
+              clipBehavior: Clip.antiAlias,
+              height: isMobileMediumHeight
+                  ? 222
+                  : isMobileLargeHeight
+                      ? 232
+                      : isMobileExtraLargeHeight
+                          ? 245
+                          : null,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 4),
+              autoPlayCurve: Curves.fastOutSlowIn,
+              viewportFraction: 1,
+              onPageChanged: (index, _) =>
+                  controller.updatePageIndicator(index)),
+          items: banners
+              .map((url) => TRoundedImage(
+                    borderRadius: 20,
+                    isNetworkImage: false,
+                    imageUrl: url,
+                    fit: BoxFit.cover,
+                    widthImage: 500,
+                  ))
+              .toList(),
+        ),
 
-            /// -- Indicators
-            Positioned(
-              top: isMobileSmall ? 188 : 210,
-              child: Obx(
-                () => SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        for (int i = 0; i < banners.length; i++)
-                          TCircularContainer(
-                            width: 15,
-                            height: 4,
-                            margin: const EdgeInsets.only(right: 10),
-                            backgroundColor:
-                                controller.carouselCurrentIndex.value == i
-                                    ? const Color.fromRGBO(219, 157, 0, 100)
-                                    : TColors.white,
-                          ),
-                      ],
+        /// -- Indicators
+        Positioned(
+          top: isMobileMediumHeight
+              ? 210
+              : isMobileLargeHeight
+                  ? 219
+                  : isMobileExtraLargeHeight
+                      ? 230
+                      : null,
+          right: -30,
+          child: Obx(
+            () => SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < banners.length; i++)
+                    TCircularContainer(
+                      width: 15,
+                      height: 4,
+                      margin: const EdgeInsets.only(right: 10),
+                      backgroundColor:
+                          controller.carouselCurrentIndex.value == i
+                              ? const Color.fromRGBO(219, 157, 0, 100)
+                              : TColors.grey,
                     ),
-                  ),
-                ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ],
     );

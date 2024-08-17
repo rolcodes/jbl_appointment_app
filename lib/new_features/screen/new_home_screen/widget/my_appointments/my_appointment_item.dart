@@ -17,8 +17,8 @@ class MyAppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = CustomScreen.isMobileSmall(context);
-    final isMobileMedium = CustomScreen.isMobileMedium(context);
+    final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
 
     return Material(
         elevation: 3,

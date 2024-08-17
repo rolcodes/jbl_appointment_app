@@ -32,10 +32,10 @@ class UserAppointmentDisplay extends StatelessWidget {
           /// If there is data display appointments
           return snapshot.hasData
               ? Container(
-            height: 170,
+            height: 160,
             width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(color: TColors.white),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+            padding: const EdgeInsets.only(left: 24, right: 24, top: 6, bottom: 0),
             child: Column(
               children: [
                 /// -- My Appointments
