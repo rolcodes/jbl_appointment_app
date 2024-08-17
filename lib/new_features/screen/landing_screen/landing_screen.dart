@@ -65,7 +65,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   child: Image.network(
                     'https://jblnew.keywcomm.com/wp-content/uploads/2024/07/brunette-woman-in-sunglasses-and-white-bikini-sunbathing-on-beach-on-vacation.jpg',
                     fit: BoxFit.cover,
-                    alignment: Alignment(-0.1, 0),
+                    alignment: const Alignment(-0.1, 0),
                   ),
                 ),
                 Container(
@@ -79,7 +79,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             TColors.secondary,
                             Colors.white.withOpacity(0.0),
                           ],
-                          stops: [
+                          stops: const [
                             0.1,
                             0.9,
                           ])),
@@ -112,7 +112,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         const SizedBox(height: 140),
 
                         /// Page 1
-                        Container(
+                        SizedBox(
                           height: 220,
                           width: MediaQuery.of(context).size.width,
                           child: Column(
@@ -125,7 +125,8 @@ class _LandingScreenState extends State<LandingScreen> {
                                   TColors.primary
                                 ],
                                 onPressed: () {
-                                  pageController.animateToPage(++pageChanged,
+                                  /// or (animate to)
+                                  pageController.nextPage(
                                       duration:
                                           const Duration(milliseconds: 300),
                                       curve: Curves.easeInOut);
