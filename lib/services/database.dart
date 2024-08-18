@@ -6,11 +6,10 @@ import '../new_features/models/user_model.dart';
 class DatabaseMethods {
   /// -- Collection Reference
   final userCollection = FirebaseFirestore.instance.collection('user');
-  String uid = FirebaseAuth.instance.currentUser!.uid;
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
 
   /// -- CREATE: create user
   Future addUserDetails(Map<String, dynamic> json) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
     return await FirebaseFirestore.instance
         .collection("user")
         .doc(uid)
@@ -28,7 +27,6 @@ class DatabaseMethods {
   /// -- READ: read user data
   Future<UserModel?> readUser() async {
     /// Create a variable and get current user id
-    String uid = FirebaseAuth.instance.currentUser!.uid;
 
     /// Get single document by ID
     final docUser = FirebaseFirestore.instance.collection('user').doc(uid);

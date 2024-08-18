@@ -172,7 +172,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                             height: isMobileMediumHeight
                                 ? 540
                                 : isMobileLargeHeight
-                                    ? 550
+                                    ? 555
                                     : isMobileExtraLargeHeight
                                         ? 580
                                         : null,
@@ -187,9 +187,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     height: isMobileMediumHeight
                                         ? 10
                                         : isMobileLargeHeight
-                                            ? 12
+                                            ? 15
                                             : isMobileExtraLargeHeight
-                                                ? 0
+                                                ? 10
                                                 : null),
 
                                 /// -- Service Categories
@@ -198,8 +198,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      // 'SERVICE CATEGORIES',
-                                      "${TDeviceUtils.getScreenHeight()}",
+                                      'SERVICE CATEGORIES',
+                                      // "${TDeviceUtils.getScreenHeight()}",
                                       style: isMobileSmallWidth
                                           ? Theme.of(context)
                                               .textTheme
@@ -266,7 +266,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                         : isMobileLargeHeight
                                             ? 18
                                             : isMobileExtraLargeHeight
-                                                ? 0
+                                                ? 5
                                                 : null),
 
                                 /// -- Promos

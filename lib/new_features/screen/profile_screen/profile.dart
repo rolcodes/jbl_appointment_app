@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/appointment_history.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/edit_profile.dart';
+import 'package:jbl/services/auth_service.dart';
 import 'package:jbl/utils/device/device_utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../common/widgets/list_tile/settings_menu_tile.dart';
@@ -21,6 +23,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobileSmall = TDeviceUtils.getScreenWidth(context) < 430;
+
+    final auth = AuthService();
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -172,10 +176,9 @@ class ProfileScreen extends StatelessWidget {
                                               'Are you sure you want to logout your account?'),
                                           actions: [
                                             TextButton(
-                                              child: const Text("Cancel",
+                                              child: Text("Cancel",
                                                   style: TextStyle(
-                                                      color: CupertinoColors
-                                                          .activeBlue)),
+                                                      color: Colors.grey.shade800)),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
@@ -195,12 +198,19 @@ class ProfileScreen extends StatelessWidget {
                                                 /// delay function
                                                 await Future.delayed(
                                                     const Duration(seconds: 1));
-                                                Get.offAll(() =>
-                                                    const LandingScreen());
+
+                                                /// Sign out/Log out function from auth_service.dart
+                                                await auth.signOut();
+                                                print('Firebase Sign Out Success!');
 
                                                 /// Delete user data in local storage after logging out
-                                                // SharedPreferences preferences = await SharedPreferences.getInstance();
-                                                // await preferences.clear();
+                                                SharedPreferences preferences =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                await preferences.clear();
+
+                                                Get.offAll(() =>
+                                                    const LandingScreen());
                                               },
                                             ),
                                           ],

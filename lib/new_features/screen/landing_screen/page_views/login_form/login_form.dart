@@ -1,9 +1,9 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../services/auth_service.dart';
 import '../../../../../services/shared_pref.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/popups/loaders.dart';
@@ -29,36 +29,54 @@ class _LoginFormState extends State<LoginForm> {
   String? mail, password;
 
   /// Controllers
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   /// Helps us to check validation in each textfield
   final formkey = GlobalKey<FormState>();
 
+  /// Text editing controllers takes large up spaces so we have to
+  /// dispose it after they are no longer required
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   Future userLogin() async {
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: mail!, password: password!);
+    if (mail != null && password != null) {
+      try {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: mail!, password: password!);
 
-      /// Save Data Locally, Alter the email from previous user
-      await SharedPreferenceHelper().saveUserEmail(emailController.text);
+        /// Save Data Locally, Alter the email from previous user
+        await SharedPreferenceHelper().saveUserEmail(emailController.text);
 
+        /// Show snackbar
+        TLoaders.successSnackBar(
+            title: 'Congratulations!', message: 'Sign in was successful!');
+        // ignore: use_build_context_synchronously
+        await Future.delayed(const Duration(seconds: 2));
 
-      /// Show snackbar
-      TLoaders.successSnackBar(
-          title: 'Congratulations!', message: 'Sign in was successful!');
-      // ignore: use_build_context_synchronously
-      await Future.delayed(const Duration(seconds: 2));
-      Get.offAll(() => const NewNavigationMenu());
+        /// Navigate to Home Screen
+        /// TO DO: Remove manual navigation to Home Screen
+        /// Apply: Keep user logged in function
+        // Get.offAll(() => const NewNavigationMenu());
 
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-      } else if (e.code == 'wrong-password') {
-        TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-      } else if (e.code == 'invalid-email') {
-        TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      } on FirebaseAuthException catch (e) {
+        AuthService().exceptionHandlerSignIn(e.code);
+
+        // if (e.code == 'user-not-found') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // } else if (e.code == 'wrong-password') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // } else if (e.code == 'invalid-email') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // }
       }
+    } else {
+      return null;
     }
   }
 
@@ -90,7 +108,6 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
-
             const SizedBox(height: 50),
             Expanded(
               flex: 8,
@@ -102,7 +119,6 @@ class _LoginFormState extends State<LoginForm> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-
                         Expanded(
                           flex: 1,
                           child: Image.asset(
@@ -114,31 +130,33 @@ class _LoginFormState extends State<LoginForm> {
                           textController: emailController,
                           hint: 'Email',
                           obscureText: false,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              showDialog(
-                                context: context,
-                                builder: (ctx) => CupertinoAlertDialog(
-                                  content: Text('Please enter your credentials.',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge!
-                                          .apply(color: Colors.black)),
-                                  actions: [
-                                    TextButton(
-                                      child: Text("OK",
-                                          style:
-                                              Theme.of(context).textTheme.bodyMedium),
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value!.isEmpty) {
+                          //     showDialog(
+                          //       context: context,
+                          //       builder: (ctx) => CupertinoAlertDialog(
+                          //         content: Text(
+                          //             'Please enter your credentials.',
+                          //             style: Theme.of(context)
+                          //                 .textTheme
+                          //                 .labelLarge!
+                          //                 .apply(color: Colors.black)),
+                          //         actions: [
+                          //           TextButton(
+                          //             child: Text("OK",
+                          //                 style: Theme.of(context)
+                          //                     .textTheme
+                          //                     .bodyMedium),
+                          //             onPressed: () {
+                          //               Get.back();
+                          //             },
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     );
+                          //   }
+                          //   return null;
+                          // },
                           textCapitalization: TextCapitalization.none,
                         ),
                         CustomTextFormField(
@@ -201,9 +219,7 @@ class _LoginFormState extends State<LoginForm> {
               child: Align(
                 alignment: AlignmentDirectional.bottomEnd,
                 child: TextButton(
-                  onPressed: () {
-                    Get.to(() => const AdminPanelLogin());
-                  },
+                  onPressed: () => Get.to(() => const AdminPanelLogin()),
                   child: Text(
                     'Login as Administrator',
                     style: Theme.of(context).textTheme.bodyLarge!.apply(
@@ -213,7 +229,6 @@ class _LoginFormState extends State<LoginForm> {
                           offset: const Offset(0, 2),
                           blurRadius: 25,
                           color: Colors.black.withOpacity(0.5),
-
                         ),
                       ],
                     ),

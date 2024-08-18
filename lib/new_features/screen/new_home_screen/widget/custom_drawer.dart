@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../services/auth_service.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/popups/loaders.dart';
 import '../../landing_screen/landing_screen.dart';
@@ -12,6 +14,8 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = AuthService();
+
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -122,39 +126,50 @@ class CustomDrawer extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (ctx) => CupertinoAlertDialog(
-                                  title: const Text('Logout Account'),
-                                  content: const Text(
-                                      'Are you sure you want to logout your account?'),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text("Logout",
-                                          style: TextStyle(
-                                              color: CupertinoColors
-                                                  .destructiveRed)),
-                                      onPressed: () async {
-                                        /// Show snackbar
-                                        TLoaders.successSnackBar(
-                                            title: 'Logged out!',
-                                            message:
-                                                'You have successfully logged out.');
+                              title: const Text('Logout Account'),
+                              content: const Text(
+                                  'Are you sure you want to logout your account?'),
+                              actions: [
+                                TextButton(
+                                  child: Text("Cancel",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade800)),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text("Logout",
+                                      style: TextStyle(
+                                          color: CupertinoColors
+                                              .destructiveRed)),
+                                  onPressed: () async {
+                                    /// Show snackbar
+                                    TLoaders.successSnackBar(
+                                        title: 'Logged out!',
+                                        message:
+                                        'You have successfully logged out.');
 
-                                        /// delay function
-                                        await Future.delayed(
-                                            const Duration(seconds: 1));
-                                        Get.offAll(() => const LandingScreen());
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: const Text("Cancel",
-                                          style: TextStyle(
-                                              color:
-                                                  CupertinoColors.activeBlue)),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                ));
+                                    /// delay function
+                                    await Future.delayed(
+                                        const Duration(seconds: 1));
+
+                                    /// Sign out/Log out function from auth_service.dart
+                                    await auth.signOut();
+                                    print('Firebase Sign Out Success!');
+
+                                    /// Delete user data in local storage after logging out
+                                    SharedPreferences preferences =
+                                    await SharedPreferences
+                                        .getInstance();
+                                    await preferences.clear();
+
+                                    Get.offAll(() =>
+                                    const LandingScreen());
+                                  },
+                                ),
+                              ],
+                            ));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),

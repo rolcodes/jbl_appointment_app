@@ -7,6 +7,7 @@ import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
 import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/popups/loaders.dart';
 import '../../../../new_navigation_menu.dart';
@@ -61,72 +62,79 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
   }
 
   Widget userAppointments() {
+    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
 
     return StreamBuilder(
         stream: bookingStream,
         builder: (context, AsyncSnapshot snapshot) {
-          try {
-            return snapshot.hasData
-                ? ListView.separated(
-                    itemCount: snapshot.data.docs.length,
-                    scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.zero,
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      DocumentSnapshot ds = snapshot.data.docs[index];
-                      return MyAppointmentItem(
-                        ds: ds,
-                        onSelectedAppointment: () async {
-                          _selectAppointment(
-                              context, snapshot.data.docs[index]);
-                        },
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        height: 24,
-                      );
-                    },
-                  )
-                : Container();
-          } catch (_) {
-            if (snapshot.data == null || snapshot.data.docs.length == 0) {
-              /// If no data in snapshots display no appointments
-              return SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/on_boarding_images/No data-amico.png',
-                      height: 250,
-                      width: 250,
-                      fit: BoxFit.contain,
+          if (snapshot.data == null || snapshot.data.docs.length == 0) {
+            /// If no data in snapshots display no appointments
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: isMobileExtraLargeHeight
+                  ? 650
+                  : isMobileLargeHeight
+                      ? 550
+                      : isMobileMediumHeight
+                          ? 450
+                          : 0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/on_boarding_images/No data-amico.png',
+                    height: 250,
+                    width: 250,
+                    fit: BoxFit.contain,
+                  ),
+                  Center(
+                    child: Text(
+                      'No Appointment Yet',
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    Center(
-                      child: Text(
-                        'No Appointment Yet',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                  ),
+                  const SizedBox(height: 8),
+                  Center(
+                    child: Text(
+                      'Book An Appointment Now! Enjoy Our Exclusive Deals!',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .apply(color: TColors.darkGrey),
+                      textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 8),
-                    Center(
-                      child: Text(
-                        'Book An Appointment Now! Enjoy Our Exclusive Deals!',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .apply(color: TColors.darkGrey),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
+                  ),
+                ],
+              ),
+            );
           }
-          return Container();
+
+          return snapshot.hasData
+              ? ListView.separated(
+                  itemCount: snapshot.data.docs.length,
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.zero,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    DocumentSnapshot ds = snapshot.data.docs[index];
+                    return MyAppointmentItem(
+                      ds: ds,
+                      onSelectedAppointment: () async {
+                        _selectAppointment(context, snapshot.data.docs[index]);
+                      },
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      height: 24,
+                    );
+                  },
+                )
+              : Container();
         });
   }
 
@@ -153,7 +161,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                 child: userAppointments(),
               ),
             ],

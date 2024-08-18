@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jbl/new_features/screen/landing_screen/page_views/forgot_password_form/forgot_password_form.dart';
@@ -17,7 +16,6 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   late PageController pageController;
-
 
   @override
   void initState() {
@@ -113,7 +111,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
                         /// Page 1
                         SizedBox(
-                          height: 220,
+                          height: 280,
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,7 +148,10 @@ class _LandingScreenState extends State<LandingScreen> {
                                 height: 42,
                               ),
                               GradientButton(
-                                style: Theme.of(context).textTheme.titleMedium!.apply(color: Colors.white),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .apply(color: Colors.white),
                                 text: 'Facebook',
                                 color: [
                                   Colors.blue.shade800,
@@ -160,6 +161,24 @@ class _LandingScreenState extends State<LandingScreen> {
                                     'assets/logos/facebook-176-svgrepo-com.png',
                                 width: 260,
                                 height: 42,
+                                onPressed: () {},
+                              ),
+                              GradientButton(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .apply(
+                                        color: Colors.grey.shade700,
+                                        fontSizeDelta: -2),
+                                text: 'Sign in with Google',
+                                color: [
+                                  Colors.white,
+                                  Colors.white,
+                                ],
+                                imageIcon: 'assets/logos/google-icon.png',
+                                width: 260,
+                                height: 42,
+                                onPressed: () {},
                               ),
                               GradientButton(
                                 text: 'CONTINUE AS GUEST',
@@ -190,4 +209,3 @@ class _LandingScreenState extends State<LandingScreen> {
           );
   }
 }
-

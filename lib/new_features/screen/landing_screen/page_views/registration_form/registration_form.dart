@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:jbl/new_features/screen/landing_screen/page_views/regex/regex.dart';
 import 'package:jbl/new_features/screen/landing_screen/page_views/registration_form/widget/privacy_policy.dart';
+import 'package:jbl/services/auth_service.dart';
 import 'package:random_string/random_string.dart';
 import '../../../../../services/database.dart';
 import '../../../../../services/shared_pref.dart';
@@ -96,19 +97,34 @@ class _RegistrationFormState extends State<RegistrationForm> {
         /// ignore: use_build_context_synchronously
         // Get.offAll(const NavigationMenu());
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          // TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-        } else if (e.code == 'email-already-in-use') {
-          TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-        } else if (e.code == 'invalid-email') {
-          TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-        }
+        AuthService().exceptionHandlerSignUp(e.code);
+        // if (e.code == 'weak-password') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // } else if (e.code == 'email-already-in-use') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // } else if (e.code == 'invalid-email') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // } else if (e.code == 'network-request-failed') {
+        //   TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+        // }
       }
     }
+    return null;
   }
 
   /// Helps to check validation in each text fields
   final formkey = GlobalKey<FormState>();
+
+  /// Text editing controllers takes large up spaces so we have to
+  /// dispose it after they are no longer required
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    numberController.dispose();
+    nameController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

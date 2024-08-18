@@ -24,6 +24,15 @@ class _AdminPanelLoginState extends State<AdminPanelLogin> {
   /// Helps to check validation in each text fields
   final _formKey = GlobalKey<FormState>();
 
+  /// Text editing controllers takes large up spaces so we have to
+  /// dispose it after they are no longer required
+  @override
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
