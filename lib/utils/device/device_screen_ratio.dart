@@ -32,6 +32,7 @@ class CustomScreen {
   }
 
   static bool isMobileExtraLargeHeight() {
-    return TDeviceUtils.getScreenHeight() > 870 && TDeviceUtils.getScreenHeight() <= 1000;
+    return TDeviceUtils.getScreenHeight() > 870 &&
+        TDeviceUtils.getScreenHeight() <= 1000;
   }
 }

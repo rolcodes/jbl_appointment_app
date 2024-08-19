@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbl/new_features/models/user_model.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/chat/custom_chat_button.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/custom_drawer.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/custom_sizedbox_height.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/new_promo_silder.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_categories_see_all.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/service_category_cards/service_category_cards.dart';
@@ -15,12 +15,14 @@ import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../services/database.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/image_strings.dart';
-import '../../controller/future_user.dart';
+import '../../controller/new_home_screen/NewHomeScreenWrapper.dart';
 import '../../models/category_model.dart';
 import '../../models/data/dummy_data.dart';
 
 class NewHomeScreen extends StatefulWidget {
-  const NewHomeScreen({super.key});
+  const NewHomeScreen({super.key, required this.user});
+
+  final UserModel? user;
 
   @override
   State<NewHomeScreen> createState() => _NewHomeScreenState();
@@ -56,12 +58,12 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   /// Initialize loading time and getOnTheLoad
   @override
   void initState() {
-    _isLoading = true;
-    Future.delayed(const Duration(milliseconds: 300), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
+    // _isLoading = true;
+    // Future.delayed(const Duration(milliseconds: 300), () {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    // });
     getOnTheLoad();
     super.initState();
   }
@@ -73,6 +75,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+    final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
+
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -92,13 +96,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
           width: 145,
         ),
       ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(TColors.primary),
-              ),
-            )
-          : SingleChildScrollView(
+      body:
+      // _isLoading
+      //     ? const Center(
+      //         child: CircularProgressIndicator(
+      //           valueColor: AlwaysStoppedAnimation<Color>(TColors.primary),
+      //         ),
+      //       )
+      //     :
+      SingleChildScrollView(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: TDeviceUtils.getScreenHeight() * 1.2,
@@ -137,7 +143,13 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             /// FutureBuilder was extracted to another file
-                            const FutureUser(),
+                             Text("Hi, ${widget.user?.name}",
+                            style: isMobileMediumWidth
+                                ? Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .apply(fontSizeDelta: -1)
+                                : Theme.of(context).textTheme.titleLarge),
                             Text(
                               'BOOK AN APPOINTMENT NOW!',
                               style: isMobileSmallWidth
