@@ -135,6 +135,7 @@ class ProfileScreen extends StatelessWidget {
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
                         ),
+                        /// Log Out Button
                         CustomLogoutButton(auth: auth),
                       ],
                     ),

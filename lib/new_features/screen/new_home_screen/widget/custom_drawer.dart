@@ -127,8 +127,11 @@ class CustomDrawer extends StatelessWidget {
                             context: context,
                             builder: (ctx) => CupertinoAlertDialog(
                               title: const Text('Logout Account'),
-                              content: const Text(
-                                  'Are you sure you want to logout your account?'),
+                              content: const Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Text(
+                                    'Are you sure you want to logout your account?'),
+                              ),
                               actions: [
                                 TextButton(
                                   child: Text("Cancel",

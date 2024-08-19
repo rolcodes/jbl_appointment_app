@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../services/auth_service.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/popups/loaders.dart';
@@ -14,6 +16,7 @@ class AdminCustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final auth = AuthService();
 
     return Container(
       decoration: BoxDecoration(
@@ -37,7 +40,7 @@ class AdminCustomDrawer extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Container(
-                padding: EdgeInsets.only(top: 80,left: 20),
+                padding: EdgeInsets.only(top: 80, left: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -173,44 +176,58 @@ class AdminCustomDrawer extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (ctx) => CupertinoAlertDialog(
-                                  title: const Text('Logout Account'),
-                                  content: const Text(
-                                      'Are you sure you want to logout your account?'),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text("Logout",
-                                          style: TextStyle(
-                                              color: CupertinoColors
-                                                  .destructiveRed)),
-                                      onPressed: () async {
-                                        /// Show snackbar
-                                        TLoaders.successSnackBar(
-                                            title: 'Logged out!',
-                                            message:
-                                                'You have successfully logged out.');
+                              title: const Text('Logout Account'),
+                              content: const Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Text(
+                                    'Are you sure you want to logout your account?'),
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: Text("Cancel",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade800)),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text("Logout",
+                                      style: TextStyle(
+                                          color: CupertinoColors
+                                              .destructiveRed)),
+                                  onPressed: () async {
+                                    /// Show snackbar
+                                    TLoaders.successSnackBar(
+                                        title: 'Logged out!',
+                                        message:
+                                        'You have successfully logged out.');
 
-                                        /// delay function
-                                        await Future.delayed(
-                                            const Duration(seconds: 1));
-                                        Get.offAll(() => const LandingScreen());
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: const Text("Cancel",
-                                          style: TextStyle(
-                                              color:
-                                                  CupertinoColors.activeBlue)),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                ));
+                                    /// delay function
+                                    await Future.delayed(
+                                        const Duration(seconds: 1));
+
+                                    /// Sign out/Log out function from auth_service.dart
+                                    await auth.signOut();
+                                    print('Firebase Sign Out Success!');
+
+                                    /// Delete user data in local storage after logging out
+                                    SharedPreferences preferences =
+                                    await SharedPreferences
+                                        .getInstance();
+                                    await preferences.clear();
+
+                                    Get.offAll(() =>
+                                    const LandingScreen());
+                                  },
+                                ),
+                              ],
+                            ));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          'Log Out',
+                          'LOG OUT',
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
@@ -223,7 +240,7 @@ class AdminCustomDrawer extends StatelessWidget {
                   Align(
                     alignment: AlignmentDirectional.bottomEnd,
                     child: Text(
-                      'Version 1.2 Build iOS 17.4     ',
+                      'Version 1.0 Build iOS 17.4     ',
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
