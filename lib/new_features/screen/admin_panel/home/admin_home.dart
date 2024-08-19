@@ -67,6 +67,9 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
   Widget build(BuildContext context) {
     final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
     final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -87,11 +90,13 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
       body: SingleChildScrollView(
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: isMobileSmall
-              ? TDeviceUtils.getScreenHeight() / 1.2
-              : isMobileMedium
-                  ? TDeviceUtils.getScreenHeight() / 1.21
-                      : TDeviceUtils.getScreenHeight() / 1.3,
+          height: isMobileMediumHeight
+              ? 720
+              : isMobileLargeHeight
+                  ? 735
+                  : isMobileExtraLargeHeight
+                      ? 735
+                      : null,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
