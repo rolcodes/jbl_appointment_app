@@ -17,7 +17,7 @@ const dummyBranch = [
   BranchClass(
     id: 'b2',
     image: 'https://jblnew.keywcomm.com/wp-content/uploads/2024/07/jss.jpeg',
-    title: 'Jevelme Salon and Spa',
+    title: 'Jevelme Salon and Spa Imus, Cavite',
     location:
         "Chelly's Commercial Space, Ground Floor, Golden Villas, Nia Rd, Carsadang Bago II",
     distance: '9.5Km',

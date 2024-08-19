@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../models/data/branch_data.dart';
@@ -28,7 +29,20 @@ class _GuestScreenState extends State<GuestScreen> {
             width: 120,
           ),
           centerTitle: true,
-          iconTheme: IconThemeData(color: TColors.primary),
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const SizedBox(
+              height: 50,
+              width: 50,
+              child: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: TColors.primary,
+                size: 20,
+              ),
+            ),
+          ),
         ),
         body: Column(
           children: [
@@ -67,7 +81,7 @@ class _GuestScreenState extends State<GuestScreen> {
                 ),
 
                 /// -- 2nd tab
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: GuestServiceCategory(),
                 ),

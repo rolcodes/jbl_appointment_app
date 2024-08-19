@@ -4,6 +4,7 @@ import 'package:jbl/new_features/screen/landing_screen/page_views/forgot_passwor
 import 'package:jbl/new_features/screen/landing_screen/page_views/login_form/login_form.dart';
 import 'package:jbl/new_features/screen/landing_screen/page_views/registration_form/registration_form.dart';
 import '../../../utils/constants/colors.dart';
+import '../../../utils/device/device_screen_ratio.dart';
 import '../continue_as_guest/guest.dart';
 import 'non_screen_widget/gradient_button.dart';
 
@@ -43,6 +44,11 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+
     return _isLoading
         ? Container(
             height: MediaQuery.of(context).size.height,
@@ -101,17 +107,37 @@ class _LandingScreenState extends State<LandingScreen> {
 
                     Column(
                       children: [
-                        const SizedBox(height: 140),
+                        SizedBox(
+                            height: isMobileMediumHeight
+                                ? 120
+                                : isMobileLargeHeight
+                                    ? 130
+                                    : isMobileExtraLargeHeight
+                                        ? 140
+                                        : null),
                         Image.asset(
                           'assets/logos/vertical_logo_jbl.png',
                           width: 260,
                           height: 260,
                         ),
-                        const SizedBox(height: 140),
+                        SizedBox(
+                            height: isMobileMediumHeight
+                                ? 120
+                                : isMobileLargeHeight
+                                    ? 130
+                                    : isMobileExtraLargeHeight
+                                        ? 140
+                                        : null),
 
                         /// Page 1
                         SizedBox(
-                          height: 280,
+                          height: isMobileMediumHeight
+                              ? 260
+                              : isMobileLargeHeight
+                                  ? 270
+                                  : isMobileExtraLargeHeight
+                                      ? 280
+                                      : null,
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

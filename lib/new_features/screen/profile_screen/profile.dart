@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -6,15 +5,11 @@ import 'package:jbl/new_features/screen/profile_screen/widget/appointment_histor
 import 'package:jbl/new_features/screen/profile_screen/widget/edit_profile.dart';
 import 'package:jbl/services/auth_service.dart';
 import 'package:jbl/utils/device/device_utility.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../common/widgets/buttons/custom_logout_button.dart';
 import '../../../common/widgets/list_tile/settings_menu_tile.dart';
-import '../../../services/database.dart';
 import '../../../utils/constants/colors.dart';
-import '../../../utils/popups/loaders.dart';
 import '../../models/user_model.dart';
-import '../landing_screen/landing_screen.dart';
 import '../new_home_screen/widget/chat/custom_chat_button.dart';
 import '../new_home_screen/widget/my_appointments/my_appointments.dart';
 
@@ -44,7 +39,10 @@ class ProfileScreen extends StatelessWidget {
         isEdit: true,
         title: Text(
           'Profile',
-          style: Theme.of(context).textTheme.titleMedium!.apply(color: TColors.primary, fontSizeDelta: 2),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .apply(color: TColors.primary, fontSizeDelta: 2),
         ),
         isCenterTitle: true,
       ),
@@ -107,7 +105,6 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.bookmark_24,
                           title: 'Appointments',
                           subTitle: 'Check your upcoming appointments',
-
                           onTap: () =>
                               Get.to(() => const MyAppointmentsScreen()),
                           titleSmall: isMobileSmall ? true : false,
@@ -117,7 +114,6 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.archive_book,
                           title: 'History',
                           subTitle: 'List of Appointments history',
-
                           onTap: () =>
                               Get.to(() => const AppointmentHistoryScreen()),
                           titleSmall: isMobileSmall ? true : false,
@@ -127,7 +123,6 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.notification,
                           title: 'Notification',
                           subTitle: 'Recent notifications & updates',
-
                           onTap: () {},
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
@@ -140,66 +135,7 @@ class ProfileScreen extends StatelessWidget {
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: OutlinedButton(
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => CupertinoAlertDialog(
-                                          title: const Text('Logout Account'),
-                                          content: const Text(
-                                              'Are you sure you want to logout your account?'),
-                                          actions: [
-                                            TextButton(
-                                              child: Text("Cancel",
-                                                  style: TextStyle(
-                                                      color: Colors
-                                                          .grey.shade800)),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            TextButton(
-                                              child: const Text("Logout",
-                                                  style: TextStyle(
-                                                      color: CupertinoColors
-                                                          .destructiveRed)),
-                                              onPressed: () async {
-                                                /// Show snackbar
-                                                TLoaders.successSnackBar(
-                                                    title: 'Logged out!',
-                                                    message:
-                                                        'You have successfully logged out.');
-
-                                                /// delay function
-                                                await Future.delayed(
-                                                    const Duration(seconds: 1));
-
-                                                /// Sign out/Log out function from auth_service.dart
-                                                await auth.signOut();
-                                                print(
-                                                    'Firebase Sign Out Success!');
-
-                                                /// Delete user data in local storage after logging out
-                                                SharedPreferences preferences =
-                                                    await SharedPreferences
-                                                        .getInstance();
-                                                await preferences.clear();
-
-                                                Get.offAll(() =>
-                                                    const LandingScreen());
-                                              },
-                                            ),
-                                          ],
-                                        ));
-                              },
-                              child: const Text(
-                                'Logout',
-                                style: TextStyle(
-                                    color: Color.fromRGBO(219, 157, 0, 1)),
-                              )),
-                        ),
+                        CustomLogoutButton(auth: auth),
                       ],
                     ),
                   ),
@@ -213,3 +149,4 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+

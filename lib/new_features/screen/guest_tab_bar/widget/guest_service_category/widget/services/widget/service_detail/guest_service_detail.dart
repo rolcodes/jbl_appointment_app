@@ -4,7 +4,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../../../models/service_product.dart';
 
 class GuestServiceDetailScreen extends StatelessWidget {
@@ -17,79 +19,102 @@ class GuestServiceDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+
     return Scaffold(
       backgroundColor: TColors.secondary,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 56,
-            child: Container(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            SizedBox(
               width: MediaQuery.of(context).size.width,
+              height: isMobileMediumHeight
+                  ? 820
+                  : isMobileLargeHeight
+                  ? 820
+                  : isMobileExtraLargeHeight
+                  ? 830
+                  : null,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   /// -- Image
-                  Image.network(
-                    service.imageUrl,
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    fit: BoxFit.cover,
+                  Expanded(
+                    flex: 4,
+                    child: Image.network(
+                      service.imageUrl,
+                      width: MediaQuery.of(context).size.width,
+                      height: 300,
+                      fit: BoxFit.cover,
+                    ),
                   ),
+                  const SizedBox(height: 8),
 
                   /// -- Title
-                  Padding(
-                    padding: EdgeInsets.all(25),
+                  Expanded(
+                    flex: 7,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          service.title,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        SizedBox(height: 25),
-
-                        /// -- Description
-                        Text(service.description),
-                        SizedBox(height: 25),
-
-                        /// -- Price
                         Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 20),
                           decoration: BoxDecoration(
-                              color: TColors.primary,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                            color: Colors.white.withOpacity(0.5),
+                          ),
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(
-                                'assets/images/users/female-svgrepo-com.png',
-                                width: 20,
-                              ),
-                              Image.asset(
-                                'assets/images/users/male-svgrepo-com.png',
-                                width: 14,
-                              ),
-                              SizedBox(width: 6),
                               Text(
-                                "${service.price}.00",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .apply(color: Colors.white),
+                                service.title,
+                                style:
+                                Theme.of(context).textTheme.headlineMedium,
                               ),
+                              SizedBox(
+                                  height: isMobileMediumHeight
+                                      ? 10
+                                      : isMobileLargeHeight
+                                      ? 20
+                                      : isMobileExtraLargeHeight
+                                      ? 25
+                                      : null),
+
+                              /// -- Description
+                              Text(service.description),
+                              const SizedBox(height: 25),
+
+                              /// -- Price
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 2),
+                                decoration: BoxDecoration(
+                                    color: TColors.primary,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Text(
+                                  "${service.price}.00",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .apply(color: Colors.white),
+                                ),
+                              ),
+                              const SizedBox(height: 25),
+
+                              /// -- Duration
+                              Text("Duration: ${service.duration}",
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ],
                           ),
                         ),
-                        SizedBox(height: 25),
-
-                        /// -- Duration
-                        Text(service.duration,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 20),
 
                         /// -- Rating
                         Container(
-                          padding: EdgeInsets.all(15),
+                          margin: const EdgeInsets.symmetric(horizontal: 25),
+                          padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
                               border: Border.all(
                                 color: TColors.primary,
@@ -102,7 +127,7 @@ class GuestServiceDetailScreen extends StatelessWidget {
                                   'Average Rating',
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 RatingBarIndicator(
                                   rating: 4.6,
                                   itemSize: 20,
@@ -115,7 +140,14 @@ class GuestServiceDetailScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 25),
+                        SizedBox(
+                            height: isMobileMediumHeight
+                                ? 18
+                                : isMobileLargeHeight
+                                ? 20
+                                : isMobileExtraLargeHeight
+                                ? 25
+                                : null),
 
                         /// -- Service Inclusions:
                         Center(
@@ -128,22 +160,25 @@ class GuestServiceDetailScreen extends StatelessWidget {
                                     .titleLarge!
                                     .apply(color: TColors.primary),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Text(
                                 'No Information Available',
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
-                              SizedBox(height: 30),
+                              const SizedBox(height: 20),
                               Text(
                                 'How Often Should It be Done?',
-                                style: Theme.of(context).textTheme.titleLarge!
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
                                     .apply(color: TColors.primary),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Text(
                                 'Repeat service every 2-3 weeks',
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
+                              const SizedBox(height: 10),
                             ],
                           ),
                         ),
@@ -153,27 +188,18 @@ class GuestServiceDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Positioned(
-            top: 65,
-            left: 10,
-            child: Container(
-              height: 45,
-              width: 45,
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: IconButton(
-                  onPressed: () => Get.back(),
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: TColors.primary,
-                    size: 25,
-                  )),
+
+            /// -- App Bar
+            const CustomAppBar(
+              isEdit: false,
+              iconColor: Colors.white,
+              showBackgroundColor: true,
+              showIcon: true,
+              isDrawer: false,
+              isNotification: false,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
