@@ -84,8 +84,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       appBar: CustomAppBar(
         backgroundColor: Colors.white,
         isEdit: false,
-        iconColor: Colors.white,
-        showBackgroundColor: true,
+        iconColor: TColors.primary,
+        showBackgroundColor: false,
         showIcon: true,
         isDrawer: true,
         isNotification: true,

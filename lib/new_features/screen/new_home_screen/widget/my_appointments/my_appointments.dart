@@ -150,7 +150,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         isEdit: false,
         title: Text(
           'My Appointments',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2),
         ),
         isCenterTitle: true,
       ),

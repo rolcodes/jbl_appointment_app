@@ -13,12 +13,18 @@ import '../../../common/widgets/list_tile/settings_menu_tile.dart';
 import '../../../services/database.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/popups/loaders.dart';
+import '../../models/user_model.dart';
 import '../landing_screen/landing_screen.dart';
 import '../new_home_screen/widget/chat/custom_chat_button.dart';
 import '../new_home_screen/widget/my_appointments/my_appointments.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({
+    super.key,
+    required this.user,
+  });
+
+  final UserModel? user;
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +35,16 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
-        backgroundColor: TColors.secondary,
+        backgroundColor: TColors.light,
         showBackgroundColor: false,
+        iconColor: TColors.primary,
         showIcon: true,
         isDrawer: true,
         isNotification: false,
         isEdit: true,
         title: Text(
           'Profile',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleMedium!.apply(color: TColors.primary, fontSizeDelta: 2),
         ),
         isCenterTitle: true,
       ),
@@ -46,65 +53,47 @@ class ProfileScreen extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Column(
             children: [
-              FutureBuilder(
-                future: DatabaseMethods().readUser(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong');
-                  } else if (snapshot.hasData) {
-                    final user = snapshot.data;
-                    return user == null
-                        ? Container()
-                        : Material(
-                            color: TColors.light,
-                            borderRadius: BorderRadius.circular(20),
-                            child: InkWell(
-                              onTap: () => Get.to(() => EditProfileScreen()),
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                padding: const EdgeInsets.all(24),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: ClipOval(
-                                        child: Image.asset(
-                                          'assets/images/users/default_profile.png',
-                                          height: 120,
-                                          width: 120,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            user.name,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge,
-                                          ),
-                                          Text(user.email),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+              Material(
+                color: TColors.light,
+                borderRadius: BorderRadius.circular(20),
+                child: InkWell(
+                  onTap: () => Get.to(() => const EditProfileScreen()),
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/images/users/default_profile.png',
+                              height: 120,
+                              width: 120,
+                              fit: BoxFit.contain,
                             ),
-                          );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(color: TColors.primary),
-                    );
-                  }
-                },
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            children: [
+                              Text(
+                                "${user?.name}",
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              Text("${user?.email}"),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               SizedBox(height: 24),
               Column(
@@ -118,10 +107,7 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.bookmark_24,
                           title: 'Appointments',
                           subTitle: 'Check your upcoming appointments',
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 20,
-                          ),
+
                           onTap: () =>
                               Get.to(() => const MyAppointmentsScreen()),
                           titleSmall: isMobileSmall ? true : false,
@@ -131,10 +117,7 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.archive_book,
                           title: 'History',
                           subTitle: 'List of Appointments history',
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 20,
-                          ),
+
                           onTap: () =>
                               Get.to(() => const AppointmentHistoryScreen()),
                           titleSmall: isMobileSmall ? true : false,
@@ -144,10 +127,7 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.notification,
                           title: 'Notification',
                           subTitle: 'Recent notifications & updates',
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 20,
-                          ),
+
                           onTap: () {},
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
@@ -156,10 +136,6 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.heart_add,
                           title: 'Favorites',
                           subTitle: 'List of all favorite products',
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 20,
-                          ),
                           onTap: () {},
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
@@ -178,7 +154,8 @@ class ProfileScreen extends StatelessWidget {
                                             TextButton(
                                               child: Text("Cancel",
                                                   style: TextStyle(
-                                                      color: Colors.grey.shade800)),
+                                                      color: Colors
+                                                          .grey.shade800)),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
@@ -201,7 +178,8 @@ class ProfileScreen extends StatelessWidget {
 
                                                 /// Sign out/Log out function from auth_service.dart
                                                 await auth.signOut();
-                                                print('Firebase Sign Out Success!');
+                                                print(
+                                                    'Firebase Sign Out Success!');
 
                                                 /// Delete user data in local storage after logging out
                                                 SharedPreferences preferences =

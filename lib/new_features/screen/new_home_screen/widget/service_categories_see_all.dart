@@ -31,6 +31,7 @@ class ServiceCategoriesSeeAll extends StatelessWidget {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
+        backgroundColor: Colors.white,
         isEdit: false,
         isCenterTitle: true,
         iconColor: TColors.primary,
@@ -40,7 +41,7 @@ class ServiceCategoriesSeeAll extends StatelessWidget {
         isNotification: false,
         title: Text(
           'Service Categories',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
       body: GridView.builder(

@@ -78,15 +78,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
+        backgroundColor: Colors.white,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
         isNotification: false,
+        iconColor: TColors.primary,
         isEdit: false,
         isCenterTitle: true,
         title: Text(
           'Edit Profile',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
       body: FutureBuilder(

@@ -7,7 +7,6 @@ class TSettingMenuTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subTitle,
-    this.trailing,
     this.onTap,
     required this.titleSmall,
     required this.subTitleSmall,
@@ -16,7 +15,6 @@ class TSettingMenuTile extends StatelessWidget {
   final bool titleSmall, subTitleSmall;
   final IconData icon;
   final String title, subTitle;
-  final Widget? trailing;
   final VoidCallback? onTap;
 
   @override
@@ -46,7 +44,11 @@ class TSettingMenuTile extends StatelessWidget {
                       .labelMedium!
                       .apply(fontSizeDelta: -1))
               : Text(subTitle, style: Theme.of(context).textTheme.labelMedium),
-          trailing: trailing,
+          trailing: const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 20,
+            color: Colors.grey,
+          ),
           onTap: onTap,
         ),
       ),

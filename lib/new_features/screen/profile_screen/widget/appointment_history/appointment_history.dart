@@ -25,7 +25,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
           isCenterTitle: true,
           title: Text(
             'Appointment History',
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2),
           ),
         ),
         body: Column(

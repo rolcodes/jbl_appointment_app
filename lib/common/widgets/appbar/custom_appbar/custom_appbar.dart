@@ -140,8 +140,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           backgroundColor:
                               WidgetStatePropertyAll(Colors.transparent),
                         ),
-                        onPressed: () => Get.to(() => EditProfileScreen()),
-                        icon: Icon(Icons.edit_outlined),
+                        onPressed: () => Get.to(() => const EditProfileScreen()),
+                        icon: const Icon(Icons.edit_outlined, color: TColors.primary,),
                       ),
                     )
                   : Container(),

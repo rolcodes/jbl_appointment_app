@@ -83,6 +83,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(
+        backgroundColor: Colors.white,
         isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
@@ -92,16 +93,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
         iconColor: TColors.primary,
         title: Text(
           widget.title,
-          style: Theme.of(context).textTheme.headlineSmall!.apply(
+          style: Theme.of(context).textTheme.titleMedium!.apply(
+            fontSizeDelta: 2,
             color: TColors.primary,
-            shadows: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(.50),
-                  spreadRadius: 5,
-                  offset: const Offset(0, 1),
-                  blurRadius: 5,
-                  blurStyle: BlurStyle.normal),
-            ],
           ),
         ),
       ),
