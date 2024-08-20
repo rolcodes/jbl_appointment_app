@@ -41,7 +41,7 @@ class UserAppointmentDisplay extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(color: TColors.white),
                           padding: const EdgeInsets.only(
-                              left: 24, right: 24, top: 6, bottom: 0),
+                              left: 24, right: 24, top: 0, bottom: 0),
                           child: Column(
                             children: [
                               /// -- My Appointments

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -61,12 +62,13 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
       context: context,
       builder: (ctx) => Dialog(
         child: SizedBox(
-          height: 400,
+          height: 600,
           child: Container(
             width: TDeviceUtils.getScreenWidth(context),
             decoration: BoxDecoration(
                 color: TColors.light, borderRadius: BorderRadius.circular(10)),
-            padding: const EdgeInsets.only(top: 30, bottom: 20, left: 30, right: 30),
+            padding:
+                const EdgeInsets.only(top: 30, bottom: 20, left: 30, right: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +95,53 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                 ),
                 const SizedBox(height: 10),
 
+                Container(
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          widget.ds['image'],
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 12),
+                        height: 100,
+                        width: 180,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.ds['service'],
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              widget.ds['duration'],
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            Text(
+                              widget.ds['price'],
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            Spacer(),
+                            Text(
+                              'Booking ID: ${widget.ds['bookingId']}',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
                 /// Get data from Firebase
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,22 +155,18 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            'Date:',
+                        Text('Date:',
                             style: Theme.of(context).textTheme.bodyMedium),
-                        Text(
-                            widget.ds['date'],
+                        Text(widget.ds['date'],
                             style: Theme.of(context).textTheme.bodyMedium),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            'Time:',
+                        Text('Time:',
                             style: Theme.of(context).textTheme.bodyMedium),
-                        Text(
-                            widget.ds['time'],
+                        Text(widget.ds['time'],
                             style: Theme.of(context).textTheme.bodyMedium),
                       ],
                     ),
@@ -195,7 +240,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                       onPressed: () => Navigator.pop(context),
                       child: Text(
                         'Cancel',
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),
                     TextButton(
@@ -212,12 +257,15 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                             title: 'Rescheduling successful',
                             message: 'Booking was rescheduled successfully!');
 
-                        await Future.delayed(const Duration(seconds: 2));
+                        await Future.delayed(const Duration(seconds: 1));
                         Get.offAll(() => const NewNavigationMenu());
                       },
                       child: Text(
-                        'Yes',
-                        style: Theme.of(context).textTheme.titleMedium,
+                        'Confirm',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .apply(color: CupertinoColors.activeBlue),
                       ),
                     ),
                   ],
@@ -234,7 +282,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
   Widget build(BuildContext context) {
     /// -- List to selected data, and update to text controller
     /// -- Listen to picked date and update to text controller
-    pickedDate.text = DateFormat('MMM d, yyyy') // EEEE, MMM d, yyyy
+    pickedDate.text = DateFormat('MMM d') // EEEE, MMM d, yyyy
         .format(Provider.of<CalendarModel>(context, listen: false)
             .firstDate); //.add_yMd()
 
@@ -251,7 +299,10 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
         iconColor: TColors.primary,
         title: Text(
           'Select Technician',
-          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2, color: TColors.primary),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
       body: ListView.separated(

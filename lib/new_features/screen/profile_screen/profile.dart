@@ -33,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: TColors.light,
         showBackgroundColor: false,
         iconColor: TColors.primary,
-        showIcon: true,
+        showIcon: false,
         isDrawer: true,
         isNotification: false,
         isEdit: true,
