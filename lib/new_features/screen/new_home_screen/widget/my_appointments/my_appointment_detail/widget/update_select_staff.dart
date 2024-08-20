@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:jbl/utils/device/device_utility.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
@@ -51,7 +52,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
     super.initState();
   }
 
-  /// -- Method to navigate to Checkout Screen, passing data from Select Staff Screen
+  /// -- Method to display custom showDialog, passing data from Select Staff Screen
   void onSelectStaff(
       BuildContext context, ServiceProduct service, StaffModel staff) {
     /// Create function to reschedule booking
@@ -62,9 +63,10 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
         child: SizedBox(
           height: 400,
           child: Container(
+            width: TDeviceUtils.getScreenWidth(context),
             decoration: BoxDecoration(
                 color: TColors.light, borderRadius: BorderRadius.circular(10)),
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.only(top: 30, bottom: 20, left: 30, right: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +76,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                     Center(
                       child: Text(
                         'Reschedule Booking',
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -89,6 +91,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 10),
 
                 /// Get data from Firebase
                 Column(
@@ -100,13 +103,40 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                             .bodyLarge!
                             .apply(fontWeightDelta: 1)),
                     const SizedBox(height: 6),
-                    Text(
-                        'Date: ${widget.ds['date']}, 2024, ${widget.ds['time']}',
-                        style: Theme.of(context).textTheme.bodyMedium),
-                    Text('Technician: ${widget.ds['staffName']}',
-                        style: Theme.of(context).textTheme.bodyMedium),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            'Date:',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                        Text(
+                            widget.ds['date'],
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            'Time:',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                        Text(
+                            widget.ds['time'],
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Technician:',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                        Text(widget.ds['staffName'],
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
                   ],
                 ),
+                const SizedBox(height: 10),
 
                 /// Get data from recent selection of user
                 Column(
@@ -118,14 +148,45 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                             .bodyLarge!
                             .apply(fontWeightDelta: 1)),
                     const SizedBox(height: 6),
-                    Text(
-                      'Date: ${pickedDate.text}, $time',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Date:',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        Text(
+                          pickedDate.text,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
                     ),
-                    Text('Technician: ${staff.staffName}',
-                        style: Theme.of(context).textTheme.bodyMedium),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Time:',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        Text(
+                          '$time',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Technician:',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                        Text(staff.staffName,
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
                   ],
                 ),
+                const SizedBox(height: 10),
+                const Divider(),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -134,25 +195,29 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                       onPressed: () => Navigator.pop(context),
                       child: Text(
                         'Cancel',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     TextButton(
                       onPressed: () async {
                         /// -- UPDATE: update user appointment
-                        await DatabaseMethods().updateUserAppointments(widget.ds['bookingId'],
-                             pickedDate.text, time!, staff.staffName);
+                        await DatabaseMethods().updateUserAppointments(
+                            widget.ds['bookingId'],
+                            pickedDate.text,
+                            time!,
+                            staff.staffName);
                         print('Appointment was successfully updated!');
 
-                        TLoaders.successBookingSnackBar(title: 'Rescheduling successful', message: 'Booking was rescheduled successfully!');
+                        TLoaders.successBookingSnackBar(
+                            title: 'Rescheduling successful',
+                            message: 'Booking was rescheduled successfully!');
 
                         await Future.delayed(const Duration(seconds: 2));
                         Get.offAll(() => const NewNavigationMenu());
-
                       },
                       child: Text(
                         'Yes',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ],
@@ -175,8 +240,9 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(        isEdit: false,
-
+      appBar: CustomAppBar(
+        backgroundColor: Colors.white,
+        isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
@@ -185,7 +251,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
         iconColor: TColors.primary,
         title: Text(
           'Select Technician',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
       body: ListView.separated(

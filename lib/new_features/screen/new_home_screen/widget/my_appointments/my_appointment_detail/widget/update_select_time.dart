@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
+import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_time_item.dart';
 
 import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../../../services/shared_pref.dart';
@@ -78,8 +79,9 @@ class _UpdateSelectTimeState extends State<UpdateSelectTime> {
                   crossAxisCount: 3,
                 ),
                 itemCount: widget.hours.length,
-                itemBuilder: (ctx, index) => TimeItem(
-                  selectTime: widget.hours[index],
+                itemBuilder: (ctx, index) => UpdateTimeItem(
+                  selectTime: widget.hours[index], ds: widget.ds,
+
                 ),
               ),
             ),

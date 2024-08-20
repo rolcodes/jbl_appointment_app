@@ -7,26 +7,25 @@ import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/m
 import 'package:jbl/utils/popups/loaders.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../services/shared_pref.dart';
-import '../../../../utils/constants/colors.dart';
-import '../../../../utils/device/device_utility.dart';
-import '../../../models/calendar_model.dart';
-import '../../../models/data/dummy_data.dart';
-import '../../../models/time_model.dart';
-import '../../select_staff/select_staff.dart';
+import '../../../../../../../services/shared_pref.dart';
+import '../../../../../../../utils/device/device_utility.dart';
+import '../../../../../../models/calendar_model.dart';
+import '../../../../../../models/data/dummy_data.dart';
+import '../../../../../../models/time_model.dart';
 
-class TimeItem extends StatefulWidget {
-  const TimeItem({super.key, required this.selectTime});
+class UpdateTimeItem extends StatefulWidget {
+  const UpdateTimeItem({super.key, required this.selectTime, required this.ds});
 
   final TimeClass selectTime;
+  final DocumentSnapshot<Object?> ds;
 
   @override
-  State<TimeItem> createState() => _TimeItemState();
+  State<UpdateTimeItem> createState() => _UpdateTimeItemState();
 }
 
 TextEditingController pickedDate = TextEditingController();
 
-class _TimeItemState extends State<TimeItem> {
+class _UpdateTimeItemState extends State<UpdateTimeItem> {
   // final Function() onSelectedTime;
   // bool click = false;
 
@@ -34,9 +33,10 @@ class _TimeItemState extends State<TimeItem> {
   void onSelectTime(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (ctx) {
-        return const SelectStaffScreen(
+        return UpdateSelectTechnician(
           services: dummyServices,
           staff: dummyStaff,
+          ds: widget.ds,
         );
       }),
     );
