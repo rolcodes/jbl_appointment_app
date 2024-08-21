@@ -119,14 +119,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
+        backgroundColor: TColors.light,
         isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
         isNotification: false,
         iconColor: TColors.primary,
-        title:
-            Text('Checkout', style: Theme.of(context).textTheme.headlineSmall),
+        title: Text('Checkout',
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall!
+                .apply(color: TColors.primary)),
         isCenterTitle: true,
       ),
       body:
@@ -148,8 +152,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 ? TDeviceUtils.getScreenHeight() / 1.11
                                 : TDeviceUtils.getScreenHeight() / 1.09,
                             padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: TColors.primary.withOpacity(0.5),
+                            decoration: const BoxDecoration(
+                              color: TColors.secondary,
                             ),
                             child: Container(
                               height: TDeviceUtils.getScreenHeight(),
@@ -269,9 +273,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       ),
                                     ),
                                   ),
-                                  const Divider(
-                                      height: 10, color: TColors.primary),
-                                  SizedBox(height: 20),
+                                  Divider(
+                                    height: 10,
+                                    color: TColors.primary.withOpacity(0.4),
+                                  ),
+                                  const SizedBox(height: 20),
 
                                   Expanded(
                                     flex: 1,
@@ -336,21 +342,29 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                 ),
                                               ),
                                               const SizedBox(height: 5),
-                                              if (time != null)
-                                                Text(time!,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleLarge),
+                                              time != null
+                                                  ? Text(time!,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .titleLarge)
+                                                  : time == null
+                                                      ? Text(time.toString(),
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .titleLarge)
+                                                      : Container(),
                                             ],
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 20),
-                                  const Divider(
-                                      height: 10, color: TColors.primary),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 20),
+                                   Divider(
+                                      height: 10,                                     color: TColors.primary.withOpacity(0.4),
+                                  ),
+                                  const SizedBox(height: 10),
 
                                   Expanded(
                                     flex: 2,
@@ -358,7 +372,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       children: [
                                         Center(
                                           child: Text(
-                                            'Your choosen staff',
+                                            'Your chosen staff',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall!
@@ -385,8 +399,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 40),
+                                                padding: const EdgeInsets.only(
+                                                    left: 40),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -409,9 +423,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     ),
                                   ),
 
-                                  const Divider(
-                                      height: 10, color: TColors.primary),
-                                  SizedBox(height: 20),
+                                  Divider(
+                                    height: 10,
+                                    color: TColors.primary.withOpacity(0.4),
+                                  ),
+                                  const SizedBox(height: 20),
 
                                   Expanded(
                                     flex: 3,
@@ -561,8 +577,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           : isMobileMedium
                                               ? 8
                                               : 10),
-                                  const Divider(
-                                      height: 10, color: TColors.primary),
+                                  Divider(
+                                    height: 10,
+                                    color: TColors.primary.withOpacity(0.4),
+                                  ),
                                   SizedBox(
                                       height: isMobileSmall
                                           ? 10
@@ -627,7 +645,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(height: 20),
+                                              const SizedBox(height: 20),
 
                                               Row(
                                                 mainAxisAlignment:
@@ -652,7 +670,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(height: 20),
+                                        const SizedBox(height: 20),
                                         ElevatedButton(
                                           onPressed: () {
                                             showDialog(
@@ -678,9 +696,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                 ),
                                                 actions: [
                                                   TextButton(
-                                                    onPressed: () {
-                                                      Get.back();
-                                                    },
+                                                    onPressed: () => Get.back(),
                                                     style: TextButton.styleFrom(
                                                         overlayColor:
                                                             TColors.primary),

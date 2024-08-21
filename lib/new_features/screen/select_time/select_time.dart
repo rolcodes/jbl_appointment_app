@@ -26,16 +26,16 @@ class SelectTime extends StatefulWidget {
 
 class _SelectTimeState extends State<SelectTime> {
   /// -- Method to navigate to select staff screen
-  void onSelectTime(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => const SelectStaffScreen(
-          services: dummyServices,
-          staff: dummyStaff,
-        ),
-      ),
-    );
-  }
+  // void onSelectTime(BuildContext context) {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (ctx) => const SelectStaffScreen(
+  //         services: dummyServices,
+  //         staff: dummyStaff,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   // String? serviceTime;
   //
@@ -66,8 +66,9 @@ class _SelectTimeState extends State<SelectTime> {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: AppBar(
+        backgroundColor: TColors.light,
         title: Text('Select Time',
-            style: Theme.of(context).textTheme.headlineSmall),
+            style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.primary)),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -85,12 +86,7 @@ class _SelectTimeState extends State<SelectTime> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          Text(
-            "",
-            style: Theme.of(context).textTheme.titleLarge,
-          )
-        ],
+
       ),
       body: Column(
         children: [
@@ -122,9 +118,10 @@ class _SelectTimeState extends State<SelectTime> {
             TLoaders.errorSnackBar(
                 title: 'Error',
                 message: 'Make sure to select time to proceed!');
-          } else {
-            onSelectTime(context);
           }
+          // else {
+          //   onSelectTime(context);
+          // }
         },
         child: Container(
           height: Platform.isAndroid ? 50 : 70,

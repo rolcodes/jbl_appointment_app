@@ -31,12 +31,12 @@ class _TimeItemState extends State<TimeItem> {
   // bool click = false;
 
   /// -- Method to navigate to select staff screen
-  void onSelectTime(BuildContext context) {
+  void onSelectTime(BuildContext context, String selectedTime) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (ctx) {
-        return const SelectStaffScreen(
+        return SelectStaffScreen(
           services: dummyServices,
-          staff: dummyStaff,
+          staff: dummyStaff, selectedTime: selectedTime,
         );
       }),
     );
@@ -62,6 +62,7 @@ class _TimeItemState extends State<TimeItem> {
 
       /// Function
       onPressed: () {
+
         showDialog(
             barrierDismissible: false,
             context: (context),
@@ -98,6 +99,9 @@ class _TimeItemState extends State<TimeItem> {
                               .titleLarge!
                               .apply(color: CupertinoColors.activeBlue)),
                       onPressed: () async {
+                        /// Save selected time in local database using shared preferences
+                        SharedPreferenceHelper().saveServiceTime(selectedTime);
+
                         time = await SharedPreferenceHelper().getServiceTime();
 
                         if (time == null) {
@@ -105,15 +109,13 @@ class _TimeItemState extends State<TimeItem> {
                               title: 'Error',
                               message: 'Make sure to select time to proceed!');
                         } else {
-                          onSelectTime(context);
+                          onSelectTime(context, selectedTime);
                         }
                       },
                     ),
                   ],
                 ));
 
-        /// Save selected time in local database using shared preferences
-        SharedPreferenceHelper().saveServiceTime(selectedTime);
       },
       child: Center(
         child: Text(

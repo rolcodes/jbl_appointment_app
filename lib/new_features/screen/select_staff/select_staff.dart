@@ -1,28 +1,42 @@
 
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/select_staff/widget/staff_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../services/shared_pref.dart';
 import '../../../utils/constants/colors.dart';
 
 import '../../models/service_product.dart';
 import '../../models/staff_model.dart';
+import '../../models/time_model.dart';
 import '../checkout_screen/checkout_screen.dart';
 
-class SelectStaffScreen extends StatelessWidget {
+class SelectStaffScreen extends StatefulWidget {
   const SelectStaffScreen({
     super.key,
     required this.services,
-    required this.staff,
+    required this.staff, required this.selectedTime,
   });
 
+  final String selectedTime;
   final List<ServiceProduct> services;
   final List<StaffModel> staff;
 
+  @override
+  State<SelectStaffScreen> createState() => _SelectStaffScreenState();
+}
+
+class _SelectStaffScreenState extends State<SelectStaffScreen> {
+  String? time;
   /// -- Method to navigate to Checkout Screen, passing data from Select Staff Screen
   void onSelectStaff(
       BuildContext context, ServiceProduct service, StaffModel staff) {
+    /// To avoid null value, get the selected time again by saving it again here
+    /// select staff then transfer to checkout screen
+    SharedPreferenceHelper().saveServiceTime(widget.selectedTime);
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => CheckoutScreen(
@@ -31,6 +45,23 @@ class SelectStaffScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Get data in local database
+  getDataFromSharedPref() async {
+
+    time = await SharedPreferenceHelper().getServiceTime();
+  }
+
+  getOnTheLoad() async {
+    await getDataFromSharedPref();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getOnTheLoad();
+    super.initState();
   }
 
   @override
@@ -51,19 +82,19 @@ class SelectStaffScreen extends StatelessWidget {
         ),
       ),
       body: ListView.separated(
-        itemCount: staff.length,
+        itemCount: widget.staff.length,
         itemBuilder: (ctx, index) {
           return StaffItem(
             /// staff details
-            staff: staff[index],
+            staff: widget.staff[index],
 
             /// checkout details
-            service: services[index],
+            service: widget.services[index],
             onSelectedService: (service) {
               onSelectStaff(
                 context,
                 service,
-                staff[index],
+                widget.staff[index],
               );
             },
           );

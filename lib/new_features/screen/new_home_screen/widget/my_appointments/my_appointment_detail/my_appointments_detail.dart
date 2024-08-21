@@ -44,7 +44,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
+    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
     final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
 
     return Scaffold(
@@ -78,15 +78,15 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       ClipOval(
                         child: Image.network(
                           widget.ds['branchImage'],
-                          height: isMobileSmall ? 90 : 100,
-                          width: isMobileSmall ? 90 : 100,
+                          height: isMobileSmallWidth ? 90 : 100,
+                          width: isMobileSmallWidth ? 90 : 100,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ],
                   ),
                   Container(
-                    width: isMobileSmall ? 240 : 260,
+                    width: isMobileSmallWidth ? 240 : 260,
                     padding: isMobileMedium
                         ? const EdgeInsets.only(left: 8)
                         : const EdgeInsets.only(left: 0),
@@ -96,7 +96,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       children: [
                         Text(
                           widget.ds['branchTitle'],
-                          style: isMobileSmall
+                          style: isMobileSmallWidth
                               ? Theme.of(context)
                                   .textTheme
                                   .headlineSmall!
@@ -220,19 +220,19 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       widget.ds['image'],
-                      width: isMobileSmall ? 110 : 120,
-                      height: isMobileSmall ? 110 : 120,
+                      width: isMobileSmallWidth ? 110 : 120,
+                      height: isMobileSmallWidth ? 110 : 120,
                       fit: BoxFit.cover,
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 20),
-                    height: isMobileSmall ? 110 : 120,
+                    height: isMobileSmallWidth ? 110 : 120,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: isMobileSmall ? 200 : 220,
+                          width: isMobileSmallWidth ? 200 : 220,
                           child: Text(
                             widget.ds['service'],
                             style: Theme.of(context)
@@ -267,7 +267,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
               widget.ds['status'] == 'Cancelled'
           ? const SizedBox()
           : Container(
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               height: Platform.isAndroid ? 50 : 70,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -317,7 +317,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       child: Container(
                         padding: EdgeInsets.only(
                             left: 75,
-                            right: isMobileSmall ? 60 : 75,
+                            right: isMobileSmallWidth ? 60 : 75,
                             top: Platform.isAndroid ? 0 : 25,
                             bottom: Platform.isAndroid ? 0 : 25),
                         child: Text(
@@ -338,7 +338,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       },
                       child: Container(
                         padding: EdgeInsets.only(
-                            left: isMobileSmall ? 40 : 60,
+                            left: isMobileSmallWidth ? 40 : 60,
                             right: 60,
                             top: Platform.isAndroid ? 0 : 25,
                             bottom: Platform.isAndroid ? 0 : 25),
