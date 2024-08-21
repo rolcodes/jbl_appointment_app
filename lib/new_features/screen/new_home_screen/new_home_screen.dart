@@ -15,7 +15,6 @@ import '../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../services/database.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/image_strings.dart';
-import '../../controller/new_home_screen/NewHomeScreenWrapper.dart';
 import '../../models/category_model.dart';
 import '../../models/data/dummy_data.dart';
 

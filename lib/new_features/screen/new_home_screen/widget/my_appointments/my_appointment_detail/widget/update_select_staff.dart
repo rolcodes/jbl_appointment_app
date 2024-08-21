@@ -109,20 +109,20 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                         child: Image.network(
                           widget.ds['image'],
                           width: isMobileSmallHeight
-                              ? 85
+                              ? 80
                               : isMobileMediumHeight
-                                  ? 90
+                                  ? 85
                                   : isMobileLargeHeight
-                                      ? 95
+                                      ? 90
                                       : isMobileExtraLargeHeight
                                           ? 100
                                           : null,
                           height: isMobileSmallHeight
-                              ? 85
+                              ? 80
                               : isMobileMediumHeight
-                                  ? 90
+                                  ? 85
                                   : isMobileLargeHeight
-                                      ? 95
+                                      ? 90
                                       : isMobileExtraLargeHeight
                                           ? 100
                                           : null,
@@ -135,11 +135,11 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                         width: isMobileSmallHeight
                             ? 150
                             : isMobileMediumHeight
-                                ? 160
+                                ? 155
                                 : isMobileLargeHeight
-                                    ? 170
+                                    ? 160
                                     : isMobileExtraLargeHeight
-                                        ? 180
+                                        ? 170
                                         : null,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
