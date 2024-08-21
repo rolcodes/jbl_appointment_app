@@ -82,6 +82,7 @@ class _UpdateTimeItemState extends State<UpdateTimeItem> {
                           '${pickedDate.text}, 2024',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
+                        const SizedBox(height: 2),
                         Text(
                           selectedTime,
                           style: Theme.of(context).textTheme.titleLarge,
@@ -151,14 +152,12 @@ class _UpdateTimeItemState extends State<UpdateTimeItem> {
           child: Text(
             widget.selectTime.time,
             style: isMobileSmall
-                ? Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .apply(color: Colors.black, fontSizeDelta: -2)
-                : Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .apply(color: Colors.black),
+                ? Theme.of(context).textTheme.titleSmall!.apply(
+                color: isPressed ? Colors.white : Colors.black,
+                fontSizeDelta: -2)
+                : Theme.of(context).textTheme.titleSmall!.apply(
+                color: isPressed ? Colors.white : Colors.black,
+                fontWeightDelta: isPressed ? 2 : 0),
           ),
         ),
       ),

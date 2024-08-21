@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/controller/new_home_screen/NewHomeScreenWrapper.dart';
 import 'package:jbl/new_features/controller/profile/profile_wrapper.dart';
+import 'package:jbl/new_features/screen/categories_screen/categories_screen.dart';
 import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/custom_drawer.dart';
 import 'package:jbl/new_features/screen/profile_screen/profile.dart';
@@ -22,6 +23,7 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
   int currentPageIndex = 0;
   List screenList = [
     const NewHomeScreenWrapper(),
+    const CategoriesScreen(),
     const ProfileWrapper(),
   ];
 
@@ -59,6 +61,17 @@ class _NewNavigationMenuState extends State<NewNavigationMenu> {
                 color: TColors.darkGrey,
               ),
               label: 'Home',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(
+                Icons.search_rounded,
+                color: TColors.primary,
+              ),
+              icon: Icon(
+                Icons.search_rounded,
+                color: TColors.darkGrey,
+              ),
+              label: 'Explore',
             ),
             NavigationDestination(
               selectedIcon: Icon(

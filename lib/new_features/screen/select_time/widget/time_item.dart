@@ -77,9 +77,18 @@ class _TimeItemState extends State<TimeItem> {
               barrierDismissible: false,
               context: (context),
               builder: (ctx) => CupertinoAlertDialog(
-                    title: Text(
-                      '${pickedDate.text}, 2024, $selectedTime',
-                      style: Theme.of(context).textTheme.titleLarge,
+                    title: Column(
+                      children: [
+                        Text(
+                          '${pickedDate.text}, 2024',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          selectedTime,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        )
+                      ],
                     ),
                     content: Padding(
                       padding: EdgeInsets.only(top: 10),
