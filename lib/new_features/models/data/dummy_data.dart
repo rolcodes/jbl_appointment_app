@@ -15,7 +15,7 @@ List<Category> availableCategories = [
     id: 'c2',
     title: 'Gluta Drips',
     image:
-        'https://jblnew.keywcomm.com/wp-content/uploads/2024/05/Gluta-Iv-Push-Vs-Drip-Jevelme-Beauty-Lounge.webp',
+        'https://jblnew.keywcomm.com/wp-content/uploads/2024/07/brunette-woman-in-sunglasses-and-white-bikini-sunbathing-on-beach-on-vacation-e1724232598188.jpg',
   ),
   Category(
     id: 'c3',
