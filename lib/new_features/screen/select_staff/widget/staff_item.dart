@@ -34,17 +34,20 @@ class StaffItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(10),
-        splashColor: TColors.primary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+        splashColor: TColors.primary.withOpacity(0.8),
 
         /// Function
         onTap: () {
           onSelectedService(service);
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
             children: [
               ClipOval(

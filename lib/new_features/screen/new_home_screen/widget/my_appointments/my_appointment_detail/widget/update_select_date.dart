@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -46,30 +45,40 @@ class _UpdateSelectDateScreenState extends State<UpdateSelectDateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(        isEdit: false,
-
+      appBar: CustomAppBar(
+        isEdit: false,
+        backgroundColor: TColors.light,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
         isNotification: false,
         title: Text('Select Date',
-            style: Theme.of(context).textTheme.headlineSmall),
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall!
+                .apply(color: TColors.primary)),
         iconColor: TColors.primary,
         isCenterTitle: true,
       ),
-      body: ScrollableCleanCalendar(
-        calendarController: calendarController,
-        layout: Layout.BEAUTY,
-        calendarCrossAxisSpacing: 10,
-        padding: const EdgeInsets.all(20),
-        monthTextStyle: Theme.of(context)
-            .textTheme
-            .headlineMedium!
-            .apply(color: TColors.primary),
-        monthTextAlign: TextAlign.right,
-        daySelectedBackgroundColor: TColors.primary,
-        dayDisableColor: Colors.grey,
-        dayRadius: 100,
+      body: Container(
+        margin: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20)),
+        child: ScrollableCleanCalendar(
+          calendarController: calendarController,
+          layout: Layout.BEAUTY,
+          calendarCrossAxisSpacing: 10,
+          padding: const EdgeInsets.all(20),
+          monthTextStyle: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .apply(color: TColors.primary),
+          monthTextAlign: TextAlign.right,
+          daySelectedBackgroundColor: TColors.primary,
+          dayDisableColor: Colors.grey,
+          dayRadius: 100,
+        ),
       ),
 
       /// -- Create a button to trigger the event

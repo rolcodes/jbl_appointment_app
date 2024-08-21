@@ -143,92 +143,106 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                 const SizedBox(height: 10),
 
                 /// Get data from Firebase
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('From',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .apply(fontWeightDelta: 1)),
-                    const SizedBox(height: 6),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Date:',
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        Text(widget.ds['date'],
-                            style: Theme.of(context).textTheme.bodyMedium),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Time:',
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        Text(widget.ds['time'],
-                            style: Theme.of(context).textTheme.bodyMedium),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Technician:',
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        Text(widget.ds['staffName'],
-                            style: Theme.of(context).textTheme.bodyMedium),
-                      ],
-                    ),
-                  ],
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.red.shade100.withOpacity(0.2)
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('From',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .apply(fontWeightDelta: 1)),
+                      const SizedBox(height: 6),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Date:',
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text(widget.ds['date'],
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Time:',
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text(widget.ds['time'],
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Technician:',
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text(widget.ds['staffName'],
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10),
 
                 /// Get data from recent selection of user
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('To',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .apply(fontWeightDelta: 1)),
-                    const SizedBox(height: 6),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Date:',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        Text(
-                          pickedDate.text,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Time:',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        Text(
-                          '$time',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Technician:',
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        Text(staff.staffName,
-                            style: Theme.of(context).textTheme.bodyMedium),
-                      ],
-                    ),
-                  ],
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.green.shade100.withOpacity(0.2)
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('To',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .apply(fontWeightDelta: 1)),
+                      const SizedBox(height: 6),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Date:',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          Text(
+                            pickedDate.text,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Time:',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          Text(
+                            '$time',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Technician:',
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text(staff.staffName,
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10),
                 const Divider(),
@@ -305,23 +319,26 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
               .apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
-      body: ListView.separated(
-        itemCount: widget.staff.length,
-        itemBuilder: (ctx, index) {
-          return StaffItem(
-            /// staff details
-            staff: widget.staff[index],
+      body: Container(
+        margin: const EdgeInsets.all(20),
+        child: ListView.separated(
+          itemCount: widget.staff.length,
+          itemBuilder: (ctx, index) {
+            return StaffItem(
+              /// staff details
+              staff: widget.staff[index],
 
-            /// checkout details
-            service: widget.services[index],
-            onSelectedService: (service) {
-              onSelectStaff(context, service, widget.staff[index]);
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 5);
-        },
+              /// checkout details
+              service: widget.services[index],
+              onSelectedService: (service) {
+                onSelectStaff(context, service, widget.staff[index]);
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 15);
+          },
+        ),
       ),
     );
   }

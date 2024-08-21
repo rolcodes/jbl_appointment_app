@@ -52,7 +52,10 @@ class _SelectTimeState extends State<SelectTime> {
       appBar: AppBar(
         backgroundColor: TColors.light,
         title: Text('Select Time',
-            style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.primary)),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .apply(color: TColors.primary, fontSizeDelta: 2)),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -70,28 +73,29 @@ class _SelectTimeState extends State<SelectTime> {
           ),
         ),
         centerTitle: true,
-
       ),
       body: Container(
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(20)
-        ),
+            color: Colors.white.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20)),
         child: Column(
           children: [
             Expanded(
               child: Container(
-                padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10, right: 5),
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 10, left: 10, right: 5),
                 child: CupertinoScrollbar(
                   thickness: 4,
                   thicknessWhileDragging: 8,
                   radius: const Radius.circular(2),
                   thumbVisibility: true,
                   child: GridView.builder(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 15),
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 10, right: 15),
                     shrinkWrap: false,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: 30 / 14,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
