@@ -10,6 +10,7 @@ import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.d
 import '../../../../../../../services/database.dart';
 import '../../../../../../../services/shared_pref.dart';
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../../utils/popups/loaders.dart';
 import '../../../../../../models/calendar_model.dart';
 import '../../../../../../models/service_product.dart';
@@ -56,8 +57,12 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
   /// -- Method to display custom showDialog, passing data from Select Staff Screen
   void onSelectStaff(
       BuildContext context, ServiceProduct service, StaffModel staff) {
-    /// Create function to reschedule booking
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
 
+    /// Create function to reschedule booking
     showDialog(
       context: context,
       builder: (ctx) => Dialog(
@@ -78,6 +83,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                     Center(
                       child: Text(
                         'Reschedule Booking',
+                        // '${MediaQuery.of(context).size.height}',
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
@@ -102,15 +108,39 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
                           widget.ds['image'],
-                          width: 100,
-                          height: 100,
+                          width: isMobileSmallHeight
+                              ? 85
+                              : isMobileMediumHeight
+                                  ? 90
+                                  : isMobileLargeHeight
+                                      ? 95
+                                      : isMobileExtraLargeHeight
+                                          ? 100
+                                          : null,
+                          height: isMobileSmallHeight
+                              ? 85
+                              : isMobileMediumHeight
+                                  ? 90
+                                  : isMobileLargeHeight
+                                      ? 95
+                                      : isMobileExtraLargeHeight
+                                          ? 100
+                                          : null,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 12),
                         height: 100,
-                        width: 180,
+                        width: isMobileSmallHeight
+                            ? 150
+                            : isMobileMediumHeight
+                                ? 160
+                                : isMobileLargeHeight
+                                    ? 170
+                                    : isMobileExtraLargeHeight
+                                        ? 180
+                                        : null,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -146,9 +176,8 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                 Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.red.shade100.withOpacity(0.2)
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red.shade100.withOpacity(0.2)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -195,8 +224,7 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.green.shade100.withOpacity(0.2)
-                  ),
+                      color: Colors.green.shade100.withOpacity(0.2)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

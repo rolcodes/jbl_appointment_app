@@ -34,6 +34,7 @@ class ServiceDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// My Strategy on making conditions in Media Queries
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -45,7 +46,7 @@ class ServiceDetailScreen extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: isMobileMediumHeight
+              height: isMobileSmallHeight ? 810 : isMobileMediumHeight
                   ? 820
                   : isMobileLargeHeight
                       ? 820

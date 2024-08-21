@@ -45,7 +45,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
   @override
   Widget build(BuildContext context) {
     final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
-    final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
+    final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
+    final isMobileLargeWidth = CustomScreen.isMobileLargeWidth(context);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -57,13 +58,11 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
         backgroundColor: TColors.light,
         isNotification: false,
         isCenterTitle: true,
-        title: Text(
-          'Appointment',
+        title: Text('Appointment',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
-                .apply(color: TColors.primary, fontSizeDelta: 2)
-        ),
+                .apply(color: TColors.primary, fontSizeDelta: 2)),
       ),
       backgroundColor: TColors.secondary,
       body: SingleChildScrollView(
@@ -93,7 +92,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                   ),
                   Container(
                     width: isMobileSmallWidth ? 240 : 260,
-                    padding: isMobileMedium
+                    padding: isMobileMediumWidth
                         ? const EdgeInsets.only(left: 8)
                         : const EdgeInsets.only(left: 0),
                     child: Column(
@@ -344,7 +343,13 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       },
                       child: Container(
                         padding: EdgeInsets.only(
-                            left: isMobileSmallWidth ? 40 : 60,
+                            left: isMobileSmallWidth
+                                ? 40
+                                : isMobileMediumWidth
+                                    ? 49
+                                    : isMobileLargeWidth
+                                        ? 60
+                                        : 55,
                             right: 60,
                             top: Platform.isAndroid ? 0 : 25,
                             bottom: Platform.isAndroid ? 0 : 25),

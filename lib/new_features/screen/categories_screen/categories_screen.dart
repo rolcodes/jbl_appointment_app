@@ -57,11 +57,19 @@ class CategoriesScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: isMobileExtraLargeHeight ? 1300 : null,
+          /// TO DO
+          height: isMobileMediumHeight
+              ? 1180
+              : isMobileLargeHeight
+                  ? 1250
+                  : isMobileExtraLargeHeight
+                      ? 1300
+                      : null,
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
+                margin: const EdgeInsets.only(
+                    left: 20, right: 20, top: 20, bottom: 0),
                 child: TextFormField(
                   onTapOutside: (event) {
                     print('onTapOutside');
@@ -123,8 +131,6 @@ class CategoriesScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: const CustomChatButton(),
-
     );
-
   }
 }
