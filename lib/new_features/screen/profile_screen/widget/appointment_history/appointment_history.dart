@@ -17,6 +17,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
         backgroundColor: TColors.secondary,
         appBar: CustomAppBar(
           backgroundColor: TColors.light,
+          iconColor: TColors.primary,
           showBackgroundColor: false,
           showIcon: true,
           isDrawer: false,
@@ -25,7 +26,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
           isCenterTitle: true,
           title: Text(
             'Appointment History',
-            style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2),
+            style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2,color: TColors.primary),
           ),
         ),
         body: Column(

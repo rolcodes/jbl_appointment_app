@@ -28,7 +28,7 @@ TextEditingController pickedDate = TextEditingController();
 
 class _TimeItemState extends State<TimeItem> {
   // final Function() onSelectedTime;
-  // bool click = false;
+  bool isPressed = false;
 
   /// -- Method to navigate to select staff screen
   void onSelectTime(BuildContext context, String selectedTime) {
@@ -36,7 +36,8 @@ class _TimeItemState extends State<TimeItem> {
       MaterialPageRoute(builder: (ctx) {
         return SelectStaffScreen(
           services: dummyServices,
-          staff: dummyStaff, selectedTime: selectedTime,
+          staff: dummyStaff,
+          selectedTime: selectedTime,
         );
       }),
     );
@@ -56,79 +57,93 @@ class _TimeItemState extends State<TimeItem> {
 
     final selectedTime = widget.selectTime.time;
 
-    return TextButton(
-      style: TextButton.styleFrom(
-          backgroundColor: Colors.grey.shade300, foregroundColor: Colors.red),
+    return Material(
+      color: isPressed ? TColors.primary : Colors.grey.shade200,
+      shadowColor: Colors.grey.withOpacity(0.2),
+      elevation: 1,
+      borderRadius: BorderRadius.circular(100),
+      child: TextButton(
+        style: TextButton.styleFrom(foregroundColor: Colors.red),
 
-      /// Function
-      onPressed: () {
+        /// Function
+        onPressed: () {
+          /// Button Color Indicator
+          setState(() {
+            isPressed = !isPressed;
+          });
 
-        showDialog(
-            barrierDismissible: false,
-            context: (context),
-            builder: (ctx) => CupertinoAlertDialog(
-                  title: Text(
-                    '${pickedDate.text}, 2024, $selectedTime',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  content: Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(
-                      'Are you sure to your selected schedule?',
-                      style: Theme.of(context).textTheme.labelLarge,
+          /// Display Dialog Box
+          showDialog(
+              barrierDismissible: false,
+              context: (context),
+              builder: (ctx) => CupertinoAlertDialog(
+                    title: Text(
+                      '${pickedDate.text}, 2024, $selectedTime',
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                  ),
-                  actions: [
-                    TextButton(
-                      child: Text("No",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .apply(color: Colors.grey.shade700)),
-                      onPressed: () {
-                        /// Remove selected time after a pop
-                        SharedPreferenceHelper().removeServiceTime();
-
-                        Navigator.of(context).pop();
-                      },
+                    content: Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text(
+                        'Are you sure to your selected schedule?',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
                     ),
-                    TextButton(
-                      child: Text("Yes",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .apply(color: CupertinoColors.activeBlue)),
-                      onPressed: () async {
-                        /// Save selected time in local database using shared preferences
-                        SharedPreferenceHelper().saveServiceTime(selectedTime);
+                    actions: [
+                      TextButton(
+                        child: Text("No",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .apply(color: Colors.grey.shade700)),
+                        onPressed: () {
+                          setState(() {
+                            isPressed = false;
+                          });
 
-                        time = await SharedPreferenceHelper().getServiceTime();
+                          /// Remove selected time after a pop
+                          SharedPreferenceHelper().removeServiceTime();
 
-                        if (time == null) {
-                          TLoaders.errorSnackBar(
-                              title: 'Error',
-                              message: 'Make sure to select time to proceed!');
-                        } else {
-                          onSelectTime(context, selectedTime);
-                        }
-                      },
-                    ),
-                  ],
-                ));
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text("Yes",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .apply(color: CupertinoColors.activeBlue)),
+                        onPressed: () async {
+                          /// Save selected time in local database using shared preferences
+                          SharedPreferenceHelper()
+                              .saveServiceTime(selectedTime);
 
-      },
-      child: Center(
-        child: Text(
-          widget.selectTime.time,
-          style: isMobileSmall
-              ? Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .apply(color: Colors.black, fontSizeDelta: -2)
-              : Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .apply(color: Colors.black),
+                          time =
+                              await SharedPreferenceHelper().getServiceTime();
+
+                          if (time == null) {
+                            TLoaders.errorSnackBar(
+                                title: 'Error',
+                                message:
+                                    'Make sure to select time to proceed!');
+                          } else {
+                            onSelectTime(context, selectedTime);
+                          }
+                        },
+                      ),
+                    ],
+                  ));
+        },
+        child: Center(
+          child: Text(
+            widget.selectTime.time,
+            style: isMobileSmall
+                ? Theme.of(context).textTheme.titleSmall!.apply(
+                    color: isPressed ? Colors.white : Colors.black,
+                    fontSizeDelta: -2)
+                : Theme.of(context).textTheme.titleSmall!.apply(
+                    color: isPressed ? Colors.white : Colors.black,
+                    fontWeightDelta: isPressed ? 2 : 0),
+          ),
         ),
       ),
     );

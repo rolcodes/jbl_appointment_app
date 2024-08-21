@@ -31,7 +31,7 @@ class ServiceCategoriesSeeAll extends StatelessWidget {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: TColors.light,
         isEdit: false,
         isCenterTitle: true,
         iconColor: TColors.primary,

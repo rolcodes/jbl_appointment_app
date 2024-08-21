@@ -78,7 +78,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       backgroundColor: TColors.secondary,
       appBar: CustomAppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: TColors.light,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,

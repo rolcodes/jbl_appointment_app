@@ -144,13 +144,14 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
       appBar: CustomAppBar(
         backgroundColor: TColors.light,
         showBackgroundColor: false,
+        iconColor: TColors.primary,
         showIcon: true,
         isDrawer: false,
         isNotification: false,
         isEdit: false,
         title: Text(
           'My Appointments',
-          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2),
+          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2,color: TColors.primary),
         ),
         isCenterTitle: true,
       ),

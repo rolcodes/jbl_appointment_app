@@ -82,7 +82,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       backgroundColor: TColors.secondary,
       // Colors.grey.shade300
       appBar: CustomAppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: TColors.white,
         isEdit: false,
         iconColor: TColors.primary,
         showBackgroundColor: false,
