@@ -68,40 +68,53 @@ class _SelectStaffScreenState extends State<SelectStaffScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(        isEdit: false,
-
-        showBackgroundColor: false,
-        showIcon: true,
-        isDrawer: false,
-        isCenterTitle: true,
-        isNotification: false,
-        iconColor: TColors.primary,
-        title: Text(
-          'Select Staff',
-          style: Theme.of(context).textTheme.headlineSmall,
+      appBar: AppBar(
+        backgroundColor: TColors.light,
+        title: Text('Select Staff',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .apply(color: TColors.primary, fontSizeDelta: 2)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const SizedBox(
+            height: 50,
+            width: 50,
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: TColors.primary,
+              size: 20,
+            ),
+          ),
         ),
+        centerTitle: true,
       ),
-      body: ListView.separated(
-        itemCount: widget.staff.length,
-        itemBuilder: (ctx, index) {
-          return StaffItem(
-            /// staff details
-            staff: widget.staff[index],
+      body: Container(
+        margin: const EdgeInsets.all(20),
+        child: ListView.separated(
+          itemCount: widget.staff.length,
+          itemBuilder: (ctx, index) {
+            return StaffItem(
+              /// staff details
+              staff: widget.staff[index],
 
-            /// checkout details
-            service: widget.services[index],
-            onSelectedService: (service) {
-              onSelectStaff(
-                context,
-                service,
-                widget.staff[index],
-              );
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 5);
-        },
+              /// checkout details
+              service: widget.services[index],
+              onSelectedService: (service) {
+                onSelectStaff(
+                  context,
+                  service,
+                  widget.staff[index],
+                );
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 15);
+          },
+        ),
       ),
     );
   }

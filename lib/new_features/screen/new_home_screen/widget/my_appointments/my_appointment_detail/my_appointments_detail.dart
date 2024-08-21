@@ -53,11 +53,16 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
+        iconColor: TColors.primary,
+        backgroundColor: TColors.light,
         isNotification: false,
         isCenterTitle: true,
         title: Text(
           'Appointment',
-          style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .apply(color: TColors.primary, fontSizeDelta: 2)
         ),
       ),
       backgroundColor: TColors.secondary,
@@ -67,9 +72,10 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 180,
+              margin: EdgeInsets.only(top: 8),
               padding: const EdgeInsets.only(
                   right: 24, left: 24, top: 24, bottom: 12),
-              decoration: const BoxDecoration(color: TColors.light),
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -144,7 +150,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
             Container(
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(24),
-              decoration: const BoxDecoration(color: TColors.light),
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
               height: 230,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

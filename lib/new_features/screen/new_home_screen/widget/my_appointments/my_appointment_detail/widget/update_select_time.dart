@@ -1,7 +1,7 @@
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_time_item.dart';
@@ -56,69 +56,88 @@ class _UpdateSelectTimeState extends State<UpdateSelectTime> {
       appBar: CustomAppBar(
         isDeleteTime: true,
         isEdit: false,
+        backgroundColor: TColors.light,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
         isNotification: false,
         title: Text('Select Time',
-            style: Theme.of(context).textTheme.headlineSmall),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .apply(color: TColors.primary, fontSizeDelta: 2)),
         iconColor: TColors.primary,
         isCenterTitle: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(20.0),
-              child: GridView.builder(
-                shrinkWrap: false,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 30 / 9,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: 3,
-                ),
-                itemCount: widget.hours.length,
-                itemBuilder: (ctx, index) => UpdateTimeItem(
-                  selectTime: widget.hours[index], ds: widget.ds,
-
+      body: Container(
+        margin: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 10, left: 10, right: 5),
+                child: CupertinoScrollbar(
+                  thickness: 4,
+                  thicknessWhileDragging: 8,
+                  radius: const Radius.circular(2),
+                  thumbVisibility: true,
+                  child: GridView.builder(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 10, right: 15),
+                    shrinkWrap: false,
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 30 / 14,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 15,
+                      crossAxisCount: 3,
+                    ),
+                    itemCount: widget.hours.length,
+                    itemBuilder: (ctx, index) => UpdateTimeItem(
+                      selectTime: widget.hours[index], ds: widget.ds,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: InkWell(
-        onTap: () async {
-          time = await SharedPreferenceHelper().getServiceTime();
-
-          if (time == null) {
-            TLoaders.errorSnackBar(title: 'Error', message: 'Make sure to select time to proceed!');
-          } else {
-            onSelectTime(context);
-          }        },
-        child: Container(
-          height: Platform.isAndroid ? 50 : 70,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Colors.orange.shade800, TColors.primary])),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Continue',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .apply(color: Colors.white),
-                ),
-                SizedBox(height: Platform.isAndroid ? 0 : 10),
-              ],
-            ),
-          ),
+          ],
         ),
       ),
+      // bottomNavigationBar: InkWell(
+      //   onTap: () async {
+      //     time = await SharedPreferenceHelper().getServiceTime();
+      //
+      //     if (time == null) {
+      //       TLoaders.errorSnackBar(title: 'Error', message: 'Make sure to select time to proceed!');
+      //     } else {
+      //       onSelectTime(context);
+      //     }        },
+      //   child: Container(
+      //     height: Platform.isAndroid ? 50 : 70,
+      //     decoration: BoxDecoration(
+      //         gradient: LinearGradient(
+      //             colors: [Colors.orange.shade800, TColors.primary])),
+      //     child: Center(
+      //       child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Text(
+      //             'Continue',
+      //             style: Theme.of(context)
+      //                 .textTheme
+      //                 .titleSmall!
+      //                 .apply(color: Colors.white),
+      //           ),
+      //           SizedBox(height: Platform.isAndroid ? 0 : 10),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

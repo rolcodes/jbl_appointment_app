@@ -129,8 +129,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         title: Text('Checkout',
             style: Theme.of(context)
                 .textTheme
-                .headlineSmall!
-                .apply(color: TColors.primary)),
+                .titleMedium!
+                .apply(color: TColors.primary, fontSizeDelta: 2)),
         isCenterTitle: true,
       ),
       body:
@@ -280,7 +280,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   const SizedBox(height: 20),
 
                                   Expanded(
-                                    flex: 1,
+                                    flex: 0,
                                     child: Row(
                                       children: [
                                         Expanded(
@@ -307,7 +307,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ),
-                                              const SizedBox(height: 5),
+                                              const SizedBox(height: 10),
                                               Text(
                                                 pickedDate.text,
                                                 style: Theme.of(context)
@@ -341,7 +341,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           color: Colors.white),
                                                 ),
                                               ),
-                                              const SizedBox(height: 5),
+                                              const SizedBox(height: 10),
                                               time != null
                                                   ? Text(time!,
                                                       style: Theme.of(context)
@@ -671,163 +671,172 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           ),
                                         ),
                                         const SizedBox(height: 20),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (ctx) =>
-                                                  CupertinoAlertDialog(
-                                                title: Text(
-                                                  'Confirm Booking',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                ),
-                                                content: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10),
-                                                  child: Text(
-                                                    'Heads up! Your chosen technician will be considered but it is not guaranteed.',
+
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                              gradient: LinearGradient(
+                                                  colors: [Colors.orange.shade800, TColors.primary])),
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.transparent,
+
+                                              shadowColor: Colors.transparent,
+                                            ),
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (ctx) =>
+                                                    CupertinoAlertDialog(
+                                                  title: Text(
+                                                    'Confirm Booking',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .labelLarge,
+                                                        .titleLarge,
                                                   ),
+                                                  content: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
+                                                    child: Text(
+                                                      'Heads up! Your chosen technician will be considered but it is not guaranteed.',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge,
+                                                    ),
+                                                  ),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () => Get.back(),
+                                                      style: TextButton.styleFrom(
+                                                          overlayColor:
+                                                              TColors.primary),
+                                                      child: Text(
+                                                        'Cancel',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge!
+                                                            .apply(
+                                                                color: TColors
+                                                                    .darkerGrey),
+                                                      ),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () async {
+                                                        /// -- Map String Dynamic helps you to combine key value pairs and map it into database collections
+                                                        /// -- Get user inputs
+                                                        // Map<String, dynamic>
+                                                        //     userBookingMap = {
+                                                        //   "Username": user.name,
+                                                        //   // Data from Firebase
+                                                        //   "Account ID": id,
+                                                        //   "email": user.email,
+                                                        //   // Data from Firebase
+                                                        //   "Telephone": user.telephone,
+                                                        //   // Data from Firebase
+                                                        //   // "User Image": userImage,
+                                                        //   "Service": title,
+                                                        //   "Image": image,
+                                                        //   "Duration": duration,
+                                                        //   "Price": price,
+                                                        //   "Date": pickedDate.text,
+                                                        //   "Time": time,
+                                                        //   "Staff Image": widget.staff.image,
+                                                        //   "Staff Name":
+                                                        //       widget.staff.staffName,
+                                                        //   "Staff Rating":
+                                                        //       widget.staff.rating,
+                                                        //   "Branch Image": branch[0].image,
+                                                        //   "Branch Title": branch[0].title,
+                                                        //   "Branch Location":
+                                                        //       branch[0].location,
+                                                        //   "Branch Contact":
+                                                        //       branch[0].contact,
+                                                        //   "Booking ID": widget.bookingId,
+                                                        // };
+
+                                                        final userBooking =
+                                                            UserBookingModel(
+                                                          name: user.name,
+                                                          accountId: uid,
+                                                          email: user.email,
+                                                          telephone:
+                                                              user.telephone,
+                                                          service: title,
+                                                          image: image,
+                                                          duration: duration,
+                                                          price: price,
+                                                          date: pickedDate.text,
+                                                          time: time,
+                                                          staffImage:
+                                                              widget.staff.image,
+                                                          staffName: widget
+                                                              .staff.staffName,
+                                                          staffRating:
+                                                              widget.staff.rating,
+                                                          branchImage:
+                                                              branch[0].image,
+                                                          branchTitle:
+                                                              branch[0].title,
+                                                          branchLocation:
+                                                              branch[0].location,
+                                                          branchContact:
+                                                              branch[0].contact,
+                                                          bookingId:
+                                                              widget.bookingId,
+                                                          timestamp: _currentDate,
+                                                          cancelReason: '',
+                                                        );
+                                                        final json =
+                                                            userBooking.toJson();
+
+                                                        /// Upload data to Booking Collections with document name of Booking ID
+                                                        await DatabaseMethods()
+                                                            .addUserBooking(json,
+                                                                widget.bookingId)
+                                                            .then((value) {
+                                                          /// SnackBar
+                                                          TLoaders.successSnackBar(
+                                                              title: 'Done!',
+                                                              message:
+                                                                  'Your reservation was successful!');
+                                                        });
+
+                                                        /// -- Add update status in document field using update function
+                                                        /// -- Set status to Waiting for approval
+                                                        await DatabaseMethods()
+                                                            .updateAppointmentStatus(
+                                                                widget.bookingId);
+
+                                                        await Future.delayed(
+                                                            const Duration(
+                                                                seconds: 1));
+
+                                                        /// Remove selected/saved time, to generate new time for new appointment
+                                                        SharedPreferenceHelper()
+                                                            .removeServiceTime();
+
+                                                        Get.to(() =>
+                                                            const NewNavigationMenu());
+                                                      },
+                                                      style: TextButton.styleFrom(
+                                                          overlayColor:
+                                                              TColors.primary),
+                                                      child: Text(
+                                                        'Book',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .titleLarge!
+                                                            .apply(
+                                                                fontSizeDelta: -1,
+                                                                color: CupertinoColors
+                                                                    .activeBlue),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () => Get.back(),
-                                                    style: TextButton.styleFrom(
-                                                        overlayColor:
-                                                            TColors.primary),
-                                                    child: Text(
-                                                      'Cancel',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge!
-                                                          .apply(
-                                                              color: TColors
-                                                                  .darkerGrey),
-                                                    ),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () async {
-                                                      /// -- Map String Dynamic helps you to combine key value pairs and map it into database collections
-                                                      /// -- Get user inputs
-                                                      // Map<String, dynamic>
-                                                      //     userBookingMap = {
-                                                      //   "Username": user.name,
-                                                      //   // Data from Firebase
-                                                      //   "Account ID": id,
-                                                      //   "email": user.email,
-                                                      //   // Data from Firebase
-                                                      //   "Telephone": user.telephone,
-                                                      //   // Data from Firebase
-                                                      //   // "User Image": userImage,
-                                                      //   "Service": title,
-                                                      //   "Image": image,
-                                                      //   "Duration": duration,
-                                                      //   "Price": price,
-                                                      //   "Date": pickedDate.text,
-                                                      //   "Time": time,
-                                                      //   "Staff Image": widget.staff.image,
-                                                      //   "Staff Name":
-                                                      //       widget.staff.staffName,
-                                                      //   "Staff Rating":
-                                                      //       widget.staff.rating,
-                                                      //   "Branch Image": branch[0].image,
-                                                      //   "Branch Title": branch[0].title,
-                                                      //   "Branch Location":
-                                                      //       branch[0].location,
-                                                      //   "Branch Contact":
-                                                      //       branch[0].contact,
-                                                      //   "Booking ID": widget.bookingId,
-                                                      // };
-
-                                                      final userBooking =
-                                                          UserBookingModel(
-                                                        name: user.name,
-                                                        accountId: uid,
-                                                        email: user.email,
-                                                        telephone:
-                                                            user.telephone,
-                                                        service: title,
-                                                        image: image,
-                                                        duration: duration,
-                                                        price: price,
-                                                        date: pickedDate.text,
-                                                        time: time,
-                                                        staffImage:
-                                                            widget.staff.image,
-                                                        staffName: widget
-                                                            .staff.staffName,
-                                                        staffRating:
-                                                            widget.staff.rating,
-                                                        branchImage:
-                                                            branch[0].image,
-                                                        branchTitle:
-                                                            branch[0].title,
-                                                        branchLocation:
-                                                            branch[0].location,
-                                                        branchContact:
-                                                            branch[0].contact,
-                                                        bookingId:
-                                                            widget.bookingId,
-                                                        timestamp: _currentDate,
-                                                        cancelReason: '',
-                                                      );
-                                                      final json =
-                                                          userBooking.toJson();
-
-                                                      /// Upload data to Booking Collections with document name of Booking ID
-                                                      await DatabaseMethods()
-                                                          .addUserBooking(json,
-                                                              widget.bookingId)
-                                                          .then((value) {
-                                                        /// SnackBar
-                                                        TLoaders.successSnackBar(
-                                                            title: 'Done!',
-                                                            message:
-                                                                'Your reservation was successful!');
-                                                      });
-
-                                                      /// -- Add update status in document field using update function
-                                                      /// -- Set status to Waiting for approval
-                                                      await DatabaseMethods()
-                                                          .updateAppointmentStatus(
-                                                              widget.bookingId);
-
-                                                      await Future.delayed(
-                                                          const Duration(
-                                                              seconds: 1));
-
-                                                      /// Remove selected/saved time, to generate new time for new appointment
-                                                      SharedPreferenceHelper()
-                                                          .removeServiceTime();
-
-                                                      Get.to(() =>
-                                                          const NewNavigationMenu());
-                                                    },
-                                                    style: TextButton.styleFrom(
-                                                        overlayColor:
-                                                            TColors.primary),
-                                                    child: Text(
-                                                      'Book',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleLarge!
-                                                          .apply(
-                                                              fontSizeDelta: -1,
-                                                              color: CupertinoColors
-                                                                  .activeBlue),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                          child: SizedBox(
-                                            width: double.infinity,
+                                              );
+                                            },
                                             child: Center(
                                               child: Text(
                                                 'Submit',

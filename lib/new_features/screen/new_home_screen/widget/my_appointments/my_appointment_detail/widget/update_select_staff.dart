@@ -305,23 +305,26 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
               .apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
-      body: ListView.separated(
-        itemCount: widget.staff.length,
-        itemBuilder: (ctx, index) {
-          return StaffItem(
-            /// staff details
-            staff: widget.staff[index],
+      body: Container(
+        margin: const EdgeInsets.all(20),
+        child: ListView.separated(
+          itemCount: widget.staff.length,
+          itemBuilder: (ctx, index) {
+            return StaffItem(
+              /// staff details
+              staff: widget.staff[index],
 
-            /// checkout details
-            service: widget.services[index],
-            onSelectedService: (service) {
-              onSelectStaff(context, service, widget.staff[index]);
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 5);
-        },
+              /// checkout details
+              service: widget.services[index],
+              onSelectedService: (service) {
+                onSelectStaff(context, service, widget.staff[index]);
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 15);
+          },
+        ),
       ),
     );
   }

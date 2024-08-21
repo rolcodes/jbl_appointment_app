@@ -126,6 +126,13 @@ class _TimeItemState extends State<TimeItem> {
                                 message:
                                     'Make sure to select time to proceed!');
                           } else {
+                            /// Pop dialog box and remove indicator color in button
+                            Navigator.of(context).pop();
+                            setState(() {
+                              isPressed = false;
+                            });
+
+                            /// Method: Go to Select Staff Screen
                             onSelectTime(context, selectedTime);
                           }
                         },

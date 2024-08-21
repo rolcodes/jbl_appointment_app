@@ -50,16 +50,18 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
         isDrawer: false,
         isNotification: false,
         title: Text('Select Date',
-            style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.primary)),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .apply(color: TColors.primary, fontSizeDelta: 2)),
         iconColor: TColors.primary,
         isCenterTitle: true,
       ),
       body: Container(
         margin: EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(20)
-        ),
+            color: Colors.white.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20)),
         child: ScrollableCleanCalendar(
           calendarController: calendarController,
           layout: Layout.BEAUTY,
@@ -73,7 +75,6 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
           daySelectedBackgroundColor: TColors.primary,
           dayDisableColor: Colors.grey,
           dayRadius: 100,
-
         ),
       ),
 
