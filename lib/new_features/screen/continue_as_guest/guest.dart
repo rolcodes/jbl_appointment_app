@@ -47,7 +47,7 @@ class _GuestScreenState extends State<GuestScreen> {
         body: Column(
           children: [
             TabBar(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               indicatorPadding:
                   const EdgeInsets.symmetric(vertical: 8, horizontal: -25),
               indicator: BoxDecoration(

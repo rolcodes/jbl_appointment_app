@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_tab.dart';
-import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/completed_tab/completed_tab.dart';
-import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/expired_tab/expired_tab.dart';
+import 'package:jbl/new_features/screen/explore_screen/widget/services_category_tab/services_category_tab.dart';
 
-import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import '../../../../../utils/constants/colors.dart';
+import '../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../utils/device/device_screen_ratio.dart';
+import '../new_home_screen/widget/chat/custom_chat_button.dart';
 
-class AppointmentHistoryScreen extends StatelessWidget {
-  const AppointmentHistoryScreen({super.key});
+class ExploreScreen extends StatelessWidget {
+  const ExploreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+    final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: TColors.secondary,
+        backgroundColor: TColors.secondary.withOpacity(0.5),
         appBar: CustomAppBar(
-          backgroundColor: TColors.light,
-          iconColor: TColors.primary,
-          showBackgroundColor: false,
-          showIcon: true,
-          isDrawer: false,
-          isNotification: false,
+          backgroundColor: TColors.white,
           isEdit: false,
           isCenterTitle: true,
-          title: Text(
-            'Appointment History',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .apply(fontSizeDelta: 2, color: TColors.primary),
+          iconColor: TColors.primary,
+          showBackgroundColor: false,
+          showIcon: false,
+          isDrawer: false,
+          isNotification: true,
+          title: Image.asset(
+            'assets/logos/jbl-logo.jpg',
+            fit: BoxFit.contain,
+            width: 145,
           ),
         ),
         body: Column(
           children: [
             Container(
-              decoration: const BoxDecoration(color: TColors.light),
+              decoration: const BoxDecoration(color: TColors.white),
               padding: const EdgeInsets.only(bottom: 10),
               child: Container(
                 height: 40,
@@ -46,8 +50,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
                   dividerHeight: 0,
-                  indicatorPadding:
-                      const EdgeInsets.only(left: -22, right: -21),
+                  indicatorPadding: const EdgeInsets.only(left: -22, right: -21),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: TColors.primary.withOpacity(0.5),
@@ -63,13 +66,13 @@ class AppointmentHistoryScreen extends StatelessWidget {
                       .apply(fontSizeDelta: 1),
                   tabs: const [
                     Tab(
-                      child: Text(' Cancelled '),
+                      child: Text('Services'),
                     ),
                     Tab(
-                      child: Text('Completed'),
+                      child: Text('Service'),
                     ),
                     Tab(
-                      child: Text('    Expired    '),
+                      child: Text('Product'),
                     ),
                   ],
                 ),
@@ -81,32 +84,29 @@ class AppointmentHistoryScreen extends StatelessWidget {
                   /// -- 1st tab
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: const CancelledTab(),
+                    child: const ServicesCategoryTab(),
                   ),
 
                   /// -- 2nd tab
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: const Center(
-                      child: CompletedTab(),
-                    ),
+                    child: const Center(child: Text('Text')),
                   ),
 
                   /// -- 3rd tab
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     child: const Center(
-                      child: ExpiredTab(),
+                      child:  Text('No Products Available.'),
                     ),
                   ),
                 ],
               ),
-            ),
+            )
           ],
         ),
+        floatingActionButton: const CustomChatButton(),
       ),
     );
   }
