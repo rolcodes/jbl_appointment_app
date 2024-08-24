@@ -1,24 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/select_staff/widget/staff_details.dart';
 
-import '../../../../utils/constants/colors.dart';
-import '../../../models/service_product.dart';
-import '../../../models/staff_model.dart';
-import 'custom_rating_bar_indicator.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../models/service_product.dart';
+import '../../../../models/staff_model.dart';
+import '../../../select_staff/widget/custom_rating_bar_indicator.dart';
 
-class StaffItem extends StatelessWidget {
-  const StaffItem({
+class StaffTabItem extends StatelessWidget {
+  const StaffTabItem({
     super.key,
     required this.staff,
     required this.service,
-    required this.onSelectedService,
   });
 
   final ServiceProduct service;
   final StaffModel staff;
-
-  final void Function(ServiceProduct service) onSelectedService;
 
   /// -- Method to navigate to select staff details
   void onSelectDetails(BuildContext context) {
@@ -48,7 +44,8 @@ class StaffItem extends StatelessWidget {
 
           /// Function
           onTap: () {
-            onSelectedService(service);
+            /// Method
+            onSelectDetails(context);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

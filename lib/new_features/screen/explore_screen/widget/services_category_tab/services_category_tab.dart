@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../common/widgets/textfield/custom_search_button.dart';
 import '../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../models/category_model.dart';
 import '../../../../models/data/dummy_data.dart';
@@ -46,44 +47,7 @@ class ServicesCategoryTab extends StatelessWidget {
             : null,
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(
-                  left: 20, right: 20, top: 20, bottom: 0),
-              child: TextFormField(
-                onTapOutside: (event) {
-                  print('onTapOutside');
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-                onTap: () {},
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    focusColor: Colors.white,
-                    isDense: true,
-                    prefixIcon: Icon(Iconsax.search_normal),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                    hintText: 'Search',
-                    hintStyle: const TextStyle(
-                      color: Colors.grey,
-                    )),
-              ),
-            ),
+            const CustomSearchButton(),
             Expanded(
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),

@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:jbl/new_features/controller/new_home_screen/NewHomeScreenWrapper.dart';
 import 'package:jbl/new_features/controller/profile/profile_wrapper.dart';
 import 'package:jbl/new_features/screen/explore_screen/explore_screen.dart';
-import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:jbl/new_features/screen/new_home_screen/widget/custom_drawer.dart';
-import 'package:jbl/new_features/screen/profile_screen/profile.dart';
 
 import '../utils/constants/colors.dart';
 

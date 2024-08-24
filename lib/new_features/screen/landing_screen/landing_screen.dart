@@ -197,7 +197,7 @@ class _LandingScreenState extends State<LandingScreen> {
                                         color: Colors.grey.shade700,
                                         fontSizeDelta: -2),
                                 text: 'Sign in with Google',
-                                color: [
+                                color: const [
                                   Colors.white,
                                   Colors.white,
                                 ],

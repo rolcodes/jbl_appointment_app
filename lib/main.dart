@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jbl/new_features/new_navigation_menu.dart';
 import 'package:jbl/new_features/screen/admin_panel/admin_navigation_menu.dart';
+import 'package:jbl/new_features/screen/explore_screen/explore_screen.dart';
 import 'package:jbl/new_features/screen/landing_screen/landing_screen.dart';
 import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
 import 'package:jbl/services/wrapper.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         /// SplashScreen() to begin from the start
+        /// Wrapper() to keep user logged in
         home: const Wrapper(),
       ),
     );

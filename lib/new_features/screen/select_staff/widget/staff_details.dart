@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
@@ -11,7 +10,7 @@ import 'custom_overall_product_rating.dart';
 import 'custom_rating_bar_indicator.dart';
 
 class StaffDetails extends StatelessWidget {
-  const  StaffDetails({super.key, required this.staff});
+  const StaffDetails({super.key, required this.staff});
 
   final StaffModel staff;
 
@@ -21,8 +20,8 @@ class StaffDetails extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: TColors.secondary,
-      appBar: CustomAppBar(        isEdit: false,
-
+      appBar: CustomAppBar(
+        isEdit: false,
         showBackgroundColor: false,
         showIcon: true,
         isDrawer: false,
@@ -31,7 +30,10 @@ class StaffDetails extends StatelessWidget {
         iconColor: TColors.primary,
         title: Text(
           'Staff Details',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .apply(fontSizeDelta: 2, color: TColors.primary),
         ),
       ),
       body: SingleChildScrollView(
@@ -96,7 +98,7 @@ class StaffDetails extends StatelessWidget {
                 width: 220,
                 height: 40,
                 onPressed: () {},
-        
+
                 /// Redirect to Service Categories Grid Item
               ),
               SizedBox(height: 25),
@@ -107,7 +109,7 @@ class StaffDetails extends StatelessWidget {
               SizedBox(height: 20),
               Text('Reviews', style: Theme.of(context).textTheme.headlineSmall),
               SizedBox(height: 20),
-        
+
               /// -- User Review
               Container(
                 padding: EdgeInsets.all(10),
@@ -118,7 +120,7 @@ class StaffDetails extends StatelessWidget {
                   children: [
                     ClipOval(
                       child: Image.asset(
-                        'assets/images/users/user8.jpeg',
+                        'assets/images/users/user2.jpeg',
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
@@ -135,7 +137,12 @@ class StaffDetails extends StatelessWidget {
                               children: [
                                 Text(
                                   'Maria Gonzales',
-                                  style: isMobileSmall ? Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: -2) : Theme.of(context).textTheme.titleMedium,
+                                  style: isMobileSmall
+                                      ? Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .apply(fontSizeDelta: -2)
+                                      : Theme.of(context).textTheme.titleMedium,
                                 ),
                                 TRatingBarIndicator(rating: staff.rating)
                               ],
@@ -170,7 +177,7 @@ class StaffDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-        
+
               /// See all reviews
               TextButton(
                 style: TextButton.styleFrom(

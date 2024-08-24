@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/models/data/branch_data.dart';
+import 'package:jbl/new_features/models/data/dummy_data.dart';
+import 'package:jbl/new_features/screen/explore_screen/widget/branch_tab/branch_tab.dart';
 import 'package:jbl/new_features/screen/explore_screen/widget/services_category_tab/services_category_tab.dart';
+import 'package:jbl/new_features/screen/explore_screen/widget/staff_tab/staff_tab.dart';
 
 import '../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../utils/constants/colors.dart';
@@ -20,7 +24,7 @@ class ExploreScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: TColors.secondary.withOpacity(0.5),
+        backgroundColor: TColors.secondary,
         appBar: CustomAppBar(
           backgroundColor: TColors.white,
           isEdit: false,
@@ -50,7 +54,8 @@ class ExploreScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
                   dividerHeight: 0,
-                  indicatorPadding: const EdgeInsets.only(left: -22, right: -21),
+                  indicatorPadding:
+                      const EdgeInsets.only(left: -22, right: -21),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: TColors.primary.withOpacity(0.5),
@@ -59,20 +64,23 @@ class ExploreScreen extends StatelessWidget {
                   splashBorderRadius: BorderRadius.circular(25),
                   labelColor: Colors.white,
                   isScrollable: false,
-                  labelStyle: Theme.of(context).textTheme.bodyLarge,
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .apply(fontWeightDelta: 1),
                   unselectedLabelStyle: Theme.of(context)
                       .textTheme
                       .labelLarge!
                       .apply(fontSizeDelta: 1),
                   tabs: const [
                     Tab(
-                      child: Text('Services'),
+                      child: Text('   Services   '),
                     ),
                     Tab(
-                      child: Text('Service'),
+                      child: Text('     Branch     '),
                     ),
                     Tab(
-                      child: Text('Product'),
+                      child: Text('    Staff    '),
                     ),
                   ],
                 ),
@@ -82,7 +90,7 @@ class ExploreScreen extends StatelessWidget {
               child: TabBarView(
                 children: [
                   /// -- 1st tab
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: const ServicesCategoryTab(),
                   ),
@@ -90,17 +98,14 @@ class ExploreScreen extends StatelessWidget {
                   /// -- 2nd tab
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: const Center(child: Text('Text')),
+                    child: const BranchTab(branches: dummyBranch),
                   ),
 
                   /// -- 3rd tab
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
-                    child: const Center(
-                      child:  Text('No Products Available.'),
-                    ),
-                  ),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const StaffTab(
+                          services: dummyServices, staff: dummyStaff)),
                 ],
               ),
             )
