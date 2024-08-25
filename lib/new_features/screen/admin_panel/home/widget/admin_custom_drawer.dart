@@ -54,6 +54,26 @@ class AdminCustomDrawer extends StatelessWidget {
                         child: Image.network(
                           'https://jblnew.keywcomm.com/wp-content/uploads/2024/05/jbl-favicon.png',
                           scale: 8,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: TColors.primary,
+                                value: loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            );
+                          },
+                          errorBuilder: (context, exception, stackTrace) {
+                            return Image.asset(
+                              'assets/images/content/no-image-found.jpg',
+                              fit: BoxFit.cover,
+                              scale: 8,
+                            );
+                          },
                         ),
                       ),
                     ),

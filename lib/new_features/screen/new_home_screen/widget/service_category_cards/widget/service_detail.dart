@@ -64,6 +64,43 @@ class ServiceDetailScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: 300,
                       fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext
+                      context,
+                          Widget child,
+                          ImageChunkEvent?
+                          loadingProgress) {
+                        if (loadingProgress ==
+                            null) return child;
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                          child: Center(
+                            child:
+                            CircularProgressIndicator(
+                              color: TColors
+                                  .primary,
+                              value: loadingProgress
+                                  .expectedTotalBytes !=
+                                  null
+                                  ? loadingProgress
+                                  .cumulativeBytesLoaded /
+                                  loadingProgress
+                                      .expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context,
+                          exception,
+                          stackTrace) {
+                        return Image.asset(
+                          'assets/images/content/no-image-found.jpg',
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(height: 8),

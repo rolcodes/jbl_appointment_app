@@ -86,6 +86,42 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                           height: isMobileSmallWidth ? 90 : 100,
                           width: isMobileSmallWidth ? 90 : 100,
                           fit: BoxFit.cover,
+                          loadingBuilder:
+                              (BuildContext context,
+                              Widget child,
+                              ImageChunkEvent?
+                              loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return SizedBox(
+                              height: isMobileSmallWidth ? 90 : 100,
+                              width: isMobileSmallWidth ? 90 : 100,
+                              child: Center(
+                                child:
+                                CircularProgressIndicator(
+                                  color: TColors.primary,
+                                  value: loadingProgress
+                                      .expectedTotalBytes !=
+                                      null
+                                      ? loadingProgress
+                                      .cumulativeBytesLoaded /
+                                      loadingProgress
+                                          .expectedTotalBytes!
+                                      : null,
+                                ),
+                              ),
+                            );
+                          },
+                          errorBuilder: (context,
+                              exception, stackTrace) {
+                            return Image.asset(
+                              'assets/images/content/no-image-found.jpg',
+                              fit: BoxFit.cover,
+                              height: isMobileSmallWidth ? 90 : 100,
+                              width: isMobileSmallWidth ? 90 : 100,
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -228,6 +264,42 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       width: isMobileSmallWidth ? 110 : 120,
                       height: isMobileSmallWidth ? 110 : 120,
                       fit: BoxFit.cover,
+                      loadingBuilder:
+                          (BuildContext context,
+                          Widget child,
+                          ImageChunkEvent?
+                          loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return SizedBox(
+                          width: isMobileSmallWidth ? 110 : 120,
+                          height: isMobileSmallWidth ? 110 : 120,
+                          child: Center(
+                            child:
+                            CircularProgressIndicator(
+                              color: TColors.primary,
+                              value: loadingProgress
+                                  .expectedTotalBytes !=
+                                  null
+                                  ? loadingProgress
+                                  .cumulativeBytesLoaded /
+                                  loadingProgress
+                                      .expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context,
+                          exception, stackTrace) {
+                        return Image.asset(
+                          'assets/images/content/no-image-found.jpg',
+                          fit: BoxFit.cover,
+                          width: isMobileSmallWidth ? 110 : 120,
+                          height: isMobileSmallWidth ? 110 : 120,
+                        );
+                      },
                     ),
                   ),
                   Container(

@@ -24,14 +24,14 @@ class CustomSearchButton extends StatelessWidget {
             isDense: true,
             prefixIcon: const Icon(Iconsax.search_normal),
             enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: Colors.grey,
+              borderSide: BorderSide(
+                color: Colors.grey.shade300,
               ),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: Colors.grey,
+              borderSide:  BorderSide(
+                color: Colors.grey.shade300,
               ),
               borderRadius: BorderRadius.circular(10),
             ),
@@ -41,8 +41,8 @@ class CustomSearchButton extends StatelessWidget {
               ),
             ),
             hintText: 'Search',
-            hintStyle: const TextStyle(
-              color: Colors.grey,
+            hintStyle: TextStyle(
+              color: Colors.grey.shade300,
             )),
       ),
     );

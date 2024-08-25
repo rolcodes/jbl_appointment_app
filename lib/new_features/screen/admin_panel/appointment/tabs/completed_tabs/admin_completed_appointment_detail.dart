@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../../common/widgets/images/custom_image_network.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/device/device_utility.dart';
 
@@ -48,8 +49,8 @@ class _AdminCompletedAppointmentDetailState extends State<AdminCompletedAppointm
                   Column(
                     children: [
                       ClipOval(
-                        child: Image.network(
-                          widget.ds['branchImage'],
+                        child: CustomImageNetwork(
+                          imageUrl: widget.ds['image'],
                           height: isMobileSmall ? 90 : 100,
                           width: isMobileSmall ? 90 : 100,
                           fit: BoxFit.cover,
@@ -184,8 +185,8 @@ class _AdminCompletedAppointmentDetailState extends State<AdminCompletedAppointm
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      widget.ds['image'],
+                    child: CustomImageNetwork(
+                      imageUrl: widget.ds['image'],
                       width: isMobileSmall ? 110 : 120,
                       height: isMobileSmall ? 110 : 120,
                       fit: BoxFit.cover,

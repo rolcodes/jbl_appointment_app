@@ -40,6 +40,43 @@ class ServiceCategoryCardListsItem extends StatelessWidget {
                   width: 250,
                   height: 150,
                   fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext
+                  context,
+                      Widget child,
+                      ImageChunkEvent?
+                      loadingProgress) {
+                    if (loadingProgress ==
+                        null) return child;
+                    return SizedBox(
+                      width: 300,
+                      height: 140,
+                      child: Center(
+                        child:
+                        CircularProgressIndicator(
+                          color: TColors
+                              .primary,
+                          value: loadingProgress
+                              .expectedTotalBytes !=
+                              null
+                              ? loadingProgress
+                              .cumulativeBytesLoaded /
+                              loadingProgress
+                                  .expectedTotalBytes!
+                              : null,
+                        ),
+                      ),
+                    );
+                  },
+                  errorBuilder: (context,
+                      exception,
+                      stackTrace) {
+                    return Image.asset(
+                      'assets/images/content/no-image-found.jpg',
+                      fit: BoxFit.cover,
+                      width: 300,
+                      height: 140,
+                    );
+                  },
                 ),
               ),
               Expanded(

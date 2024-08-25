@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../../../common/widgets/images/custom_image_network.dart';
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/device/device_screen_ratio.dart';
 
 class CompletedAppointmentDetail extends StatefulWidget {
   const CompletedAppointmentDetail({super.key, required this.ds});
@@ -18,6 +20,8 @@ class _CancelledAppointmentDetail extends State<CompletedAppointmentDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
+    final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
     return Scaffold(
       appBar: CustomAppBar(
         isEdit: false,
@@ -47,11 +51,11 @@ class _CancelledAppointmentDetail extends State<CompletedAppointmentDetail> {
                   Column(
                     children: [
                       ClipOval(
-                        child: Image.network(
-                          widget.ds['branchImage'],
-                          height: 100,
-                          width: 100,
+                        child: CustomImageNetwork(
+                          imageUrl: widget.ds['branchImage'],
                           fit: BoxFit.cover,
+                          height: isMobileSmall ? 90 : 100,
+                          width: isMobileSmall ? 90 : 100,
                         ),
                       ),
                     ],
@@ -181,10 +185,10 @@ class _CancelledAppointmentDetail extends State<CompletedAppointmentDetail> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      widget.ds['image'],
-                      width: 120,
-                      height: 120,
+                    child: CustomImageNetwork(
+                      imageUrl: widget.ds['image'],
+                      width: isMobileSmall ? 110 : 120,
+                      height: isMobileSmall ? 110 : 120,
                       fit: BoxFit.cover,
                     ),
                   ),

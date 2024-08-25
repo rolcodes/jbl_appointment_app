@@ -50,6 +50,43 @@ class StaffDetails extends StatelessWidget {
                   width: 110,
                   height: 110,
                   fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext
+                  context,
+                      Widget child,
+                      ImageChunkEvent?
+                      loadingProgress) {
+                    if (loadingProgress ==
+                        null) return child;
+                    return SizedBox(
+                      width: 110,
+                      height: 110,
+                      child: Center(
+                        child:
+                        CircularProgressIndicator(
+                          color: TColors
+                              .primary,
+                          value: loadingProgress
+                              .expectedTotalBytes !=
+                              null
+                              ? loadingProgress
+                              .cumulativeBytesLoaded /
+                              loadingProgress
+                                  .expectedTotalBytes!
+                              : null,
+                        ),
+                      ),
+                    );
+                  },
+                  errorBuilder: (context,
+                      exception,
+                      stackTrace) {
+                    return Image.asset(
+                      'assets/images/content/no-image-found.jpg',
+                      fit: BoxFit.cover,
+                      width: 110,
+                      height: 110,
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 25),

@@ -13,18 +13,19 @@ class BranchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onSelectBranch(branch);
-      },
-      child: Material(
-        elevation: 2,
-        borderRadius: BorderRadius.circular(10),
+    return Material(
+      elevation: 2,
+      borderRadius: BorderRadius.circular(20),
+      color: TColors.light,
+      child: InkWell(
+        onTap: () {
+          onSelectBranch(branch);
+        },
+        splashColor: TColors.primary.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(20),
         child: Container(
           height: 190,
-          decoration: BoxDecoration(
-              color: TColors.light,
-              borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           padding: const EdgeInsets.all(20),
           child: Row(
             children: [
@@ -36,9 +37,46 @@ class BranchItem extends StatelessWidget {
                       width: 90,
                       height: 90,
                       fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext
+                      context,
+                          Widget child,
+                          ImageChunkEvent?
+                          loadingProgress) {
+                        if (loadingProgress ==
+                            null) return child;
+                        return SizedBox(
+                          width: 90,
+                          height: 90,
+                          child: Center(
+                            child:
+                            CircularProgressIndicator(
+                              color: TColors
+                                  .primary,
+                              value: loadingProgress
+                                  .expectedTotalBytes !=
+                                  null
+                                  ? loadingProgress
+                                  .cumulativeBytesLoaded /
+                                  loadingProgress
+                                      .expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context,
+                          exception,
+                          stackTrace) {
+                        return Image.asset(
+                          'assets/images/content/no-image-found.jpg',
+                          fit: BoxFit.cover,
+                          width: 90,
+                          height: 90,
+                        );
+                      },
                     ),
                   ),
-                  Expanded(flex: 1,child: SizedBox()),
+                  Expanded(flex: 1, child: SizedBox()),
                 ],
               ),
               Expanded(
@@ -61,13 +99,9 @@ class BranchItem extends StatelessWidget {
                       /// Rating
                       const TRatingBarIndicator(rating: 4.8),
 
-
                       /// Clinic Hours
                       Text(branch.weekdayHours),
                       Text(branch.weekendHours),
-
-
-
                     ],
                   ),
                 ),

@@ -89,6 +89,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                     height: 250,
                     width: 250,
                     fit: BoxFit.contain,
+
                   ),
                   Center(
                     child: Text(

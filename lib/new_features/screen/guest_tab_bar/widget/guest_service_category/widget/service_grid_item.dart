@@ -42,6 +42,49 @@ class ServiceGridItem extends StatelessWidget {
                   width: 300,
                   height: 140,
                   fit: BoxFit.cover,
+                  // When image is loading from the server it takes some time
+                  // So we will show progress indicator while loading
+                  loadingBuilder: (BuildContext
+                  context,
+                      Widget child,
+                      ImageChunkEvent?
+                      loadingProgress) {
+                    if (loadingProgress ==
+                        null) return child;
+                    return SizedBox(
+                      width: 300,
+                      height: 140,
+                      child: Center(
+                        child:
+                        CircularProgressIndicator(
+                          color: TColors
+                              .primary,
+                          value: loadingProgress
+                              .expectedTotalBytes !=
+                              null
+                              ? loadingProgress
+                              .cumulativeBytesLoaded /
+                              loadingProgress
+                                  .expectedTotalBytes!
+                              : null,
+                        ),
+                      ),
+                    );
+                  },
+                  // When dealing with networks it completes with two states,
+                  // complete with a value or completed with an error,
+                  // So handling errors is very important otherwise it will crash the app screen.
+                  // I showed dummy images from assets when there is an error, you can show some texts or anything you want.
+                  errorBuilder: (context,
+                      exception,
+                      stackTrace) {
+                    return Image.asset(
+                      'assets/images/content/no-image-found.jpg',
+                      fit: BoxFit.cover,
+                      width: 300,
+                      height: 140,
+                    );
+                  },
                 ),
               ),
               Expanded(

@@ -1,8 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../../../common/widgets/images/custom_image_network.dart';
 import '../../../../../../../utils/constants/colors.dart';
 import '../../../../../../../utils/device/device_screen_ratio.dart';
 
@@ -12,11 +12,11 @@ class CancelledAppointmentDetail extends StatefulWidget {
   final DocumentSnapshot<Object?> ds;
 
   @override
-  State<CancelledAppointmentDetail> createState() => _CancelledAppointmentDetail();
+  State<CancelledAppointmentDetail> createState() =>
+      _CancelledAppointmentDetail();
 }
 
 class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
-
   @override
   Widget build(BuildContext context) {
     final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
@@ -51,11 +51,11 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                   Column(
                     children: [
                       ClipOval(
-                        child: Image.network(
-                          widget.ds['branchImage'],
+                        child: CustomImageNetwork(
+                          imageUrl: widget.ds['branchImage'],
+                          fit: BoxFit.cover,
                           height: isMobileSmall ? 90 : 100,
                           width: isMobileSmall ? 90 : 100,
-                          fit: BoxFit.cover,
                         ),
                       ),
                     ],
@@ -73,9 +73,9 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                           widget.ds['branchTitle'],
                           style: isMobileSmall
                               ? Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .apply(fontSizeDelta: -1)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .apply(fontSizeDelta: -1)
                               : Theme.of(context).textTheme.headlineSmall,
                           maxLines: 2,
                         ),
@@ -150,8 +150,8 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                           style: Theme.of(context).textTheme.bodyMedium),
                       Text('${widget.ds['time']}, ${widget.ds["date"]}',
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
-                            color: Colors.pinkAccent.shade700,
-                          )),
+                                color: Colors.pinkAccent.shade700,
+                              )),
                     ],
                   ),
 
@@ -193,8 +193,8 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      widget.ds['image'],
+                    child: CustomImageNetwork(
+                      imageUrl: widget.ds['image'],
                       width: isMobileSmall ? 110 : 120,
                       height: isMobileSmall ? 110 : 120,
                       fit: BoxFit.cover,
@@ -236,7 +236,6 @@ class _CancelledAppointmentDetail extends State<CancelledAppointmentDetail> {
           ],
         ),
       ),
-
     );
   }
 }

@@ -24,7 +24,7 @@ class ExploreScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: TColors.secondary,
+        backgroundColor: TColors.secondary.withOpacity(0.5),
         appBar: CustomAppBar(
           backgroundColor: TColors.white,
           isEdit: false,
@@ -43,7 +43,7 @@ class ExploreScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              decoration: const BoxDecoration(color: TColors.white),
+              decoration: const BoxDecoration(color: Colors.white),
               padding: const EdgeInsets.only(bottom: 10),
               child: Container(
                 height: 40,
@@ -80,7 +80,7 @@ class ExploreScreen extends StatelessWidget {
                       child: Text('     Branch     '),
                     ),
                     Tab(
-                      child: Text('    Staff    '),
+                      child: Text('       Staff       '),
                     ),
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../common/widgets/images/custom_image_network.dart';
 import '../../../../../../services/database.dart';
 import '../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../utils/device/device_utility.dart';
@@ -85,8 +86,8 @@ class AdminCompletedAppointmentItem extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            ds["image"],
+                          child: CustomImageNetwork(
+                            imageUrl: ds["image"],
                             fit: BoxFit.cover,
                             width: isMobileSmall ? 100 : 110,
                             height: isMobileSmall ? 100 : 110,

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../common/widgets/images/custom_image_network.dart';
 import '../../../../../../services/database.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/device/device_screen_ratio.dart';
@@ -142,8 +143,8 @@ class AdminApprovedAppointmentItem extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            ds["image"],
+                          child: CustomImageNetwork(
+                            imageUrl: ds["image"],
                             fit: BoxFit.cover,
                             width: isMobileSmall ? 100 : 110,
                             height: isMobileSmall ? 100 : 110,

@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jbl/common/widgets/images/custom_image_network.dart';
 
 import '../../../../../../../utils/constants/colors.dart';
 import '../../../../../../../utils/device/device_screen_ratio.dart';
-import '../../../../../../../utils/device/device_utility.dart';
 
 class CancelledItem extends StatelessWidget {
   const CancelledItem({
@@ -77,16 +77,21 @@ class CancelledItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        ds["image"],
-                        fit: BoxFit.cover,
-                        width: isMobileSmall ? 100 : 110,
-                        height: isMobileSmall ? 100 : 110,
-                      )),
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomImageNetwork(
+                      imageUrl: ds["image"],
+                      fit: BoxFit.cover,
+                      width: isMobileSmall ? 100 : 110,
+                      height: isMobileSmall ? 100 : 110,
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.only(left: 12),
-                    width: isMobileSmall ? 210 : isMobileMedium ? 220 : 240,
+                    width: isMobileSmall
+                        ? 210
+                        : isMobileMedium
+                            ? 220
+                            : 240,
                     height: isMobileSmall ? 100 : 110,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

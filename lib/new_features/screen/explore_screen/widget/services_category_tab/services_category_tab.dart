@@ -41,10 +41,10 @@ class ServicesCategoryTab extends StatelessWidget {
         height: isMobileMediumHeight
             ? 1180
             : isMobileLargeHeight
-            ? 1250
-            : isMobileExtraLargeHeight
-            ? 1300
-            : null,
+                ? 1250
+                : isMobileExtraLargeHeight
+                    ? 1300
+                    : null,
         child: Column(
           children: [
             const CustomSearchButton(),

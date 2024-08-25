@@ -195,6 +195,57 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         ? 80
                                                         : 90,
                                                 fit: BoxFit.cover,
+                                                loadingBuilder:
+                                                    (BuildContext context,
+                                                        Widget child,
+                                                        ImageChunkEvent?
+                                                            loadingProgress) {
+                                                  if (loadingProgress == null)
+                                                    return child;
+                                                  return SizedBox(
+                                                    width: isMobileSmall
+                                                        ? 75
+                                                        : isMobileMedium
+                                                            ? 80
+                                                            : 90,
+                                                    height: isMobileSmall
+                                                        ? 75
+                                                        : isMobileMedium
+                                                            ? 80
+                                                            : 90,
+                                                    child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: TColors.primary,
+                                                        value: loadingProgress
+                                                                    .expectedTotalBytes !=
+                                                                null
+                                                            ? loadingProgress
+                                                                    .cumulativeBytesLoaded /
+                                                                loadingProgress
+                                                                    .expectedTotalBytes!
+                                                            : null,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                errorBuilder: (context,
+                                                    exception, stackTrace) {
+                                                  return Image.asset(
+                                                    'assets/images/content/no-image-found.jpg',
+                                                    fit: BoxFit.cover,
+                                                    width: isMobileSmall
+                                                        ? 75
+                                                        : isMobileMedium
+                                                            ? 80
+                                                            : 90,
+                                                    height: isMobileSmall
+                                                        ? 75
+                                                        : isMobileMedium
+                                                            ? 80
+                                                            : 90,
+                                                  );
+                                                },
                                               ),
                                             ),
                                           Container(
@@ -361,8 +412,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: 20),
-                                   Divider(
-                                      height: 10,                                     color: TColors.primary.withOpacity(0.4),
+                                  Divider(
+                                    height: 10,
+                                    color: TColors.primary.withOpacity(0.4),
                                   ),
                                   const SizedBox(height: 10),
 
@@ -396,6 +448,41 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   width: 70,
                                                   height: 70,
                                                   fit: BoxFit.cover,
+                                                  loadingBuilder:
+                                                      (BuildContext context,
+                                                      Widget child,
+                                                      ImageChunkEvent?
+                                                      loadingProgress) {
+                                                    if (loadingProgress == null)
+                                                      return child;
+                                                    return SizedBox(
+                                                      width: 70,
+                                                      height: 70,
+                                                      child: Center(
+                                                        child:
+                                                        CircularProgressIndicator(
+                                                          color: TColors.primary,
+                                                          value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                              null
+                                                              ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                              loadingProgress
+                                                                  .expectedTotalBytes!
+                                                              : null,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  errorBuilder: (context,
+                                                      exception, stackTrace) {
+                                                    return Image.asset(
+                                                      'assets/images/content/no-image-found.jpg',
+                                                      fit: BoxFit.cover,
+                                                      width: 70,
+                                                      height: 70,
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                               Padding(
@@ -463,6 +550,41 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                       width: 70,
                                                       height: 70,
                                                       fit: BoxFit.cover,
+                                                      loadingBuilder:
+                                                          (BuildContext context,
+                                                          Widget child,
+                                                          ImageChunkEvent?
+                                                          loadingProgress) {
+                                                        if (loadingProgress == null)
+                                                          return child;
+                                                        return SizedBox(
+                                                          width: 70,
+                                                          height: 70,
+                                                          child: Center(
+                                                            child:
+                                                            CircularProgressIndicator(
+                                                              color: TColors.primary,
+                                                              value: loadingProgress
+                                                                  .expectedTotalBytes !=
+                                                                  null
+                                                                  ? loadingProgress
+                                                                  .cumulativeBytesLoaded /
+                                                                  loadingProgress
+                                                                      .expectedTotalBytes!
+                                                                  : null,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                      errorBuilder: (context,
+                                                          exception, stackTrace) {
+                                                        return Image.asset(
+                                                          'assets/images/content/no-image-found.jpg',
+                                                          fit: BoxFit.cover,
+                                                          width: 70,
+                                                          height: 70,
+                                                        );
+                                                      },
                                                     ),
                                                   ),
                                                   const SizedBox(height: 55),
@@ -671,16 +793,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           ),
                                         ),
                                         const SizedBox(height: 20),
-
                                         Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(12),
-                                              gradient: LinearGradient(
-                                                  colors: [Colors.orange.shade800, TColors.primary])),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              gradient: LinearGradient(colors: [
+                                                Colors.orange.shade800,
+                                                TColors.primary
+                                              ])),
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.transparent,
-
+                                              backgroundColor:
+                                                  Colors.transparent,
                                               shadowColor: Colors.transparent,
                                             ),
                                             onPressed: () {
@@ -707,10 +831,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   ),
                                                   actions: [
                                                     TextButton(
-                                                      onPressed: () => Get.back(),
-                                                      style: TextButton.styleFrom(
-                                                          overlayColor:
-                                                              TColors.primary),
+                                                      onPressed: () =>
+                                                          Get.back(),
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                              overlayColor:
+                                                                  TColors
+                                                                      .primary),
                                                       child: Text(
                                                         'Cancel',
                                                         style: Theme.of(context)
@@ -768,32 +895,36 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           price: price,
                                                           date: pickedDate.text,
                                                           time: time,
-                                                          staffImage:
-                                                              widget.staff.image,
+                                                          staffImage: widget
+                                                              .staff.image,
                                                           staffName: widget
                                                               .staff.staffName,
-                                                          staffRating:
-                                                              widget.staff.rating,
+                                                          staffRating: widget
+                                                              .staff.rating,
                                                           branchImage:
                                                               branch[0].image,
                                                           branchTitle:
                                                               branch[0].title,
                                                           branchLocation:
-                                                              branch[0].location,
+                                                              branch[0]
+                                                                  .location,
                                                           branchContact:
                                                               branch[0].contact,
                                                           bookingId:
                                                               widget.bookingId,
-                                                          timestamp: _currentDate,
+                                                          timestamp:
+                                                              _currentDate,
                                                           cancelReason: '',
                                                         );
-                                                        final json =
-                                                            userBooking.toJson();
+                                                        final json = userBooking
+                                                            .toJson();
 
                                                         /// Upload data to Booking Collections with document name of Booking ID
                                                         await DatabaseMethods()
-                                                            .addUserBooking(json,
-                                                                widget.bookingId)
+                                                            .addUserBooking(
+                                                                json,
+                                                                widget
+                                                                    .bookingId)
                                                             .then((value) {
                                                           /// SnackBar
                                                           TLoaders.successSnackBar(
@@ -806,7 +937,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         /// -- Set status to Waiting for approval
                                                         await DatabaseMethods()
                                                             .updateAppointmentStatus(
-                                                                widget.bookingId);
+                                                                widget
+                                                                    .bookingId);
 
                                                         await Future.delayed(
                                                             const Duration(
@@ -819,16 +951,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         Get.to(() =>
                                                             const NewNavigationMenu());
                                                       },
-                                                      style: TextButton.styleFrom(
-                                                          overlayColor:
-                                                              TColors.primary),
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                              overlayColor:
+                                                                  TColors
+                                                                      .primary),
                                                       child: Text(
                                                         'Book',
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .titleLarge!
                                                             .apply(
-                                                                fontSizeDelta: -1,
+                                                                fontSizeDelta:
+                                                                    -1,
                                                                 color: CupertinoColors
                                                                     .activeBlue),
                                                       ),

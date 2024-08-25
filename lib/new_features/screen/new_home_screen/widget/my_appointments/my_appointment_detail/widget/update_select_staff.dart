@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,6 +130,66 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                                           ? 100
                                           : null,
                           fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return SizedBox(
+                              width: isMobileSmallHeight
+                                  ? 80
+                                  : isMobileMediumHeight
+                                      ? 85
+                                      : isMobileLargeHeight
+                                          ? 90
+                                          : isMobileExtraLargeHeight
+                                              ? 100
+                                              : null,
+                              height: isMobileSmallHeight
+                                  ? 80
+                                  : isMobileMediumHeight
+                                      ? 85
+                                      : isMobileLargeHeight
+                                          ? 90
+                                          : isMobileExtraLargeHeight
+                                              ? 100
+                                              : null,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: TColors.primary,
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              ),
+                            );
+                          },
+                          errorBuilder: (context, exception, stackTrace) {
+                            return Image.asset(
+                              'assets/images/content/no-image-found.jpg',
+                              fit: BoxFit.cover,
+                              width: isMobileSmallHeight
+                                  ? 80
+                                  : isMobileMediumHeight
+                                      ? 85
+                                      : isMobileLargeHeight
+                                          ? 90
+                                          : isMobileExtraLargeHeight
+                                              ? 100
+                                              : null,
+                              height: isMobileSmallHeight
+                                  ? 80
+                                  : isMobileMediumHeight
+                                      ? 85
+                                      : isMobileLargeHeight
+                                          ? 90
+                                          : isMobileExtraLargeHeight
+                                              ? 100
+                                              : null,
+                            );
+                          },
                         ),
                       ),
                       Container(
@@ -287,7 +350,6 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        /// -- UPDATE: update user appointment
                         await DatabaseMethods().updateUserAppointments(
                             widget.ds['bookingId'],
                             pickedDate.text,

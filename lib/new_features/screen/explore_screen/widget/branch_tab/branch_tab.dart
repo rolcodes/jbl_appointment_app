@@ -26,12 +26,23 @@ class BranchTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileExtraLarge = CustomScreen.isMobileExtraLargeHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
 
     return SingleChildScrollView(
       child: SizedBox(
         width: TDeviceUtils.getScreenWidth(context),
-        height: isMobileExtraLarge ? 900 : null,
+        height: isMobileSmallHeight
+            ? 500
+            : isMobileMediumHeight
+                ? 600
+                : isMobileLargeHeight
+                    ? 700
+                    : isMobileExtraLarge
+                        ? 800
+                        : null,
         child: Column(
           children: [
             const CustomSearchButton(),
@@ -62,4 +73,3 @@ class BranchTab extends StatelessWidget {
     );
   }
 }
-
