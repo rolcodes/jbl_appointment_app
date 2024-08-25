@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:jbl/new_features/screen/admin_panel/search/search_screen.dart';
 
 import '../../../utils/constants/colors.dart';
 import 'appointment/admin_appointment_tabs.dart';
@@ -19,6 +20,7 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
   int currentPageIndex = 0;
   List screenList = [
     const AdminPanelHome(),
+    const AdminSearchScreen(),
     const AdminAppointmentTabs(),
   ];
 
@@ -55,6 +57,17 @@ class _NewAdminNavigationMenuState extends State<NewAdminNavigationMenu> {
                 color: TColors.darkGrey,
               ),
               label: 'Home',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(
+                Icons.search_rounded,
+                color: TColors.primary,
+              ),
+              icon: Icon(
+                Icons.search_rounded,
+                color: TColors.darkGrey,
+              ),
+              label: 'Search',
             ),
             NavigationDestination(
               selectedIcon: Icon(

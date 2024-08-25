@@ -53,7 +53,7 @@ class _AdminApprovedAppointmentDetailState
                     children: [
                       ClipOval(
                         child: CustomImageNetwork(
-                          imageUrl: widget.ds['image'],
+                          imageUrl: widget.ds['branchImage'],
                           height: isMobileSmall ? 90 : 100,
                           width: isMobileSmall ? 90 : 100,
                           fit: BoxFit.cover,

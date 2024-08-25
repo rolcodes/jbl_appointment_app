@@ -100,7 +100,7 @@ class AdminCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: Center(
                       child: AdminNotificationBadge(
                         iconColor:
-                            showBackgroundColor ? TColors.white : TColors.black,
+                            showBackgroundColor ? TColors.white : TColors.primary,
                         onSelectedBadge: () {},
                       ),
                     ),

@@ -96,13 +96,6 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         ),
       ),
       body:
-      // _isLoading
-      //     ? const Center(
-      //         child: CircularProgressIndicator(
-      //           valueColor: AlwaysStoppedAnimation<Color>(TColors.primary),
-      //         ),
-      //       )
-      //     :
       SingleChildScrollView(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,

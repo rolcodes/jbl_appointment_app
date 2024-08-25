@@ -72,18 +72,20 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
 
     return Scaffold(
-      backgroundColor: TColors.secondary,
+      backgroundColor: TColors.secondary.withOpacity(0.5),
       appBar: AdminCustomAppBar(
         isCenterTitle: true,
         showBackgroundColor: false,
         showIcon: true,
+        iconColor: TColors.primary,
         isDrawer: true,
         isNotification: true,
         isEdit: false,
-        backgroundColor: TColors.light,
-        title: Text(
-          'Jevelme Beauty Lounge',
-          style: Theme.of(context).textTheme.headlineSmall,
+        backgroundColor: TColors.white,
+        title: Image.asset(
+          'assets/logos/jbl-logo.jpg',
+          fit: BoxFit.contain,
+          width: 145,
         ),
       ),
       drawer: const AdminCustomDrawer(),

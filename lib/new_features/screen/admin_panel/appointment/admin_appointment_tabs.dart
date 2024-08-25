@@ -28,7 +28,7 @@ class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
         appBar: AdminCustomAppBar(
           backgroundColor: TColors.light,
           showBackgroundColor: false,
-          showIcon: true,
+          showIcon: false,
           isDrawer: true,
           isNotification: true,
           isEdit: false,

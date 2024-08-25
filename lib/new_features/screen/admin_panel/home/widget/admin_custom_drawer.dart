@@ -82,14 +82,14 @@ class AdminCustomDrawer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Jirol Admin',
+                          'Jevelme Beauty Lounge',
                           style: Theme.of(context)
                               .textTheme
-                              .headlineMedium!
+                              .headlineSmall!
                               .apply(color: Colors.white),
                         ),
                         Text(
-                          'jiroladmin@gmail.com',
+                          'marketingjafdigital@gmail.com',
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!

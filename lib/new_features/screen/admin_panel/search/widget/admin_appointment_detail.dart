@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
@@ -6,16 +7,16 @@ import '../../../../../../common/widgets/images/custom_image_network.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/device/device_utility.dart';
 
-class AdminExpiredAppointmentDetail extends StatefulWidget {
-  const AdminExpiredAppointmentDetail({super.key, required this.ds});
+class AdminAppointmentDetail extends StatefulWidget {
+  const AdminAppointmentDetail({super.key, required this.ds});
 
   final DocumentSnapshot<Object?> ds;
 
   @override
-  State<AdminExpiredAppointmentDetail> createState() => _AdminExpiredAppointmentDetailState();
+  State<AdminAppointmentDetail> createState() => _AdminAppointmentDetailState();
 }
 
-class _AdminExpiredAppointmentDetailState extends State<AdminExpiredAppointmentDetail> {
+class _AdminAppointmentDetailState extends State<AdminAppointmentDetail> {
   @override
   Widget build(BuildContext context) {
     final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
@@ -68,9 +69,9 @@ class _AdminExpiredAppointmentDetailState extends State<AdminExpiredAppointmentD
                           widget.ds['branchTitle'],
                           style: isMobileSmall
                               ? Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .apply(fontSizeDelta: -1)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .apply(fontSizeDelta: -1)
                               : Theme.of(context).textTheme.headlineSmall,
                           maxLines: 2,
                         ),
@@ -117,9 +118,18 @@ class _AdminExpiredAppointmentDetailState extends State<AdminExpiredAppointmentD
                       Text(
                         widget.ds['status'],
                         style: Theme.of(context).textTheme.bodyMedium!.apply(
-                          fontSizeDelta: -2,
-                          color: Colors.orange.shade600,
-                        ),
+                            fontSizeDelta: -2,
+                            color: widget.ds['status'] == 'Waiting for approval'
+                                ? Colors.grey.shade500
+                                : widget.ds['status'] == 'Approved'
+                                    ? CupertinoColors.activeBlue
+                                    : widget.ds['status'] == 'Completed'
+                                        ? Colors.green
+                                        : widget.ds['status'] == 'Expired'
+                                            ? Colors.orange.shade600
+                                            : widget.ds['status'] == 'Cancelled'
+                                                ? Colors.red
+                                                : null),
                       ),
                     ],
                   ),
@@ -142,8 +152,8 @@ class _AdminExpiredAppointmentDetailState extends State<AdminExpiredAppointmentD
                           style: Theme.of(context).textTheme.bodyMedium),
                       Text('${widget.ds['time']}, ${widget.ds["date"]}',
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
-                            color: Colors.pinkAccent.shade700,
-                          )),
+                                color: Colors.pinkAccent.shade700,
+                              )),
                     ],
                   ),
 

@@ -38,7 +38,14 @@ class DatabaseMethods {
     return null;
   }
 
-  /// -- READ: User Appointments
+  /// -- READ: All User Appointments
+  Future<Stream<QuerySnapshot>> getAllAppointments() async {
+    return FirebaseFirestore.instance
+        .collection("appointments")
+        .snapshots();
+  }
+
+  /// -- READ: Specific User Appointments
   Future<Stream<QuerySnapshot>> getUserAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
