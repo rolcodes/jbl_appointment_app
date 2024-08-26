@@ -96,238 +96,242 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         ),
       ),
       body:
-      SingleChildScrollView(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: TDeviceUtils.getScreenHeight() * 1.2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 0,
-                      child: Container(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 10),
-                        decoration: const BoxDecoration(color: Colors.white),
-                        child: const NewPromoSlider(
-                          banners: [
-                            TImages.newBanner1,
-                            TImages.newBanner2,
-                            TImages.newBanner3,
-                            TImages.newBanner4,
-                            TImages.newBanner5,
-                            TImages.newBanner6,
-                            TImages.newBanner7,
-                            TImages.newBanner8,
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Expanded(
-                      flex: 0,
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white),
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            /// FutureBuilder was extracted to another file
-                             Text("Hi, ${widget.user?.name}",
-                            style: isMobileMediumWidth
-                                ? Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .apply(fontSizeDelta: -1)
-                                : Theme.of(context).textTheme.titleLarge),
-                            Text(
-                              'BOOK AN APPOINTMENT NOW!',
-                              style: isMobileSmallWidth
-                                  ? Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .apply(
-                                          color: TColors.primary,
-                                          letterSpacingDelta: 2)
-                                  : Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .apply(
-                                          color: TColors.primary,
-                                          fontSizeDelta: 2,
-                                          letterSpacingDelta: 2),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Expanded(
-                      flex: 7,
-                      child: Column(
-                        children: [
-                          /// -- Appointment Item
-                          UserAppointmentDisplay(
-                              context: context, bookingStream: bookingStream),
-
-                          Container(
-                            height: isMobileMediumHeight
-                                ? 540
-                                : isMobileLargeHeight
-                                    ? 555
-                                    : isMobileExtraLargeHeight
-                                        ? 580
-                                        : null,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                            ),
-                            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                    height: isMobileMediumHeight
-                                        ? 10
-                                        : isMobileLargeHeight
-                                            ? 15
-                                            : isMobileExtraLargeHeight
-                                                ? 10
-                                                : null),
-
-                                /// -- Service Categories
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'SERVICE CATEGORIES',
-                                      // "${TDeviceUtils.getScreenHeight()}",
-                                      style: isMobileSmallWidth
-                                          ? Theme.of(context)
-                                              .textTheme
-                                              .titleLarge!
-                                              .apply(fontSizeDelta: 0)
-                                          : Theme.of(context)
-                                              .textTheme
-                                              .titleLarge,
-                                    ),
-
-                                    /// -- See All Categories
-                                    TextButton(
-                                      onPressed: () => Get.to(() =>
-                                          const ServiceCategoriesSeeAll()),
-                                      style: TextButton.styleFrom(
-                                        minimumSize: const Size(50, 30),
-                                        padding: EdgeInsets.zero,
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                      ),
-                                      child: Text('See All',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                    height: isMobileMediumHeight
-                                        ? 10
-                                        : isMobileLargeHeight
-                                            ? 16
-                                            : isMobileExtraLargeHeight
-                                                ? 0
-                                                : null),
-
-                                /// -- Services Categories Cards
-                                SizedBox(
-                                  height: 190,
-                                  child: ListView.separated(
-                                    // remove hard edges and fix cropped shadows
-                                    clipBehavior: Clip.none,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: availableCategories.length,
-                                    itemBuilder: (ctx, index) {
-                                      return ServiceCategoryCardListsItem(
-                                        service: availableCategories[index],
-                                        onSelectedCategory: () {
-                                          _selectCategory(context,
-                                              availableCategories[index]);
-                                        },
-                                      );
-                                    },
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return const SizedBox(width: 24);
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                    height: isMobileMediumHeight
-                                        ? 10
-                                        : isMobileLargeHeight
-                                            ? 18
-                                            : isMobileExtraLargeHeight
-                                                ? 5
-                                                : null),
-
-                                /// -- Promos
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('PROMOS',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge),
-
-                                    /// -- See All Categories
-                                    TextButton(
-                                      onPressed: () => Get.to(() =>
-                                          const ServiceCategoriesSeeAll()),
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: const Size(50, 30),
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                      ),
-                                      child: Text('See All',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                    height: isMobileMediumHeight
-                                        ? 5
-                                        : isMobileLargeHeight
-                                            ? 12
-                                            : isMobileExtraLargeHeight
-                                                ? 0
-                                                : null),
-
-                                /// -- Promos
-                                const NewPromoSlider(
-                                  banners: [
-                                    TImages.newBanner5,
-                                    TImages.newBanner6,
-                                    TImages.newBanner7,
-                                    TImages.newBanner8,
-                                  ],
-                                ),
-                              ],
-                            ),
+      RefreshIndicator(
+        onRefresh: () => Future.delayed(const Duration(seconds: 3)),
+        color: TColors.primary,
+        child: SingleChildScrollView(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: TDeviceUtils.getScreenHeight() * 1.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 0,
+                        child: Container(
+                          padding:
+                              const EdgeInsets.only(left: 20, right: 20, top: 10),
+                          decoration: const BoxDecoration(color: Colors.white),
+                          child: const NewPromoSlider(
+                            banners: [
+                              TImages.newBanner1,
+                              TImages.newBanner2,
+                              TImages.newBanner3,
+                              TImages.newBanner4,
+                              TImages.newBanner5,
+                              TImages.newBanner6,
+                              TImages.newBanner7,
+                              TImages.newBanner8,
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Expanded(
+                        flex: 0,
+                        child: Container(
+                          decoration: const BoxDecoration(color: Colors.white),
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              /// FutureBuilder was extracted to another file
+                               Text("Hi, ${widget.user?.name}",
+                              style: isMobileMediumWidth
+                                  ? Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .apply(fontSizeDelta: -1)
+                                  : Theme.of(context).textTheme.titleLarge),
+                              Text(
+                                'BOOK AN APPOINTMENT NOW!',
+                                style: isMobileSmallWidth
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .apply(
+                                            color: TColors.primary,
+                                            letterSpacingDelta: 2)
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .apply(
+                                            color: TColors.primary,
+                                            fontSizeDelta: 2,
+                                            letterSpacingDelta: 2),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Expanded(
+                        flex: 7,
+                        child: Column(
+                          children: [
+                            /// -- Appointment Item
+                            UserAppointmentDisplay(
+                                context: context, bookingStream: bookingStream),
+
+                            Container(
+                              height: isMobileMediumHeight
+                                  ? 540
+                                  : isMobileLargeHeight
+                                      ? 555
+                                      : isMobileExtraLargeHeight
+                                          ? 580
+                                          : null,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                              ),
+                              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                      height: isMobileMediumHeight
+                                          ? 10
+                                          : isMobileLargeHeight
+                                              ? 15
+                                              : isMobileExtraLargeHeight
+                                                  ? 10
+                                                  : null),
+
+                                  /// -- Service Categories
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'SERVICE CATEGORIES',
+                                        // "${TDeviceUtils.getScreenHeight()}",
+                                        style: isMobileSmallWidth
+                                            ? Theme.of(context)
+                                                .textTheme
+                                                .titleLarge!
+                                                .apply(fontSizeDelta: 0)
+                                            : Theme.of(context)
+                                                .textTheme
+                                                .titleLarge,
+                                      ),
+
+                                      /// -- See All Categories
+                                      TextButton(
+                                        onPressed: () => Get.to(() =>
+                                            const ServiceCategoriesSeeAll()),
+                                        style: TextButton.styleFrom(
+                                          minimumSize: const Size(50, 30),
+                                          padding: EdgeInsets.zero,
+                                          tapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        child: Text('See All',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      height: isMobileMediumHeight
+                                          ? 10
+                                          : isMobileLargeHeight
+                                              ? 16
+                                              : isMobileExtraLargeHeight
+                                                  ? 0
+                                                  : null),
+
+                                  /// -- Services Categories Cards
+                                  SizedBox(
+                                    height: 190,
+                                    child: ListView.separated(
+                                      // remove hard edges and fix cropped shadows
+                                      clipBehavior: Clip.none,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: availableCategories.length,
+                                      itemBuilder: (ctx, index) {
+                                        return ServiceCategoryCardListsItem(
+                                          service: availableCategories[index],
+                                          onSelectedCategory: () {
+                                            _selectCategory(context,
+                                                availableCategories[index]);
+                                          },
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return const SizedBox(width: 24);
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height: isMobileMediumHeight
+                                          ? 10
+                                          : isMobileLargeHeight
+                                              ? 18
+                                              : isMobileExtraLargeHeight
+                                                  ? 5
+                                                  : null),
+
+                                  /// -- Promos
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('PROMOS',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge),
+
+                                      /// -- See All Categories
+                                      TextButton(
+                                        onPressed: () => Get.to(() =>
+                                            const ServiceCategoriesSeeAll()),
+                                        style: TextButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          minimumSize: const Size(50, 30),
+                                          tapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        child: Text('See All',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      height: isMobileMediumHeight
+                                          ? 5
+                                          : isMobileLargeHeight
+                                              ? 12
+                                              : isMobileExtraLargeHeight
+                                                  ? 0
+                                                  : null),
+
+                                  /// -- Promos
+                                  const NewPromoSlider(
+                                    banners: [
+                                      TImages.newBanner5,
+                                      TImages.newBanner6,
+                                      TImages.newBanner7,
+                                      TImages.newBanner8,
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
 
       /// -- Drawer
       drawer: const CustomDrawer(),

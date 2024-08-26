@@ -190,10 +190,10 @@ class CustomDrawer extends StatelessWidget {
                   Align(
                     alignment: AlignmentDirectional.bottomEnd,
                     child: Text(
-                      'Version 1.2 Build iOS 17.4     ',
+                      'Version 1.0 JAF Digital     ',
                       style: Theme.of(context)
                           .textTheme
-                          .bodySmall!
+                          .labelMedium!
                           .apply(color: Colors.white),
                     ),
                   ),
