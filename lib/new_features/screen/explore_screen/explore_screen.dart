@@ -15,11 +15,6 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
-    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
-    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
-    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
-    final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
 
     return DefaultTabController(
       length: 3,
@@ -50,7 +45,7 @@ class ExploreScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
                   dividerHeight: 0,

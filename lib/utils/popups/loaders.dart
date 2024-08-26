@@ -114,6 +114,18 @@ class TLoaders {
     );
   }
 
+  static noInternetSnackbar({required title, message = ''}) {
+    Get.snackbar(title, message,
+        isDismissible: false,
+        shouldIconPulse: false,
+        duration: const Duration(days: 1),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        icon: const Icon(Icons.wifi_off, color: Colors.white, size: 25),
+        margin: const EdgeInsets.all(20));
+  }
+
   /// -- Approved Status
   static approvedSnackBar({
     required title,
@@ -127,21 +139,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Approved',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'Appointment was successfully approved!',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -174,8 +179,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: CupertinoColors.activeBlue, fontWeightDelta: 1),
@@ -184,7 +188,7 @@ class TLoaders {
     );
   }
 
-  /// -- Approved Status
+  /// -- Completed Status
   static completedSnackBar({
     required title,
     message = '',
@@ -197,21 +201,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Completed',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'The appointment was successfully completed!',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -244,8 +241,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: Colors.green.shade700, fontWeightDelta: 1),
@@ -267,21 +263,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Cancelled',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'Appointment was cancelled successfully!',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -312,8 +301,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: TColors.darkGrey, fontWeightDelta: 1),
@@ -335,21 +323,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Cancelled',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'Appointment was cancelled successfully!',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -380,8 +361,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: TColors.darkGrey, fontWeightDelta: 1),
@@ -403,21 +383,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Expired',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'The appointment was moved to expired tab.',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -448,8 +421,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: TColors.darkGrey, fontWeightDelta: 1),
@@ -471,21 +443,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Done',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'Appointment was moved to requests tab',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -516,8 +481,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: TColors.darkGrey, fontWeightDelta: 1),
@@ -539,21 +503,14 @@ class TLoaders {
       message,
       titleText: Text(
         'Done',
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodySmall!
-            .apply(
-          color: Colors.black,
-          fontWeightDelta: 1,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.apply(
+              color: Colors.black,
+              fontWeightDelta: 1,
+            ),
       ),
       messageText: Text(
         'Appointment was moved to requests tab',
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       isDismissible: true,
       shouldIconPulse: false,
@@ -584,8 +541,7 @@ class TLoaders {
         },
         child: Text(
           'Undo',
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .bodySmall!
               .apply(color: TColors.darkGrey, fontWeightDelta: 1),

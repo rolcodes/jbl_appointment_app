@@ -66,8 +66,8 @@ class _LandingScreenState extends State<LandingScreen> {
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(),
-                  child: Image.network(
-                    'https://jblnew.keywcomm.com/wp-content/uploads/2024/07/brunette-woman-in-sunglasses-and-white-bikini-sunbathing-on-beach-on-vacation.jpg',
+                  child: Image.asset(
+                    'assets/images/content/jbl-background.jpg',
                     fit: BoxFit.cover,
                     alignment: const Alignment(-0.1, 0),
                   ),

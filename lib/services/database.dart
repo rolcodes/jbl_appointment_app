@@ -42,6 +42,7 @@ class DatabaseMethods {
   Future<Stream<QuerySnapshot>> getAllAppointments() async {
     return FirebaseFirestore.instance
         .collection("appointments")
+        .orderBy('date', descending: false)
         .snapshots();
   }
 
