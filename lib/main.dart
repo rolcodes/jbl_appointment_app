@@ -3,13 +3,8 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:jbl/new_features/new_navigation_menu.dart';
-import 'package:jbl/new_features/screen/admin_panel/admin_navigation_menu.dart';
-import 'package:jbl/new_features/screen/explore_screen/explore_screen.dart';
-import 'package:jbl/new_features/screen/landing_screen/landing_screen.dart';
-import 'package:jbl/new_features/screen/new_home_screen/new_home_screen.dart';
+import 'package:jbl/new_features/controller/dependency_injection.dart';
 import 'package:jbl/services/wrapper.dart';
-import 'package:jbl/splash_screen.dart';
 
 import 'package:jbl/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +17,6 @@ void main() async {
   /// -- Make sure Firebase.initializeApp
   if (Platform.isAndroid) {
     await Firebase.initializeApp(
-
       options: const FirebaseOptions(
           apiKey: "AIzaSyBr4fsZcZjua-0fpTAwjKPfCAEeIyz42xk",
           appId: "1:8262591029:android:6c7ced8349341bfc32877c",
@@ -34,6 +28,7 @@ void main() async {
   }
 
   runApp(const MyApp());
+  DependencyInjection.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -44,13 +39,12 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => CalendarModel(),
       child: GetMaterialApp(
-
         theme: TAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
 
         /// SplashScreen() to begin from the start
         /// Wrapper() to keep user logged in
-        home: const NewAdminNavigationMenu(),
+        home: const Wrapper(),
       ),
     );
   }
