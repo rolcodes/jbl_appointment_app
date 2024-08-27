@@ -29,7 +29,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         iconTheme: IconThemeData(color: TColors.primary),
         centerTitle: true,
         title: Text('Privacy Policy',
-            style: Theme.of(context).textTheme.headlineMedium!.apply(color: TColors.primary)),
+            style: Theme.of(context).textTheme.titleMedium!.apply(color: TColors.primary, fontSizeDelta: 2)),
       ),
       body: _buildUI(),
       backgroundColor: TColors.secondary,

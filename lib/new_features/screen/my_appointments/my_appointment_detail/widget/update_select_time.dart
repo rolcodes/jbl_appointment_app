@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_time_item.dart';
+import 'package:jbl/new_features/screen/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
+import 'package:jbl/new_features/screen/my_appointments/my_appointment_detail/widget/update_time_item.dart';
 
-import '../../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import '../../../../../../../services/shared_pref.dart';
-import '../../../../../../../utils/constants/colors.dart';
-import '../../../../../../../utils/popups/loaders.dart';
-import '../../../../../../models/data/dummy_data.dart';
-import '../../../../../../models/time_model.dart';
-import '../../../../../select_time/widget/time_item.dart';
+import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../../services/shared_pref.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/popups/loaders.dart';
+import '../../../../models/data/dummy_data.dart';
+import '../../../../models/time_model.dart';
+import '../../../select_time/widget/time_item.dart';
 
 class UpdateSelectTime extends StatefulWidget {
   const UpdateSelectTime({

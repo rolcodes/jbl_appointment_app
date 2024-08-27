@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:badges/badges.dart' as badges;
+import 'package:jbl/new_features/screen/notification_screen/notification_screen.dart';
 
 class NotificationBadge extends StatelessWidget {
   const NotificationBadge({
@@ -22,7 +24,7 @@ class NotificationBadge extends StatelessWidget {
       ),
       showBadge: true,
       ignorePointer: false,
-      onTap: () {},
+      onTap: () => Get.to(()=> const NotificationScreen()),
       badgeContent: const Icon(
         Icons.circle,
         color: CupertinoColors.activeGreen,
@@ -37,7 +39,7 @@ class NotificationBadge extends StatelessWidget {
       ),
       badgeStyle: const badges.BadgeStyle(badgeColor: Colors.transparent),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () => Get.to(()=> const NotificationScreen()),
         child: Align(
           alignment: Alignment.center,
           child: Icon(

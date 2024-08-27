@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jbl/utils/device/device_utility.dart';
 
-import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/device/device_screen_ratio.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/device/device_screen_ratio.dart';
 
 class MyAppointmentItem extends StatelessWidget {
   const MyAppointmentItem({

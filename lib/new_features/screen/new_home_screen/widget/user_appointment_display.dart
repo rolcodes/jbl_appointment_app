@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/device/device_utility.dart';
-import 'my_appointments/my_appointments.dart';
+import '../../my_appointments/my_appointments.dart';
 
 class UserAppointmentDisplay extends StatelessWidget {
   const UserAppointmentDisplay({

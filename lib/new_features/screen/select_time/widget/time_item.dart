@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
+import 'package:jbl/new_features/screen/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
 import 'package:jbl/utils/popups/loaders.dart';
 import 'package:provider/provider.dart';
 

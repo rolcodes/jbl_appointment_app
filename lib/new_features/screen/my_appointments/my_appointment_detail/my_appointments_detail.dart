@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/custom_choicechip.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_date.dart';
+import 'package:jbl/new_features/screen/my_appointments/my_appointment_detail/widget/custom_choicechip.dart';
+import 'package:jbl/new_features/screen/my_appointments/my_appointment_detail/widget/update_select_date.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
-import '../../../../../../utils/constants/colors.dart';
-import '../../../../../../utils/device/device_screen_ratio.dart';
-import '../../../../../../utils/device/device_utility.dart';
-import '../../../../select_date/select_date.dart';
+import '../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_screen_ratio.dart';
+import '../../../../utils/device/device_utility.dart';
+import '../../select_date/select_date.dart';
 
 class AppointmentsDetail extends StatefulWidget {
   const AppointmentsDetail({super.key, required this.ds});

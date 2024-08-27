@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jbl/new_features/screen/landing_screen/page_views/registration_form/widget/privacy_policy.dart';
+import 'package:jbl/new_features/screen/notification_screen/notification_screen.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/appointment_history.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/edit_profile.dart';
 import 'package:jbl/services/auth_service.dart';
@@ -11,7 +13,7 @@ import '../../../common/widgets/list_tile/settings_menu_tile.dart';
 import '../../../utils/constants/colors.dart';
 import '../../models/user_model.dart';
 import '../new_home_screen/widget/chat/custom_chat_button.dart';
-import '../new_home_screen/widget/my_appointments/my_appointments.dart';
+import '../my_appointments/my_appointments.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
@@ -123,15 +125,15 @@ class ProfileScreen extends StatelessWidget {
                           icon: Iconsax.notification,
                           title: 'Notification',
                           subTitle: 'Recent notifications & updates',
-                          onTap: () {},
+                          onTap: () => Get.to(() => const NotificationScreen()),
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
                         ),
                         TSettingMenuTile(
-                          icon: Iconsax.heart_add,
-                          title: 'Favorites',
-                          subTitle: 'List of all favorite products',
-                          onTap: () {},
+                          icon: Iconsax.security_user,
+                          title: 'Privacy Policy',
+                          subTitle: 'Our Commitment to Privacy',
+                          onTap: () => Get.to(() => const PrivacyPolicy()),
                           titleSmall: isMobileSmall ? true : false,
                           subTitleSmall: isMobileSmall ? true : false,
                         ),

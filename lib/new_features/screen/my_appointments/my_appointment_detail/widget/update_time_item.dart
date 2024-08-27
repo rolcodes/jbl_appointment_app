@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:jbl/new_features/screen/new_home_screen/widget/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
+import 'package:jbl/new_features/screen/my_appointments/my_appointment_detail/widget/update_select_staff.dart';
 import 'package:jbl/utils/popups/loaders.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../../services/shared_pref.dart';
-import '../../../../../../../utils/constants/colors.dart';
-import '../../../../../../../utils/device/device_utility.dart';
-import '../../../../../../models/calendar_model.dart';
-import '../../../../../../models/data/dummy_data.dart';
-import '../../../../../../models/time_model.dart';
+import '../../../../../services/shared_pref.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/device/device_utility.dart';
+import '../../../../models/calendar_model.dart';
+import '../../../../models/data/dummy_data.dart';
+import '../../../../models/time_model.dart';
 
 class UpdateTimeItem extends StatefulWidget {
   const UpdateTimeItem({super.key, required this.selectTime, required this.ds});
