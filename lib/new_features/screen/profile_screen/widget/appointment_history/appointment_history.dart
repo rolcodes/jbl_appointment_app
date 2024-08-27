@@ -79,27 +79,42 @@ class AppointmentHistoryScreen extends StatelessWidget {
               child: TabBarView(
                 children: [
                   /// -- 1st tab
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: const CancelledTab(),
+                  RefreshIndicator(
+                    onRefresh: () => Future.delayed(const Duration(seconds: 3)),
+                    color: TColors.primary,
+                    backgroundColor: Colors.white,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: const CancelledTab(),
+                    ),
                   ),
 
                   /// -- 2nd tab
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: const Center(
-                      child: CompletedTab(),
+                  RefreshIndicator(
+                    onRefresh: () => Future.delayed(const Duration(seconds: 3)),
+                    color: TColors.primary,
+                    backgroundColor: Colors.white,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: const Center(
+                        child: CompletedTab(),
+                      ),
                     ),
                   ),
 
                   /// -- 3rd tab
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: const Center(
-                      child: ExpiredTab(),
+                  RefreshIndicator(
+                    onRefresh: () => Future.delayed(const Duration(seconds: 3)),
+                    color: TColors.primary,
+                    backgroundColor: Colors.white,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: const Center(
+                        child: ExpiredTab(),
+                      ),
                     ),
                   ),
                 ],

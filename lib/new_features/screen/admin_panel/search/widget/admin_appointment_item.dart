@@ -32,7 +32,7 @@ class AdminAppointmentItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Material(
         elevation: 2,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         color: TColors.white,
         child: InkWell(
           onTap: onSelectedAllRequestAppointment,
@@ -42,7 +42,7 @@ class AdminAppointmentItem extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
                 color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [
                 Row(
