@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:jbl/common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import 'package:jbl/new_features/screen/notification_screen/widget/notification_item.dart';
 import 'package:jbl/utils/constants/colors.dart';
 import 'package:jbl/utils/device/device_utility.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class AdminNotificationScreen extends StatelessWidget {
+  const AdminNotificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +44,16 @@ class NotificationScreen extends StatelessWidget {
               ),
               NotificationItem(
                 onTap: () {},
-                icon: Iconsax.tag,
-                text: 'Promotions',
+                icon: Iconsax.direct_inbox,
+                text: 'Requests',
               ),NotificationItem(
                 onTap: () {},
-                icon: Iconsax.discount_shape,
-                text: 'Voucher Deals',
+                icon: Iconsax.slash,
+                text: 'Cancelled',
               ),NotificationItem(
                 onTap: () {},
-                icon: Iconsax.like_dislike,
-                text: "Do's and Don'ts",
+                icon: Iconsax.box,
+                text: 'Emails',
               ),
             ],
           ),

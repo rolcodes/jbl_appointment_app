@@ -47,7 +47,7 @@ class AdminNotificationBadge extends StatelessWidget {
       ),
       badgeStyle: const badges.BadgeStyle(badgeColor: Colors.transparent),
       child: GestureDetector(
-        onTap: () {},
+        onTap: onSelectedBadge,
         child: Align(
           alignment: Alignment.center,
           child: Icon(

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbl/new_features/screen/admin_panel/widget/appbar/widget/admin_notification_screen.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/device/device_utility.dart';
@@ -101,7 +102,7 @@ class AdminCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: AdminNotificationBadge(
                         iconColor:
                             showBackgroundColor ? TColors.white : TColors.primary,
-                        onSelectedBadge: () {},
+                        onSelectedBadge: () => Get.to(() => const AdminNotificationScreen()),
                       ),
                     ),
                   ),
@@ -115,7 +116,7 @@ class AdminCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               WidgetStatePropertyAll(Colors.transparent),
                         ),
                         onPressed: () {},
-                        icon: Icon(Icons.edit_outlined),
+                        icon: const Icon(Icons.edit_outlined),
                       ),
                     )
                   : Container(),
