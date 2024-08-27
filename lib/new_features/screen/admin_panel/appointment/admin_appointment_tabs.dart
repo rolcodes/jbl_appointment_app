@@ -103,38 +103,68 @@ class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
                     child: TabBarView(
                       children: [
                         /// -- 1st tab
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: AdminRequestTab(),
+                        RefreshIndicator(
+                          onRefresh: () =>
+                              Future.delayed(const Duration(seconds: 3)),
+                          color: TColors.primary,
+                          backgroundColor: Colors.white,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: AdminRequestTab(),
+                            ),
                           ),
                         ),
 
                         /// -- 2nd tab
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: AdminApprovedTab(),
+                        RefreshIndicator(
+                          onRefresh: () =>
+                              Future.delayed(const Duration(seconds: 3)),
+                          color: TColors.primary,
+                          backgroundColor: Colors.white,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: AdminApprovedTab(),
+                            ),
                           ),
                         ),
 
                         /// -- 3rd tab
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: AdminCompletedTab(),
+                        RefreshIndicator(
+                          onRefresh: () =>
+                              Future.delayed(const Duration(seconds: 3)),
+                          color: TColors.primary,
+                          backgroundColor: Colors.white,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: AdminCompletedTab(),
+                            ),
                           ),
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: AdminExpiredTab(),
+                        RefreshIndicator(
+                          onRefresh: () =>
+                              Future.delayed(const Duration(seconds: 3)),
+                          color: TColors.primary,
+                          backgroundColor: Colors.white,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: AdminExpiredTab(),
+                            ),
                           ),
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: AdminCancelledTab(),
+                        RefreshIndicator(
+                          onRefresh: () =>
+                              Future.delayed(const Duration(seconds: 3)),
+                          color: TColors.primary,
+                          backgroundColor: Colors.white,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: AdminCancelledTab(),
+                            ),
                           ),
                         ),
                       ],

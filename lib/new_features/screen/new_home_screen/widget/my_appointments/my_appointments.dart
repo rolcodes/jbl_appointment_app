@@ -89,7 +89,6 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                     height: 250,
                     width: 250,
                     fit: BoxFit.contain,
-
                   ),
                   Center(
                     child: Text(
@@ -118,7 +117,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
                   itemCount: snapshot.data.docs.length,
                   scrollDirection: Axis.vertical,
                   padding: EdgeInsets.zero,
-                  physics: const BouncingScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     DocumentSnapshot ds = snapshot.data.docs[index];
@@ -152,22 +151,24 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen> {
         isEdit: false,
         title: Text(
           'My Appointments',
-          style: Theme.of(context).textTheme.titleMedium!.apply(fontSizeDelta: 2,color: TColors.primary),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .apply(fontSizeDelta: 2, color: TColors.primary),
         ),
         isCenterTitle: true,
       ),
       backgroundColor: TColors.secondary,
-      body: SingleChildScrollView(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                child: userAppointments(),
-              ),
-            ],
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        width: MediaQuery.of(context).size.width,
+        child: RefreshIndicator(
+          onRefresh: () => Future.delayed(const Duration(seconds: 3)),
+          color: TColors.primary,
+          backgroundColor: Colors.white,
+          child: SizedBox(
+            height: TDeviceUtils.getScreenHeight(),
+            child: userAppointments(),
           ),
         ),
       ),

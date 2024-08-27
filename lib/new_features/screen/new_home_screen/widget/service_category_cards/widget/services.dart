@@ -28,20 +28,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
     );
   }
 
-  late bool _isLoading;
-
-  /// Initialize loading time
-  @override
-  void initState() {
-    _isLoading = true;
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     /// -- Widget for Grid View of Services in each Categories
@@ -100,13 +86,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
         ),
       ),
 
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(TColors.primary),
-              ),
-            )
-          : content,
+      body: content,
       backgroundColor: TColors.secondary,
     );
   }

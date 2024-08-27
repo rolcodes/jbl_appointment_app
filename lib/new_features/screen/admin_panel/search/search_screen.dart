@@ -154,26 +154,32 @@ class _AdminSearchScreenState extends State<AdminSearchScreen> {
                   }
 
                   return snapshot.hasData
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ListView.separated(
-                            itemCount: snapshot.data.docs.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              DocumentSnapshot ds = snapshot.data.docs[index];
-                              return AdminAppointmentItem(
-                                ds: ds,
-                                onSelectedAllRequestAppointment: () async {
-                                  _selectedAllRequestAppointment(
-                                      context, snapshot.data.docs[index]);
-                                },
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(
-                                height: 10,
-                              );
-                            },
+                      ? RefreshIndicator(
+                          onRefresh: () =>
+                              Future.delayed(const Duration(seconds: 3)),
+                          color: TColors.primary,
+                          backgroundColor: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: ListView.separated(
+                              itemCount: snapshot.data.docs.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                DocumentSnapshot ds = snapshot.data.docs[index];
+                                return AdminAppointmentItem(
+                                  ds: ds,
+                                  onSelectedAllRequestAppointment: () async {
+                                    _selectedAllRequestAppointment(
+                                        context, snapshot.data.docs[index]);
+                                  },
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(
+                                  height: 10,
+                                );
+                              },
+                            ),
                           ),
                         )
                       : Container();

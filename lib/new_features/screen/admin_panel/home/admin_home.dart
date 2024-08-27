@@ -89,129 +89,138 @@ class _AdminPanelHomeState extends State<AdminPanelHome> {
         ),
       ),
       drawer: const AdminCustomDrawer(),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: isMobileMediumHeight
-              ? 720
-              : isMobileLargeHeight
-                  ? 735
-                  : isMobileExtraLargeHeight
-                      ? 735
-                      : null,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              /// -- Calendar
-              Container(
-                margin: EdgeInsets.only(top: 4),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(
-                    color: TColors.light,
-                    borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        offset: const Offset(0, 2),
-                        blurRadius: 20,
-                        spreadRadius: 1,
-                      )
-                    ]),
+      body: RefreshIndicator(
+        onRefresh: () => Future.delayed(const Duration(seconds: 3)),
+        color: TColors.primary,
+        backgroundColor: Colors.white,
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: isMobileMediumHeight
+                ? 720
+                : isMobileLargeHeight
+                    ? 735
+                    : isMobileExtraLargeHeight
+                        ? 735
+                        : null,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /// -- Calendar
+                Container(
+                  margin: EdgeInsets.only(top: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: BoxDecoration(
+                      color: TColors.light,
+                      borderRadius: const BorderRadius.only(
+                          bottomRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(30)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          offset: const Offset(0, 2),
+                          blurRadius: 20,
+                          spreadRadius: 1,
+                        )
+                      ]),
 
-                /// -- Calendar widget
-                child: CustomTableCalendar(
-                    focusedDay: _focusedDay,
-                    firstDay: _firstDay,
-                    lastDay: _lastDay),
-              ),
-              const SizedBox(height: 10),
+                  /// -- Calendar widget
+                  child: CustomTableCalendar(
+                      focusedDay: _focusedDay,
+                      firstDay: _firstDay,
+                      lastDay: _lastDay),
+                ),
+                const SizedBox(height: 10),
 
-              /// -- Upcoming appointment
-              StreamBuilder(
-                stream: upcomingAppointmentStream,
-                builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.data == null ||
-                      snapshot.data.docs.length == 0) {
-                    /// If no data in snapshots display nothing
-                    return const NoUpcomingAppointment();
-                  }
+                /// -- Upcoming appointment
+                StreamBuilder(
+                  stream: upcomingAppointmentStream,
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: TColors.primary,
+                      ));
+                    } else if (snapshot.data == null ||
+                        snapshot.data.docs.length == 0) {
+                      /// If no data in snapshots display nothing
+                      return const NoUpcomingAppointment();
+                    }
 
-                  return snapshot.hasData
-                      ? Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 8),
-                            child: ListView.builder(
-                              itemCount: 1,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) {
-                                DocumentSnapshot ds = snapshot.data.docs[index];
-                                return AdminUpcomingAppointmentItem(
-                                  ds: ds,
-                                  onSelectedAUpcomingAppointment: () {
-                                    _selectedUpcomingAppointment(
-                                        context, snapshot.data.docs[index]);
-                                  },
-                                );
-                              },
+                    return snapshot.hasData
+                        ? Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 8),
+                              child: ListView.builder(
+                                itemCount: 1,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  DocumentSnapshot ds =
+                                      snapshot.data.docs[index];
+                                  return AdminUpcomingAppointmentItem(
+                                    ds: ds,
+                                    onSelectedAUpcomingAppointment: () {
+                                      _selectedUpcomingAppointment(
+                                          context, snapshot.data.docs[index]);
+                                    },
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                        )
-                      : Container();
-                },
-              ),
-
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    Icon(Icons.message_outlined,
-                        size: 18, color: Colors.grey.shade700),
-                    SizedBox(width: 6),
-                    Text(
-                      'Notifications',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .apply(color: Colors.grey.shade700),
-                    ),
-                  ],
+                          )
+                        : Container();
+                  },
                 ),
-              ),
 
-              /// -- Notifications
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: TColors.light,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.grey.withOpacity(0.4))),
-                margin: EdgeInsets.all(20),
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.bookmark_add_outlined),
-                        SizedBox(width: 6),
-                        Text(
-                          'A user booked an appointment!',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                        style: Theme.of(context).textTheme.labelMedium),
-                  ],
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      Icon(Icons.message_outlined,
+                          size: 18, color: Colors.grey.shade700),
+                      SizedBox(width: 6),
+                      Text(
+                        'Notifications',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .apply(color: Colors.grey.shade700),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+
+                /// -- Notifications
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: TColors.light,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.grey.withOpacity(0.4))),
+                  margin: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.bookmark_add_outlined),
+                          SizedBox(width: 6),
+                          Text(
+                            'A user booked an appointment!',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                          style: Theme.of(context).textTheme.labelMedium),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
