@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jbl/new_features/controller/dependency_injection.dart';
-import 'package:jbl/new_features/new_navigation_menu.dart';
-import 'package:jbl/new_features/screen/admin_panel/admin_navigation_menu.dart';
 import 'package:jbl/services/wrapper.dart';
 
 import 'package:jbl/utils/theme/theme.dart';
@@ -15,6 +14,9 @@ import 'new_features/models/calendar_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
 
   /// -- Make sure Firebase.initializeApp
   if (Platform.isAndroid) {
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
 
         /// SplashScreen() to begin from the start
         /// Wrapper() to keep user logged in
-        home: const NewAdminNavigationMenu(),
+        home: const Wrapper(),
       ),
     );
   }

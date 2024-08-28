@@ -25,7 +25,9 @@ class BranchItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           height: 190,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white.withOpacity(0.5)),
           padding: const EdgeInsets.all(20),
           child: Row(
             children: [
@@ -37,36 +39,24 @@ class BranchItem extends StatelessWidget {
                       width: 90,
                       height: 90,
                       fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext
-                      context,
-                          Widget child,
-                          ImageChunkEvent?
-                          loadingProgress) {
-                        if (loadingProgress ==
-                            null) return child;
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
                         return SizedBox(
                           width: 90,
                           height: 90,
                           child: Center(
-                            child:
-                            CircularProgressIndicator(
-                              color: TColors
-                                  .primary,
-                              value: loadingProgress
-                                  .expectedTotalBytes !=
-                                  null
-                                  ? loadingProgress
-                                  .cumulativeBytesLoaded /
-                                  loadingProgress
-                                      .expectedTotalBytes!
+                            child: CircularProgressIndicator(
+                              color: TColors.primary,
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
                                   : null,
                             ),
                           ),
                         );
                       },
-                      errorBuilder: (context,
-                          exception,
-                          stackTrace) {
+                      errorBuilder: (context, exception, stackTrace) {
                         return Image.asset(
                           'assets/images/content/no-image-found.jpg',
                           fit: BoxFit.cover,
