@@ -45,19 +45,32 @@ class ExploreScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(25)),
+                    color: TColors.light,
+                    borderRadius: BorderRadius.circular(25),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: TColors.grey,
+                          offset: Offset(0, 1),
+                          spreadRadius: 0.5,
+                          blurRadius: 2)
+                    ]),
                 child: TabBar(
                   dividerHeight: 0,
                   indicatorPadding:
                       const EdgeInsets.only(left: -22, right: -21),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: TColors.primary.withOpacity(0.5),
-                  ),
+                      color: Colors.amber.shade50,
+                      boxShadow: [
+                        BoxShadow(
+                            color: TColors.grey,
+                            offset: const Offset(0, 1),
+                            spreadRadius: 0.5,
+                            blurRadius: 1)
+                      ]),
                   unselectedLabelColor: TColors.black,
                   splashBorderRadius: BorderRadius.circular(25),
-                  labelColor: Colors.white,
+                  labelColor: TColors.primary,
                   isScrollable: false,
                   labelStyle: Theme.of(context)
                       .textTheme

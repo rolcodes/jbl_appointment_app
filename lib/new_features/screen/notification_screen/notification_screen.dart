@@ -13,6 +13,7 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: TColors.light,
       appBar: CustomAppBar(
+        backgroundColor: TColors.light,
         showBackgroundColor: false,
         showIcon: true,
         iconColor: TColors.primary,
