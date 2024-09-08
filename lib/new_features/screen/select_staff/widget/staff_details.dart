@@ -3,6 +3,7 @@ import 'package:readmore/readmore.dart';
 
 import '../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_screen_ratio.dart';
 import '../../../../utils/device/device_utility.dart';
 import '../../../models/staff_model.dart';
 import '../../landing_screen/non_screen_widget/gradient_button.dart';
@@ -16,7 +17,8 @@ class StaffDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+
 
     return Scaffold(
       backgroundColor: TColors.secondary,
@@ -39,8 +41,8 @@ class StaffDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: TDeviceUtils.getScreenHeight(),
-          padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+          height: isMobileSmallHeight ? 850 : TDeviceUtils.getScreenHeight(),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -89,14 +91,14 @@ class StaffDetails extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               GradientButton(
                 text: staff.staffName,
                 color: [Colors.orange.shade800, TColors.primary],
                 width: 300,
                 height: 40,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox(
                 width: 300,
                 child: Row(
@@ -105,7 +107,7 @@ class StaffDetails extends StatelessWidget {
                       flex: 3,
                       child: Row(
                         children: [
-                          Icon(Icons.location_on, color: TColors.primary),
+                          const Icon(Icons.location_on, color: TColors.primary),
                           Text(staff.location,
                               style: Theme.of(context).textTheme.bodyMedium),
                         ],
@@ -115,7 +117,7 @@ class StaffDetails extends StatelessWidget {
                       flex: 2,
                       child: Row(
                         children: [
-                          Icon(Icons.check_circle, color: TColors.primary),
+                          const Icon(Icons.check_circle, color: TColors.primary),
                           Text(staff.position,
                               style: Theme.of(context).textTheme.bodyMedium),
                         ],
@@ -124,7 +126,7 @@ class StaffDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GradientButton(
                 text: 'Book an Appointment',
                 style: Theme.of(context)
@@ -138,18 +140,18 @@ class StaffDetails extends StatelessWidget {
 
                 /// Redirect to Service Categories Grid Item
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Text('Overall Rating',
                   style: Theme.of(context).textTheme.headlineSmall),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TOverallProductRating(rating: staff.rating),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text('Reviews', style: Theme.of(context).textTheme.headlineSmall),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               /// -- User Review
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(10)),
@@ -158,14 +160,14 @@ class StaffDetails extends StatelessWidget {
                     ClipOval(
                       child: Image.asset(
                         'assets/images/users/user2.jpeg',
-                        width: 100,
-                        height: 100,
+                        width: isMobileSmallHeight ? 70 : 100,
+                        height: isMobileSmallHeight ? 70 : 100,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.only(left: 15),
+                        padding: const EdgeInsets.only(left: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -174,7 +176,7 @@ class StaffDetails extends StatelessWidget {
                               children: [
                                 Text(
                                   'Maria Gonzales',
-                                  style: isMobileSmall
+                                  style: isMobileSmallHeight
                                       ? Theme.of(context)
                                           .textTheme
                                           .titleMedium!
@@ -188,7 +190,7 @@ class StaffDetails extends StatelessWidget {
                               'June 24, 2024',
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             ReadMoreText(
                               'Lorem ipsum dolor sit amet, conse adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
                               trimMode: TrimMode.Line,
@@ -213,7 +215,7 @@ class StaffDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               /// See all reviews
               TextButton(

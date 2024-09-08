@@ -194,9 +194,9 @@ class _UpdateSelectTechnicianState extends State<UpdateSelectTechnician> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 12),
-                        height: 100,
+                        height: isMobileSmallHeight ? 80 : 100,
                         width: isMobileSmallHeight
-                            ? 150
+                            ? 140
                             : isMobileMediumHeight
                                 ? 155
                                 : isMobileLargeHeight

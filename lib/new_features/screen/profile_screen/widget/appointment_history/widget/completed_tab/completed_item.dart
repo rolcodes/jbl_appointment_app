@@ -20,6 +20,7 @@ class CompletedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
     final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     /// -- Create condition to display only cancelled appointments in Cancelled Tabs
     return ds['status'] == 'Waiting for approval' ||
@@ -53,13 +54,12 @@ class CompletedItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: 240,
+                          width: isMobileSmallHeight ? 200 : 240,
                           child: Text(
                             ds["service"],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .apply(fontSizeDelta: 1, color: Colors.black),
+                            style: Theme.of(context).textTheme.bodySmall!.apply(
+                                fontSizeDelta: isMobileSmallHeight ? -1 : 1,
+                                color: Colors.black),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -88,8 +88,8 @@ class CompletedItem extends StatelessWidget {
                           child: CustomImageNetwork(
                             imageUrl: ds["image"],
                             fit: BoxFit.cover,
-                            width: isMobileSmall ? 100 : 110,
-                            height: isMobileSmall ? 100 : 110,
+                            width: isMobileSmallHeight ? 70 : 110,
+                            height: isMobileSmallHeight ? 70 : 110,
                           ),
                         ),
                         Container(

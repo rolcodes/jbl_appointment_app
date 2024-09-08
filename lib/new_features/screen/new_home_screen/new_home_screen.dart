@@ -66,6 +66,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -99,7 +100,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: TDeviceUtils.getScreenHeight() * 1.2,
+            height: TDeviceUtils.getScreenHeight() * 1.25,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -166,13 +167,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                           context: context, bookingStream: bookingStream),
 
                       Container(
-                        height: isMobileMediumHeight
-                            ? 540
-                            : isMobileLargeHeight
-                                ? 555
-                                : isMobileExtraLargeHeight
-                                    ? 580
-                                    : null,
+                        height: isMobileSmallHeight
+                            ? 500
+                            : isMobileMediumHeight
+                                ? 540
+                                : isMobileLargeHeight
+                                    ? 555
+                                    : isMobileExtraLargeHeight
+                                        ? 580
+                                        : null,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
@@ -223,13 +226,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                               ],
                             ),
                             SizedBox(
-                                height: isMobileMediumHeight
-                                    ? 10
-                                    : isMobileLargeHeight
-                                        ? 16
-                                        : isMobileExtraLargeHeight
-                                            ? 0
-                                            : null),
+                                height: isMobileSmallHeight
+                                    ? 6
+                                    : isMobileMediumHeight
+                                        ? 10
+                                        : isMobileLargeHeight
+                                            ? 16
+                                            : isMobileExtraLargeHeight
+                                                ? 0
+                                                : null),
 
                             /// -- Services Categories Cards
                             SizedBox(
@@ -256,13 +261,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                               ),
                             ),
                             SizedBox(
-                                height: isMobileMediumHeight
-                                    ? 10
-                                    : isMobileLargeHeight
-                                        ? 18
-                                        : isMobileExtraLargeHeight
-                                            ? 5
-                                            : null),
+                                height: isMobileSmallHeight
+                                    ? 12
+                                    : isMobileMediumHeight
+                                        ? 10
+                                        : isMobileLargeHeight
+                                            ? 18
+                                            : isMobileExtraLargeHeight
+                                                ? 5
+                                                : null),
 
                             /// -- Promos
                             Row(
@@ -290,13 +297,15 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                               ],
                             ),
                             SizedBox(
-                                height: isMobileMediumHeight
-                                    ? 5
-                                    : isMobileLargeHeight
-                                        ? 12
-                                        : isMobileExtraLargeHeight
-                                            ? 0
-                                            : null),
+                                height: isMobileSmallHeight
+                                    ? 4
+                                    : isMobileMediumHeight
+                                        ? 5
+                                        : isMobileLargeHeight
+                                            ? 12
+                                            : isMobileExtraLargeHeight
+                                                ? 0
+                                                : null),
 
                             /// -- Promos
                             const NewPromoSlider(

@@ -8,6 +8,7 @@ import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_service_categ
 
 import '../../../../../../../common/widgets/buttons/custom_guest_book_now_button.dart';
 import '../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../models/service_product.dart';
 import '../../../../../landing_screen/landing_screen.dart';
 
@@ -86,6 +87,7 @@ class _GuestServiceScreenState extends State<GuestServiceScreen> {
         ),
       );
     }
+
 
     return Scaffold(
       appBar: AppBar(

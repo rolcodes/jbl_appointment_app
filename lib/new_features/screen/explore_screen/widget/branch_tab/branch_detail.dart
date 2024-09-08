@@ -20,6 +20,7 @@ class BranchDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -28,7 +29,7 @@ class BranchDetailScreen extends StatelessWidget {
       backgroundColor: TColors.secondary,
       body: SingleChildScrollView(
         child: SizedBox(
-          height: isMobileMediumHeight
+          height: isMobileSmallHeight ? 910 : isMobileMediumHeight
               ? 950
               : isMobileLargeHeight
               ? 950
@@ -122,14 +123,14 @@ class BranchDetailScreen extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
-                                          .apply(color: TColors.primary),
+                                          .apply(color: TColors.primary, fontSizeDelta: isMobileSmallHeight ? -2 : 0),
                                     ),
                                     Text(
                                       branch.weekendHours,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
-                                          .apply(color: TColors.primary),
+                                          .apply(color: TColors.primary, fontSizeDelta: isMobileSmallHeight ? -2 : 0),
                                     ),
                                   ],
                                 )

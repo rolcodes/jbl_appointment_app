@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../common/widgets/images/custom_image_network.dart';
+import '../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../models/branch_model.dart';
 import '../../../select_staff/widget/custom_rating_bar_indicator.dart';
 
@@ -13,6 +15,8 @@ class BranchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+
     return Material(
       elevation: 2,
       borderRadius: BorderRadius.circular(20),
@@ -34,44 +38,18 @@ class BranchItem extends StatelessWidget {
               Column(
                 children: [
                   ClipOval(
-                    child: Image.network(
-                      branch.image,
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return SizedBox(
-                          width: 90,
-                          height: 90,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: TColors.primary,
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          ),
-                        );
-                      },
-                      errorBuilder: (context, exception, stackTrace) {
-                        return Image.asset(
-                          'assets/images/content/no-image-found.jpg',
-                          fit: BoxFit.cover,
-                          width: 90,
-                          height: 90,
-                        );
-                      },
-                    ),
-                  ),
+                      child: CustomImageNetwork(
+                    imageUrl: branch.image,
+                    width: 75,
+                    height: 75,
+                    fit: BoxFit.cover,
+                  )),
                   Expanded(flex: 1, child: SizedBox()),
                 ],
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

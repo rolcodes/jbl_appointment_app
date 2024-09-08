@@ -47,6 +47,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
     final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
     final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
     final isMobileLargeWidth = CustomScreen.isMobileLargeWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -71,7 +72,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 180,
-              margin: EdgeInsets.only(top: 8),
+              margin: const EdgeInsets.only(top: 8),
               padding: const EdgeInsets.only(
                   right: 24, left: 24, top: 24, bottom: 12),
               decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
@@ -83,8 +84,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       ClipOval(
                         child: Image.network(
                           widget.ds['branchImage'],
-                          height: isMobileSmallWidth ? 90 : 100,
-                          width: isMobileSmallWidth ? 90 : 100,
+                          height: isMobileSmallHeight ? 70 : 100,
+                          width: isMobileSmallHeight ? 70 : 100,
                           fit: BoxFit.cover,
                           loadingBuilder:
                               (BuildContext context,
@@ -95,8 +96,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                               return child;
                             }
                             return SizedBox(
-                              height: isMobileSmallWidth ? 90 : 100,
-                              width: isMobileSmallWidth ? 90 : 100,
+                              height: isMobileSmallHeight ? 70 : 100,
+                              width: isMobileSmallHeight ? 70 : 100,
                               child: Center(
                                 child:
                                 CircularProgressIndicator(
@@ -118,8 +119,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                             return Image.asset(
                               'assets/images/content/no-image-found.jpg',
                               fit: BoxFit.cover,
-                              height: isMobileSmallWidth ? 90 : 100,
-                              width: isMobileSmallWidth ? 90 : 100,
+                              height: isMobileSmallHeight ? 70 : 100,
+                              width: isMobileSmallHeight ? 70 : 100,
                             );
                           },
                         ),
@@ -128,7 +129,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                   ),
                   Container(
                     width: isMobileSmallWidth ? 240 : 260,
-                    padding: isMobileMediumWidth
+                    padding: isMobileSmallHeight ? const EdgeInsets.only(left: 8) : isMobileMediumWidth
                         ? const EdgeInsets.only(left: 8)
                         : const EdgeInsets.only(left: 0),
                     child: Column(
@@ -261,8 +262,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       widget.ds['image'],
-                      width: isMobileSmallWidth ? 110 : 120,
-                      height: isMobileSmallWidth ? 110 : 120,
+                      width: isMobileSmallHeight ? 90 : 120,
+                      height: isMobileSmallHeight ? 90 : 120,
                       fit: BoxFit.cover,
                       loadingBuilder:
                           (BuildContext context,
@@ -273,8 +274,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                           return child;
                         }
                         return SizedBox(
-                          width: isMobileSmallWidth ? 110 : 120,
-                          height: isMobileSmallWidth ? 110 : 120,
+                          width: isMobileSmallHeight ? 90 : 120,
+                          height: isMobileSmallHeight ? 90 : 120,
                           child: Center(
                             child:
                             CircularProgressIndicator(
@@ -296,15 +297,15 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                         return Image.asset(
                           'assets/images/content/no-image-found.jpg',
                           fit: BoxFit.cover,
-                          width: isMobileSmallWidth ? 110 : 120,
-                          height: isMobileSmallWidth ? 110 : 120,
+                          width: isMobileSmallHeight ? 90 : 120,
+                          height: isMobileSmallHeight ? 90 : 120,
                         );
                       },
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 20),
-                    height: isMobileSmallWidth ? 110 : 120,
+                    height: isMobileSmallHeight ? 90 : 120,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -393,8 +394,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       },
                       child: Container(
                         padding: EdgeInsets.only(
-                            left: 75,
-                            right: isMobileSmallWidth ? 60 : 75,
+                            left: isMobileSmallHeight ? 60 : 75,
+                            right: isMobileSmallHeight ? 60 : 75,
                             top: Platform.isAndroid ? 0 : 25,
                             bottom: Platform.isAndroid ? 0 : 25),
                         child: Text(
@@ -415,14 +416,14 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       },
                       child: Container(
                         padding: EdgeInsets.only(
-                            left: isMobileSmallWidth
+                            left: isMobileSmallHeight
                                 ? 40
                                 : isMobileMediumWidth
                                     ? 49
                                     : isMobileLargeWidth
                                         ? 60
                                         : 55,
-                            right: 60,
+                            right: isMobileSmallHeight ? 46 : 60,
                             top: Platform.isAndroid ? 0 : 25,
                             bottom: Platform.isAndroid ? 0 : 25),
                         child: Text(

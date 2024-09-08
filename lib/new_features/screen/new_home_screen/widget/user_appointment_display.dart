@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_screen_ratio.dart';
 import '../../../../utils/device/device_utility.dart';
 import '../../my_appointments/my_appointments.dart';
 
@@ -20,6 +21,7 @@ class UserAppointmentDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     return StreamBuilder(
         stream: bookingStream,
@@ -158,7 +160,8 @@ class UserAppointmentDisplay extends StatelessWidget {
                                                         if (loadingProgress ==
                                                             null) return child;
                                                         return Container(
-                                                          color: Colors.grey.shade200,
+                                                          color: Colors
+                                                              .grey.shade200,
                                                           width: isMobileSmall
                                                               ? 100
                                                               : 110,
@@ -213,10 +216,7 @@ class UserAppointmentDisplay extends StatelessWidget {
                                                                   .getScreenWidth(
                                                                       context) *
                                                               0.60
-                                                          : TDeviceUtils
-                                                                  .getScreenWidth(
-                                                                      context) *
-                                                              0.57,
+                                                          : isMobileSmallHeight ? 200 : 200 ,
                                                       height: isMobileSmall
                                                           ? 100
                                                           : 110,

@@ -21,7 +21,7 @@ class NewPromoSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
-
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -31,7 +31,9 @@ class NewPromoSlider extends StatelessWidget {
         CarouselSlider(
           options: CarouselOptions(
               clipBehavior: Clip.antiAlias,
-              height: isMobileMediumHeight
+              height:
+              isMobileSmallHeight ? 208 :
+              isMobileMediumHeight
                   ? 222
                   : isMobileLargeHeight
                       ? 232
@@ -57,7 +59,7 @@ class NewPromoSlider extends StatelessWidget {
 
         /// -- Indicators
         Positioned(
-          top: isMobileMediumHeight
+          top:  isMobileSmallHeight ? 192 : isMobileMediumHeight
               ? 210
               : isMobileLargeHeight
                   ? 219

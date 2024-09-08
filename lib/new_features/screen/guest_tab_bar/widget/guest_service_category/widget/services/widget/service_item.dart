@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/constants/colors.dart';
+import '../../../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../../../../utils/device/device_utility.dart';
 import '../../../../../../../models/service_product.dart';
 
@@ -20,7 +21,7 @@ class ServiceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     /// -- Widget for Services in each Category => guest_service.dart
     return Material(
@@ -45,7 +46,7 @@ class ServiceItem extends StatelessWidget {
                 child: Image.network(
                   service.imageUrl,
                   width: 300,
-                  height: 140,
+                  height: isMobileSmallHeight ? 120 : 140,
                   fit: BoxFit.cover,
                   loadingBuilder: (BuildContext
                   context,
@@ -89,11 +90,11 @@ class ServiceItem extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: SizedBox(
-                    width: isMobileSmall ? 120 : 160,
+                    width: isMobileSmallHeight ? 120 : 160,
                     child: Text(
                       service.title,
-                      style: isMobileSmall
-                          ? Theme.of(context).textTheme.titleLarge!.apply(fontSizeDelta: -3)
+                      style: isMobileSmallHeight
+                          ? Theme.of(context).textTheme.titleLarge!.apply(fontSizeDelta: -4)
                           : Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.center,
                       maxLines: 2,

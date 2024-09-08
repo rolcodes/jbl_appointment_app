@@ -19,6 +19,7 @@ class MyAppointmentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
     final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     return Material(
         elevation: 3,
@@ -54,7 +55,7 @@ class MyAppointmentItem extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
-                            .apply(fontSizeDelta: -1),
+                            .apply(fontSizeDelta: isMobileSmallHeight ? -3 : -1),
                         overflow: TextOverflow.ellipsis,
                       ),
 
@@ -65,13 +66,13 @@ class MyAppointmentItem extends StatelessWidget {
                                   .textTheme
                                   .bodyLarge!
                                   .apply(
-                                      fontSizeDelta: -3, color: Colors.grey))
+                                      fontSizeDelta: isMobileSmallHeight ? -6 : -3, color: Colors.grey))
                               : Text(ds['status'],
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
                                       .apply(
-                                          fontSizeDelta: -3,
+                                          fontSizeDelta: isMobileSmallHeight ? -4 : -3,
                                           color: Colors.blue)),
                     ],
                   ),
@@ -98,8 +99,8 @@ class MyAppointmentItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
                         ds['image'],
-                        width: isMobileSmall ? 100 : 110,
-                        height: isMobileSmall ? 100 : 110,
+                        width: isMobileSmallHeight ? 85 : 110,
+                        height: isMobileSmallHeight ? 85 : 110,
                         fit: BoxFit.cover,
                         loadingBuilder:
                             (BuildContext context,
@@ -110,8 +111,8 @@ class MyAppointmentItem extends StatelessWidget {
                             return child;
                           }
                           return SizedBox(
-                            width: isMobileSmall ? 100 : 110,
-                            height: isMobileSmall ? 100 : 110,
+                            width: isMobileSmallHeight ? 85 : 110,
+                            height: isMobileSmallHeight ? 85 : 110,
                             child: Center(
                               child:
                               CircularProgressIndicator(
@@ -133,8 +134,8 @@ class MyAppointmentItem extends StatelessWidget {
                           return Image.asset(
                             'assets/images/content/no-image-found.jpg',
                             fit: BoxFit.cover,
-                            width: isMobileSmall ? 100 : 110,
-                            height: isMobileSmall ? 100 : 110,
+                            width: isMobileSmallHeight ? 85 : 110,
+                            height: isMobileSmallHeight ? 85 : 110,
                           );
                         },
                       ),
@@ -142,7 +143,7 @@ class MyAppointmentItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 12),
                       child: SizedBox(
-                        width: isMobileSmall ? 192 : isMobileMedium ? 200 : 220,
+                        width: isMobileSmallHeight ? 170 : isMobileMedium ? 200 : 220,
                         height: 110,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

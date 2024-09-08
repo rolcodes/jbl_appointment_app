@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/cancelled_tab/cancelled_tab.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/completed_tab/completed_tab.dart';
 import 'package:jbl/new_features/screen/profile_screen/widget/appointment_history/widget/expired_tab/expired_tab.dart';
+import 'package:jbl/utils/device/device_screen_ratio.dart';
 
 import '../../../../../common/widgets/appbar/custom_appbar/custom_appbar.dart';
 import '../../../../../utils/constants/colors.dart';
@@ -11,6 +12,8 @@ class AppointmentHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -58,10 +61,10 @@ class AppointmentHistoryScreen extends StatelessWidget {
                   indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       color: Colors.amber.shade50,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                             color: TColors.grey,
-                            offset: const Offset(0, 1),
+                            offset: Offset(0, 1),
                             spreadRadius: 0.5,
                             blurRadius: 1)
                       ]),
@@ -69,17 +72,20 @@ class AppointmentHistoryScreen extends StatelessWidget {
                   splashBorderRadius: BorderRadius.circular(25),
                   labelColor: TColors.primary,
                   isScrollable: false,
-                  labelStyle: Theme.of(context)
+                  labelStyle: isMobileSmallHeight ? Theme.of(context)
+                      .textTheme
+                      .titleMedium!.apply(fontSizeDelta: -4, fontWeightDelta: 1)
+                       : Theme.of(context)
                       .textTheme
                       .bodyLarge!
                       .apply(fontWeightDelta: 1),
                   unselectedLabelStyle: Theme.of(context)
                       .textTheme
                       .labelLarge!
-                      .apply(fontSizeDelta: 1),
-                  tabs: const [
+                      .apply(fontSizeDelta: isMobileSmallHeight ? -1 : 1),
+                  tabs: [
                     Tab(
-                      child: Text(' Cancelled '),
+                      child: isMobileSmallHeight ? Text('Cancelled') : Text(' Cancelled '),
                     ),
                     Tab(
                       child: Text('Completed'),

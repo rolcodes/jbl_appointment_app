@@ -44,7 +44,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -108,7 +108,9 @@ class _LandingScreenState extends State<LandingScreen> {
                     Column(
                       children: [
                         SizedBox(
-                            height: isMobileMediumHeight
+                            height: isMobileSmallHeight
+                                ? 110
+                                : isMobileMediumHeight
                                 ? 120
                                 : isMobileLargeHeight
                                     ? 130
@@ -117,11 +119,14 @@ class _LandingScreenState extends State<LandingScreen> {
                                         : null),
                         Image.asset(
                           'assets/logos/vertical_logo_jbl.png',
-                          width: 260,
-                          height: 260,
+                          width: isMobileSmallHeight ? 210 : 260,
+                          height: isMobileSmallHeight ? 210 : 260,
                         ),
                         SizedBox(
-                            height: isMobileMediumHeight
+                            height:
+                            isMobileSmallHeight
+                                ? 110
+                                : isMobileMediumHeight
                                 ? 120
                                 : isMobileLargeHeight
                                     ? 130
@@ -131,13 +136,15 @@ class _LandingScreenState extends State<LandingScreen> {
 
                         /// Page 1
                         SizedBox(
-                          height: isMobileMediumHeight
-                              ? 260
-                              : isMobileLargeHeight
-                                  ? 270
-                                  : isMobileExtraLargeHeight
-                                      ? 280
-                                      : null,
+                          height: isMobileSmallHeight
+                              ? 250
+                              : isMobileMediumHeight
+                                  ? 260
+                                  : isMobileLargeHeight
+                                      ? 270
+                                      : isMobileExtraLargeHeight
+                                          ? 280
+                                          : null,
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

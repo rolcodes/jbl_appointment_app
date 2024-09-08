@@ -5,6 +5,7 @@ import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_branch/widget
 import 'package:jbl/new_features/screen/guest_tab_bar/widget/guest_branch/widget/guest_branch_details.dart';
 
 import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../models/branch_model.dart';
 
 class GuestBranchTab extends StatelessWidget {
@@ -26,6 +27,8 @@ class GuestBranchTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Column(
       children: [
         /// Search Button

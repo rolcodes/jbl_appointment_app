@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/device/device_screen_ratio.dart';
 import '../../../../../models/branch_model.dart';
 import '../../../../select_staff/widget/custom_rating_bar_indicator.dart';
 
@@ -13,6 +14,11 @@ class BranchListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+
     return Column(
       children: [
         InkWell(
@@ -26,7 +32,7 @@ class BranchListItem extends StatelessWidget {
               decoration: BoxDecoration(
                   color: TColors.light,
                   borderRadius: BorderRadius.circular(10)),
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
                   Column(
@@ -34,17 +40,17 @@ class BranchListItem extends StatelessWidget {
                       ClipOval(
                         child: Image.network(
                           branch.image,
-                          width: 90,
-                          height: 90,
+                          width: isMobileSmallHeight ? 60 : 90,
+                          height: isMobileSmallHeight ? 60 : 90,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: 70),
+                      const SizedBox(height: 70),
                     ],
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: isMobileSmallHeight ? 10 : 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -60,7 +66,7 @@ class BranchListItem extends StatelessWidget {
                           ),
 
                           /// Rating
-                          TRatingBarIndicator(rating: 5),
+                          const TRatingBarIndicator(rating: 5),
 
                           /// Kilometer
                           Text(branch.distance),
@@ -86,7 +92,7 @@ class BranchListItem extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
       ],
     );
   }

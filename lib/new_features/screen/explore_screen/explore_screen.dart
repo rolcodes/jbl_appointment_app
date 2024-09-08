@@ -15,6 +15,7 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     return DefaultTabController(
       length: 3,
@@ -41,7 +42,7 @@ class ExploreScreen extends StatelessWidget {
               decoration: const BoxDecoration(color: Colors.white),
               padding: const EdgeInsets.only(bottom: 10),
               child: Container(
-                height: 40,
+                height: isMobileSmallHeight ? 35 : 40,
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
@@ -59,12 +60,12 @@ class ExploreScreen extends StatelessWidget {
                   indicatorPadding:
                       const EdgeInsets.only(left: -22, right: -21),
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(25),
                       color: Colors.amber.shade50,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                             color: TColors.grey,
-                            offset: const Offset(0, 1),
+                            offset: Offset(0, 1),
                             spreadRadius: 0.5,
                             blurRadius: 1)
                       ]),
@@ -72,23 +73,32 @@ class ExploreScreen extends StatelessWidget {
                   splashBorderRadius: BorderRadius.circular(25),
                   labelColor: TColors.primary,
                   isScrollable: false,
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .apply(fontWeightDelta: 1),
+                  labelStyle: isMobileSmallHeight
+                      ? Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .apply(fontWeightDelta: 2)
+                      : Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .apply(fontWeightDelta: 1),
                   unselectedLabelStyle: Theme.of(context)
                       .textTheme
                       .labelLarge!
                       .apply(fontSizeDelta: 1),
-                  tabs: const [
+                  tabs: [
                     Tab(
-                      child: Text('   Services   '),
+                      child: isMobileSmallHeight
+                          ? const Text('Services')
+                          : const Text('   Services   '),
                     ),
                     Tab(
-                      child: Text('     Branch     '),
+                      child:  isMobileSmallHeight
+                          ? const Text(' Branch ') : Text('     Branch     '),
                     ),
                     Tab(
-                      child: Text('       Staff       '),
+                      child: isMobileSmallHeight
+                          ? const Text('    Staff    ') : Text('       Staff       '),
                     ),
                   ],
                 ),

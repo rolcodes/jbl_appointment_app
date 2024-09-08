@@ -29,16 +29,14 @@ class ServicesCategoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmallWidth = CustomScreen.isMobileSmallWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
-    final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
 
     return SingleChildScrollView(
       child: SizedBox(
-        /// TO DO
-        height: isMobileMediumHeight
+        height: isMobileSmallHeight ? 1100 : isMobileMediumHeight
             ? 1180
             : isMobileLargeHeight
                 ? 1250

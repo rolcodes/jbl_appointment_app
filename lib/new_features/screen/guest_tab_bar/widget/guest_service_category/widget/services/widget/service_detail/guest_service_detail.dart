@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -19,6 +18,7 @@ class GuestServiceDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -30,13 +30,15 @@ class GuestServiceDetailScreen extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: isMobileMediumHeight
-                  ? 820
-                  : isMobileLargeHeight
-                  ? 820
-                  : isMobileExtraLargeHeight
-                  ? 830
-                  : null,
+              height: isMobileSmallHeight
+                  ? 810
+                  : isMobileMediumHeight
+                      ? 820
+                      : isMobileLargeHeight
+                          ? 820
+                          : isMobileExtraLargeHeight
+                              ? 830
+                              : null,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -71,16 +73,16 @@ class GuestServiceDetailScreen extends StatelessWidget {
                               Text(
                                 service.title,
                                 style:
-                                Theme.of(context).textTheme.headlineMedium,
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                               SizedBox(
                                   height: isMobileMediumHeight
                                       ? 10
                                       : isMobileLargeHeight
-                                      ? 20
-                                      : isMobileExtraLargeHeight
-                                      ? 25
-                                      : null),
+                                          ? 20
+                                          : isMobileExtraLargeHeight
+                                              ? 25
+                                              : null),
 
                               /// -- Description
                               Text(service.description),
@@ -141,13 +143,13 @@ class GuestServiceDetailScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                            height: isMobileMediumHeight
+                            height: isMobileSmallHeight ? 15 : isMobileMediumHeight
                                 ? 18
                                 : isMobileLargeHeight
-                                ? 20
-                                : isMobileExtraLargeHeight
-                                ? 25
-                                : null),
+                                    ? 20
+                                    : isMobileExtraLargeHeight
+                                        ? 25
+                                        : null),
 
                         /// -- Service Inclusions:
                         Center(

@@ -24,6 +24,7 @@ class GuestBranchDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
     final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
@@ -32,13 +33,15 @@ class GuestBranchDetailsScreen extends StatelessWidget {
       backgroundColor: TColors.secondary,
       body: SingleChildScrollView(
         child: SizedBox(
-          height: isMobileMediumHeight
-              ? 950
-              : isMobileLargeHeight
+          height: isMobileSmallHeight
+              ? 920
+              : isMobileMediumHeight
                   ? 950
-                  : isMobileExtraLargeHeight
-                      ? 920
-                      : null,
+                  : isMobileLargeHeight
+                      ? 950
+                      : isMobileExtraLargeHeight
+                          ? 920
+                          : null,
           child: Column(
             children: [
               Expanded(
@@ -126,7 +129,7 @@ class GuestBranchDetailsScreen extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
-                                          .apply(color: TColors.primary),
+                                          .apply(color: TColors.primary, fontSizeDelta: isMobileSmallHeight ? -2 : 0),
                                     ),
                                     Text(
                                       branch.weekendHours,
@@ -435,4 +438,3 @@ class GuestBranchDetailsScreen extends StatelessWidget {
     );
   }
 }
-

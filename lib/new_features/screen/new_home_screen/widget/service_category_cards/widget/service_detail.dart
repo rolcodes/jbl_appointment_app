@@ -194,7 +194,7 @@ class ServiceDetailScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                            height: isMobileMediumHeight
+                            height: isMobileSmallHeight ? 15 : isMobileMediumHeight
                                 ? 18
                                 : isMobileLargeHeight
                                 ? 20

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../../services/database.dart';
 import '../../../../../../../utils/constants/colors.dart';
-import '../cancelled_tab/cancelled_detail.dart';
+import '../custom_appointment_detail.dart';
 import 'completed_item.dart';
 
 class CompletedTab extends StatefulWidget {
@@ -22,7 +22,7 @@ class _CompletedTabState extends State<CompletedTab> {
       BuildContext context, DocumentSnapshot<Object?> ds) async {
     /// Navigate to specific cancelled appointment
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => CancelledAppointmentDetail(
+        builder: (ctx) => CustomAppointmentDetails(
           ds: ds,
         )));
   }

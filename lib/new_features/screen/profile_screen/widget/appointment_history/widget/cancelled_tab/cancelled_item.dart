@@ -19,6 +19,7 @@ class CancelledItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobileSmall = CustomScreen.isMobileSmallWidth(context);
     final isMobileMedium = CustomScreen.isMobileMediumWidth(context);
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     /// -- Create condition to display only cancelled appointments in Cancelled Tabs
     return Padding(
@@ -36,7 +37,7 @@ class CancelledItem extends StatelessWidget {
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 0,
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
                 blurRadius: 6,
               )
             ],
@@ -47,13 +48,12 @@ class CancelledItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: 240,
+                    width: isMobileSmallHeight ? 200 : 240,
                     child: Text(
                       ds["service"],
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .apply(fontSizeDelta: 1, color: Colors.black),
+                      style: Theme.of(context).textTheme.bodySmall!.apply(
+                          fontSizeDelta: isMobileSmallHeight ? -1 : 1,
+                          color: Colors.black),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -81,12 +81,12 @@ class CancelledItem extends StatelessWidget {
                     child: CustomImageNetwork(
                       imageUrl: ds["image"],
                       fit: BoxFit.cover,
-                      width: isMobileSmall ? 100 : 110,
-                      height: isMobileSmall ? 100 : 110,
+                      width: isMobileSmallHeight ? 70 : 110,
+                      height: isMobileSmallHeight ? 70 : 110,
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 12),
+                    padding: const EdgeInsets.only(left: 12),
                     width: isMobileSmall
                         ? 210
                         : isMobileMedium

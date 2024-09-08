@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbl/utils/device/device_screen_ratio.dart';
 
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/device/device_utility.dart';
@@ -16,7 +17,7 @@ class ServiceGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobileSmall = TDeviceUtils.getScreenWidth(context) <= 393;
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     /// -- Widget for Categories => guest_service_category.dart
     return Material(
@@ -40,7 +41,7 @@ class ServiceGridItem extends StatelessWidget {
                 child: Image.network(
                   service.image,
                   width: 300,
-                  height: 140,
+                  height: isMobileSmallHeight ? 120 : 140,
                   fit: BoxFit.cover,
                   // When image is loading from the server it takes some time
                   // So we will show progress indicator while loading
@@ -90,14 +91,14 @@ class ServiceGridItem extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: SizedBox(
-                    width: isMobileSmall ? 140 : 160,
+                    width: isMobileSmallHeight ? 140 : 160,
                     child: Text(
                       service.title,
-                      style: isMobileSmall
+                      style: isMobileSmallHeight
                           ? Theme.of(context)
                               .textTheme
                               .titleLarge!
-                              .apply(fontSizeDelta: -2)
+                              .apply(fontSizeDelta: -4)
                           : Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.center,
                     ),
