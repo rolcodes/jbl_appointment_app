@@ -48,6 +48,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
     final isMobileMediumWidth = CustomScreen.isMobileMediumWidth(context);
     final isMobileLargeWidth = CustomScreen.isMobileLargeWidth(context);
     final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -395,7 +396,7 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                       child: Container(
                         padding: EdgeInsets.only(
                             left: isMobileSmallHeight ? 60 : 75,
-                            right: isMobileSmallHeight ? 60 : 75,
+                            right: isMobileSmallHeight ? 60  : isMobileMediumHeight ? 60 : 75,
                             top: Platform.isAndroid ? 0 : 25,
                             bottom: Platform.isAndroid ? 0 : 25),
                         child: Text(
@@ -418,8 +419,8 @@ class _AppointmentsDetailState extends State<AppointmentsDetail> {
                         padding: EdgeInsets.only(
                             left: isMobileSmallHeight
                                 ? 40
-                                : isMobileMediumWidth
-                                    ? 49
+                                : isMobileMediumHeight
+                                    ? 42
                                     : isMobileLargeWidth
                                         ? 60
                                         : 55,

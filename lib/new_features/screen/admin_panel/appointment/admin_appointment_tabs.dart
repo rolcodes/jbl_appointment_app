@@ -5,6 +5,7 @@ import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/completed_t
 import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/expired_tabs/admin_expired_tab.dart';
 import 'package:jbl/new_features/screen/admin_panel/appointment/tabs/request_tab/admin_request_tab.dart';
 import '../../../../../utils/constants/colors.dart';
+import '../../../../utils/device/device_screen_ratio.dart';
 import '../widget/admin_chat/admin_custom_chat_button.dart';
 import '../widget/appbar/admin_custom_app_bar.dart';
 
@@ -18,6 +19,12 @@ class AdminAppointmentTabs extends StatefulWidget {
 class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
   @override
   Widget build(BuildContext context) {
+
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -83,7 +90,7 @@ class _AdminAppointmentTabsState extends State<AdminAppointmentTabs> {
                   labelStyle: Theme.of(context)
                       .textTheme
                       .labelSmall!
-                      .apply(fontSizeDelta: 2, fontWeightDelta: 1),
+                      .apply(fontSizeDelta: isMobileMediumHeight ? 1 : 2, fontWeightDelta: 1),
                   unselectedLabelStyle: Theme.of(context)
                       .textTheme
                       .labelSmall!

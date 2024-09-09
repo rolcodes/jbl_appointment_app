@@ -1,10 +1,10 @@
 name: jbl
-description: "A Booking Appointment App for Aesthetic Clinic developed by Jirol Delos Santos"
+description: "A Appointmnet Booking App for Aesthetic Clinic developed by Jirol Delos Santos"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: '>=3.3.2 <4.0.0'

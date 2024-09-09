@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
 
         /// SplashScreen() to begin from the start
         /// Wrapper() to keep user logged in
-        home: const Wrapper(),
+        home: const NewAdminNavigationMenu(),
       ),
     );
   }
