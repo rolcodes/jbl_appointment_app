@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/constants/colors.dart';
+import '../../../utils/device/device_screen_ratio.dart';
 import '../../models/data/branch_data.dart';
 import '../guest_tab_bar/widget/guest_branch/guest_branch_tab.dart';
 import '../guest_tab_bar/widget/guest_service_category/guest_service_category.dart';
@@ -17,6 +18,12 @@ class GuestScreen extends StatefulWidget {
 class _GuestScreenState extends State<GuestScreen> {
   @override
   Widget build(BuildContext context) {
+    final isMobileExtraSmallHeight = CustomScreen.isMobileExtraSmallHeight();
+    final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
+    final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
+    final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
+    final isMobileExtraLargeHeight = CustomScreen.isMobileExtraLargeHeight();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -58,7 +65,7 @@ class _GuestScreenState extends State<GuestScreen> {
               unselectedLabelColor: TColors.accent,
               labelColor: Colors.white,
               splashBorderRadius: BorderRadius.circular(20),
-              labelStyle: Theme.of(context).textTheme.titleMedium,
+              labelStyle: isMobileExtraSmallHeight ? Theme.of(context).textTheme.labelMedium : Theme.of(context).textTheme.titleMedium,
               tabs: const [
                 Tab(
                   child: Text('Branch'),

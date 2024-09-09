@@ -17,6 +17,7 @@ class ServiceGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileExtraSmallHeight = CustomScreen.isMobileExtraSmallHeight();
     final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     /// -- Widget for Categories => guest_service_category.dart
@@ -41,32 +42,30 @@ class ServiceGridItem extends StatelessWidget {
                 child: Image.network(
                   service.image,
                   width: 300,
-                  height: isMobileSmallHeight ? 120 : 140,
+                  height: isMobileExtraSmallHeight
+                      ? 115
+                      : isMobileSmallHeight
+                          ? 120
+                          : 140,
                   fit: BoxFit.cover,
                   // When image is loading from the server it takes some time
                   // So we will show progress indicator while loading
-                  loadingBuilder: (BuildContext
-                  context,
-                      Widget child,
-                      ImageChunkEvent?
-                      loadingProgress) {
-                    if (loadingProgress ==
-                        null) return child;
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
                     return SizedBox(
                       width: 300,
-                      height: 140,
+                      height: isMobileExtraSmallHeight
+                          ? 115
+                          : isMobileSmallHeight
+                              ? 120
+                              : 140,
                       child: Center(
-                        child:
-                        CircularProgressIndicator(
-                          color: TColors
-                              .primary,
-                          value: loadingProgress
-                              .expectedTotalBytes !=
-                              null
-                              ? loadingProgress
-                              .cumulativeBytesLoaded /
-                              loadingProgress
-                                  .expectedTotalBytes!
+                        child: CircularProgressIndicator(
+                          color: TColors.primary,
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
                               : null,
                         ),
                       ),
@@ -76,14 +75,16 @@ class ServiceGridItem extends StatelessWidget {
                   // complete with a value or completed with an error,
                   // So handling errors is very important otherwise it will crash the app screen.
                   // I showed dummy images from assets when there is an error, you can show some texts or anything you want.
-                  errorBuilder: (context,
-                      exception,
-                      stackTrace) {
+                  errorBuilder: (context, exception, stackTrace) {
                     return Image.asset(
                       'assets/images/content/no-image-found.jpg',
                       fit: BoxFit.cover,
                       width: 300,
-                      height: 140,
+                      height: isMobileExtraSmallHeight
+                          ? 115
+                          : isMobileSmallHeight
+                              ? 120
+                              : 140,
                     );
                   },
                 ),
@@ -94,12 +95,13 @@ class ServiceGridItem extends StatelessWidget {
                     width: isMobileSmallHeight ? 140 : 160,
                     child: Text(
                       service.title,
-                      style: isMobileSmallHeight
-                          ? Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .apply(fontSizeDelta: -4)
-                          : Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge!.apply(
+                            fontSizeDelta: isMobileExtraSmallHeight
+                                ? -5
+                                : isMobileSmallHeight
+                                    ? -4
+                                    : 0,
+                          ),
                       textAlign: TextAlign.center,
                     ),
                   ),

@@ -27,7 +27,7 @@ class GuestBranchTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final isMobileExtraSmallHeight = CustomScreen.isMobileExtraSmallHeight();
 
     return Column(
       children: [
@@ -57,12 +57,10 @@ class GuestBranchTab extends StatelessWidget {
               ),
             ),
             hintText: 'Search',
-            hintStyle: const TextStyle(
-              color: TColors.darkGrey,
-            ),
+            hintStyle: Theme.of(context).textTheme.titleSmall!.apply(color: TColors.darkGrey, fontSizeDelta: isMobileExtraSmallHeight ? -4 : 0 )
           ),
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
 
         Expanded(
           child: ListView.builder(

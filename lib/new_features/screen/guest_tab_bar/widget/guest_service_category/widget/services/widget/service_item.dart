@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbl/common/widgets/images/custom_image_network.dart';
 
 import '../../../../../../../../utils/constants/colors.dart';
 import '../../../../../../../../utils/device/device_screen_ratio.dart';
@@ -21,6 +22,7 @@ class ServiceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileExtraSmallHeight = CustomScreen.isMobileExtraSmallHeight();
     final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
 
     /// -- Widget for Services in each Category => guest_service.dart
@@ -39,63 +41,31 @@ class ServiceItem extends StatelessWidget {
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                child: Image.network(
-                  service.imageUrl,
-                  width: 300,
-                  height: isMobileSmallHeight ? 120 : 140,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext
-                  context,
-                      Widget child,
-                      ImageChunkEvent?
-                      loadingProgress) {
-                    if (loadingProgress ==
-                        null) return child;
-                    return SizedBox(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  child: CustomImageNetwork(
+                      imageUrl: service.imageUrl,
                       width: 300,
-                      height: 140,
-                      child: Center(
-                        child:
-                        CircularProgressIndicator(
-                          color: TColors
-                              .primary,
-                          value: loadingProgress
-                              .expectedTotalBytes !=
-                              null
-                              ? loadingProgress
-                              .cumulativeBytesLoaded /
-                              loadingProgress
-                                  .expectedTotalBytes!
-                              : null,
-                        ),
-                      ),
-                    );
-                  },
-                  errorBuilder: (context,
-                      exception,
-                      stackTrace) {
-                    return Image.asset(
-                      'assets/images/content/no-image-found.jpg',
-                      fit: BoxFit.cover,
-                      width: 300,
-                      height: 140,
-                    );
-                  },
-                ),
-              ),
+                      height: isMobileExtraSmallHeight
+                          ? 120
+                          : isMobileSmallHeight
+                              ? 120
+                              : 140,
+                      fit: BoxFit.cover)),
               Expanded(
                 child: Center(
                   child: SizedBox(
                     width: isMobileSmallHeight ? 120 : 160,
                     child: Text(
                       service.title,
-                      style: isMobileSmallHeight
-                          ? Theme.of(context).textTheme.titleLarge!.apply(fontSizeDelta: -4)
-                          : Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge!.apply(
+                          fontSizeDelta: isMobileExtraSmallHeight
+                              ? -5
+                              : isMobileSmallHeight
+                                  ? -4
+                                  : 0),
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

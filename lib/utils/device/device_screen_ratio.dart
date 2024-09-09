@@ -17,13 +17,17 @@ class CustomScreen {
     return TDeviceUtils.getScreenWidth(context) > 420;
   }
 
+  static bool isMobileExtraSmallHeight() {
+    return TDeviceUtils.getScreenHeight() <= 820 && TDeviceUtils.getScreenHeight() > 800;
+  }
+
   static bool isMobileSmallHeight() {
-    return TDeviceUtils.getScreenHeight() <= 820;
+    return TDeviceUtils.getScreenHeight() <= 840 && TDeviceUtils.getScreenHeight() > 820;
   }
 
   static bool isMobileMediumHeight() {
     return TDeviceUtils.getScreenHeight() <= 860 &&
-        TDeviceUtils.getScreenHeight() > 850;
+        TDeviceUtils.getScreenHeight() > 840;
   }
 
   static bool isMobileLargeHeight() {

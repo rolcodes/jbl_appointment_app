@@ -44,6 +44,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobileExtraSmallHeight = CustomScreen.isMobileExtraSmallHeight();
     final isMobileSmallHeight = CustomScreen.isMobileSmallHeight();
     final isMobileMediumHeight = CustomScreen.isMobileMediumHeight();
     final isMobileLargeHeight = CustomScreen.isMobileLargeHeight();
@@ -108,49 +109,68 @@ class _LandingScreenState extends State<LandingScreen> {
                     Column(
                       children: [
                         SizedBox(
-                            height: isMobileSmallHeight
+                            height: isMobileExtraSmallHeight
                                 ? 110
-                                : isMobileMediumHeight
-                                ? 120
-                                : isMobileLargeHeight
-                                    ? 130
-                                    : isMobileExtraLargeHeight
-                                        ? 140
-                                        : null),
+                                : isMobileSmallHeight
+                                    ? 110
+                                    : isMobileMediumHeight
+                                        ? 120
+                                        : isMobileLargeHeight
+                                            ? 130
+                                            : isMobileExtraLargeHeight
+                                                ? 140
+                                                : null),
                         Image.asset(
                           'assets/logos/vertical_logo_jbl.png',
-                          width: isMobileSmallHeight ? 210 : 260,
-                          height: isMobileSmallHeight ? 210 : 260,
+                          width: isMobileExtraSmallHeight
+                              ? 190
+                              : isMobileSmallHeight
+                                  ? 210
+                                  : 260,
+                          height: isMobileExtraSmallHeight
+                              ? 190
+                              : isMobileSmallHeight
+                                  ? 210
+                                  : 260,
                         ),
                         SizedBox(
-                            height:
-                            isMobileSmallHeight
+                            height: isMobileExtraSmallHeight
                                 ? 110
-                                : isMobileMediumHeight
-                                ? 120
-                                : isMobileLargeHeight
-                                    ? 130
-                                    : isMobileExtraLargeHeight
-                                        ? 140
-                                        : null),
+                                : isMobileSmallHeight
+                                    ? 110
+                                    : isMobileMediumHeight
+                                        ? 120
+                                        : isMobileLargeHeight
+                                            ? 130
+                                            : isMobileExtraLargeHeight
+                                                ? 140
+                                                : null),
 
                         /// Page 1
                         SizedBox(
-                          height: isMobileSmallHeight
-                              ? 250
-                              : isMobileMediumHeight
-                                  ? 260
-                                  : isMobileLargeHeight
-                                      ? 270
-                                      : isMobileExtraLargeHeight
-                                          ? 280
-                                          : null,
+                          height: isMobileExtraSmallHeight
+                              ? 245
+                              : isMobileSmallHeight
+                                  ? 250
+                                  : isMobileMediumHeight
+                                      ? 260
+                                      : isMobileLargeHeight
+                                          ? 270
+                                          : isMobileExtraLargeHeight
+                                              ? 280
+                                              : null,
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               GradientButton(
                                 text: 'LOGIN',
+                                style: isMobileExtraSmallHeight
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .apply(color: Colors.white)
+                                    : null,
                                 color: [
                                   Colors.orange.shade800,
                                   TColors.primary
@@ -167,6 +187,12 @@ class _LandingScreenState extends State<LandingScreen> {
                               ),
                               GradientButton(
                                 text: 'REGISTER',
+                                style: isMobileExtraSmallHeight
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .apply(color: Colors.white)
+                                    : null,
                                 color: [
                                   Colors.orange.shade800,
                                   TColors.primary
@@ -181,10 +207,15 @@ class _LandingScreenState extends State<LandingScreen> {
                                 height: 42,
                               ),
                               GradientButton(
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .apply(color: Colors.white),
+                                style: isMobileExtraSmallHeight
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .apply(color: Colors.white)
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .apply(color: Colors.white),
                                 text: 'Facebook',
                                 color: [
                                   Colors.blue.shade800,
@@ -197,12 +228,17 @@ class _LandingScreenState extends State<LandingScreen> {
                                 onPressed: () {},
                               ),
                               GradientButton(
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .apply(
-                                        color: Colors.grey.shade700,
-                                        fontSizeDelta: -2),
+                                style: isMobileExtraSmallHeight
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .apply(color: Colors.grey.shade700)
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .apply(
+                                            color: Colors.grey.shade700,
+                                            fontSizeDelta: -2),
                                 text: 'Sign in with Google',
                                 color: const [
                                   Colors.white,
@@ -215,6 +251,12 @@ class _LandingScreenState extends State<LandingScreen> {
                               ),
                               GradientButton(
                                 text: 'CONTINUE AS GUEST',
+                                style: isMobileExtraSmallHeight
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .apply(color: Colors.white)
+                                    : null,
                                 color: [
                                   Colors.orange.shade800,
                                   TColors.primary

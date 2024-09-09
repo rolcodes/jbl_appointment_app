@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jbl/new_features/controller/dependency_injection.dart';
+import 'package:jbl/new_features/controller/new_home_screen/NewHomeScreenWrapper.dart';
 import 'package:jbl/new_features/screen/admin_panel/admin_navigation_menu.dart';
 import 'package:jbl/new_features/screen/explore_screen/explore_screen.dart';
 import 'package:jbl/services/wrapper.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
 
         /// SplashScreen() to begin from the start
         /// Wrapper() to keep user logged in
-        home: const NewAdminNavigationMenu(),
+        home: const Wrapper(),
       ),
     );
   }

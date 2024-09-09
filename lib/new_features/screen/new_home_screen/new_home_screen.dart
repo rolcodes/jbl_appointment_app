@@ -144,7 +144,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                                     .apply(fontSizeDelta: -1)
                                 : Theme.of(context).textTheme.titleLarge),
                         Text(
-                          'BOOK AN APPOINTMENT NOW!',
+                          // 'BOOK AN APPOINTMENT NOW!',
+                          '${TDeviceUtils.getScreenHeight()}',
                           style: isMobileSmallWidth
                               ? Theme.of(context).textTheme.titleMedium!.apply(
                                   color: TColors.primary, letterSpacingDelta: 2)
